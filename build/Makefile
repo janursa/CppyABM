@@ -142,19 +142,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named ABM_test
-
-# Build rule for target.
-ABM_test: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ABM_test
-.PHONY : ABM_test
-
-# fast build rule for target.
-ABM_test/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ABM_test.dir/build.make CMakeFiles/ABM_test.dir/build
-.PHONY : ABM_test/fast
-
-#=============================================================================
 # Target rules for targets named ContinuousCoverage
 
 # Build rule for target.
@@ -322,6 +309,19 @@ NightlySubmit: cmake_check_build_system
 NightlySubmit/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/NightlySubmit.dir/build.make CMakeFiles/NightlySubmit.dir/build
 .PHONY : NightlySubmit/fast
+
+#=============================================================================
+# Target rules for targets named ABM_main
+
+# Build rule for target.
+ABM_main: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ABM_main
+.PHONY : ABM_main
+
+# fast build rule for target.
+ABM_main/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ABM_main.dir/build.make CMakeFiles/ABM_main.dir/build
+.PHONY : ABM_main/fast
 
 #=============================================================================
 # Target rules for targets named NightlyMemCheck
@@ -550,7 +550,7 @@ src/main.o: src/main.cpp.o
 
 # target to build an object file
 src/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ABM_test.dir/build.make CMakeFiles/ABM_test.dir/src/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ABM_main.dir/build.make CMakeFiles/ABM_main.dir/src/main.cpp.o
 .PHONY : src/main.cpp.o
 
 src/main.i: src/main.cpp.i
@@ -559,7 +559,7 @@ src/main.i: src/main.cpp.i
 
 # target to preprocess a source file
 src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ABM_test.dir/build.make CMakeFiles/ABM_test.dir/src/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ABM_main.dir/build.make CMakeFiles/ABM_main.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
 src/main.s: src/main.cpp.s
@@ -568,7 +568,7 @@ src/main.s: src/main.cpp.s
 
 # target to generate assembly for a file
 src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ABM_test.dir/build.make CMakeFiles/ABM_test.dir/src/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ABM_main.dir/build.make CMakeFiles/ABM_main.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
 # Help Target
@@ -608,7 +608,7 @@ help:
 	@echo "... NightlySubmit"
 	@echo "... NightlyTest"
 	@echo "... NightlyUpdate"
-	@echo "... ABM_test"
+	@echo "... ABM_main"
 	@echo "... binds"
 	@echo "... fmt"
 	@echo "... src/main.o"

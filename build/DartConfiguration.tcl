@@ -11,7 +11,7 @@ BuildDirectory: /Users/matin/Downloads/testProjs/env_agent/build
 CostDataFile: 
 
 # Site is something like machine.domain, i.e. pragmatic.crd
-Site: Matins-MacBook-Pro.local
+Site: Matins-MBP.fritz.box
 
 # Build name is osname-revision-compiler, i.e. Linux-2.4.2-2smp-c++
 BuildName: Darwin-c++

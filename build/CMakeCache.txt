@@ -17,9 +17,6 @@
 //Value Computed by CMake
 ABM_BINARY_DIR:STATIC=/Users/matin/Downloads/testProjs/env_agent/build
 
-//Dependencies for the target
-ABM_LIB_DEPENDS:STATIC=general;-undefined dynamic_lookup;general;fmt::fmt;
-
 //Value Computed by CMake
 ABM_SOURCE_DIR:STATIC=/Users/matin/Downloads/testProjs/env_agent
 
@@ -398,7 +395,7 @@ PYTHON_EXECUTABLE:FILEPATH=/usr/local/bin/python3.7
 PYTHON_LIBRARY:FILEPATH=/usr/local/opt/python/Frameworks/Python.framework/Versions/3.7/lib/libpython3.7m.dylib
 
 //Name of the computer/site where compile is being run
-SITE:STRING=Matins-MacBook-Pro.local
+SITE:STRING=Matins-MBP.fritz.box
 
 //Path to the SLURM sbatch executable
 SLURM_SBATCH_COMMAND:FILEPATH=SLURM_SBATCH_COMMAND-NOTFOUND

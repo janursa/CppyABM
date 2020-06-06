@@ -3,5 +3,5 @@
 #include "bases.h"
 using namespace std;
 
-struct myPatch: public Patch{
-    };
+// struct myPatch: public Patch{
+//     };
