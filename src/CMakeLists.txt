@@ -2,16 +2,16 @@
 # for testing
 set(HEADER_LIST )
 
-
+SET(MODULE_NAME "binds")
 
 set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMake")
 # include(cotire)
 
-pybind11_add_module(${TARGET} example.cpp ${HEADER_LIST})
+pybind11_add_module(${MODULE_NAME} binds.cpp ${HEADER_LIST})
 # cotire(${TARGET})
-target_link_libraries(${TARGET} PRIVATE pybind11::module)
-target_link_libraries(${TARGET} PRIVATE fmt::fmt)
-target_include_directories(${TARGET} PUBLIC ${CMAKE_SOURCE_DIR}/include)
+target_link_libraries(${MODULE_NAME} PRIVATE pybind11::module)
+target_link_libraries(${MODULE_NAME} PRIVATE fmt::fmt)
+target_include_directories(${MODULE_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/include)
 
 
 source_group(TREE "${PROJECT_SOURCE_DIR}/include" PREFIX "Header Files" FILES ${HEADER_LIST})

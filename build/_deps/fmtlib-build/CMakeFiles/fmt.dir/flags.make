@@ -6,5 +6,5 @@ CXX_FLAGS =  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk 
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/Users/matin/Downloads/testProjs/test_extension/build/_deps/fmtlib-src/include 
+CXX_INCLUDES = -I/Users/matin/Downloads/testProjs/env_agent/build/_deps/fmtlib-src/include 
 

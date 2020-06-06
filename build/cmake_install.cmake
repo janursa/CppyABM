@@ -1,4 +1,4 @@
-# Install script for directory: /Users/matin/Downloads/testProjs/test_extension
+# Install script for directory: /Users/matin/Downloads/testProjs/env_agent
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,9 +34,9 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/Users/matin/Downloads/testProjs/test_extension/build/_deps/fmtlib-build/cmake_install.cmake")
-  include("/Users/matin/Downloads/testProjs/test_extension/build/_deps/pybind11-build/cmake_install.cmake")
-  include("/Users/matin/Downloads/testProjs/test_extension/build/src/cmake_install.cmake")
+  include("/Users/matin/Downloads/testProjs/env_agent/build/_deps/fmtlib-build/cmake_install.cmake")
+  include("/Users/matin/Downloads/testProjs/env_agent/build/_deps/pybind11-build/cmake_install.cmake")
+  include("/Users/matin/Downloads/testProjs/env_agent/build/src/cmake_install.cmake")
 
 endif()
 
@@ -48,5 +48,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/matin/Downloads/testProjs/test_extension/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/matin/Downloads/testProjs/env_agent/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

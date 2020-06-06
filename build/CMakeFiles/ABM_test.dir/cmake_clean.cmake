@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "ABM_test"
   "ABM_test.pdb"
-  "CMakeFiles/ABM_test.dir/src/model.cpp.o"
+  "CMakeFiles/ABM_test.dir/src/main.cpp.o"
 )
 
 # Per-language clean rules from dependency scanning.

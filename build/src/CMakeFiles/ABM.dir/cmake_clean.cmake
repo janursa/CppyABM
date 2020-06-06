@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "ABM.cpython-37m-darwin.so"
   "ABM.pdb"
-  "CMakeFiles/ABM.dir/example.cpp.o"
+  "CMakeFiles/ABM.dir/binds.cpp.o"
 )
 
 # Per-language clean rules from dependency scanning.

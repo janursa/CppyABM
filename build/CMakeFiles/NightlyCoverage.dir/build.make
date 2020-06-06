@@ -63,10 +63,10 @@ RM = /Applications/CMake.app/Contents/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/matin/Downloads/testProjs/test_extension
+CMAKE_SOURCE_DIR = /Users/matin/Downloads/testProjs/env_agent
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/matin/Downloads/testProjs/test_extension/build
+CMAKE_BINARY_DIR = /Users/matin/Downloads/testProjs/env_agent/build
 
 # Utility rule file for NightlyCoverage.
 
@@ -91,6 +91,6 @@ CMakeFiles/NightlyCoverage.dir/clean:
 .PHONY : CMakeFiles/NightlyCoverage.dir/clean
 
 CMakeFiles/NightlyCoverage.dir/depend:
-	cd /Users/matin/Downloads/testProjs/test_extension/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/matin/Downloads/testProjs/test_extension /Users/matin/Downloads/testProjs/test_extension /Users/matin/Downloads/testProjs/test_extension/build /Users/matin/Downloads/testProjs/test_extension/build /Users/matin/Downloads/testProjs/test_extension/build/CMakeFiles/NightlyCoverage.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/matin/Downloads/testProjs/env_agent/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/matin/Downloads/testProjs/env_agent /Users/matin/Downloads/testProjs/env_agent /Users/matin/Downloads/testProjs/env_agent/build /Users/matin/Downloads/testProjs/env_agent/build /Users/matin/Downloads/testProjs/env_agent/build/CMakeFiles/NightlyCoverage.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/NightlyCoverage.dir/depend
 

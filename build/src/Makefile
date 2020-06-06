@@ -68,10 +68,10 @@ RM = /Applications/CMake.app/Contents/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/matin/Downloads/testProjs/test_extension
+CMAKE_SOURCE_DIR = /Users/matin/Downloads/testProjs/env_agent
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/matin/Downloads/testProjs/test_extension/build
+CMAKE_BINARY_DIR = /Users/matin/Downloads/testProjs/env_agent/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -111,14 +111,14 @@ test/fast: test
 
 # The main all target
 all: cmake_check_build_system
-	cd /Users/matin/Downloads/testProjs/test_extension/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/matin/Downloads/testProjs/test_extension/build/CMakeFiles /Users/matin/Downloads/testProjs/test_extension/build/src/CMakeFiles/progress.marks
-	cd /Users/matin/Downloads/testProjs/test_extension/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/matin/Downloads/testProjs/test_extension/build/CMakeFiles 0
+	cd /Users/matin/Downloads/testProjs/env_agent/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/matin/Downloads/testProjs/env_agent/build/CMakeFiles /Users/matin/Downloads/testProjs/env_agent/build/src/CMakeFiles/progress.marks
+	cd /Users/matin/Downloads/testProjs/env_agent/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/matin/Downloads/testProjs/env_agent/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /Users/matin/Downloads/testProjs/test_extension/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/clean
+	cd /Users/matin/Downloads/testProjs/env_agent/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/clean
 .PHONY : clean
 
 # The main clean target
@@ -128,60 +128,60 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /Users/matin/Downloads/testProjs/test_extension/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/preinstall
+	cd /Users/matin/Downloads/testProjs/env_agent/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /Users/matin/Downloads/testProjs/test_extension/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/preinstall
+	cd /Users/matin/Downloads/testProjs/env_agent/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /Users/matin/Downloads/testProjs/test_extension/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/matin/Downloads/testProjs/env_agent/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
-src/CMakeFiles/example.dir/rule:
-	cd /Users/matin/Downloads/testProjs/test_extension/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/CMakeFiles/example.dir/rule
-.PHONY : src/CMakeFiles/example.dir/rule
+src/CMakeFiles/binds.dir/rule:
+	cd /Users/matin/Downloads/testProjs/env_agent/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/CMakeFiles/binds.dir/rule
+.PHONY : src/CMakeFiles/binds.dir/rule
 
 # Convenience name for target.
-example: src/CMakeFiles/example.dir/rule
+binds: src/CMakeFiles/binds.dir/rule
 
-.PHONY : example
+.PHONY : binds
 
 # fast build rule for target.
-example/fast:
-	cd /Users/matin/Downloads/testProjs/test_extension/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/example.dir/build.make src/CMakeFiles/example.dir/build
-.PHONY : example/fast
+binds/fast:
+	cd /Users/matin/Downloads/testProjs/env_agent/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/binds.dir/build.make src/CMakeFiles/binds.dir/build
+.PHONY : binds/fast
 
-example.o: example.cpp.o
+binds.o: binds.cpp.o
 
-.PHONY : example.o
+.PHONY : binds.o
 
 # target to build an object file
-example.cpp.o:
-	cd /Users/matin/Downloads/testProjs/test_extension/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/example.dir/build.make src/CMakeFiles/example.dir/example.cpp.o
-.PHONY : example.cpp.o
+binds.cpp.o:
+	cd /Users/matin/Downloads/testProjs/env_agent/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/binds.dir/build.make src/CMakeFiles/binds.dir/binds.cpp.o
+.PHONY : binds.cpp.o
 
-example.i: example.cpp.i
+binds.i: binds.cpp.i
 
-.PHONY : example.i
+.PHONY : binds.i
 
 # target to preprocess a source file
-example.cpp.i:
-	cd /Users/matin/Downloads/testProjs/test_extension/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/example.dir/build.make src/CMakeFiles/example.dir/example.cpp.i
-.PHONY : example.cpp.i
+binds.cpp.i:
+	cd /Users/matin/Downloads/testProjs/env_agent/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/binds.dir/build.make src/CMakeFiles/binds.dir/binds.cpp.i
+.PHONY : binds.cpp.i
 
-example.s: example.cpp.s
+binds.s: binds.cpp.s
 
-.PHONY : example.s
+.PHONY : binds.s
 
 # target to generate assembly for a file
-example.cpp.s:
-	cd /Users/matin/Downloads/testProjs/test_extension/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/example.dir/build.make src/CMakeFiles/example.dir/example.cpp.s
-.PHONY : example.cpp.s
+binds.cpp.s:
+	cd /Users/matin/Downloads/testProjs/env_agent/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/binds.dir/build.make src/CMakeFiles/binds.dir/binds.cpp.s
+.PHONY : binds.cpp.s
 
 # Help Target
 help:
@@ -192,10 +192,10 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... test"
-	@echo "... example"
-	@echo "... example.o"
-	@echo "... example.i"
-	@echo "... example.s"
+	@echo "... binds"
+	@echo "... binds.o"
+	@echo "... binds.i"
+	@echo "... binds.s"
 .PHONY : help
 
 
@@ -207,6 +207,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /Users/matin/Downloads/testProjs/test_extension/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/matin/Downloads/testProjs/env_agent/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

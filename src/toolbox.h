@@ -24,7 +24,7 @@ namespace tools{
     void        trim(std::string &s); //!< removes space from both sides
     template<typename T>
     float       mean(vector<T> &); //!<returns average value of a vector of values
-    void        create_directory(string); //!< Receives a folder address and creates the directory
+    // void        create_directory(string); //!< Receives a folder address and creates the directory
     float       create_random_value(float, float);         //!< Creates an stochastic value between two given magnitudes
     template <typename T>
     void        log_vector(vector<T> &vec); //!< Logs the given vector to terminal
@@ -49,26 +49,30 @@ namespace tools{
         };
 
     };
-    struct invalid_directory{
-        invalid_directory(std::string msg):message(msg){}
+    struct base_exception_class{
+        base_exception_class(std::string msg):message(msg){}
         std::string message;
         const char *what() const throw() {
             return message.c_str();
         }
     };
-    struct convergence_error{
-        convergence_error(std::string msg):message(msg){}
-        std::string message;
-        const char *what() const throw() {
-            return message.c_str();
-        }
+    struct invalid_directory: public base_exception_class{
+        using base_exception_class::base_exception_class;
     };
-    struct no_available_patch{
-        no_available_patch(std::string msg):message(msg){}
-        std::string message;
-        const char *what() const throw() {
-            return message.c_str();
-        }
+    struct convergence_error: public base_exception_class{
+        using base_exception_class::base_exception_class;
+    };
+    struct no_available_patch: public base_exception_class{
+        using base_exception_class::base_exception_class;
+    };
+    struct null_ptr_error: public base_exception_class{
+        using base_exception_class::base_exception_class;
+    };
+    struct weak_to_shared_error: public base_exception_class{
+        using base_exception_class::base_exception_class;
+    };
+    struct expired_weak_ptr:public base_exception_class{
+         using base_exception_class::base_exception_class;
     };
 }
 
@@ -137,10 +141,10 @@ inline void tools::trim(std::string &s) {
 }
 
 
-inline void tools::create_directory(string folder){
-    auto opts = S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH;
-    mkdir(folder.c_str(), opts);
-}
+// inline void tools::create_directory(string folder){
+//     auto opts = S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH;
+//     mkdir(folder.c_str(), opts);
+// }
 
 inline float tools::create_random_value(float min, float max){
     std::random_device rd;

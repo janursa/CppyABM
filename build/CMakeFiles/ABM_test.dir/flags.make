@@ -6,5 +6,5 @@ CXX_FLAGS =  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk 
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/Users/matin/Downloads/testProjs/test_extension/build/_deps/pybind11-src/include -I/usr/local/Cellar/python/3.7.7/Frameworks/Python.framework/Versions/3.7/include/python3.7m 
+CXX_INCLUDES = -I/Users/matin/Downloads/testProjs/env_agent/build/_deps/pybind11-src/include -I/usr/local/Cellar/python/3.7.7/Frameworks/Python.framework/Versions/3.7/include/python3.7m 
 

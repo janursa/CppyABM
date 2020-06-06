@@ -3,7 +3,7 @@ set(CMAKE_CXX_STANDARD 17)
 # set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
-SET(TARGET "example")
+SET(TARGET "ABM")
 PROJECT(${TARGET} VERSION 1.0 LANGUAGES CXX)
 
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
@@ -43,7 +43,7 @@ set(PYBIND11_CPP_STANDARD -std=c++17)
 
 add_subdirectory(src)
 
-add_executable("${PROJECT_NAME}_test" src/test.cpp)
+add_executable("${PROJECT_NAME}_test" src/main.cpp)
 # target_include_directories("${PROJECT_NAME}_test"  PUBLIC ${CMAKE_SOURCE_DIR}/include)
 target_compile_features("${PROJECT_NAME}_test" PRIVATE cxx_std_17)
 target_link_libraries("${PROJECT_NAME}_test" PRIVATE pybind11::module)

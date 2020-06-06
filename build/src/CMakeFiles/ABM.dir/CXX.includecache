@@ -6,21 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/Users/matin/Downloads/testProjs/test_extension/src/example.cpp
-example.h
-/Users/matin/Downloads/testProjs/test_extension/src/example.h
-pybind11/pybind11.h
-/Users/matin/Downloads/testProjs/test_extension/src/pybind11/pybind11.h
-
-/Users/matin/Downloads/testProjs/test_extension/src/example.h
+/Users/matin/Downloads/testProjs/env_agent/src/binds.cpp
 iostream
-/Users/matin/Downloads/testProjs/test_extension/src/iostream
-ostream
 -
-string
--
-vector
--
+pybind11/pybind11.h
+/Users/matin/Downloads/testProjs/env_agent/src/pybind11/pybind11.h
 
 /usr/local/Cellar/python/3.7.7/Frameworks/Python.framework/Versions/3.7/include/python3.7m/Python.h
 patchlevel.h

@@ -12,8 +12,8 @@ project(fmtlib-populate NONE)
 include(ExternalProject)
 ExternalProject_Add(fmtlib-populate
                      "UPDATE_DISCONNECTED" "False" "GIT_REPOSITORY" "https://github.com/fmtlib/fmt.git" "GIT_TAG" "5.3.0"
-                    SOURCE_DIR          "/Users/matin/Downloads/testProjs/test_extension/build/_deps/fmtlib-src"
-                    BINARY_DIR          "/Users/matin/Downloads/testProjs/test_extension/build/_deps/fmtlib-build"
+                    SOURCE_DIR          "/Users/matin/Downloads/testProjs/env_agent/build/_deps/fmtlib-src"
+                    BINARY_DIR          "/Users/matin/Downloads/testProjs/env_agent/build/_deps/fmtlib-build"
                     CONFIGURE_COMMAND   ""
                     BUILD_COMMAND       ""
                     INSTALL_COMMAND     ""

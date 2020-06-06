@@ -1,1 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/c++   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/example_test.dir/src/test.cpp.o  -o example_test  -undefined dynamic_lookup 

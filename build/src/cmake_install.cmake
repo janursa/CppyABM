@@ -1,4 +1,4 @@
-# Install script for directory: /Users/matin/Downloads/testProjs/test_extension/src
+# Install script for directory: /Users/matin/Downloads/testProjs/env_agent/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

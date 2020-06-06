@@ -4,14 +4,14 @@
 
 
 # Configuration directories and files
-SourceDirectory: /Users/matin/Downloads/testProjs/test_extension
-BuildDirectory: /Users/matin/Downloads/testProjs/test_extension/build
+SourceDirectory: /Users/matin/Downloads/testProjs/env_agent
+BuildDirectory: /Users/matin/Downloads/testProjs/env_agent/build
 
 # Where to place the cost data store
 CostDataFile: 
 
 # Site is something like machine.domain, i.e. pragmatic.crd
-Site: Matins-MBP.fritz.box
+Site: Matins-MacBook-Pro.local
 
 # Build name is osname-revision-compiler, i.e. Linux-2.4.2-2smp-c++
 BuildName: Darwin-c++
@@ -26,7 +26,7 @@ SubmitURL: http://
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "/Applications/CMake.app/Contents/bin/cmake" "/Users/matin/Downloads/testProjs/test_extension"
+ConfigureCommand: "/Applications/CMake.app/Contents/bin/cmake" "/Users/matin/Downloads/testProjs/env_agent"
 MakeCommand: /Applications/CMake.app/Contents/bin/cmake --build . --config "${CTEST_CONFIGURATION_TYPE}"
 DefaultCTestConfigurationType: Release
 
@@ -57,9 +57,9 @@ P4UpdateOptions:
 P4UpdateCustom: 
 
 # Generic update command
-UpdateCommand: 
+UpdateCommand: /usr/bin/git
 UpdateOptions: 
-UpdateType: 
+UpdateType: git
 
 # Compiler info
 Compiler: /Library/Developer/CommandLineTools/usr/bin/c++

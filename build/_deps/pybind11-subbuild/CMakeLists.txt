@@ -12,8 +12,8 @@ project(pybind11-populate NONE)
 include(ExternalProject)
 ExternalProject_Add(pybind11-populate
                      "UPDATE_DISCONNECTED" "False" "GIT_REPOSITORY" "https://github.com/pybind/pybind11.git" "GIT_TAG" "master"
-                    SOURCE_DIR          "/Users/matin/Downloads/testProjs/test_extension/build/_deps/pybind11-src"
-                    BINARY_DIR          "/Users/matin/Downloads/testProjs/test_extension/build/_deps/pybind11-build"
+                    SOURCE_DIR          "/Users/matin/Downloads/testProjs/env_agent/build/_deps/pybind11-src"
+                    BINARY_DIR          "/Users/matin/Downloads/testProjs/env_agent/build/_deps/pybind11-build"
                     CONFIGURE_COMMAND   ""
                     BUILD_COMMAND       ""
                     INSTALL_COMMAND     ""
