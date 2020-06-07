@@ -1,6 +1,15 @@
 
-// #pragma once
-// #include "bases.h"
+#pragma once
+#include "bases.h"
+struct MSC: public Agent{
+	virtual void step(){
+		cout<<"MSC"<<endl;
+	}
+	virtual void update(){
+		
+	}
+};
+
 // struct MSC:public Agent{
 //     Agent(string);                                        
 //     explicit Agent(std::shared_ptr<Agent<dim>> &cellPtr); //!< Agent constructor based on agent type

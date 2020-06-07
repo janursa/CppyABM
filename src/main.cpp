@@ -6,41 +6,58 @@
 #include "env.h"
 #include "agent.h"
 #include "patch.h"
-
+#include "mesh.h"
+#include "factory.h"
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
 using namespace std;
 
-struct MSC: public Agent{
-	MSC(){
-		this->name = "MSC";
-	}
-};
-
-int test_inh_shared1(){
-	auto agent_ptr = make_shared<Agent>();
-	auto patch_ptr = make_shared<Patch>();
-	auto env_ptr = make_shared<Env>();
-	env_ptr->set();
-	agent_ptr->set_env(env_ptr);
-	auto env = agent_ptr->get_env();
-	return env->get();
-}
-string test_agent_name_1(){
-	auto agent_ptr = make_shared<Agent>();
-	auto agent_ptr2 = agent_ptr->get_ptr();
-	return agent_ptr2->name;
-}
-string test_agent_name_2(){
-	auto agent_ptr = make_shared<MSC>();
-	auto agent_ptr2 = agent_ptr->get_ptr();
-	return agent_ptr2->name;
-}
-void test(){
-	assert(test_inh_shared1() == 10);
-	assert(test_agent_name_1() == "Agent");
-	assert(test_agent_name_2() == "MSC");
-}
 int main(){
-	test();
+	
+
+	tools::create_directory(main_output_folder);
+	/** create env **/
+	
+	// auto factory_ptr = make_shared<myFactory>();
+	// auto env_ptr = make_shared<myEnv>(factory_ptr);
+	// env_ptr->check();
+	// // auto factory_ptr = make_shared<myFactory
+	// /** create meshes **/
+	// auto meshes = mesh_tools().grid(1,1,.1);
+	
+	#ifdef TEST
+	
+	/** create patches **/ //=> needs meshes
+	// step 1: create patches from info of meshes
+	map<unsigned,shared_ptr<Patch>> patches;
+	for (auto & mesh_item:meshes){
+		auto patch_ptr = make_shared<myPatch>(); // create patch
+		patch_ptr->index = mesh_item.index;      // copy index
+		patch_ptr->coords = mesh_item.coords;    // copy coords
+		patch_ptr->neighbors_indices = mesh_item.neighbors_indices;  // copy neighbors indices
+		patches[patch_ptr->index]= patch_ptr;
+	}
+	// step 2: assign neighbor patches
+	for (auto &[index,patch]:patches){
+		vector<shared_ptr<Patch>> neighbors;
+		auto neighbors_indices = patch->neighbors_indices;
+		for (auto const &neighbor_index:neighbors_indices){
+			auto neighbor_patch = patches.at(neighbor_index);
+			neighbors.push_back(neighbor_patch);
+		}
+		patch->neighbors = neighbors;
+	}
+
+	
+	/** create agents **/
+	unsigned agent_count = 10;
+	vector<shared_ptr<Agent>> agents;
+	for (unsigned i=0; i < agent_count; i++){
+		agents.push_back(make_shared<MSC>());
+	}
+	
+#endif //TEST
+	
 	return 0;
 }
 

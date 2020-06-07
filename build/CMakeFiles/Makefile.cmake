@@ -57,6 +57,9 @@ set(CMAKE_MAKEFILE_DEPENDS
   "_deps/pybind11-src/tools/FindPythonLibsNew.cmake"
   "_deps/pybind11-src/tools/pybind11Tools.cmake"
   "../src/CMakeLists.txt"
+  "/usr/local/lib/cmake/nlohmann_json/nlohmann_jsonConfig.cmake"
+  "/usr/local/lib/cmake/nlohmann_json/nlohmann_jsonConfigVersion.cmake"
+  "/usr/local/lib/cmake/nlohmann_json/nlohmann_jsonTargets.cmake"
   )
 
 # The corresponding makefile is:

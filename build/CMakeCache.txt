@@ -413,6 +413,15 @@ USE_PYTHON_INCLUDE_DIR:BOOL=OFF
 //Dependencies for the target
 binds_LIB_DEPENDS:STATIC=general;-undefined dynamic_lookup;general;fmt::fmt;
 
+//The directory containing a CMake configuration file for nlohmann-json.
+nlohmann-json_DIR:PATH=nlohmann-json_DIR-NOTFOUND
+
+//The directory containing a CMake configuration file for nlohmann.
+nlohmann_DIR:PATH=nlohmann_DIR-NOTFOUND
+
+//The directory containing a CMake configuration file for nlohmann_json.
+nlohmann_json_DIR:PATH=/usr/local/lib/cmake/nlohmann_json
+
 //Value Computed by CMake
 pybind11_BINARY_DIR:STATIC=/Users/matin/Downloads/testProjs/env_agent/build/_deps/pybind11-build
 
@@ -619,6 +628,8 @@ FIND_PACKAGE_MESSAGE_DETAILS_Doxygen:INTERNAL=[/usr/local/bin/doxygen][cfound co
 FIND_PACKAGE_MESSAGE_DETAILS_PYTHON:INTERNAL=/usr/local/bin/python3.7
 //Details about finding PythonInterp
 FIND_PACKAGE_MESSAGE_DETAILS_PythonInterp:INTERNAL=[/usr/local/bin/python3.7][v3.7.7()]
+//Details about finding nlohmann_json
+FIND_PACKAGE_MESSAGE_DETAILS_nlohmann_json:INTERNAL=[/usr/local/lib/cmake/nlohmann_json/nlohmann_jsonConfig.cmake][v3.7.3()]
 //ADVANCED property for variable: GITCOMMAND
 GITCOMMAND-ADVANCED:INTERNAL=1
 //Test HAS_FLTO
@@ -629,6 +640,7 @@ HAS_NULLPTR_WARNING:INTERNAL=1
 HAVE_OPEN:INTERNAL=1
 //ADVANCED property for variable: HGCOMMAND
 HGCOMMAND-ADVANCED:INTERNAL=1
+JSON_BuildTests:INTERNAL=OFF
 //ADVANCED property for variable: MAKECOMMAND
 MAKECOMMAND-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: MEMORYCHECK_COMMAND
