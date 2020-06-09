@@ -7,12 +7,12 @@ using namespace std;
 namespace py = pybind11;
 struct Agent;
 struct Patch;
+
+/** custom types **/
 using AgentsBank = vector<shared_ptr<Agent>>;
 PYBIND11_MAKE_OPAQUE(AgentsBank);
 using PatchesBank = map<unsigned,shared_ptr<Patch>>;
 PYBIND11_MAKE_OPAQUE(PatchesBank);
-
-/** Agent activities **/
 
 struct HATCH_CONFIG{
 	HATCH_CONFIG (bool flag = false, 
@@ -71,4 +71,19 @@ struct convergence_error: public base_exception_class{
 struct patch_availibility: public base_exception_class{
     using base_exception_class::base_exception_class;
 };
+
+
+/** settings **/
+//#define DEBUG
+
+// *** helpers ***// 
+#ifdef DEBUG
+#define LOG(str) do { std::cout << str ; } while( false )
+#else
+#define LOG(str) do { } while ( false )
+#endif
+
+//** directories **//
+
+const std::string main_output_folder = "outputs/";
 

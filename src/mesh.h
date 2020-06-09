@@ -1,8 +1,7 @@
 
 #pragma once
-#include "settings.h"
-// #include <nlohmann/json.hpp>
-// using json = nlohmann::json;
+#include <vector>
+#include "common.h"
 using namespace std;
 
 
@@ -15,7 +14,7 @@ struct MESH_ITEM {
     vector<float> coords;
     std::vector<unsigned> neighbors_indices;
 }; //!< Mesh item
-struct mesh_tools{
+struct mesh_tools{ 
 
     static vector<MESH_ITEM> grid(float x, float y, float size){
         auto calculate_mesh_index = [](unsigned i, unsigned j,unsigned x_n) {
@@ -26,7 +25,7 @@ struct mesh_tools{
             unsigned neighbor_numbers = 8;
             unsigned x_index[neighbor_numbers];
             unsigned y_index[neighbor_numbers];
-            x_index[0] = x;
+            x_index[0] = x; // TODO: do it more smartly
             y_index[0] = y + 1;
 
             x_index[1] = x;
@@ -57,7 +56,6 @@ struct mesh_tools{
                 neighbor_indices.push_back(neighbor_index);
 
             }
-        //    for (auto index:neighbor_indices) cout<<"   "<<index<<endl;
             return neighbor_indices;
         };
         
@@ -85,17 +83,13 @@ struct mesh_tools{
             }
 
         }
-        // this->print_to_file("meshes.csv");
-
         auto message = to_string(mesh_count) + " mesh generated";
         LOG(message);
-        
-        // vector<int> test = {2,3,4};
         return meshes;
     };
 };  // namespace meshes
 
-// inline void meshes_tools::grid::print_to_file(string file_name){
+// inline void mesh_tools::grid::print_to_file(string file_name){
 //     auto file_name_mod = main_output_folder+"/"+file_name;
 //     ofstream ID(file_name_mod);          
 //     for (auto &item:this->meshes){
@@ -110,70 +104,6 @@ struct mesh_tools{
 //     }
 //     ID.close();
 // }
-// class Mesh{
-// public:
-//     Mesh(int index, float x, float y):mesh_index(index), x_coord(x), y_coord(y) {
 
-//     }
-//     int get_meshindex(){
-//         return mesh_index;
-//     }
-//     vector<float> get_globalxyzcoordinates(){
-//         vector<float> coords = {x_coord,y_coord,0};
-//         return coords;
-//     }
-//     int mesh_index;
-//     std::vector<unsigned> neighbor_indices; //!< Indices of meshes located in the neumann boundary
-//     float x_coord;
-//     float y_coord;
-//     vector<shared_ptr<Mesh>>  setup_meshes(float domain_x_l, float domain_y_l, float patch_size){
-//         vector<shared_ptr<Mesh>> meshes;
-//         float mesh_size = patch_size;
-//         x_n() = domain_x_l/mesh_size;
-//         y_n() = domain_y_l/mesh_size;
-//         unsigned mesh_count =0;
-//         for (int j=0; j<y_n(); j++){ //outer vector meshes
-//             for (int i=0; i<x_n(); i++){ //inner vector meshe
-//                 auto x = (mesh_size/2)+i*mesh_size;
-//                 auto y = (mesh_size/2)+j*mesh_size;
-//                 auto mesh_index = calculate_mesh_index(i,j);
-//                 auto meshPtr = make_shared<Mesh>(mesh_index,x,y);
-//                 auto neighbor_indices = find_neighborhood(i,j);
-//                 meshPtr->neighbor_indices = neighbor_indices;
-//                 meshes.push_back(meshPtr);
-//                 mesh_count ++;
-//             }
-
-//         }
-//         auto message = to_string(mesh_count) + " mesh generated";
-//         LOG(message);
-//         return meshes;
-//     }
-//     // static Mesh* at(unsigned index){
-//     //     try {
-//     //         return get_modelPtr()->meshes_container[index].get();
-//     //     }catch(out_of_range&ofr){
-//     //         cerr<<"error";
-//     //         throw ofr;
-//     //         exit(2);
-
-//     //     }
-//     // }
-//     static vector<unsigned> find_neighborhood(int &x, int &y);
-
-    
-//     
-
-//     static unsigned& x_n(){
-//         static unsigned var{};
-//         return var;
-//     } ; //!< Mesh number in x direction
-//     static unsigned& y_n(){
-//         static unsigned var{};
-//         return var;
-//     } ; ; //!< Mesh number in y direction
-// };
-
-// 
 
 

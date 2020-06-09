@@ -2,34 +2,33 @@
 #pragma once
 #include <map>
 #include <algorithm>
+#include <random>
 #include <pybind11/stl.h>
 #include "pybind11/pybind11.h"
-#include "toolbox.h"
 #include "common.h"
 #include "mesh.h"
 namespace py=pybind11;
 using std::shared_ptr;
 using std::vector;
-using namespace tools;
 struct Env;
 struct Agent;
 struct Patch;
 using namespace std;
+//!  Base class
+/*!
+  All classes inherit this
+*/
 struct Base{
-	string class_name;
-	/** storage **/
-    vector<float> data;
-
-    bool disappear = false;
-
-    /** General **/
-
 protected:
-
+	string class_name;
+    vector<float> data;
+    bool disappear = false;
 };
-
+//!   Base clase for patches
+/*!
+  
+*/
 struct Patch: public Base{
-	// Patch(){}
 	Patch(shared_ptr<Env> env){
 		this->env = env;
 	}
@@ -53,13 +52,17 @@ struct Patch: public Base{
 		this->agent_count = 0;
 	}
 	shared_ptr<Patch> empty_neighbor(bool quiet);
-
 	bool empty = true;
 	/** connectors **/
 	unsigned agent_count = 0; //!< For debugging 
 	std::shared_ptr<Agent> agent;
 	std::shared_ptr<Env> env;
 };
+
+//!   Base clase for Agents
+/*!
+  
+*/
 struct Agent: public Base,enable_shared_from_this<Agent>{
 	Agent(shared_ptr<Env> env , string class_name){
 		this->env = env;
@@ -125,6 +128,10 @@ inline shared_ptr<Patch> Patch::empty_neighbor(bool quiet = false){
     	if (!quiet) throw patch_availibility("No available patch around the agent");
     	return nullptr;
 }
+//!   Base clase for environments
+/*!
+  
+*/
 struct Env: public Base{
 
 	virtual ~Env(){};
@@ -148,8 +155,6 @@ struct Env: public Base{
     void check(){
     	
     }
-
-
 };
 inline void Env::step_agents(){
 
@@ -324,7 +329,6 @@ inline shared_ptr<Patch> Env::find_empty_patch(){
 inline void Env::setup_domain(vector<MESH_ITEM> mesh){
     	/** create patches **/ 
 		// step 1: create patches from info of meshes
-		
 		for (auto & mesh_item:mesh){
 			auto patch = this->generate_patch(); // create patch
 			patch->index = mesh_item.index;      // copy index
