@@ -50,22 +50,7 @@ namespace tools{
         };
 
     };
-    struct base_exception_class{
-        base_exception_class(std::string msg):message(msg){}
-        std::string message;
-        const char *what() const throw() {
-            return message.c_str();
-        }
-    };
-    struct invalid_directory: public base_exception_class{
-        using base_exception_class::base_exception_class;
-    };
-    struct convergence_error: public base_exception_class{
-        using base_exception_class::base_exception_class;
-    };
-    struct no_available_patch: public base_exception_class{
-        using base_exception_class::base_exception_class;
-    };
+    
 
 }
 

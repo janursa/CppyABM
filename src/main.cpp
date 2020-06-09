@@ -7,7 +7,6 @@
 #include "agent.h"
 #include "patch.h"
 #include "mesh.h"
-#include "factory.h"
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 using namespace std;
@@ -27,26 +26,7 @@ int main(){
 	
 	#ifdef TEST
 	
-	/** create patches **/ //=> needs meshes
-	// step 1: create patches from info of meshes
-	map<unsigned,shared_ptr<Patch>> patches;
-	for (auto & mesh_item:meshes){
-		auto patch_ptr = make_shared<myPatch>(); // create patch
-		patch_ptr->index = mesh_item.index;      // copy index
-		patch_ptr->coords = mesh_item.coords;    // copy coords
-		patch_ptr->neighbors_indices = mesh_item.neighbors_indices;  // copy neighbors indices
-		patches[patch_ptr->index]= patch_ptr;
-	}
-	// step 2: assign neighbor patches
-	for (auto &[index,patch]:patches){
-		vector<shared_ptr<Patch>> neighbors;
-		auto neighbors_indices = patch->neighbors_indices;
-		for (auto const &neighbor_index:neighbors_indices){
-			auto neighbor_patch = patches.at(neighbor_index);
-			neighbors.push_back(neighbor_patch);
-		}
-		patch->neighbors = neighbors;
-	}
+	
 
 	
 	/** create agents **/

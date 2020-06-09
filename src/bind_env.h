@@ -13,4 +13,19 @@ struct PyEnv : public Env {
             setup         
         );
     }
+    shared_ptr<Patch> generate_patch() override {
+        PYBIND11_OVERLOAD_PURE(
+            shared_ptr<Patch>, 
+            Env,      
+            generate_patch         
+        );
+    }
+    shared_ptr<Agent> generate_agent(string agent_name) override {
+        PYBIND11_OVERLOAD_PURE(
+            shared_ptr<Agent>, 
+            Env,      
+            generate_agent,
+            agent_name         
+        );
+    }
 };

@@ -15,15 +15,8 @@
 #define LOG(str) do { } while ( false )
 #endif
 
-//** types **//
-using domain_data_t = std::map<std::string,std::map<std::string,std::vector<float>>>;
-using domain_measurements_scheme_t = std::vector<std::map<std::string,std::variant<std::string,std::vector<std::string>>>>;
 
-struct COORDS {
-	float x;
-	float y;
-	float z;
-} ; //<! Coordinates 
+
 
 //** directories **//
 

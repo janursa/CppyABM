@@ -13,4 +13,13 @@ struct PyAgent : public Agent {
             step         
         );
     }
+
+    void inherit(shared_ptr<Agent> father) override{
+    	PYBIND11_OVERLOAD(
+            void, 
+            Agent,      
+            inherit,
+            father         
+        );
+    };
 };

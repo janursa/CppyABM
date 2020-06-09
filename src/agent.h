@@ -2,6 +2,7 @@
 #pragma once
 #include "bases.h"
 struct MSC: public Agent{
+	MSC(shared_ptr<Env> env):Agent(env,"MSC"){}
 	virtual void step(){
 		cout<<"MSC"<<endl;
 	}
