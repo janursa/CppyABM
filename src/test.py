@@ -12,7 +12,11 @@ class myPatch(Patch):
 	def step(self):
 		pass
 
-
+class dead(Agent):
+	def __init__(self,env):
+		super().__init__(env = env, class_name = 'dead')
+	def step(self):
+		pass
 import time
 class MSC(Agent):
 	def __init__(self,env):
@@ -27,21 +31,19 @@ class MSC(Agent):
 		self.storage.append(2)
 		# self.order_hatch(patch = dest_patch, quiet = True, reset = True)
 		self.order_move()
-		# self.env.place_agent(dest_patch,new_agent)
-		# self.storage.append(2)
-		# 
-		
+		self.order_switch('dead')
 
 		pass 
 	
 
 
 class myEnv(Env):
-	
 	def __init__(self):
 		super().__init__()
 		self.tick = 0
 		self._repo = []
+	def update_repo(self):
+		self._repo[:]= [agent for agent in self._repo if not agent.disappear]
 	def generate_patch(self):
 		patch_obj = myPatch(self)
 		self._repo.append(patch_obj)
@@ -49,9 +51,11 @@ class myEnv(Env):
 	def generate_agent(self,agent_name):
 		if agent_name == 'MSC':
 			agent_obj = MSC(self)
+		elif agent_name == 'dead':
+			agent_obj = dead(self)
 		else:
-			agent_obj = MSC(self)
-			pass
+			print("Generate agent is not defined")
+			sys.exit(0)
 		self._repo.append(agent_obj)
 		self.agents.append(agent_obj)
 		return agent_obj
@@ -61,10 +65,11 @@ class myEnv(Env):
 		self.setup_domain(mesh)
 		
 		for i in range(1):
-			obj = self.generate_agent(MSC)
+			obj = self.generate_agent('MSC')
 			self.place_agent_randomly(obj)
 	def step(self):
-		print('tick {}: agent counts {}'.format(self.tick,len(self.agents)))
+		print('tick {}: agent counts {} agents in repo {}'
+			.format(self.tick,len(self.agents),len(self._repo)))
 		self.step_agents()	
 		self.update()
 		self.tick += 1
@@ -79,22 +84,17 @@ class myEnv(Env):
 			print("Agents cannot exceed patches in number")
 			sys.exit(0)
 
-
-
 	def log(self):
-		x = []
-		y = []
-		type_ = []
-		size_ = []
 		file = open('scatter.csv','w')
 		file.write('x,y,type,size\n')
 		for index,patch in self.patches.items():
-			if patch.empty == False:
-				size_ = 10
-				type_ = 'agent'
-			else:
+			if patch.empty:
 				size_ = 2
 				type_ = 'nothing'
+			else:
+				size_ = 10
+				type_ = patch.agent.class_name
+				
 			file.write("{},{},{},{}\n".format(patch.coords[0],
 											patch.coords[1],
 											type_,

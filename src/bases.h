@@ -16,8 +16,7 @@ struct Agent;
 struct Patch;
 using namespace std;
 struct Base{
-	std::string name; 
-	
+	string class_name;
 	/** storage **/
     vector<float> data;
 
@@ -64,7 +63,7 @@ struct Patch: public Base{
 struct Agent: public Base,enable_shared_from_this<Agent>{
 	Agent(shared_ptr<Env> env , string class_name){
 		this->env = env;
-		this->name = class_name;
+		this->class_name = class_name;
 	}
 	virtual ~Agent(){};
 	/** Major functions **/ 
@@ -74,6 +73,7 @@ struct Agent: public Base,enable_shared_from_this<Agent>{
     std::pair <bool,std::string> switch_info = std::make_pair(false,"");
     HATCH_CONFIG _hatch = HATCH_CONFIG();
     MOVE_CONFIG _move = MOVE_CONFIG();
+    SWITCH_CONFIG _switch = SWITCH_CONFIG();
     /** pure virtuals **/
 
     /** Auxillary funcs **/
@@ -83,9 +83,13 @@ struct Agent: public Base,enable_shared_from_this<Agent>{
     std::shared_ptr<Agent> get_ptr();
     void order_hatch(shared_ptr<Patch> patch, bool inherit, bool quiet, bool reset);
     void order_move(shared_ptr<Patch> patch, bool quiet, bool reset);
+    void order_switch(string to){
+    	this->_switch = SWITCH_CONFIG(true,to);
+    };
 
     void reset_hatch(){ this->_hatch = HATCH_CONFIG();}
     void reset_move(){ this->_move = MOVE_CONFIG();}
+    void reset_switch(){ this->_switch = SWITCH_CONFIG();}
 
     /** connectors **/
 	std::shared_ptr<Patch> patch;
@@ -128,10 +132,10 @@ struct Env: public Base{
     PatchesBank patches;
     vector<unsigned> patches_indices;
     //** Pure virtuals **/
-    virtual void setup()=0;
+    virtual void setup(){};
     virtual shared_ptr<Patch> generate_patch() = 0;
-	virtual	shared_ptr<Agent> generate_agent(string agent_name) = 0;
-
+	virtual	shared_ptr<Agent> generate_agent(string class_name) = 0;
+	virtual void update_repo(){};
 	//** main functions **/
     void setup_domain(vector<MESH_ITEM> mesh);
     virtual void update();
@@ -202,7 +206,7 @@ inline void Env::update(){
 					throw patch_availibility("No patch for hatching. If you want to silent this error, pass argumen quiet as true");
 				}
 			}
-			auto new_agent = this->generate_agent(this->agents[i]->name);
+			auto new_agent = this->generate_agent(this->agents[i]->class_name);
 			if (this->agents[i]->_hatch._inherit){
 				new_agent->inherit(this->agents[i]);
 			}
@@ -259,6 +263,30 @@ inline void Env::update(){
 			this->agents[i]->reset_move();
 
 	}
+	/** switch **/
+	for (unsigned  i = 0; i < agent_count; i++){
+		if (!this->agents[0]->_switch._flag) continue;
+		auto to = this->agents[0]->_switch._to;
+		auto new_agent = this->generate_agent(to);
+		this->agents[0]->patch->remove_agent(); // get the patch empty
+		this->connect_patch_agent(this->agents[0]->patch,new_agent);
+		this->agents[0]->disappear = true;
+		this->agents[0]->reset_switch();
+
+	}
+	/** process disappearing **/
+	int jj = 0;
+    while (true) {
+        if (jj >= this->agents.size()) break;
+        for (int ii = jj; ii < this->agents.size(); ii++) {
+            if (this->agents[ii]->disappear == true) {
+                this->agents.erase(this->agents.begin() + ii);
+                break;
+            }
+            jj++;
+        };
+    }
+    this->update_repo(); // to remove the agents from repo
 	
 };
 inline void Env::place_agent(shared_ptr<Patch> patch,shared_ptr<Agent> agent){

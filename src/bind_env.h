@@ -7,7 +7,7 @@ using namespace std;
 struct PyEnv : public Env {
     using Env::Env;
     void setup() override {
-        PYBIND11_OVERLOAD_PURE(
+        PYBIND11_OVERLOAD(
             void, 
             Env,      
             setup         
@@ -26,6 +26,14 @@ struct PyEnv : public Env {
             Env,      
             generate_agent,
             agent_name         
+        );
+    }
+    void update_repo() override {
+        PYBIND11_OVERLOAD(
+            void, 
+            Env,      
+            update_repo
+                
         );
     }
 };

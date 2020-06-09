@@ -47,7 +47,7 @@ struct MOVE_CONFIG{
 };
 struct SWITCH_CONFIG{
 	SWITCH_CONFIG (bool flag = false, 
-		    string to = nullptr
+		    string to = ""
 		    ):
 			_flag(flag),_to(to)
 	{};

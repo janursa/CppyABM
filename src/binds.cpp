@@ -32,10 +32,13 @@ PYBIND11_MODULE(binds, m) {
     	.def("order_move",&Agent::order_move,"Move request",
     		py::arg("patch")=nullptr, 
     		py::arg("quiet")=false, py::arg("reset")=false)
+    	.def("order_switch",&Agent::order_switch,"Switch request",
+    		py::arg("to"))
     	.def_readwrite("disappear",&Agent::disappear)
     	.def_readwrite("env",&Agent::env)
     	.def_readwrite("data",&Agent::data)
-    	.def_readwrite("patch",&Agent::patch);
+    	.def_readwrite("patch",&Agent::patch)
+    	.def_readwrite("class_name",&Agent::class_name);
 
     
     /** Patch **/
@@ -44,6 +47,7 @@ PYBIND11_MODULE(binds, m) {
     	.def_readwrite("coords",&Patch::coords)
     	.def_readwrite("agent",&Patch::agent)
     	.def_readwrite("empty",&Patch::empty)
+    	.def_readwrite("disappear",&Patch::disappear)
     	.def("empty_neighbor", &Patch::empty_neighbor,"Return an empty patch around the patch",
     		py::arg("quiet")=false);
 
