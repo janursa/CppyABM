@@ -11,12 +11,12 @@ using namespace std;
 */
 struct MESH_ITEM {
     unsigned index;
-    vector<float> coords;
+    vector<double> coords;
     std::vector<unsigned> neighbors_indices;
 }; //!< Mesh item
 struct mesh_tools{ 
 
-    static vector<MESH_ITEM> grid(float x, float y, float size){
+    static vector<MESH_ITEM> grid(double x, double y, double size){
         auto calculate_mesh_index = [](unsigned i, unsigned j,unsigned x_n) {
             return (j*x_n + i);
         };
@@ -64,7 +64,7 @@ struct mesh_tools{
             
         unsigned x_n = x/size;
         unsigned y_n = y/size;
-        float mesh_size = size;
+        double mesh_size = size;
         unsigned mesh_count =0;
         // ** some small funcs **//
         
@@ -73,8 +73,8 @@ struct mesh_tools{
             for (unsigned i=0; i<x_n; i++){ //inner vector meshe
                 auto x = (mesh_size/2)+i*mesh_size;
                 auto y = (mesh_size/2)+j*mesh_size;
-                float z = 0;
-                vector<float> coords = {x,y,z};
+                double z = 0;
+                vector<double> coords = {x,y,z};
                 auto mesh_index = calculate_mesh_index(i,j,x_n);
                 auto neighbor_indices = find_neighborhood(i,j,x_n,y_n);
                 MESH_ITEM mesh_item = {mesh_index,coords,neighbor_indices};

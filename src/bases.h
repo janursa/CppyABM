@@ -5,6 +5,8 @@
 #include <random>
 #include <pybind11/stl.h>
 #include "pybind11/pybind11.h"
+// #include <nlohmann/json.hpp>
+// using json = nlohmann::json
 #include "common.h"
 #include "mesh.h"
 namespace py=pybind11;
@@ -19,9 +21,7 @@ using namespace std;
   All classes inherit this
 */
 struct Base{
-protected:
 	string class_name;
-    vector<float> data;
     bool disappear = false;
 };
 //!   Base clase for patches
@@ -34,10 +34,12 @@ struct Patch: public Base{
 	}
 	virtual ~Patch(){}
 	unsigned index;
-	vector<float> coords;
+	vector<double> coords;
 	vector<unsigned> neighbors_indices;
 	vector<shared_ptr<Patch>> neighbors;
-	/** Auxilliry funcs **/
+	/** main funcs **/
+	virtual void step(){};
+	/** Auxs funcs **/
 	void set_agent(shared_ptr<Agent> agent){
 		this->agent = agent;
 		this->empty = false;
@@ -52,11 +54,21 @@ struct Patch: public Base{
 		this->agent_count = 0;
 	}
 	shared_ptr<Patch> empty_neighbor(bool quiet);
-	bool empty = true;
+	vector<shared_ptr<Agent>> find_neighbor_agents(bool include_self = true){
+		vector<shared_ptr<Agent>> neighbor_agents;
+		if (!this->empty and include_self) neighbor_agents.push_back(this->agent);
+		for (auto const &patch:this->neighbors){
+			if (!patch->empty) neighbor_agents.push_back(patch->agent);
+		}
+		return neighbor_agents;
+	}
 	/** connectors **/
 	unsigned agent_count = 0; //!< For debugging 
 	std::shared_ptr<Agent> agent;
 	std::shared_ptr<Env> env;
+	/** patch data **/
+	PatchDataBank data;
+	bool empty = true;
 };
 
 //!   Base clase for Agents
@@ -97,7 +109,8 @@ struct Agent: public Base,enable_shared_from_this<Agent>{
     /** connectors **/
 	std::shared_ptr<Patch> patch;
 	std::shared_ptr<Env> env;
-
+	/** Agent data **/
+	AgentDataBank data;
 };
 inline void Agent::order_hatch(shared_ptr<Patch> patch = nullptr, 
 		    bool inherit = false, bool quiet = false, bool reset = false){
@@ -145,22 +158,55 @@ struct Env: public Base{
 	virtual void update_repo(){};
 	//** main functions **/
     void setup_domain(vector<MESH_ITEM> mesh);
+    void step_agents();
+    void step_patches();
     virtual void update();
     //** Place agents **/
+    void setup_agents(map<string,unsigned> config);
     void place_agent(shared_ptr<Patch> patch,shared_ptr<Agent> agent);
     void place_agent_randomly(shared_ptr<Agent> agent);
     shared_ptr<Patch> find_empty_patch(); //!< Finds empty patches in the entire domain
     void connect_patch_agent(shared_ptr<Patch> patch,shared_ptr<Agent> agent);
-    void step_agents();
+
     void check(){
     	
     }
+    //** aux functions **//
+    map<string,unsigned> count_agents();
+    double collect_from_patches(string); 
+
+    /** Env data **/
+    std::map<std::string,unsigned> agents_count;
+    std::set<string> agent_classes;
+
 };
+inline double Env::collect_from_patches(string tag){
+	double result = 0;
+	for (auto const &[index,patch]: this->patches){
+		result += patch->data[tag];
+	}
+	return result;
+}
 inline void Env::step_agents(){
 
     	for (unsigned i = 0; i < this->agents.size(); i++){
     		this->agents[i]->step();
     	}
+}
+inline void Env::step_patches(){
+
+    	for (unsigned i = 0; i < this->agents.size(); i++){
+    		this->patches[i]->step();
+    	}
+}
+inline void Env::setup_agents(map<string,unsigned> config){
+	for (auto const [agent_type,count]:config){
+		for (unsigned i = 0; i < count; i++){
+			auto agent = this->generate_agent(agent_type);
+			this->place_agent_randomly(agent);
+		}
+		this->agent_classes.insert(agent_type);
+	}
 }
 inline void Env::update(){
 	
@@ -270,13 +316,14 @@ inline void Env::update(){
 	}
 	/** switch **/
 	for (unsigned  i = 0; i < agent_count; i++){
-		if (!this->agents[0]->_switch._flag) continue;
-		auto to = this->agents[0]->_switch._to;
+		auto agent = this->agents[i];
+		if (!agent->_switch._flag) continue;
+		auto to = agent->_switch._to;
 		auto new_agent = this->generate_agent(to);
-		this->agents[0]->patch->remove_agent(); // get the patch empty
-		this->connect_patch_agent(this->agents[0]->patch,new_agent);
-		this->agents[0]->disappear = true;
-		this->agents[0]->reset_switch();
+		agent->patch->remove_agent(); // get the patch empty
+		this->connect_patch_agent(agent->patch,new_agent);
+		agent->disappear = true;
+		agent->reset_switch();
 
 	}
 	/** process disappearing **/
@@ -292,8 +339,30 @@ inline void Env::update(){
         };
     }
     this->update_repo(); // to remove the agents from repo
-	
+    /** update Env data **/
+    // update agent counts
+
+    this->count_agents();
+    
 };
+inline map<string,unsigned> Env::count_agents(){
+	map<string,unsigned> agents_count;
+    for (unsigned i = 0; i < this->agents.size(); i++) {
+        auto agent =  this->agents[i];
+        agents_count[agent->class_name]++;
+        
+    	agent_classes.insert(agent->class_name);
+    	
+    }
+    // to add those agents that were present at setup time but disappeared
+    for (auto const & agent_class:this->agent_classes){
+    	if (agents_count.find(agent_class) == agents_count.end()){
+    		agents_count[agent_class] = 0;
+    	}
+    }
+    this->agents_count = agents_count;
+    return agents_count;
+}
 inline void Env::place_agent(shared_ptr<Patch> patch,shared_ptr<Agent> agent){
 	if (!patch->empty) throw patch_availibility("Patch is not empty");
 	connect_patch_agent(patch,agent);

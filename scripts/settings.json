@@ -1,0 +1,80 @@
+{
+  "setup":{
+    "exp_duration" : 72,
+    "grid":{
+        "x_l": 0.335,
+        "y_l": 0.335,
+        "patch_size": 0.015
+    },
+    "patch":{
+        "attrs":{ "Mg":0, "pH":7.8,"agent_density":0,"lactate":0}
+      },
+    "agents":
+      {
+        "n":{
+          "MSC": 200,
+          "Dead": 0
+        },
+        "MSC":{
+          "attrs":{"pH":7.8,"MI":0}
+        },
+        "Dead":{
+          "attrs":{ }
+        }
+      }
+  },
+  "returns":{
+    
+    "agents_count": [24,48,72]
+    
+  },
+  "logs":{
+    "flag": false,
+    "agent": [
+      {
+        "flag":false,
+        "interval":1,
+        "type": "scatter",
+        "tags":["size"],
+        "dir":"outputs/agents_scatter_data.csv"
+      },
+      {
+        "flag":true,
+        "interval":1,
+        "type":"agents_count_traj",
+        "dir":"outputs/agents_count_data.csv"
+      },
+      {
+        "flag":false,
+        "interval":1,
+        "tags":["MI"],
+        "type":"traj",
+        "dir":"outputs/agents_traj_data.csv"
+      }
+    ],
+    "patch":[
+      {
+        "flag":false,
+        "interval":1,
+        "type":"densitymap",
+        "tags":["agent_density"],
+        "dir":"outputs/patches_densitymap_data.csv"
+      },
+      {
+        "flag":false,
+        "interval":1,
+        "type":"traj",
+        "tags":["lactate"],
+        "dir":"outputs/patches_lactate_data.csv"
+      },
+      {
+        "flag":false,
+        "interval":1,
+        "type":"traj",
+        "tags":["pH"],
+        "dir":"outputs/patches_pH_data.csv"
+      }
+
+    ]
+  }
+}

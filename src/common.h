@@ -13,7 +13,15 @@ using AgentsBank = vector<shared_ptr<Agent>>;
 PYBIND11_MAKE_OPAQUE(AgentsBank);
 using PatchesBank = map<unsigned,shared_ptr<Patch>>;
 PYBIND11_MAKE_OPAQUE(PatchesBank);
-
+using PatchDataBank = std::map<string,double>;
+PYBIND11_MAKE_OPAQUE(PatchDataBank);
+using AgentDataBank = PatchDataBank;
+// using EnvDataBank = std::map<string,double>;
+// PYBIND11_MAKE_OPAQUE(EnvDataBank);
+// using VectorFloat = vector<double>;
+// PYBIND11_MAKE_OPAQUE(VectorFloat)
+// using DataBank = map<string,vector<double>>;
+// PYBIND11_MAKE_OPAQUE(map<string,vector<double>>);
 struct HATCH_CONFIG{
 	HATCH_CONFIG (bool flag = false, 
 		    shared_ptr<Patch> _patch = nullptr, 
