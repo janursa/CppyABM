@@ -23,10 +23,10 @@ class myPatch(Patch):
 			self.data[key] = value;
 	def step(self):
 		pH_new = self.pH()
-		new_lactate = self.lactate()
-		self.data["pH"] = pH_new
-		self.data["lactate"] = new_lactate
-		self.data["agent_density"] = len(self.find_neighbor_agents(include_self = True))/9.0
+		# new_lactate = self.lactate()
+		# self.data["pH"] = pH_new
+		# self.data["lactate"] = new_lactate
+		# self.data["agent_density"] = len(self.find_neighbor_agents(include_self = True))/9.0
 		return
 	def pH(self):
 		mg = self.data["Mg"]

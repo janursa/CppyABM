@@ -63,10 +63,11 @@ class myEnv(Env):
 	def step(self):
 
 		self.step_patches()
-		self.step_agents()	
+		# self.step_agents()	
 
-		self.tick += 1
-		self.update()
+		# self.tick += 1
+		# self.update()
+		pass
 	def update(self):
 		super().update()
 		## Either updates or appends a pair of key-value to self.data
@@ -106,21 +107,21 @@ class myEnv(Env):
 		Post processing: logging the results to a file
 		"""
 		# agents on patches as scatter format
-		file = open('scatter.csv','w')
-		file.write('x,y,type,size\n')
-		for index,patch in self.patches.items():
-			if patch.empty:
-				size_ = 2
-				type_ = 'nothing'
-			else:
-				size_ = 10
-				type_ = patch.agent.class_name
+		# file = open('scatter.csv','w')
+		# file.write('x,y,type,size\n')
+		# for index,patch in self.patches.items():
+		# 	if patch.empty:
+		# 		size_ = 2
+		# 		type_ = 'nothing'
+		# 	else:
+		# 		size_ = 10
+		# 		type_ = patch.agent.class_name
 				
-			file.write("{},{},{},{}\n".format(patch.coords[0],
-											patch.coords[1],
-											type_,
-											size_))
-		file.close()
+		# 	file.write("{},{},{},{}\n".format(patch.coords[0],
+		# 									patch.coords[1],
+		# 									type_,
+		# 									size_))
+		# file.close()
 
 		## agent counts 
 		df = pd.DataFrame.from_dict(self.data)

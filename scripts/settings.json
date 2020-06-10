@@ -2,8 +2,8 @@
   "setup":{
     "exp_duration" : 72,
     "grid":{
-        "x_l": 0.335,
-        "y_l": 0.335,
+        "x_l": 1,
+        "y_l": 1,
         "patch_size": 0.015
     },
     "patch":{
@@ -12,7 +12,7 @@
     "agents":
       {
         "n":{
-          "MSC": 200,
+          "MSC": 1000,
           "Dead": 0
         },
         "MSC":{
