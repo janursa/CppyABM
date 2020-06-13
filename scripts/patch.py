@@ -4,7 +4,7 @@ import pathlib
 import os
 current_file_path = pathlib.Path(__file__).parent.absolute()
 sys.path.insert(1,current_file_path)
-sys.path.insert(1,os.path.join(current_file_path,'..','build','pylib'))
+sys.path.insert(1,os.path.join(current_file_path,'..','build','binds'))
 from binds import Patch
 
 
@@ -23,10 +23,10 @@ class myPatch(Patch):
 			self.data[key] = value;
 	def step(self):
 		pH_new = self.pH()
-		# new_lactate = self.lactate()
-		# self.data["pH"] = pH_new
-		# self.data["lactate"] = new_lactate
-		# self.data["agent_density"] = len(self.find_neighbor_agents(include_self = True))/9.0
+		new_lactate = self.lactate()
+		self.data["pH"] = pH_new
+		self.data["lactate"] = new_lactate
+		self.data["agent_density"] = len(self.find_neighbor_agents(include_self = True))/9.0
 		return
 	def pH(self):
 		mg = self.data["Mg"]

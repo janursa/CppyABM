@@ -9,7 +9,7 @@ from pprogress import ProgressBar
 
 current_file_path = pathlib.Path(__file__).parent.absolute()
 sys.path.insert(1,current_file_path)
-sys.path.insert(1,os.path.join(current_file_path,'..','build','pylib'))
+sys.path.insert(1,os.path.join(current_file_path,'..','build','binds'))
 
 from binds import Env,mesh_tools
 from agents import MSC,Dead
@@ -63,10 +63,10 @@ class myEnv(Env):
 	def step(self):
 
 		self.step_patches()
-		# self.step_agents()	
+		self.step_agents()	
 
-		# self.tick += 1
-		# self.update()
+		self.tick += 1
+		self.update()
 		pass
 	def update(self):
 		super().update()

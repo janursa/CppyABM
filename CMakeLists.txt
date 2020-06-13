@@ -41,18 +41,12 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(pybind11)
 set(PYBIND11_CPP_STANDARD -std=c++17)
 
-add_subdirectory(pylib)
-
 
 set(JSON_BuildTests OFF CACHE INTERNAL "")
-# include(FetchContent)
-# FetchContent_Declare(
-#   nlohmann
-#   GIT_REPOSITORY https://github.com/nlohmann/json.git
-#   GIT_TAG        develop
-# )
-# FetchContent_MakeAvailable(nlohmann)
 find_package(nlohmann_json REQUIRED)
+
+add_subdirectory(binds)
+
 
 # set(EXE_HEADER_LIST "${CMAKE_SOURCE_DIR}/src/bases.h")
 # add_executable("${PROJECT_NAME}_main" src/main.cpp ${EXE_HEADER_LIST})
