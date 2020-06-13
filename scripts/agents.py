@@ -5,7 +5,7 @@ import os
 import time
 current_file_path = pathlib.Path(__file__).parent.absolute()
 sys.path.insert(1,current_file_path)
-sys.path.insert(1,os.path.join(current_file_path,'..','build','src'))
+sys.path.insert(1,os.path.join(current_file_path,'..','build','pylib'))
 from binds import Agent
 sys.path.insert(1,os.path.join(current_file_path,'..','..','fuzzy','build'))
 from fuzzy import fuzzy

@@ -9,7 +9,7 @@ from pprogress import ProgressBar
 
 current_file_path = pathlib.Path(__file__).parent.absolute()
 sys.path.insert(1,current_file_path)
-sys.path.insert(1,os.path.join(current_file_path,'..','build','src'))
+sys.path.insert(1,os.path.join(current_file_path,'..','build','pylib'))
 
 from binds import Env,mesh_tools
 from agents import MSC,Dead

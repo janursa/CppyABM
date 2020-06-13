@@ -41,7 +41,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(pybind11)
 set(PYBIND11_CPP_STANDARD -std=c++17)
 
-add_subdirectory(src)
+add_subdirectory(pylib)
 
 
 set(JSON_BuildTests OFF CACHE INTERNAL "")
@@ -54,12 +54,12 @@ set(JSON_BuildTests OFF CACHE INTERNAL "")
 # FetchContent_MakeAvailable(nlohmann)
 find_package(nlohmann_json REQUIRED)
 
-set(EXE_HEADER_LIST "${CMAKE_SOURCE_DIR}/src/bases.h")
-add_executable("${PROJECT_NAME}_main" src/main.cpp ${EXE_HEADER_LIST})
-# target_include_directories("${PROJECT_NAME}_test"  PUBLIC ${CMAKE_SOURCE_DIR}/include)
-target_compile_features("${PROJECT_NAME}_main" PRIVATE cxx_std_17)
-target_link_libraries("${PROJECT_NAME}_main" PRIVATE pybind11::module)
-target_link_libraries("${PROJECT_NAME}_main" PRIVATE nlohmann_json::nlohmann_json)
+# set(EXE_HEADER_LIST "${CMAKE_SOURCE_DIR}/src/bases.h")
+# add_executable("${PROJECT_NAME}_main" src/main.cpp ${EXE_HEADER_LIST})
+# # target_include_directories("${PROJECT_NAME}_test"  PUBLIC ${CMAKE_SOURCE_DIR}/include)
+# target_compile_features("${PROJECT_NAME}_main" PRIVATE cxx_std_17)
+# target_link_libraries("${PROJECT_NAME}_main" PRIVATE pybind11::module)
+# target_link_libraries("${PROJECT_NAME}_main" PRIVATE nlohmann_json::nlohmann_json)
 
 
 
