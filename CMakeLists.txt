@@ -5,7 +5,8 @@ set(CMAKE_CXX_STANDARD 17)
 
 SET(TARGET "ABM")
 PROJECT(${TARGET} VERSION 1.0 LANGUAGES CXX)
-
+SET(STATICLIBS "BaseLibs")
+SET(APP "app")
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 
     set_property(GLOBAL PROPERTY USE_FOLDERS ON)
@@ -46,14 +47,8 @@ set(JSON_BuildTests OFF CACHE INTERNAL "")
 find_package(nlohmann_json REQUIRED)
 
 add_subdirectory(binds)
-
-
-# set(EXE_HEADER_LIST "${CMAKE_SOURCE_DIR}/src/bases.h")
-# add_executable("${PROJECT_NAME}_main" src/main.cpp ${EXE_HEADER_LIST})
-# # target_include_directories("${PROJECT_NAME}_test"  PUBLIC ${CMAKE_SOURCE_DIR}/include)
-# target_compile_features("${PROJECT_NAME}_main" PRIVATE cxx_std_17)
-# target_link_libraries("${PROJECT_NAME}_main" PRIVATE pybind11::module)
-# target_link_libraries("${PROJECT_NAME}_main" PRIVATE nlohmann_json::nlohmann_json)
+add_subdirectory(src)
+add_subdirectory(app)
 
 
 

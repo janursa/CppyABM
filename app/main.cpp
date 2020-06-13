@@ -4,6 +4,7 @@
 #include <vector>
 #include <memory>
 #include <nlohmann/json.hpp>
+#include <bases.h>
 using json = nlohmann::json;
 using namespace std;
 
