@@ -82,7 +82,7 @@ struct Agent: public Base,enable_shared_from_this<Agent>{
 	}
 	virtual ~Agent(){};
 	/** Major functions **/ 
-	virtual void step()=0;
+	virtual void step(){};
 	virtual void update(){};
     /** Flags **/
     std::pair <bool,std::string> switch_info = std::make_pair(false,"");

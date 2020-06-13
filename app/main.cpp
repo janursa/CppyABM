@@ -4,12 +4,13 @@
 #include <vector>
 #include <memory>
 #include <nlohmann/json.hpp>
-#include <bases.h>
 using json = nlohmann::json;
 using namespace std;
 
+
 int main(){
-	cout<<"Hello world"<<endl;
+	// auto env_obj =  myEnv();
+	cout<<"hellor"<<endl;
 	return 0;
 }
 

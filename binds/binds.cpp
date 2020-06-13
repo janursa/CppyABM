@@ -1,9 +1,9 @@
 #include <iostream>
 #include "mesh.h"
 #include "common.h"
-#include "env.cpp"
-#include "agents.cpp"
-#include "patch.cpp"
+#include "patch_link.cpp"
+#include "agents_link.cpp"
+#include "env_link.cpp"
 
 
 PYBIND11_MODULE(binds, m) {
