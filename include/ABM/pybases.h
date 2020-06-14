@@ -4,13 +4,14 @@
 #include <algorithm>
 #include "pybind11/pybind11.h"
 namespace py=pybind11;
-
-struct PyPatch : public Patch {
-    using Patch::Patch;
+struct Env;
+template<class PatchBase> 
+struct PyPatch : public PatchBase {
+    using PatchBase::PatchBase;
     void step() override {
     	PYBIND11_OVERLOAD(
     		void,
-    		Patch,
+    		PatchBase,
     		step
     		);
     }
@@ -50,12 +51,13 @@ struct PyEnv : public EnvBase {
     }
 };
 
-struct PyAgent : public Agent {
-    using Agent::Agent;
+template<class AgentBase>
+struct PyAgent : public AgentBase {
+    using AgentBase::AgentBase;
     void step() override {
         PYBIND11_OVERLOAD_PURE(
             void, 
-            Agent,      
+            AgentBase,      
             step         
         );
     }
@@ -63,7 +65,7 @@ struct PyAgent : public Agent {
     void inherit(shared_ptr<Agent> father) override{
         PYBIND11_OVERLOAD(
             void, 
-            Agent,      
+            AgentBase,      
             inherit,
             father         
         );

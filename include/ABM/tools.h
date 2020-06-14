@@ -10,9 +10,7 @@ using namespace std;
 
 template<typename class_name,typename py_class_name>
 py::class_<class_name,py_class_name,std::shared_ptr<class_name>> link_env(py::module m, string class_name_string){
-    /** Types **/
-    py::bind_vector<AgentsBank>(m,"AgentsBank");
-    py::bind_map<PatchesBank>(m,"PatchesBank");
+
 
     auto class_binds_obj = py::class_<class_name,py_class_name,std::shared_ptr<class_name>>(m,class_name_string.c_str(),py::dynamic_attr())
         .def(py::init<>())
