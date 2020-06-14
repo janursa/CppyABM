@@ -1,10 +1,9 @@
 #include <iostream>
 #include "mesh.h"
+#include "tools.h"
 #include "common.h"
-#include "patch_link.cpp"
-#include "agents_link.cpp"
-#include "env_link.cpp"
-#include "links_funcs.cpp"
+#include "pybases.h"
+#include "bases.h"
 
 
 PYBIND11_MODULE(binds, m) {

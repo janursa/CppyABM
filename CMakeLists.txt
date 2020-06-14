@@ -46,8 +46,8 @@ set(PYBIND11_CPP_STANDARD -std=c++17)
 set(JSON_BuildTests OFF CACHE INTERNAL "")
 find_package(nlohmann_json REQUIRED)
 
-add_subdirectory(binds)
 add_subdirectory(src)
+add_subdirectory(binds)
 add_subdirectory(app)
 
 

@@ -1,5 +1,13 @@
+
+#pragma once
 #include "bases.h"
-// binding class
+#include <map>
+#include <algorithm>
+// #include <pybind11/stl.h>
+#include "pybind11/pybind11.h"
+namespace py=pybind11;
+using namespace std;
+
 template<typename class_name,typename py_class_name>
 void link_env(py::module m, string class_name_string){
     py::class_<class_name,py_class_name,std::shared_ptr<class_name>>(m,class_name_string.c_str(),py::dynamic_attr())
@@ -53,5 +61,7 @@ void link_patch(py::module &m, string class_name_ptr){
         .def_readwrite("disappear",&class_name::disappear)
         .def_readwrite("data",&class_name::data)
         .def_readwrite("neighbors",&class_name::neighbors);
+
         
 }
+

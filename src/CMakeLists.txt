@@ -5,10 +5,10 @@ set(HEADER_LIST )
 set(SOURCE_FILES "env.cpp"
 				 "agents.cpp"
 				 "patch.cpp"
-				 "links_funcs.cpp")
+				 "tools.cpp"
+				 "pybases.cpp")
 
 set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMake")
-
 add_library(${STATICLIBS} STATIC ${SOURCE_FILES})
 target_link_libraries(${STATICLIBS} PRIVATE pybind11::module)
 target_link_libraries(${STATICLIBS} PRIVATE fmt::fmt)

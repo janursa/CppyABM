@@ -120,7 +120,6 @@ struct Agent: public Base,enable_shared_from_this<Agent>{
   
 */
 struct Env: public Base{
-
 	virtual ~Env(){};
     AgentsBank agents;
     PatchesBank patches;
@@ -155,22 +154,3 @@ struct Env: public Base{
 
 };
 
-//!   Linking function for Env
-/*!
-  
-*/
-
-template<typename class_name,typename py_class_name>
-void link_env(py::module m, string class_name_string);
-//!   Linking function for Agent
-/*!
-  
-*/
-template<typename class_name,typename py_class_name>
-void link_agent(py::module &m, string class_name_str);
-//!   Linking function for Patch
-/*!
-  
-*/
-template<typename class_name,typename py_class_name>
-void link_patch(py::module &m, string class_name_ptr);
