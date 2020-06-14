@@ -4,7 +4,8 @@ set(HEADER_LIST )
 
 set(SOURCE_FILES "env.cpp"
 				 "agents.cpp"
-				 "patch.cpp")
+				 "patch.cpp"
+				 "links_funcs.cpp")
 
 set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMake")
 

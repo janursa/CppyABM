@@ -238,21 +238,3 @@
             patch->neighbors = neighbors;
         }
     }
-// binding class
-template<typename class_name,typename py_class_name>
-void link_env(py::module m, string class_name_string){
-    py::class_<class_name,py_class_name,std::shared_ptr<class_name>>(m,class_name_string.c_str(),py::dynamic_attr())
-        .def(py::init<>())
-        .def("check",&class_name::check)
-        .def("place_agent_randomly",&class_name::place_agent_randomly)
-        .def("setup_domain",&class_name::setup_domain)
-        .def("step_agents",&class_name::step_agents)
-        .def("step_patches",&class_name::step_patches)
-        .def("place_agent",&class_name::place_agent)
-        .def("update",&class_name::update)
-        .def("setup_agents",&class_name::setup_agents)
-        .def("count_agents",&class_name::count_agents)
-        .def("collect_from_patches",&class_name::collect_from_patches)
-        .def_readwrite("patches",&class_name::patches)
-        .def_readwrite("agents",&class_name::agents);
-}

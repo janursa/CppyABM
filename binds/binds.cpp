@@ -4,6 +4,7 @@
 #include "patch_link.cpp"
 #include "agents_link.cpp"
 #include "env_link.cpp"
+#include "links_funcs.cpp"
 
 
 PYBIND11_MODULE(binds, m) {
