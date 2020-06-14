@@ -9,8 +9,12 @@ namespace py=pybind11;
 using namespace std;
 
 template<typename class_name,typename py_class_name>
-void link_env(py::module m, string class_name_string){
-    py::class_<class_name,py_class_name,std::shared_ptr<class_name>>(m,class_name_string.c_str(),py::dynamic_attr())
+py::class_<class_name,py_class_name,std::shared_ptr<class_name>> link_env(py::module m, string class_name_string){
+    /** Types **/
+    py::bind_vector<AgentsBank>(m,"AgentsBank");
+    py::bind_map<PatchesBank>(m,"PatchesBank");
+
+    auto class_binds_obj = py::class_<class_name,py_class_name,std::shared_ptr<class_name>>(m,class_name_string.c_str(),py::dynamic_attr())
         .def(py::init<>())
         .def("check",&class_name::check)
         .def("place_agent_randomly",&class_name::place_agent_randomly)
@@ -24,12 +28,13 @@ void link_env(py::module m, string class_name_string){
         .def("collect_from_patches",&class_name::collect_from_patches)
         .def_readwrite("patches",&class_name::patches)
         .def_readwrite("agents",&class_name::agents);
+    return class_binds_obj;
 }
 
 template<typename class_name,typename py_class_name>
-void link_agent(py::module &m, string class_name_str) {
+py::class_<class_name,py_class_name,std::shared_ptr<class_name>>  link_agent(py::module &m, string class_name_str) {
     /** Agent **/
-    py::class_<class_name,py_class_name,std::shared_ptr<class_name>>(m,class_name_str.c_str(),py::dynamic_attr())
+    auto class_binds_obj =  py::class_<class_name,py_class_name,std::shared_ptr<class_name>>(m,class_name_str.c_str(),py::dynamic_attr())
         .def(py::init<shared_ptr<Env>,string>(),"Initialize",py::arg("env"),py::arg("class_name"))
         .def("move",&class_name::move,"Move the agent to a new patch")
         .def("order_hatch",&class_name::order_hatch,"Hatch request",
@@ -45,11 +50,23 @@ void link_agent(py::module &m, string class_name_str) {
         .def_readwrite("data",&class_name::data)
         .def_readwrite("patch",&class_name::patch)
         .def_readwrite("class_name",&class_name::class_name);
+    return class_binds_obj;
 
 }
 template<typename class_name,typename py_class_name>
-void link_patch(py::module &m, string class_name_ptr){
-    py::class_<class_name,py_class_name,std::shared_ptr<class_name>>(m,class_name_ptr.c_str(),py::dynamic_attr())
+py::class_<class_name,py_class_name,std::shared_ptr<class_name>>  link_patch(py::module &m, string class_name_ptr){
+    // data types
+    auto bb = py::bind_map<map<string,double>>(m,"PatchDataBank"); //TODO: needs to go
+    bb.def("keys",[](map<string,double> &v) {
+       std::vector<std::string> retval;
+       for (auto const& element : v) {
+         retval.push_back(element.first);
+       }
+       return retval;
+    });
+
+    // main class
+    auto class_binds_obj =  py::class_<class_name,py_class_name,std::shared_ptr<class_name>>(m,class_name_ptr.c_str(),py::dynamic_attr())
         .def(py::init<shared_ptr<Env>>())
         .def("empty_neighbor", &class_name::empty_neighbor,"Return an empty patch around the patch",
             py::arg("quiet")=false)
@@ -61,7 +78,17 @@ void link_patch(py::module &m, string class_name_ptr){
         .def_readwrite("disappear",&class_name::disappear)
         .def_readwrite("data",&class_name::data)
         .def_readwrite("neighbors",&class_name::neighbors);
-
+    return class_binds_obj;
         
 }
 
+void register_exceptions(py::module m){
+     py::register_exception<patch_availibility>(m, "patch_availibility");
+}
+void register_mesh(py::module m){
+    py::class_<MESH_ITEM>(m,"MESH_ITEM")
+        .def(py::init<>()); 
+    py::class_<mesh_tools>(m,"mesh_tools")
+        .def(py::init<>())
+        .def("grid",&mesh_tools::grid);
+}

@@ -17,9 +17,7 @@ class myEnv: public Env{
 
 	}
 };
-class PyMyEnv : public PyEnv{
 
-};
 
 
 int main(){
