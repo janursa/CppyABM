@@ -8,6 +8,16 @@ namespace py = pybind11;
 struct Agent;
 struct Patch;
 
+/** macros and helpers **/
+template <typename T> std::string type_name();
+#define TYPENAME(A) { std::cout<< #A; }
+//#define DEBUG
+
+#ifdef DEBUG
+#define LOG(str) do { std::cout << str ; } while( false )
+#else
+#define LOG(str) do { } while ( false )
+#endif
 /** custom types **/
 using AgentsBank = vector<shared_ptr<Agent>>;
 PYBIND11_MAKE_OPAQUE(AgentsBank);
@@ -16,12 +26,6 @@ PYBIND11_MAKE_OPAQUE(PatchesBank);
 using PatchDataBank = std::map<string,double>;
 PYBIND11_MAKE_OPAQUE(PatchDataBank);
 using AgentDataBank = PatchDataBank;
-// using EnvDataBank = std::map<string,double>;
-// PYBIND11_MAKE_OPAQUE(EnvDataBank);
-// using VectorFloat = vector<double>;
-// PYBIND11_MAKE_OPAQUE(VectorFloat)
-// using DataBank = map<string,vector<double>>;
-// PYBIND11_MAKE_OPAQUE(map<string,vector<double>>);
 struct HATCH_CONFIG{
 	HATCH_CONFIG (bool flag = false, 
 		    shared_ptr<Patch> _patch = nullptr, 
@@ -80,16 +84,6 @@ struct patch_availibility: public base_exception_class{
     using base_exception_class::base_exception_class;
 };
 
-
-/** settings **/
-//#define DEBUG
-
-// *** helpers ***// 
-#ifdef DEBUG
-#define LOG(str) do { std::cout << str ; } while( false )
-#else
-#define LOG(str) do { } while ( false )
-#endif
 
 //** directories **//
 

@@ -19,11 +19,11 @@ PYBIND11_MODULE(binds, m) {
 		  return retval;
     });
 	/** Envs **/
-    link_env(m);
+    link_env<Env,PyEnv>(m,"Env");
 	/** Agent **/
-    link_agent(m);
+    link_agent<Agent,PyAgent>(m,"Agent");
     /** Patch **/
-    link_patch(m);
+    link_patch<Patch,PyPatch>(m,"Patch");
     
     /** Exceptions **/
     py::register_exception<patch_availibility>(m, "patch_availibility");

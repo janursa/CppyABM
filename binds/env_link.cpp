@@ -32,19 +32,3 @@ struct PyEnv : public Env {
         );
     }
 };
-void link_env(py::module m){
-    py::class_<Env,PyEnv,std::shared_ptr<Env>>(m,"Env",py::dynamic_attr())
-        .def(py::init<>())
-        .def("check",&Env::check)
-        .def("place_agent_randomly",&Env::place_agent_randomly)
-        .def("setup_domain",&Env::setup_domain)
-        .def("step_agents",&Env::step_agents)
-        .def("step_patches",&Env::step_patches)
-        .def("place_agent",&Env::place_agent)
-        .def("update",&Env::update)
-        .def("setup_agents",&Env::setup_agents)
-        .def("count_agents",&Env::count_agents)
-        .def("collect_from_patches",&Env::collect_from_patches)
-        .def_readwrite("patches",&Env::patches)
-        .def_readwrite("agents",&Env::agents);
-}
