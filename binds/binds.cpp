@@ -8,14 +8,15 @@
 
 PYBIND11_MODULE(binds, m) {
 	/** Envs **/
-
+    // data types
     py::bind_vector<AgentsBank>(m,"AgentsBank");
     py::bind_map<PatchesBank>(m,"PatchesBank");
-    link_env<Env,PyEnv<Env>>(m,"Env");
-    
+    // class
+    expose_base_env(m);
 	/** Agent **/
-    link_agent<Agent,PyAgent<Agent>>(m,"Agent");
+    expose_base_agent(m);
     /** Patch **/
+    // data types
     auto bb = py::bind_map<map<string,double>>(m,"PatchDataBank"); //TODO: needs to go
     bb.def("keys",[](map<string,double> &v) {
        std::vector<std::string> retval;
@@ -24,7 +25,8 @@ PYBIND11_MODULE(binds, m) {
        }
        return retval;
     });
-    link_patch<Patch,PyPatch<Patch>>(m,"Patch");
+    // class
+    expose_base_patch(m);
     /** Exceptions **/
     register_exceptions(m);
     /** mesh **/
