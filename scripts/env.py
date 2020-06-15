@@ -33,6 +33,8 @@ class myEnv(Env):
 			self.params = json.load(file)
 	def update_repo(self):
 		self._repo[:]= [agent for agent in self._repo if not agent.disappear]
+	def test_abstract(self):
+		print("inside test abstract in base")
 	def generate_patch(self):
 		patch_obj = myPatch(self, configs = self.settings["setup"]["patch"].copy(),
 								  params = self.params.copy())

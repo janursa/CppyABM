@@ -48,7 +48,7 @@ find_package(nlohmann_json REQUIRED)
 
 add_subdirectory(src)
 add_subdirectory(binds)
-add_subdirectory(app)
+# add_subdirectory(app)
 
 
 

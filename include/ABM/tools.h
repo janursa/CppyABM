@@ -10,9 +10,7 @@ using namespace std;
 
 template<typename class_name,typename py_class_name>
 py::class_<class_name,py_class_name,std::shared_ptr<class_name>> link_env(py::module m, string class_name_string){
-
-
-    auto class_binds_obj = py::class_<class_name,py_class_name,std::shared_ptr<class_name>>(m,class_name_string.c_str(),py::dynamic_attr())
+    auto class_binds_obj = py::class_<class_name,py_class_name,std::shared_ptr<class_name>> (m,class_name_string.c_str(),py::dynamic_attr())
         .def(py::init<>())
         .def("check",&class_name::check)
         .def("place_agent_randomly",&class_name::place_agent_randomly)
@@ -53,15 +51,7 @@ py::class_<class_name,py_class_name,std::shared_ptr<class_name>>  link_agent(py:
 }
 template<typename class_name,typename py_class_name>
 py::class_<class_name,py_class_name,std::shared_ptr<class_name>>  link_patch(py::module &m, string class_name_ptr){
-    // data types
-    auto bb = py::bind_map<map<string,double>>(m,"PatchDataBank"); //TODO: needs to go
-    bb.def("keys",[](map<string,double> &v) {
-       std::vector<std::string> retval;
-       for (auto const& element : v) {
-         retval.push_back(element.first);
-       }
-       return retval;
-    });
+    
 
     // main class
     auto class_binds_obj =  py::class_<class_name,py_class_name,std::shared_ptr<class_name>>(m,class_name_ptr.c_str(),py::dynamic_attr())

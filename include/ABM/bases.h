@@ -118,7 +118,7 @@ struct Agent: public Base,enable_shared_from_this<Agent>{
 /*!
   
 */
-struct Env: public Base{
+struct Env: public Base,enable_shared_from_this<Env>{
 	virtual ~Env(){};
     AgentsBank agents;
     PatchesBank patches;
@@ -144,6 +144,9 @@ struct Env: public Base{
     	
     }
     //** aux functions **//
+    std::shared_ptr<Env> get_ptr(){
+    	return this->shared_from_this();
+    };
     map<string,unsigned> count_agents();
     double collect_from_patches(string); 
 

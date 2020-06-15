@@ -29,7 +29,7 @@ class MSC(Agent):
 	This class describes a MSC cell.
 	"""
 	def __init__(self,env,configs = None, params = None):
-		super().__init__(env = env, class_name = 'MSC')
+		Agent.__init__(self,env = env, class_name = 'MSC')
 		self.configs = configs or {}
 		self.params = params or {}
 		self.policy = fuzzy("MSC",self.params)
