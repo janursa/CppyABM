@@ -3,9 +3,9 @@ set(CMAKE_CXX_STANDARD 17)
 # set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
-SET(TARGET "ABM")
+SET(TARGET "CPPYABM")
 PROJECT(${TARGET} VERSION 1.0 LANGUAGES CXX)
-SET(STATICLIBS "BaseLibs")
+SET(STATICLIBS "ABM")
 SET(APP "app")
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 
@@ -13,11 +13,11 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     set(CMAKE_CXX_EXTENSIONS OFF)
     include(CTest)
     find_package(Doxygen)
-    # if(Doxygen_FOUND)
-    #     add_subdirectory(docs)
-    # else()
-    #     message(STATUS "Doxygen not found, not building docs")
-    # endif()
+    if(Doxygen_FOUND)
+        add_subdirectory(docs)
+    else()
+        message(STATUS "Doxygen not found, not building docs")
+    endif()
 endif()
 
 

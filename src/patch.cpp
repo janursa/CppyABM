@@ -1,5 +1,5 @@
 #include <iostream>
-#include "bases.h"
+#include "CPPYABM/bases.h"
 
  shared_ptr<Patch> Patch::empty_neighbor(bool quiet){
         auto neighbors = this->neighbors;

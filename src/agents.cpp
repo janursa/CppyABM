@@ -1,5 +1,5 @@
 #include <iostream>
-#include "bases.h"
+#include "CPPYABM/bases.h"
 
 void Agent::move(shared_ptr<Patch> dest, bool quiet){
         if (!dest->empty) {

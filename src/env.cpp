@@ -1,5 +1,5 @@
 #include <iostream>
-#include "bases.h"
+#include "CPPYABM/bases.h"
 
   double Env::collect_from_patches(string tag){
     double result = 0;

@@ -1,12 +1,12 @@
 #include <iostream>
-#include "mesh.h"
-#include "tools.h"
-#include "common.h"
-#include "pybases.h"
-#include "bases.h"
+#include "CPPYABM/mesh.h"
+#include "CPPYABM/tools.h"
+#include "CPPYABM/common.h"
+#include "CPPYABM/pybases.h"
+#include "CPPYABM/bases.h"
 
 
-PYBIND11_MODULE(binds, m) {
+PYBIND11_MODULE(CPPYABM, m) {
 	/** Envs **/
     // data types
     py::bind_vector<AgentsBank>(m,"AgentsBank");
