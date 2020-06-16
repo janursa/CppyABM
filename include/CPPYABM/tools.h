@@ -27,7 +27,7 @@ void expose_base_env(py::module m){
 }
 
 template<typename class_name,typename py_class_name>
-py::class_<class_name,py_class_name,std::shared_ptr<class_name>> expose_env(py::module m, string class_name_string){
+py::class_<class_name,Env,py_class_name,std::shared_ptr<class_name>> expose_env(py::module m, string class_name_string){
     auto class_binds_obj = 
     py::class_<class_name,Env,py_class_name,std::shared_ptr<class_name>> (m,class_name_string.c_str(),py::dynamic_attr())
         .def(py::init<>())
@@ -66,7 +66,7 @@ void expose_base_agent(py::module m){
 }
 
 template<typename class_name,typename py_class_name>
-py::class_<class_name,py_class_name,std::shared_ptr<class_name>>  expose_agent(py::module &m, string class_name_str) {
+py::class_<class_name,Agent,py_class_name,std::shared_ptr<class_name>>  expose_agent(py::module &m, string class_name_str) {
     /** Agent **/
     auto class_binds_obj =  py::class_<class_name,Agent,py_class_name,std::shared_ptr<class_name>>(m,class_name_str.c_str(),py::dynamic_attr())
         .def(py::init<shared_ptr<Env>,string>(),"Initialize",py::arg("env"),py::arg("class_name"))
@@ -104,7 +104,7 @@ void expose_base_patch(py::module m){
 }
 
 template<typename class_name,typename py_class_name>
-py::class_<class_name,py_class_name,std::shared_ptr<class_name>>  expose_patch(py::module &m, string class_name_ptr){
+py::class_<class_name,Patch,py_class_name,std::shared_ptr<class_name>>  expose_patch(py::module &m, string class_name_ptr){
     auto class_binds_obj =  py::class_<class_name,Patch,py_class_name,std::shared_ptr<class_name>>(m,class_name_ptr.c_str(),py::dynamic_attr())
         .def(py::init<shared_ptr<Env>>())
         .def("empty_neighbor", &class_name::empty_neighbor,"Return an empty patch around the patch",
