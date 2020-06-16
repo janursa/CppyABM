@@ -33,6 +33,7 @@ class MSC(Agent):
 		self.configs = configs or {}
 		self.params = params or {}
 		self.policy = fuzzy("MSC",self.params)
+		self.data = {}
 		## initialize
 		for key,value in self.configs['attrs'].items():
 			self.data[key] = value;

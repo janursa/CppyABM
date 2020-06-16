@@ -66,7 +66,6 @@ struct Patch: public Base{
 	std::shared_ptr<Agent> agent;
 	std::shared_ptr<Env> env;
 	/** patch data **/
-	PatchDataBank data;
 	bool empty = true;
 };
 
@@ -109,8 +108,6 @@ struct Agent: public Base,enable_shared_from_this<Agent>{
     /** connectors **/
 	std::shared_ptr<Patch> patch;
 	std::shared_ptr<Env> env;
-	/** Agent data **/
-	AgentDataBank data;
 };
 
 
@@ -148,7 +145,6 @@ struct Env: public Base,enable_shared_from_this<Env>{
     	return this->shared_from_this();
     };
     map<string,unsigned> count_agents();
-    double collect_from_patches(string); 
 
     /** Env data **/
     std::map<std::string,unsigned> agents_count;

@@ -16,16 +16,6 @@ PYBIND11_MODULE(CPPYABM, m) {
 	/** Agent **/
     expose_base_agent(m);
     /** Patch **/
-    // data types
-    auto bb = py::bind_map<map<string,double>>(m,"PatchDataBank"); //TODO: needs to go
-    bb.def("keys",[](map<string,double> &v) {
-       std::vector<std::string> retval;
-       for (auto const& element : v) {
-         retval.push_back(element.first);
-       }
-       return retval;
-    });
-    // class
     expose_base_patch(m);
     /** Exceptions **/
     register_exceptions(m);

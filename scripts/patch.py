@@ -18,6 +18,7 @@ class myPatch(Patch):
 		super().__init__(env)
 		self.configs = configs or {}
 		self.params = params or {}
+		self.data = {}
 		## initialize
 		for key,value in self.configs['attrs'].items():
 			self.data[key] = value;

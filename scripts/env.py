@@ -133,4 +133,9 @@ class myEnv(Env):
 		df_pH = df[["pH"]]
 		df_pH.to_csv('outputs/pH.csv')
 		pass
+	def collect_from_patches(self,tag):
+		sum_ = 0
+		for index,patch in self.patches.items():
+			sum_+=patch.data[tag]
+		return sum_
 

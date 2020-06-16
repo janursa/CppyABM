@@ -8,12 +8,12 @@ settings = {
     #         "graph_size" : 600
     #        },
     "agents_traj": {
-            "graph_dir" : "/Users/matin/Downloads/testProjs/ABM_base/build/outputs/agents_traj.csv",
+            "graph_dir" : "/Users/matin/Downloads/testProjs/CPPYABM/build/outputs/agents_traj.csv",
             "graph_type" : 'lines',
             'x-axis-moves': False
            },
    "pH": {
-		    "graph_dir" : "/Users/matin/Downloads/testProjs/ABM_base/build/outputs/pH.csv",
+		    "graph_dir" : "/Users/matin/Downloads/testProjs/CPPYABM/build/outputs/pH.csv",
 		    "graph_type" : 'lines',
 		    'x-axis-moves': False
 		   }

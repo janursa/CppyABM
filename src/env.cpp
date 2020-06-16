@@ -1,13 +1,7 @@
 #include <iostream>
 #include "CPPYABM/bases.h"
 
-  double Env::collect_from_patches(string tag){
-    double result = 0;
-    for (auto const &[index,patch]: this->patches){
-        result += patch->data[tag];
-    }
-    return result;
-}
+
   void Env::step_agents(){
 
         for (unsigned i = 0; i < this->agents.size(); i++){

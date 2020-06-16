@@ -21,7 +21,6 @@ void expose_base_env(py::module m){
         .def("update",&Env::update)
         .def("setup_agents",&Env::setup_agents)
         .def("count_agents",&Env::count_agents)
-        .def("collect_from_patches",&Env::collect_from_patches)
         .def_readwrite("patches",&Env::patches)
         .def_readwrite("agents",&Env::agents);
 }
@@ -30,7 +29,6 @@ template<typename class_name,typename py_class_name>
 py::class_<class_name,Env,py_class_name,std::shared_ptr<class_name>> expose_env(py::module m, string class_name_string){
     auto class_binds_obj = 
     py::class_<class_name,Env,py_class_name,std::shared_ptr<class_name>> (m,class_name_string.c_str(),py::dynamic_attr())
-        .def(py::init<>())
         .def("check",&class_name::check)
         .def("place_agent_randomly",&class_name::place_agent_randomly)
         .def("setup_domain",&class_name::setup_domain)
@@ -40,7 +38,6 @@ py::class_<class_name,Env,py_class_name,std::shared_ptr<class_name>> expose_env(
         .def("update",&class_name::update)
         .def("setup_agents",&class_name::setup_agents)
         .def("count_agents",&class_name::count_agents)
-        .def("collect_from_patches",&class_name::collect_from_patches)
         .def_readwrite("patches",&class_name::patches)
         .def_readwrite("agents",&class_name::agents);
     return class_binds_obj;
@@ -60,7 +57,6 @@ void expose_base_agent(py::module m){
             py::arg("to"))
         .def_readwrite("disappear",&Agent::disappear)
         .def_readwrite("env",&Agent::env)
-        .def_readwrite("data",&Agent::data)
         .def_readwrite("patch",&Agent::patch)
         .def_readwrite("class_name",&Agent::class_name);
 }
@@ -69,7 +65,6 @@ template<typename class_name,typename py_class_name>
 py::class_<class_name,Agent,py_class_name,std::shared_ptr<class_name>>  expose_agent(py::module &m, string class_name_str) {
     /** Agent **/
     auto class_binds_obj =  py::class_<class_name,Agent,py_class_name,std::shared_ptr<class_name>>(m,class_name_str.c_str(),py::dynamic_attr())
-        .def(py::init<shared_ptr<Env>,string>(),"Initialize",py::arg("env"),py::arg("class_name"))
         .def("move",&class_name::move,"Move the agent to a new patch")
         .def("order_hatch",&class_name::order_hatch,"Hatch request",
             py::arg("patch")=nullptr, py::arg("inherit")=false,
@@ -81,7 +76,6 @@ py::class_<class_name,Agent,py_class_name,std::shared_ptr<class_name>>  expose_a
             py::arg("to"))
         .def_readwrite("disappear",&class_name::disappear)
         .def_readwrite("env",&class_name::env)
-        .def_readwrite("data",&class_name::data)
         .def_readwrite("patch",&class_name::patch)
         .def_readwrite("class_name",&class_name::class_name);
     return class_binds_obj;
@@ -99,14 +93,12 @@ void expose_base_patch(py::module m){
         .def_readwrite("agent",&Patch::agent)
         .def_readwrite("empty",&Patch::empty)
         .def_readwrite("disappear",&Patch::disappear)
-        .def_readwrite("data",&Patch::data)
         .def_readwrite("neighbors",&Patch::neighbors);
 }
 
 template<typename class_name,typename py_class_name>
 py::class_<class_name,Patch,py_class_name,std::shared_ptr<class_name>>  expose_patch(py::module &m, string class_name_ptr){
     auto class_binds_obj =  py::class_<class_name,Patch,py_class_name,std::shared_ptr<class_name>>(m,class_name_ptr.c_str(),py::dynamic_attr())
-        .def(py::init<shared_ptr<Env>>())
         .def("empty_neighbor", &class_name::empty_neighbor,"Return an empty patch around the patch",
             py::arg("quiet")=false)
         .def("find_neighbor_agents",&class_name::find_neighbor_agents,"Returns a vector of agents in one patch neighborhood",
@@ -115,7 +107,6 @@ py::class_<class_name,Patch,py_class_name,std::shared_ptr<class_name>>  expose_p
         .def_readwrite("agent",&class_name::agent)
         .def_readwrite("empty",&class_name::empty)
         .def_readwrite("disappear",&class_name::disappear)
-        .def_readwrite("data",&class_name::data)
         .def_readwrite("neighbors",&class_name::neighbors);
     return class_binds_obj;
         
