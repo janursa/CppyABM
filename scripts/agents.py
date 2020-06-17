@@ -3,6 +3,7 @@ import random
 import pathlib
 import os
 import time
+from datetime import datetime
 current_file_path = pathlib.Path(__file__).parent.absolute()
 sys.path.insert(1,current_file_path)
 sys.path.insert(1,os.path.join(current_file_path,'..','build','binds'))
@@ -10,6 +11,7 @@ from CPPYABM import Agent
 sys.path.insert(1,os.path.join(current_file_path,'..','..','fuzzy','build'))
 from fuzzy import fuzzy
 
+random.seed(datetime.now())
 class Dead(Agent):
 	"""
 	This class describes a Dead cell.
@@ -28,9 +30,10 @@ class MSC(Agent):
 	"""
 	This class describes a MSC cell.
 	"""
-	def __init__(self,env,configs = None, params = None):
+	def __init__(self,env,configs = None, params = None, id_ = 0):
 		Agent.__init__(self,env = env, class_name = 'MSC')
 		self.configs = configs or {}
+		self.id = id_
 		self.params = params or {}
 		self.policy = fuzzy("MSC",self.params)
 		self.data = {}
@@ -41,6 +44,10 @@ class MSC(Agent):
 		self.data = father.data
 	def step(self):
 		predictions = self.run_policy()
+		if (self.patch.data["agent_density"] == 0):
+			print(len(self.patch.find_neighbor_agents(include_self = True))/9.0)
+			# print(self.patch.empty) 
+		# print(self.patch.data)
 		## functions
 		die = self.mortality(predictions["Mo"])
 		hatch = self.proliferation(predictions["Pr"])
@@ -85,6 +92,7 @@ class MSC(Agent):
 		Mg = self.patch.data["Mg"]/self.params["Mg_max"]
 		policy_inputs = {"AE":AE, "Mg":Mg, "CD": CD}
 		# print(policy_inputs)
+		# print(policy_inputs)
 		predictions = self.policy.predict(policy_inputs) # fuzzy controller
 		# print(predictions)
 		# sys.exit(0)
@@ -97,10 +105,10 @@ class MSC(Agent):
 		"""
 		adapted_pH = self.data["pH"]
 		env_pH = self.patch.data["pH"]
-		if adapted_pH == 0:
-			AE = 1
-		else:
-			AE = abs(env_pH - adapted_pH) / adapted_pH
+		# if adapted_pH == 0:
+		# 	AE = 1
+		# else:
+		AE = abs(env_pH - adapted_pH) / adapted_pH
 		if AE > 1:
 			AE = 1
 		new_adapted_pH = 0
@@ -109,7 +117,8 @@ class MSC(Agent):
 			new_adapted_pH = adapted_pH + adaptation_rate
 		else:
 			new_adapted_pH = adapted_pH - adaptation_rate
-
+		# if (AE == 0):
+		# 	print("adapted_pH: {} env_pH {} AE {} new_adapted_pH {}".format(adapted_pH,env_pH,AE,new_adapted_pH))
 		return AE, new_adapted_pH
 	
 	def mortality(self,Mo):

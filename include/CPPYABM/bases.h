@@ -8,6 +8,7 @@
 // using json = nlohmann::json
 #include "common.h"
 #include "mesh.h"
+#include "tools.h"
 namespace py=pybind11;
 using std::shared_ptr;
 using std::vector;
@@ -22,6 +23,9 @@ using namespace std;
 struct Base{
 	string class_name;
     bool disappear = false;
+    virtual void set_data(string tag) {throw undefined_member("Set data is used before implementation");};
+    virtual double get_data(string tag) {throw undefined_member("Get data is used before implementation");};
+
 };
 //!   Base clase for patches
 /*!
@@ -37,7 +41,9 @@ struct Patch: public Base{
 	vector<unsigned> neighbors_indices;
 	vector<shared_ptr<Patch>> neighbors;
 	/** main funcs **/
-	virtual void step(){};
+	virtual void step(){
+		throw undefined_member("Step function is not defined inside Patch");
+	};
 	/** Auxs funcs **/
 	void set_agent(shared_ptr<Agent> agent){
 		this->agent = agent;
@@ -67,6 +73,7 @@ struct Patch: public Base{
 	std::shared_ptr<Env> env;
 	/** patch data **/
 	bool empty = true;
+
 };
 
 //!   Base clase for Agents
@@ -80,8 +87,9 @@ struct Agent: public Base,enable_shared_from_this<Agent>{
 	}
 	virtual ~Agent(){};
 	/** Major functions **/ 
-	virtual void step(){};
-	virtual void update(){};
+	virtual void step(){
+		throw undefined_member("Agent step function is not defined");
+	};
     /** Flags **/
     std::pair <bool,std::string> switch_info = std::make_pair(false,"");
     HATCH_CONFIG _hatch = HATCH_CONFIG();
@@ -90,7 +98,7 @@ struct Agent: public Base,enable_shared_from_this<Agent>{
     /** pure virtuals **/
 
     /** Auxillary funcs **/
-    virtual void inherit(shared_ptr<Agent> father){};
+    virtual void inherit(shared_ptr<Agent> father){cout<<"Inherit is not defined"<<endl;};
     void set_patch(shared_ptr<Patch> patch){ this->patch = patch;}
     void move(shared_ptr<Patch> dest, bool quiet = false);
     std::shared_ptr<Agent> get_ptr();
@@ -108,6 +116,7 @@ struct Agent: public Base,enable_shared_from_this<Agent>{
     /** connectors **/
 	std::shared_ptr<Patch> patch;
 	std::shared_ptr<Env> env;
+
 };
 
 
@@ -121,10 +130,13 @@ struct Env: public Base,enable_shared_from_this<Env>{
     PatchesBank patches;
     vector<unsigned> patches_indices;
     //** Pure virtuals **/
-    virtual void setup(){};
-    virtual shared_ptr<Patch> generate_patch() = 0;
-	virtual	shared_ptr<Agent> generate_agent(string class_name) = 0;
-	virtual void update_repo(){};
+    virtual shared_ptr<Patch> generate_patch() {
+    	throw undefined_member("Generate patch is not defined inside Env");
+    };
+	virtual	shared_ptr<Agent> generate_agent(string class_name) {
+		throw undefined_member("Generate agent is not defined inside Env");
+	};
+	virtual void update_repo(){throw undefined_member("Update repository is not implemented but called");};
 	//** main functions **/
     void setup_domain(vector<MESH_ITEM> mesh);
     void step_agents();
@@ -137,9 +149,9 @@ struct Env: public Base,enable_shared_from_this<Env>{
     shared_ptr<Patch> find_empty_patch(); //!< Finds empty patches in the entire domain
     void connect_patch_agent(shared_ptr<Patch> patch,shared_ptr<Agent> agent);
 
-    void check(){
-    	
-    }
+    virtual void step() {
+    	throw undefined_member("Step function is not defined inside Env");
+    };
     //** aux functions **//
     std::shared_ptr<Env> get_ptr(){
     	return this->shared_from_this();

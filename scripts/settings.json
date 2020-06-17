@@ -2,17 +2,17 @@
   "setup":{
     "exp_duration" : 72,
     "grid":{
-        "x_l": 1,
-        "y_l": 1,
+        "x_l": 0.34,
+        "y_l": 0.34,
         "patch_size": 0.015
     },
     "patch":{
-        "attrs":{ "Mg":0, "pH":7.8,"agent_density":0,"lactate":0}
+        "attrs":{ "Mg":3, "pH":7.8,"agent_density":0,"lactate":0}
       },
     "agents":
       {
         "n":{
-          "MSC": 1000,
+          "MSC": 150,
           "Dead": 0
         },
         "MSC":{

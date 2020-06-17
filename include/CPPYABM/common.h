@@ -80,6 +80,9 @@ struct convergence_error: public base_exception_class{
 struct patch_availibility: public base_exception_class{
     using base_exception_class::base_exception_class;
 };
+struct undefined_member: public base_exception_class{
+    using base_exception_class::base_exception_class;
+};
 
 
 //** directories **//

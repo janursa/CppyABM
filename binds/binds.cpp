@@ -1,6 +1,6 @@
 #include <iostream>
 #include "CPPYABM/mesh.h"
-#include "CPPYABM/tools.h"
+#include "CPPYABM/bind_tools.h"
 #include "CPPYABM/common.h"
 #include "CPPYABM/pybases.h"
 #include "CPPYABM/bases.h"

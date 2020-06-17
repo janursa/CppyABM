@@ -26,6 +26,8 @@ class myEnv(Env):
 		## env variables
 		self.tick = 0
 		self.last_tick = 0
+		self.agent_id_counter = 0
+		self.patch_id_counter = 0
 		## simulation specific
 		with open(SETTINGS_PATH) as file:
 			self.settings = json.load(file)
@@ -37,13 +39,14 @@ class myEnv(Env):
 		print("inside test abstract in base")
 	def generate_patch(self):
 		patch_obj = myPatch(self, configs = self.settings["setup"]["patch"].copy(),
-								  params = self.params.copy())
+								  params = self.params.copy(),id_ = self.patch_id_counter)
 		self._repo.append(patch_obj)
+		self.patch_id_counter+=1
 		return patch_obj
 	def generate_agent(self,agent_name):
 		if agent_name == 'MSC':
 			agent_obj = MSC(self, configs = self.settings["setup"]["agents"]["MSC"].copy(),
-								  params = self.params.copy())
+								  params = self.params.copy(),id_ = self.agent_id_counter)
 		elif agent_name == 'Dead':
 			agent_obj = Dead(self, configs = self.settings["setup"]["agents"]["Dead"].copy(),
 								  params = self.params.copy())
@@ -52,6 +55,7 @@ class myEnv(Env):
 			sys.exit(0)
 		self._repo.append(agent_obj)
 		self.agents.append(agent_obj)
+		self.agent_id_counter+=1
 		return agent_obj
 
 	def setup(self):
@@ -63,10 +67,8 @@ class myEnv(Env):
 		self.setup_agents(agent_counts)
 		self.update()
 	def step(self):
-
 		self.step_patches()
 		self.step_agents()	
-
 		self.tick += 1
 		self.update()
 		pass
@@ -109,21 +111,37 @@ class myEnv(Env):
 		Post processing: logging the results to a file
 		"""
 		# agents on patches as scatter format
-		# file = open('scatter.csv','w')
-		# file.write('x,y,type,size\n')
-		# for index,patch in self.patches.items():
-		# 	if patch.empty:
-		# 		size_ = 2
-		# 		type_ = 'nothing'
-		# 	else:
-		# 		size_ = 10
-		# 		type_ = patch.agent.class_name
-				
-		# 	file.write("{},{},{},{}\n".format(patch.coords[0],
-		# 									patch.coords[1],
-		# 									type_,
-		# 									size_))
-		# file.close()
+		# def scatter_patch(patches):
+		# 	file = open('outputs/scatter_patch.csv','w')
+
+		# 	file.write('x,y,z,cell,size\n')
+		# 	for index,patch in patches.items():
+		# 		if patch.empty:
+		# 			size_ = 2
+		# 			type_ = 'nothing'
+		# 		else:
+		# 			size_ = 10
+		# 			type_ = patch.agent.class_name
+					
+		# 		file.write("{},{},{},{}\n".format(patch.coords[0],
+		# 										patch.coords[1],
+		# 										type_,
+		# 										size_))
+		# 	file.close()
+		# print_patch(self.patches)
+		def scatter_agents(agents):
+			file = open('outputs/scatter.csv','w')
+			file.write('x,y,type,size\n')
+			for agent in agents:
+				x,y,z = agent.patch.coords
+				type_ = agent.class_name
+				size_ = 10	
+				file.write("{},{},{},{}\n".format(x,
+												y,
+												type_,
+												size_))
+			file.close()
+		scatter_agents(self.agents)
 
 		## agent counts 
 		df = pd.DataFrame.from_dict(self.data)

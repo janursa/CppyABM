@@ -9,16 +9,16 @@ from CPPYABM import Patch
 
 
 
-
 class myPatch(Patch):
 	"""
 	This class describes my patch.
 	"""
-	def __init__(self,env,configs = None, params = None):
+	def __init__(self,env,configs = None, params = None, id_ = None):
 		super().__init__(env)
 		self.configs = configs or {}
 		self.params = params or {}
 		self.data = {}
+		self.id = id_
 		## initialize
 		for key,value in self.configs['attrs'].items():
 			self.data[key] = value;
@@ -33,6 +33,7 @@ class myPatch(Patch):
 		mg = self.data["Mg"]
 		lactate = self.data["lactate"]
 		pH_new = self.params["w_mg_ph"]*mg -self.params["w_lactate_ph"]*lactate + 7.8;
+		# print("mg {} lactate {} pH_new {}".format(mg,lactate,pH_new))
 		return pH_new
 	def lactate(self):
 		if not self.empty and self.agent.class_name != "Dead":
@@ -42,3 +43,7 @@ class myPatch(Patch):
 		w = self.params["w_MI_lactate"]
 		lactate = self.data["lactate"] + w * MI
 		return lactate
+	def get_data(self,tag):
+		pass
+	def set_data(self,tag):
+		pass

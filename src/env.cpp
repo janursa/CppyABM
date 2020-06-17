@@ -3,16 +3,15 @@
 
 
   void Env::step_agents(){
-
-        for (unsigned i = 0; i < this->agents.size(); i++){
-            this->agents[i]->step();
-        }
+    for (unsigned i = 0; i < this->agents.size(); i++){
+        this->agents[i]->step();
+    }
 }
   void Env::step_patches(){
 
-        for (unsigned i = 0; i < this->agents.size(); i++){
-            this->patches[i]->step();
-        }
+    for (unsigned i = 0; i < this->patches.size(); i++){
+        this->patches[i]->step();
+    }
 }
   void Env::setup_agents(map<string,unsigned> config){
     for (auto const [agent_type,count]:config){
@@ -24,11 +23,11 @@
     }
 }
   void Env::update(){
-    
+    auto g = random_::randomly_seeded_MT();
+    std::shuffle(this->agents.begin(),this->agents.end(),g);
     /** hatch **/
     unsigned agent_count = this->agents.size();
     for (unsigned  i = 0; i < agent_count; i++){
-
         if (this->agents[i]->_hatch._flag){
             auto inherit = this->agents[i]->_hatch._inherit;
             auto patch = this->agents[i]->_hatch._patch;
@@ -197,8 +196,7 @@
     auto patches_indices_copy = this->patches_indices;
     auto patch_count = this->patches_indices.size();
 
-    std::random_device rd;
-    std::mt19937 g(rd());
+    auto g = random_::randomly_seeded_MT();
 
     std::shuffle(patches_indices_copy.begin(), patches_indices_copy.end(), g);
     
