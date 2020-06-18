@@ -26,13 +26,6 @@ if(${CMAKE_VERSION} VERSION_LESS 3.14)
     include(cmake/add_FetchContent_MakeAvailable.cmake)
 endif()
 
-FetchContent_Declare(
-  fmtlib
-  GIT_REPOSITORY https://github.com/fmtlib/fmt.git
-  GIT_TAG        5.3.0
-)
-FetchContent_MakeAvailable(fmtlib)
-
 include(FetchContent)
 FetchContent_Declare(
   pybind11
