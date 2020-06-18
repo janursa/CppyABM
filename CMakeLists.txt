@@ -43,8 +43,8 @@ FetchContent_MakeAvailable(pybind11)
 set(PYBIND11_CPP_STANDARD -std=c++17)
 
 
-set(JSON_BuildTests OFF CACHE INTERNAL "")
-find_package(nlohmann_json REQUIRED)
+# set(JSON_BuildTests OFF CACHE INTERNAL "")
+# find_package(nlohmann_json REQUIRED)
 
 add_subdirectory(src)
 add_subdirectory(binds)
