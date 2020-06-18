@@ -5,7 +5,8 @@
 #include "pybases.h"
 namespace py=pybind11;
 
-void expose_base_env(py::module m){
+
+void expose_base_env(py::module &m){
     py::class_<Env,PyEnv<Env>,std::shared_ptr<Env>> (m,"Env",py::dynamic_attr())
         .def(py::init<>())
         .def("place_agent_randomly",&Env::place_agent_randomly)
@@ -106,15 +107,37 @@ py::class_<class_name,Patch,py_class_name,std::shared_ptr<class_name>>  expose_p
         
 }
 
-void register_exceptions(py::module m){
+void expose_exceptions(py::module m){
      py::register_exception<patch_availibility>(m, "patch_availibility");
      py::register_exception<undefined_member>(m, "undefined_member");
      
 }
-void register_mesh(py::module m){
+void expose_mesh(py::module &m){
     py::class_<MESH_ITEM>(m,"MESH_ITEM")
         .def(py::init<>()); 
     py::class_<mesh_tools>(m,"mesh_tools")
         .def(py::init<>())
         .def("grid",&mesh_tools::grid);
+}
+void expose_containers(py::module &m){
+    py::bind_vector<AgentsBank>(m,"AgentsBank");
+    py::bind_map<PatchesBank>(m,"PatchesBank")
+    .def("clear",[](PatchesBank& data){
+        data.clear();
+    });
+}
+
+void expose_defaults(py::module &m){
+    // data types
+    expose_containers(m);
+    // class
+    expose_base_env(m);
+    /** Agent **/
+    expose_base_agent(m);
+    /** Patch **/
+    expose_base_patch(m);
+    /** Exceptions **/
+    expose_exceptions(m);
+    /** mesh **/
+    expose_mesh(m);
 }
