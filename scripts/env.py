@@ -11,7 +11,7 @@ current_file_path = pathlib.Path(__file__).parent.absolute()
 sys.path.insert(1,current_file_path)
 sys.path.insert(1,os.path.join(current_file_path,'..','build','binds'))
 
-from CPPYABM import Env,mesh_tools
+from CPPYABM import Env,grid
 from agents import MSC,Dead
 from patch import myPatch
 
@@ -60,7 +60,7 @@ class myEnv(Env):
 
 	def setup(self):
 		grid_info = self.settings["setup"]["grid"]
-		mesh =  mesh_tools.grid(grid_info["x_l"],grid_info["y_l"],grid_info["patch_size"])
+		mesh =  grid(grid_info["x_l"],grid_info["y_l"],grid_info["patch_size"],share =True)
 		self.setup_domain(mesh)
 		## create agents
 		agent_counts = self.settings["setup"]["agents"]["n"]
@@ -112,9 +112,9 @@ class myEnv(Env):
 		"""
 		# agents on patches as scatter format
 		# def scatter_patch(patches):
-		# 	file = open('outputs/scatter_patch.csv','w')
+		# 	file = open('outputs/scatter.csv','w')
 
-		# 	file.write('x,y,z,cell,size\n')
+		# 	file.write('x,y,z,type,size\n')
 		# 	for index,patch in patches.items():
 		# 		if patch.empty:
 		# 			size_ = 2
@@ -128,7 +128,7 @@ class myEnv(Env):
 		# 										type_,
 		# 										size_))
 		# 	file.close()
-		# print_patch(self.patches)
+		# scatter_patch(self.patches)
 		def scatter_agents(agents):
 			file = open('outputs/scatter.csv','w')
 			file.write('x,y,type,size\n')

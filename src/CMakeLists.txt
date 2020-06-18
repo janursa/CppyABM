@@ -6,7 +6,8 @@ set(SOURCE_FILES "env.cpp"
 				 "agents.cpp"
 				 "patch.cpp"
 				 "bind_tools.cpp"
-				 "pybases.cpp")
+				 "pybases.cpp"
+				 "mesh.cpp")
 
 set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMake")
 add_library(${STATICLIBS} STATIC ${SOURCE_FILES})

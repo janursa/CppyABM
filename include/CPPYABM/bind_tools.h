@@ -115,9 +115,8 @@ void expose_exceptions(py::module m){
 void expose_mesh(py::module &m){
     py::class_<MESH_ITEM>(m,"MESH_ITEM")
         .def(py::init<>()); 
-    py::class_<mesh_tools>(m,"mesh_tools")
-        .def(py::init<>())
-        .def("grid",&mesh_tools::grid);
+    
+    m.def("grid",&grid,"Creates grid mesh", py::arg("length"), py::arg("width"), py::arg("mesh_length"),py::arg("share") = false);
 }
 void expose_containers(py::module &m){
     py::bind_vector<AgentsBank>(m,"AgentsBank");
