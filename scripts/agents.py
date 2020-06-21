@@ -46,9 +46,7 @@ class MSC(Agent):
 		predictions = self.run_policy()
 		if (self.patch.data["agent_density"] == 0):
 			print(len(self.patch.find_neighbor_agents(include_self = True))/9.0)
-			# print(self.patch.empty) 
-		# print(self.patch.data)
-		## functions
+
 		die = self.mortality(predictions["Mo"])
 		hatch = self.proliferation(predictions["Pr"])
 		walk = self.migration(predictions["Mi"])

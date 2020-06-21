@@ -27,7 +27,7 @@ class myPatch(Patch):
 		new_lactate = self.lactate()
 		self.data["pH"] = pH_new
 		self.data["lactate"] = new_lactate
-		self.data["agent_density"] = len(self.find_neighbor_agents(include_self = True))/9.0
+		self.data["agent_density"] = len(self.find_neighbor_agents(include_self = True))/27
 		return
 	def pH(self):
 		mg = self.data["Mg"]

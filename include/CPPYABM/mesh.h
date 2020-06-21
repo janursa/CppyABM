@@ -1,6 +1,7 @@
 
 #pragma once
 #include <vector>
+#include <fstream>
 #include "common.h"
 using namespace std;
 
@@ -17,23 +18,9 @@ struct MESH_ITEM {
 
 
 vector<MESH_ITEM> grid(double length, double width, double mesh_length, bool share = false);
+vector<MESH_ITEM> grid3(double length, double width, double height, double mesh_length, bool share);
 
-
-// inline void mesh_tools::grid::print_to_file(string file_name){
-//     auto file_name_mod = main_output_folder+"/"+file_name;
-//     ofstream ID(file_name_mod);          
-//     for (auto &item:this->meshes){
-//         ID<<item.index<<"\t";
-
-//         ID<<item.coords.x<<" "<<item.coords.y<<" "<<item.coords.z<<"\t";
-//         for (auto&el:item.neighbors_indices){
-//             ID<<el<<" ";
-//         }
-
-//         ID<<endl;
-//     }
-//     ID.close();
-// }
+void log_mesh(vector<MESH_ITEM> mesh, string file_name);
 
 
 

@@ -11,7 +11,7 @@ current_file_path = pathlib.Path(__file__).parent.absolute()
 sys.path.insert(1,current_file_path)
 sys.path.insert(1,os.path.join(current_file_path,'..','build','binds'))
 
-from CPPYABM import Env,grid
+from CPPYABM import Env,grid,grid3
 from agents import MSC,Dead
 from patch import myPatch
 
@@ -60,7 +60,11 @@ class myEnv(Env):
 
 	def setup(self):
 		grid_info = self.settings["setup"]["grid"]
-		mesh =  grid(grid_info["x_l"],grid_info["y_l"],grid_info["patch_size"],share =True)
+		# mesh =  grid(grid_info["x_l"],grid_info["y_l"],grid_info["patch_size"],share =True)
+		mesh =  grid3(grid_info["x_l"],grid_info["x_l"],grid_info["x_l"],grid_info["patch_size"],share =True)
+		# mesh =  grid3(1,1,0.5,0.1,share =True)
+
+
 		self.setup_domain(mesh)
 		## create agents
 		agent_counts = self.settings["setup"]["agents"]["n"]
@@ -74,6 +78,7 @@ class myEnv(Env):
 		pass
 	def update(self):
 		super().update()
+		# time.sleep(1)
 		## Either updates or appends a pair of key-value to self.data
 		def add(key,value): 
 			if key not in self.data:
@@ -111,24 +116,43 @@ class myEnv(Env):
 		Post processing: logging the results to a file
 		"""
 		# agents on patches as scatter format
-		# def scatter_patch(patches):
-		# 	file = open('outputs/scatter.csv','w')
+		def scatter_patch(patches):
+			file = open('outputs/scatter.csv','w')
 
-		# 	file.write('x,y,z,type,size\n')
-		# 	for index,patch in patches.items():
-		# 		if patch.empty:
-		# 			size_ = 2
-		# 			type_ = 'nothing'
-		# 		else:
-		# 			size_ = 10
-		# 			type_ = patch.agent.class_name
+			file.write('x,y,z,type,size\n')
+			for index,patch in patches.items():
+				if patch.empty:
+					size_ = 2
+					type_ = 'nothing'
+				else:
+					size_ = 10
+					type_ = patch.agent.class_name
 					
-		# 		file.write("{},{},{},{}\n".format(patch.coords[0],
-		# 										patch.coords[1],
-		# 										type_,
-		# 										size_))
-		# 	file.close()
+				file.write("{},{},{},{}\n".format(patch.coords[0],
+												patch.coords[1],
+												type_,
+												size_))
+			file.close()
 		# scatter_patch(self.patches)
+		
+		def scatter3_patch(patches):
+			file = open('outputs/scatter3.csv','w')
+
+			file.write('x,y,z,type,size\n')
+			for index,patch in patches.items():
+				if patch.empty:
+					size_ = 2
+					type_ = 'nothing'
+				else:
+					size_ = 10
+					type_ = patch.agent.class_name
+					
+				file.write("{},{},{},{},{}\n".format(patch.coords[0], patch.coords[1],patch.coords[2],
+												type_,
+												size_))
+			file.close()
+		# scatter3_patch(self.patches)
+
 		def scatter_agents(agents):
 			file = open('outputs/scatter.csv','w')
 			file.write('x,y,type,size\n')
@@ -141,8 +165,20 @@ class myEnv(Env):
 												type_,
 												size_))
 			file.close()
-		scatter_agents(self.agents)
-
+		# scatter_agents(self.agents)
+		
+		def scatter3_agents(agents):
+			file = open('outputs/scatter3.csv','w')
+			file.write('x,y,z,type,size\n')
+			for agent in agents:
+				x,y,z = agent.patch.coords
+				type_ = agent.class_name
+				size_ = 10	
+				file.write("{},{},{},{},{}\n".format(x,y,z,
+												type_,
+												size_))
+			file.close()
+		scatter3_agents(self.agents)
 		## agent counts 
 		df = pd.DataFrame.from_dict(self.data)
 		df_agent_counts = df[["MSC","Dead"]]
@@ -150,7 +186,6 @@ class myEnv(Env):
 		## average pH 
 		df_pH = df[["pH"]]
 		df_pH.to_csv('outputs/pH.csv')
-		pass
 	def collect_from_patches(self,tag):
 		sum_ = 0
 		for index,patch in self.patches.items():
