@@ -2,8 +2,8 @@
   "setup":{
     "exp_duration" : 72,
     "grid":{
-        "x_l": 0.34,
-        "y_l": 0.34,
+        "x_l": 1,
+        "y_l": 1,
         "patch_size": 0.015
     },
     "patch":{

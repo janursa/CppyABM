@@ -61,7 +61,7 @@ class myEnv(Env):
 	def setup(self):
 		grid_info = self.settings["setup"]["grid"]
 		# mesh =  grid(grid_info["x_l"],grid_info["y_l"],grid_info["patch_size"],share =True)
-		mesh =  grid3(grid_info["x_l"],grid_info["x_l"],grid_info["x_l"],grid_info["patch_size"],share =True)
+		mesh =  grid3(grid_info["x_l"],grid_info["x_l"],grid_info["patch_size"],grid_info["patch_size"],share =True)
 		# mesh =  grid3(1,1,0.5,0.1,share =True)
 
 

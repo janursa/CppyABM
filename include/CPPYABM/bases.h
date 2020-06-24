@@ -99,6 +99,7 @@ struct Agent: public Base,enable_shared_from_this<Agent>{
 
     /** Auxillary funcs **/
     virtual void inherit(shared_ptr<Agent> father){cout<<"Inherit is not defined"<<endl;};
+    virtual void update(){};
     void set_patch(shared_ptr<Patch> patch){ this->patch = patch;}
     void move(shared_ptr<Patch> dest, bool quiet = false);
     std::shared_ptr<Agent> get_ptr();
