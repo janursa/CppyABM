@@ -229,5 +229,5 @@
             }
             patch->neighbors = neighbors;
         }
-        log_mesh(mesh,"mesh.txt");
+        // log_mesh(mesh,"mesh.txt");
     }
