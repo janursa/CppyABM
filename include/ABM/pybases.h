@@ -9,12 +9,12 @@ struct Env;
 template<class deriveClass>
 struct PyBase: public deriveClass{
     using deriveClass::deriveClass;
-    void set_data(string tag) override {
+    void set_data(string tag, double value) override {
         PYBIND11_OVERLOAD(
             void,
             deriveClass,
             set_data,
-            tag
+            tag,value
             );
     }
     double get_data(string tag) override {

@@ -5,8 +5,10 @@ set(CMAKE_CXX_STANDARD 17)
 
 SET(TARGET "CPPYABM")
 PROJECT(${TARGET} VERSION 1.0 LANGUAGES CXX)
-SET(STATICLIBS "ABM")
-SET(APP "app")
+SET(ABMBASE "ABMBASE")
+SET(BASE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+SET(BINDMODULE "CppyABM")
+SET(APP "testapp")
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 
     set_property(GLOBAL PROPERTY USE_FOLDERS ON)
@@ -18,30 +20,45 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     else()
         message(STATUS "Doxygen not found, not building docs")
     endif()
+    include(FetchContent)
+    if(${CMAKE_VERSION} VERSION_LESS 3.14)
+        include(cmake/add_FetchContent_MakeAvailable.cmake)
+    endif()
+
+    include(FetchContent)
+    FetchContent_Declare(
+      pybind11
+      GIT_REPOSITORY https://github.com/pybind/pybind11.git
+      GIT_TAG        master
+    )
+    FetchContent_MakeAvailable(pybind11)
+    set(PYBIND11_CPP_STANDARD -std=c++17)
 endif()
 
+# include(FetchContent)
+# FetchContent_Declare(
+#     dealii
+#     GIT_REPOSITORY https://github.com/dealii/dealii.git
+#     GIT_TAG        master
+# )
+# FetchContent_MakeAvailable(dealii)
 
-include(FetchContent)
-if(${CMAKE_VERSION} VERSION_LESS 3.14)
-    include(cmake/add_FetchContent_MakeAvailable.cmake)
-endif()
 
-include(FetchContent)
-FetchContent_Declare(
-  pybind11
-  GIT_REPOSITORY https://github.com/pybind/pybind11.git
-  GIT_TAG        master
-)
-FetchContent_MakeAvailable(pybind11)
-set(PYBIND11_CPP_STANDARD -std=c++17)
-
+if (DEALII)
+    FIND_PACKAGE(deal.II 9.1.0 REQUIRED
+    HINTS ${DEALII_DIR}/build ../ ../../ $ENV{DEALII_DIR}/build
+    )
+    DEAL_II_INITIALIZE_CACHED_VARIABLES()
+    include_directories(${DEALII_DIR}/include)
+    add_definitions(-DDEALII)
+endif(DEALII)
 
 # set(JSON_BuildTests OFF CACHE INTERNAL "")
 # find_package(nlohmann_json REQUIRED)
 
 add_subdirectory(src)
 add_subdirectory(binds)
-# add_subdirectory(app)
+add_subdirectory(app)
 
 
 

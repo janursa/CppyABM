@@ -1,4 +1,4 @@
-#include "CPPYABM/mesh.h"
+#include "ABM/mesh.h"
 vector<MESH_ITEM> grid(double length, double width, double mesh_length, bool share){
         auto calculate_mesh_index = [](unsigned i, unsigned j,unsigned x_n) {
             return (j*x_n + i);
@@ -6,13 +6,13 @@ vector<MESH_ITEM> grid(double length, double width, double mesh_length, bool sha
         auto find_neighborhood=[&](unsigned i, unsigned j,unsigned x_n, unsigned y_n){
             vector<unsigned> neighbor_indices;
             unsigned neighbor_numbers = 8;
-            int x_index[neighbor_numbers];
-            int y_index[neighbor_numbers];
+            int* x_index = new int [neighbor_numbers];
+            int* y_index = new int [neighbor_numbers];
             int counter = 0;
             // find the neighbors
             for (int ii = -1; ii <= 1; ii++){
                 for (int jj = -1; jj <= 1; jj++ ){
-                    if (ii == 0 and jj == 0) continue;
+                    if (ii == 0 & jj == 0) continue;
                     x_index[counter] = i + ii; 
                     y_index[counter] = j + jj;
                     counter ++;
@@ -83,15 +83,15 @@ vector<MESH_ITEM> grid3(double length, double width, double height, double mesh_
     auto find_neighborhood=[&](unsigned i, unsigned j, unsigned z, unsigned x_n, unsigned y_n, unsigned z_n){
         vector<unsigned> neighbor_indices;
         unsigned neighbor_numbers = 26;
-        int x_index[neighbor_numbers];
-        int y_index[neighbor_numbers];
-        int z_index[neighbor_numbers];
+        int* x_index = new int [neighbor_numbers];
+        int* y_index = new int [neighbor_numbers];
+        int* z_index = new int [neighbor_numbers];
         int counter = 0;
         // find the neighbors
         for (int ii = -1; ii <= 1; ii++){
             for (int jj = -1; jj <= 1; jj++ ){
                 for (int kk = -1; kk <= 1; kk++ ){
-                    if (ii == 0 and jj == 0 and kk == 0) continue;
+                    if (ii == 0 & jj == 0 & kk == 0) continue;
                     x_index[counter] = i + ii; 
                     y_index[counter] = j + jj;
                     z_index[counter] = z + kk;

@@ -5,7 +5,7 @@ import pathlib
 import os
 import json
 import pandas as pd
-from pprogress import ProgressBar
+#from pprogress import ProgressBar
 
 current_file_path = pathlib.Path(__file__).parent.absolute()
 sys.path.insert(1,current_file_path)
@@ -105,11 +105,11 @@ class myEnv(Env):
 
 	def episode(self):
 		self.duration = self.settings["setup"]["exp_duration"]
-		self.pb = ProgressBar(self.duration)
+		#self.pb = ProgressBar(self.duration)
 		for i in range(self.duration):
 			self.step()
-			self.pb.update()
-		self.pb.done()
+			#self.pb.update()
+		#self.pb.done()
 		print("Episode finished")
 	def postprocessing(self):
 		"""

@@ -3,13 +3,11 @@
 #include <map>
 #include <algorithm>
 #include <random>
-#include "pybind11/pybind11.h"
 // #include <nlohmann/json.hpp>
 // using json = nlohmann::json
 #include "common.h"
 #include "mesh.h"
 #include "tools.h"
-namespace py=pybind11;
 using std::shared_ptr;
 using std::vector;
 struct Env;
@@ -23,7 +21,7 @@ using namespace std;
 struct Base{
 	string class_name;
     bool disappear = false;
-    virtual void set_data(string tag) {throw undefined_member("Set data is used before implementation");};
+    virtual void set_data(string tag, double value) {throw undefined_member("Set data is used before implementation");};
     virtual double get_data(string tag) {throw undefined_member("Get data is used before implementation");};
 
 };
@@ -61,7 +59,7 @@ struct Patch: public Base{
 	shared_ptr<Patch> empty_neighbor(bool quiet = false);
 	vector<shared_ptr<Agent>> find_neighbor_agents(bool include_self = true){
 		vector<shared_ptr<Agent>> neighbor_agents;
-		if (!this->empty and include_self) neighbor_agents.push_back(this->agent);
+		if (!this->empty & include_self) neighbor_agents.push_back(this->agent);
 		for (auto const &patch:this->neighbors){
 			if (!patch->empty) neighbor_agents.push_back(patch->agent);
 		}

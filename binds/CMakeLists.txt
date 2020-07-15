@@ -2,13 +2,9 @@
 # for testing
 set(HEADER_LIST )
 
-SET(MODULE_NAME "CPPYABM")
+pybind11_add_module(${BINDMODULE} binds.cpp ${HEADER_LIST})
+target_link_libraries(${BINDMODULE} PRIVATE pybind11::module)
 
-set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMake")
-
-pybind11_add_module(${MODULE_NAME} binds.cpp ${HEADER_LIST})
-target_link_libraries(${MODULE_NAME} PRIVATE pybind11::module)
-
-target_include_directories(${MODULE_NAME} PUBLIC ../include/)
-target_link_libraries(${MODULE_NAME} PRIVATE ${STATICLIBS})
-source_group(TREE "${PROJECT_SOURCE_DIR}/include" PREFIX "Header Files" FILES ${HEADER_LIST})
+target_include_directories(${BINDMODULE} PUBLIC ${BASE_SOURCE_DIR}/include)
+target_link_libraries(${BINDMODULE} PRIVATE ${ABMBASE})
+source_group(TREE "${BASE_SOURCE_DIR}/include" PREFIX "Header Files" FILES ${HEADER_LIST})

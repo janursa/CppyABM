@@ -1,12 +1,12 @@
 #include <iostream>
-#include "CPPYABM/mesh.h"
-#include "CPPYABM/bind_tools.h"
-#include "CPPYABM/common.h"
-#include "CPPYABM/pybases.h"
-#include "CPPYABM/bases.h"
+#include "ABM/mesh.h"
+#include "ABM/bind_tools.h"
+#include "ABM/common.h"
+#include "ABM/pybases.h"
+#include "ABM/bases.h"
 
 
-PYBIND11_MODULE(CPPYABM, m) {
+PYBIND11_MODULE(CppyABM, m) {
 	/** Envs **/
     expose_defaults(m);
 

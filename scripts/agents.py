@@ -4,11 +4,16 @@ import pathlib
 import os
 import time
 from datetime import datetime
+import platform
 current_file_path = pathlib.Path(__file__).parent.absolute()
 sys.path.insert(1,current_file_path)
-sys.path.insert(1,os.path.join(current_file_path,'..','build','binds'))
+if platform.system() == 'Windows':
+	#sys.path.insert(1,os.path.join(current_file_path,'..','..','fuzzy','build','x64-Debug'))
+	sys.path.insert(1,os.path.join(current_file_path,'..','build','binds','Release'))
+else:
+	sys.path.insert(1,os.path.join(current_file_path,'..','build','binds'))
+	sys.path.insert(1,os.path.join(current_file_path,'..','..','fuzzy','build'))
 from CPPYABM import Agent
-sys.path.insert(1,os.path.join(current_file_path,'..','..','fuzzy','build'))
 from fuzzy import fuzzy
 
 random.seed(datetime.now())
