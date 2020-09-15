@@ -11,5 +11,11 @@ if (DEALII)
 	DEAL_II_SETUP_TARGET(${APP})
 endif(DEALII)
 
-
+if (VTK)
+	target_link_libraries(${APP} ${VTK_LIBRARIES})
+	vtk_module_autoinit(
+		TARGETS ${APP}
+		MODULES ${VTK_LIBRARIES}
+    )
+endif(VTK)
 

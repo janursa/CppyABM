@@ -214,6 +214,7 @@
         for (auto & mesh_item:mesh){
             auto patch = this->generate_patch(); // create patch
             patch->index = mesh_item.index;      // copy index
+            patch->layer_index = mesh_item.layer_index;      // copy layer index
             patch->coords = mesh_item.coords;    // copy coords
             patch->neighbors_indices = mesh_item.neighbors_indices;  // copy neighbors indices
             patches[patch->index]= patch;

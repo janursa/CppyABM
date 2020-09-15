@@ -66,7 +66,7 @@ vector<MESH_ITEM> grid(double length, double width, double mesh_length, bool sha
                 vector<double> coords = {x,y,z};
                 auto mesh_index = calculate_mesh_index(i,j,x_n);
                 auto neighbor_indices = find_neighborhood(i,j,x_n,y_n);
-                MESH_ITEM mesh_item = {mesh_index,coords,neighbor_indices};
+                MESH_ITEM mesh_item = {mesh_index,coords,neighbor_indices,0}; // 0 is for layer index
                 meshes.push_back(mesh_item);
                 mesh_count ++;
             }
@@ -161,7 +161,7 @@ vector<MESH_ITEM> grid3(double length, double width, double height, double mesh_
                 vector<double> coords = {x,y,z};
                 auto mesh_index = calculate_mesh_index(i,j,k,x_n,y_n);
                 auto neighbor_indices = find_neighborhood(i,j,k,x_n,y_n,z_n);
-                MESH_ITEM mesh_item = {mesh_index,coords,neighbor_indices};
+                MESH_ITEM mesh_item = {mesh_index,coords,neighbor_indices,k};
                 meshes.push_back(mesh_item);
                 mesh_count ++;
             }

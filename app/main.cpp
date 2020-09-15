@@ -4,56 +4,85 @@
 #include <deal.II/grid/tria_iterator.h>
 #include <deal.II/grid/grid_generator.h>
 #include <deal.II/grid/grid_out.h>
+#include <deal.II/grid/grid_in.h>
 #include <iostream>
 #include <fstream>
 #include <cmath>
 using namespace dealii;
-void first_grid()
-{
-    Triangulation<2> triangulation;
-    GridGenerator::hyper_cube(triangulation);
-    triangulation.refine_global(4);
-    std::ofstream out("grid-1.svg");
-    GridOut       grid_out;
-    grid_out.write_svg(triangulation, out);
-    std::cout << "Grid written to grid-1.svg" << std::endl;
-}
-void second_grid()
-{
-    Triangulation<2> triangulation;
-    const Point<2> center(1, 0);
-    const double   inner_radius = 0.5, outer_radius = 1.0;
-    GridGenerator::hyper_shell(
-        triangulation, center, inner_radius, outer_radius, 10);
-    for (unsigned int step = 0; step < 5; ++step)
-    {
-        for (auto& cell : triangulation.active_cell_iterators())
-        {
-            for (unsigned int v = 0; v < GeometryInfo<2>::vertices_per_cell; ++v)
-            {
-                const double distance_from_center =
-                    center.distance(cell->vertex(v));
-                if (std::fabs(distance_from_center - inner_radius) < 1e-10)
-                {
-                    cell->set_refine_flag();
-                    break;
-                }
-            }
+using namespace std;
+
+void _dealii() {
+    auto first_grid = [&]() {
+        Triangulation<2> tria;
+        GridGenerator::hyper_cube(tria);
+        tria.refine_global(4); // a cube with an area and patch size 
+        for (auto& cell : tria.active_cell_iterators()) {
+            cout << cell->index() << endl;
         }
-        triangulation.execute_coarsening_and_refinement();
-    }
-    std::ofstream out("grid-2.svg");
-    GridOut       grid_out;
-    grid_out.write_svg(triangulation, out);
-    std::cout << "Grid written to grid-2.svg" << std::endl;
+        map<unsigned, double> inputs;
+
+        map<unsigned, double> outputs;
+
+    };
+
+    auto second_grid = [&]() {
+        Triangulation<2> tria;
+        ifstream file("grid-1.vtk");
+        GridIn<2, 2> grid;
+        grid.attach_triangulation(tria);
+        grid.read_vtk(file);
+        for (auto& cell : tria.active_cell_iterators()) {
+            cout << cell->index() << endl;
+        }
+        cout << tria.n_active_cells() << endl;
+    };
+    first_grid();
+    //second_grid();
 }
-#endif
+
+
+#endif //dealii
+#ifdef VTK
+#include <vtkGenericDataObjectReader.h>
+#include <vtkStructuredGrid.h>
+#include <vtkSmartPointer.h>
+#include <vtkPolyData.h>
+#include <string>
+void _vtk()
+{
+    cout << "insde vtk" << endl;
+    // simply set filename here (oh static joy)
+    std::string inputFilename = "setYourPathToVtkFileHere";
+
+    // Get all data from the file
+    vtkSmartPointer<vtkGenericDataObjectReader> reader =
+        vtkSmartPointer<vtkGenericDataObjectReader>::New();
+    reader->SetFileName(inputFilename.c_str());
+    reader->Update();
+
+    // All of the standard data types can be checked and obtained like this:
+    if (reader->IsFilePolyData())
+    {
+        std::cout << "output is a polydata" << std::endl;
+        vtkPolyData* output = reader->GetPolyDataOutput();
+        std::cout << "output has " << output->GetNumberOfPoints() << " points." << std::endl;
+    }
+
+    
+}
+#endif //vtk
+
+
 int main()
 {
 #ifdef DEALII
-    first_grid();
-    second_grid();
-#endif DEALII
+    _dealii();
+#endif //DEALII
+#ifdef VTK
+    _vtk();
+#endif //vtk
+
+
 }
 
 

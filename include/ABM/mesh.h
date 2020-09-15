@@ -14,6 +14,7 @@ struct MESH_ITEM {
     unsigned index;
     vector<double> coords;
     std::vector<unsigned> neighbors_indices;
+    unsigned layer_index;
 }; //!< Mesh item
 
 

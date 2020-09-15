@@ -35,6 +35,7 @@ struct Patch: public Base{
 	}
 	virtual ~Patch(){}
 	unsigned index;
+	unsigned layer_index;
 	vector<double> coords;
 	vector<unsigned> neighbors_indices;
 	vector<shared_ptr<Patch>> neighbors;
@@ -142,7 +143,7 @@ struct Env: public Base,enable_shared_from_this<Env>{
     void step_patches();
     virtual void update();
     //** Place agents **/
-    void setup_agents(map<string,unsigned> config);
+    virtual void setup_agents(map<string,unsigned> config);
     void place_agent(shared_ptr<Patch> patch,shared_ptr<Agent> agent);
     void place_agent_randomly(shared_ptr<Agent> agent);
     shared_ptr<Patch> find_empty_patch(); //!< Finds empty patches in the entire domain
