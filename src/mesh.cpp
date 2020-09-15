@@ -150,7 +150,7 @@ vector<MESH_ITEM> grid3(double length, double width, double height, double mesh_
     unsigned y_n = width/mesh_length;
     unsigned z_n = height/mesh_length;
     unsigned mesh_count =0;
-    // ** some small funcs **//
+    // ** loop over x,y,z and create meshes **//
     
     for (unsigned k=0; k<z_n; k++){
         for (unsigned j=0; j<y_n; j++){ //outer vector meshes
