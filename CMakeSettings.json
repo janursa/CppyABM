@@ -6,7 +6,7 @@
       "configurationType": "RelWithDebInfo",
       "buildRoot": "${projectDir}\\build\\${name}",
       "installRoot": "${projectDir}\\out\\install\\${name}",
-      "cmakeCommandArgs": "-DDEALII=true -DDEALII_DIR=\"D:/projects/extern/DEALII/\" ",
+      "cmakeCommandArgs": "",
       "buildCommandArgs": "",
       "ctestCommandArgs": "",
       "inheritEnvironments": [ "msvc_x64_x64" ],
