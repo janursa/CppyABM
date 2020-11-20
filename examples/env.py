@@ -11,7 +11,8 @@ sys.path.insert(1,current_file_path)
 # 	sys.path.insert(1,os.path.join(current_file_path,'..','build','x64-Release','binds'))
 # else:
 # 	sys.path.insert(1,os.path.join(current_file_path,'..','build','binds'))
-from CppyABM import Env,grid,grid3, Patch, Agent
+from binds.cppyabm import Env,grid,grid3, Patch, Agent
+print(Env)
 
 # SETTINGS_PATH = os.path.join(current_file_path,'settings.json')
 # PARAMS_PATH = os.path.join(current_file_path,'params.json')

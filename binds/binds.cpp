@@ -6,7 +6,7 @@
 #include "ABM/bases.h"
 
 
-PYBIND11_MODULE(CppyABM, m) {
+PYBIND11_MODULE(cppyabm, m) {
 	/** Envs **/
     expose_defaults(m);
 
