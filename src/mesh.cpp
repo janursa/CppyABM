@@ -60,6 +60,7 @@ vector<MESH_ITEM> grid(double length, double width, double mesh_length, bool sha
 
         for (unsigned j=0; j<y_n; j++){ //outer vector meshes
             for (unsigned i=0; i<x_n; i++){ //inner vector meshe
+
                 auto x = (mesh_length/2)+i*mesh_length;
                 auto y = (mesh_length/2)+j*mesh_length;
                 double z = 0;
@@ -67,6 +68,9 @@ vector<MESH_ITEM> grid(double length, double width, double mesh_length, bool sha
                 auto mesh_index = calculate_mesh_index(i,j,x_n);
                 auto neighbor_indices = find_neighborhood(i,j,x_n,y_n);
                 MESH_ITEM mesh_item = {mesh_index,coords,neighbor_indices,0}; // 0 is for layer index
+                if (i==0 or i == x_n -1 or j ==0 or j == y_n-1){
+                    mesh_item.on_border = true;
+                }
                 meshes.push_back(mesh_item);
                 mesh_count ++;
             }

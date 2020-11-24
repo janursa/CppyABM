@@ -72,6 +72,7 @@ struct Patch: public Base{
 	std::shared_ptr<Env> env;
 	/** patch data **/
 	bool empty = true;
+	bool on_border = false;
 
 };
 
@@ -136,12 +137,14 @@ struct Env: public Base,enable_shared_from_this<Env>{
 	virtual	shared_ptr<Agent> generate_agent(string class_name) {
 		throw undefined_member("Generate agent is not defined inside Env");
 	};
-	virtual void update_repo(){throw undefined_member("Update repository is not implemented but called");};
+	// virtual void update_repo(){throw undefined_member("Update repository is not implemented but called");};
+	virtual void update_repo(){}
 	//** main functions **/
     void setup_domain(vector<MESH_ITEM> mesh);
     void step_agents();
     void step_patches();
-    virtual void update();
+    
+	virtual void update();
     //** Place agents **/
     virtual void setup_agents(map<string,unsigned> config);
     void place_agent(shared_ptr<Patch> patch,shared_ptr<Agent> agent);

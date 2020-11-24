@@ -18,7 +18,9 @@ void expose_base_env(py::module &m){
         .def("setup_agents",&Env::setup_agents)
         .def("count_agents",&Env::count_agents)
         .def_readwrite("patches",&Env::patches)
-        .def_readwrite("agents",&Env::agents);
+        .def_readwrite("agents",&Env::agents)
+        .def("connect_patch_agent", &Env::connect_patch_agent);
+
 }
 
 template<typename class_name,typename py_class_name>
@@ -33,6 +35,7 @@ py::class_<class_name,Env,py_class_name,std::shared_ptr<class_name>> expose_env(
         .def("update",&class_name::update)
         .def("setup_agents",&class_name::setup_agents)
         .def("count_agents",&class_name::count_agents)
+        .def("connect_patch_agent", &class_name::connect_patch_agent)
         .def_readwrite("patches",&class_name::patches)
         .def_readwrite("agents",&class_name::agents);
     return class_binds_obj;
@@ -87,6 +90,7 @@ void expose_base_patch(py::module m){
         .def_readwrite("coords",&Patch::coords)
         .def_readwrite("agent",&Patch::agent)
         .def_readwrite("empty",&Patch::empty)
+        .def_readwrite("on_border",&Patch::on_border)
         .def_readwrite("disappear",&Patch::disappear)
         .def_readwrite("neighbors",&Patch::neighbors);
 }
@@ -101,6 +105,7 @@ py::class_<class_name,Patch,py_class_name,std::shared_ptr<class_name>>  expose_p
         .def_readwrite("coords",&class_name::coords)
         .def_readwrite("agent",&class_name::agent)
         .def_readwrite("empty",&class_name::empty)
+        .def_readwrite("on_border",&class_name::on_border)
         .def_readwrite("disappear",&class_name::disappear)
         .def_readwrite("neighbors",&class_name::neighbors);
     return class_binds_obj;
@@ -115,8 +120,7 @@ void expose_exceptions(py::module m){
 void expose_mesh(py::module &m){
     py::class_<MESH_ITEM>(m,"MESH_ITEM")
         .def(py::init<>()); 
-    
-    m.def("grid",&grid,"Creates 3D grid mesh", py::arg("length"), py::arg("width"), py::arg("mesh_length"),py::arg("share") = false);
+    m.def("grid2",&grid,"Creates 3D grid mesh", py::arg("length"), py::arg("width"), py::arg("mesh_length"),py::arg("share") = false);
     m.def("grid3",&grid3,"Creates 3D grid mesh", py::arg("length"), py::arg("width"),py::arg("height"), py::arg("mesh_length"),py::arg("share") = false);
 
 }

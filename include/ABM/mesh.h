@@ -15,6 +15,7 @@ struct MESH_ITEM {
     vector<double> coords;
     std::vector<unsigned> neighbors_indices;
     unsigned layer_index;
+    bool on_border = false;
 }; //!< Mesh item
 
 

@@ -79,6 +79,7 @@
             this->agents[i]->reset_hatch();
         };
     }
+
     /** move **/
     for (unsigned  i = 0; i < agent_count; i++){
         if (!this->agents[i]->_move._flag) continue;
@@ -128,6 +129,7 @@
             this->agents[i]->reset_move();
 
     }
+
     /** switch **/
     for (unsigned  i = 0; i < agent_count; i++){
         auto agent = this->agents[i];
@@ -155,8 +157,9 @@
     this->update_repo(); // to remove the agents from repo
     /** update Env data **/
     // update agent counts
-
     this->count_agents();
+
+
     
 };
   map<string,unsigned> Env::count_agents(){
@@ -217,6 +220,12 @@
             patch->layer_index = mesh_item.layer_index;      // copy layer index
             patch->coords = mesh_item.coords;    // copy coords
             patch->neighbors_indices = mesh_item.neighbors_indices;  // copy neighbors indices
+            try {
+                patch->on_border = mesh_item.on_border;
+            }
+            catch (...){
+
+            }
             patches[patch->index]= patch;
             this->patches_indices.push_back(patch->index);
         }
