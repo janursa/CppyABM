@@ -148,6 +148,7 @@
         if (jj >= this->agents.size()) break;
         for (int ii = jj; ii < this->agents.size(); ii++) {
             if (this->agents[ii]->disappear == true) {
+                this->agents[ii]->patch->remove_agent();
                 this->agents.erase(this->agents.begin() + ii);
                 break;
             }

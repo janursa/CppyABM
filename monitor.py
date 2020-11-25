@@ -17,11 +17,11 @@ settings = {
     #         "graph_type" : 'scatter',
     #         "graph_size" : 800
     #        },
-   #  "Cell counts": {
-   #          "graph_dir" : "./build/outputs/agents_traj.csv",
-   #          "graph_type" : 'lines',
-   #          'x-axis-moves': False
-   #         },
+    "Cell counts": {
+            "graph_dir" : "./examples/cell_count.csv",
+            "graph_type" : 'lines',
+            'x-axis-moves': False
+           },
    # "pH": {
 		 #    "graph_dir" : "./build/outputs/pH.csv",
 		 #    "graph_type" : 'lines',

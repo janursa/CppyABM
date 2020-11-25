@@ -20,7 +20,6 @@ using namespace std;
 */
 struct Base{
 	string class_name;
-    bool disappear = false;
     virtual void set_data(string tag, double value) {throw undefined_member("Set data is used before implementation");};
     virtual double get_data(string tag) {throw undefined_member("Get data is used before implementation");};
 
@@ -117,6 +116,9 @@ struct Agent: public Base,enable_shared_from_this<Agent>{
     /** connectors **/
 	std::shared_ptr<Patch> patch;
 	std::shared_ptr<Env> env;
+
+	bool disappear = false;
+
 
 };
 

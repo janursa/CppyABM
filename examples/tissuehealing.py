@@ -4,6 +4,7 @@ import sys
 import os
 import platform
 import pathlib
+import pandas as pd
 
 current_file_path = pathlib.Path(__file__).parent.absolute()
 sys.path.insert(1,current_file_path)
@@ -24,12 +25,15 @@ class cell (Agent):
 	def __init__(self,env):
 		Agent.__init__(self,env = env,class_name = 'cell')
 		self.clock = 12
+	def update(self):
+		self.clock+=1
 
 class healingEnv(Env):
 	def __init__(self):
 		Env.__init__(self)
 		self._repo = []
 		self.clock = 0
+		self.data = {'cell_count':[],'tissue_density':[]}
 	def generate_agent(self,agent_name):
 		agent_obj = cell(self)
 		self._repo.append(agent_obj)
@@ -44,51 +48,52 @@ class healingEnv(Env):
 			x,y,z = patch.coords
 			if (x >= 0.25 and x <=1.25) and (y>=0.25 and y<=1.25):
 				patch.damage_center = True
+				patch.tissue = 0
+				if patch.empty == False:
+					patch.agent.disappear = True
 	def setup(self):
 		## create mesh
 		length = 1.5 # mm	
 		width = length #mm 	
-		mesh = grid2(length=length, width=width, mesh_length=0.015, share = False)
+		mesh = grid2(length=length, width=width, mesh_length=0.015, share = True)
 		## create patch based on mesh
 		self.setup_domain(mesh)
 		## assiging 1000 cells randomly in the domain
-		self.setup_agents({'cell':1000})
-		## assigining cells to the boundary patches
-		for [index,patch] in self.patches.items():
-			x,y,z = patch.coords
-			if patch.on_border and patch.empty:
-				new_cell = self.generate_agent(self)
-				self.connect_patch_agent(patch,new_cell)
+		self.setup_agents({'cell':2000})
+		## create the damage
+		self.damage()
+		self.update()
 	def run(self):
-		if self.clock < 20:
-			self.inflammation()
 		# execute cells
 		for cell in self.agents:
-			# if gradient is significant migrate based on chemotaxis otherwise randomly
-			max_gradient = max(gradients)
-			if max_gradient >= 0.1:
-				max_index = gradients.index(max_gradient)
-				dest_patch = cell.patch.neighbors[max_index]
-				cell.order_move(dest_patch,quiet = True)
-			else:
-				# rand_index = randrange(len(cell.patch.neighbors))
-				# dest_patch = cell.patch.neighbors[rand_index]
-				pass
-			# cell.order_move(dest_patch,quiet = True)
+			# dest_patch = cell.patch.empty_neighbor(quiet=False)
+			cell.order_move(quiet=True)
 			# proliferation
-			if cell.clock == 24:
-				cell.order_hatch(quiet = True)
+			neighbor_cell_count = len(cell.patch.find_neighbor_agents())
+			if cell.patch.damage_center and cell.clock >= 12:
+				if neighbor_cell_count <= 6:
+					cell.order_hatch(quiet=True)
+					cell.clock = 0 
 			# deposit tissue
-			cell.patch.tissue += 0.05
-			if cell.patch.tissue > 1:
-				cell.patch.tissue = 2
+			if cell.patch.tissue < 100:
+				cell.patch.tissue += 1	
 			# die
-			if cell.patch.tissue == 1:
+			if neighbor_cell_count >7:
 				cell.disappear = True
 		self.update()
 		self.clock +=1
 	def update(self):
 		super().update()
+		for agent in self.agents:
+			agent.update()
+		cell_count = self.count_agents()
+		self.data['cell_count'].append(cell_count['cell'])
+		tissue_density_sum = 0
+		for _,patch in self.patches.items():
+			tissue_density_sum+=patch.tissue
+
+		tissue_mean = tissue_density_sum/len(self.patches)
+		self.data['tissue_density'].append(tissue_mean)
 
 	def output(self):
 		# plot agents on the domain
@@ -105,6 +110,10 @@ class healingEnv(Env):
 			x,y,z = patch.coords
 			file.write("{},{},{},{}\n".format(x, y, patch.tissue, 10))
 		file.close()
+		## cell counts
+		df = pd.DataFrame.from_dict(self.data)
+		df_agent_counts = df[['cell_count']]
+		df_agent_counts.to_csv('cell_count.csv')
 
 		
 
@@ -112,9 +121,9 @@ class healingEnv(Env):
 envObj = healingEnv()
 envObj.setup()
 import time
-for i in range(100):
+for i in range(1):
 	print('Iteration {}'.format(i))
-	# time.sleep(2)
 	envObj.run()
-	envObj.output()
+	
+envObj.output()
 

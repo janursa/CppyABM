@@ -44,7 +44,7 @@ py::class_<class_name,Env,py_class_name,std::shared_ptr<class_name>> expose_env(
 void expose_base_agent(py::module m){
     py::class_<Agent,PyAgent<Agent>,std::shared_ptr<Agent>>(m,"Agent",py::dynamic_attr())
         .def(py::init<shared_ptr<Env>,string>(),"Initialize",py::arg("env"),py::arg("class_name"))
-        .def("move",&Agent::move,"Move the agent to a new patch")
+        .def("move",&Agent::move,"Move the agent to a new patch",py::arg("patch")=nullptr,py::arg("quiet")=false)
         .def("order_hatch",&Agent::order_hatch,"Hatch request",
             py::arg("patch")=nullptr, py::arg("inherit")=false,
             py::arg("quiet")=false, py::arg("reset")=false)
@@ -56,14 +56,17 @@ void expose_base_agent(py::module m){
         .def_readwrite("disappear",&Agent::disappear)
         .def_readwrite("env",&Agent::env)
         .def_readwrite("patch",&Agent::patch)
+        .def_readwrite("disappear",&Agent::disappear)
         .def_readwrite("class_name",&Agent::class_name);
+
 }
 
 template<typename class_name,typename py_class_name>
 py::class_<class_name,Agent,py_class_name,std::shared_ptr<class_name>>  expose_agent(py::module &m, string class_name_str) {
     /** Agent **/
     auto class_binds_obj =  py::class_<class_name,Agent,py_class_name,std::shared_ptr<class_name>>(m,class_name_str.c_str(),py::dynamic_attr())
-        .def("move",&class_name::move,"Move the agent to a new patch")
+        .def("move",&class_name::move,"Move the agent to a new patch",py::arg("patch")=nullptr,py::arg("quiet")=false)
+
         .def("order_hatch",&class_name::order_hatch,"Hatch request",
             py::arg("patch")=nullptr, py::arg("inherit")=false,
             py::arg("quiet")=false, py::arg("reset")=false)
@@ -75,7 +78,9 @@ py::class_<class_name,Agent,py_class_name,std::shared_ptr<class_name>>  expose_a
         .def_readwrite("disappear",&class_name::disappear)
         .def_readwrite("env",&class_name::env)
         .def_readwrite("patch",&class_name::patch)
+        .def_readwrite("disappear",&class_name::disappear)
         .def_readwrite("class_name",&class_name::class_name);
+
     return class_binds_obj;
 
 }
@@ -87,11 +92,11 @@ void expose_base_patch(py::module m){
             py::arg("quiet")=false)
         .def("find_neighbor_agents",&Patch::find_neighbor_agents,"Returns a vector of agents in one patch neighborhood",
             py::arg("include_self")=true)
+        .def("remove_agent", &Patch::remove_agent,"Removes agent from the patch")
         .def_readwrite("coords",&Patch::coords)
         .def_readwrite("agent",&Patch::agent)
         .def_readwrite("empty",&Patch::empty)
         .def_readwrite("on_border",&Patch::on_border)
-        .def_readwrite("disappear",&Patch::disappear)
         .def_readwrite("neighbors",&Patch::neighbors);
 }
 
@@ -106,7 +111,6 @@ py::class_<class_name,Patch,py_class_name,std::shared_ptr<class_name>>  expose_p
         .def_readwrite("agent",&class_name::agent)
         .def_readwrite("empty",&class_name::empty)
         .def_readwrite("on_border",&class_name::on_border)
-        .def_readwrite("disappear",&class_name::disappear)
         .def_readwrite("neighbors",&class_name::neighbors);
     return class_binds_obj;
         
