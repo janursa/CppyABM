@@ -71,19 +71,6 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 	endif(VTK)
 endif()
 
-# include(FetchContent)
-# FetchContent_Declare(
-#     dealii
-#     GIT_REPOSITORY https://github.com/dealii/dealii.git
-#     GIT_TAG        master
-# )
-# FetchContent_MakeAvailable(dealii)
-
-
-
-# set(JSON_BuildTests OFF CACHE INTERNAL "")
-# find_package(nlohmann_json REQUIRED)
-
 add_subdirectory(src)
 add_subdirectory(binds)
 add_subdirectory(app)

@@ -19,7 +19,7 @@ struct MESH_ITEM {
 }; //!< Mesh item
 
 
-vector<MESH_ITEM> grid(double length, double width, double mesh_length, bool share = false);
+vector<MESH_ITEM> grid2(double length, double width, double mesh_length, bool share = false);
 vector<MESH_ITEM> grid3(double length, double width, double height, double mesh_length, bool share);
 
 void log_mesh(vector<MESH_ITEM> mesh, string file_name);

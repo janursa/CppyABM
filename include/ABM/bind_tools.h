@@ -124,7 +124,7 @@ void expose_exceptions(py::module m){
 void expose_mesh(py::module &m){
     py::class_<MESH_ITEM>(m,"MESH_ITEM")
         .def(py::init<>()); 
-    m.def("grid2",&grid,"Creates 3D grid mesh", py::arg("length"), py::arg("width"), py::arg("mesh_length"),py::arg("share") = false);
+    m.def("grid2",&grid2,"Creates 3D grid mesh", py::arg("length"), py::arg("width"), py::arg("mesh_length"),py::arg("share") = false);
     m.def("grid3",&grid3,"Creates 3D grid mesh", py::arg("length"), py::arg("width"),py::arg("height"), py::arg("mesh_length"),py::arg("share") = false);
 
 }

@@ -1,5 +1,3 @@
-# CMAKE_MINIMUM_REQUIRED(VERSION 3.13.1)
-# for testing
 set(HEADER_LIST )
 
 set(SOURCE_FILES "env.cpp"

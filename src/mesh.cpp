@@ -1,5 +1,5 @@
 #include "ABM/mesh.h"
-vector<MESH_ITEM> grid(double length, double width, double mesh_length, bool share){
+vector<MESH_ITEM> grid2(double length, double width, double mesh_length, bool share){
         auto calculate_mesh_index = [](unsigned i, unsigned j,unsigned x_n) {
             return (j*x_n + i);
         };

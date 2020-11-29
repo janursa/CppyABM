@@ -6,24 +6,23 @@ import platform
 import pathlib
 import pandas as pd
 
-current_file_path = pathlib.Path(__file__).parent.absolute()
-sys.path.insert(1,current_file_path)
-if platform.system() == 'Windows':
-	sys.path.insert(1,os.path.join(current_file_path,'..','build','x64-Release'))
-else:
-	sys.path.insert(1,os.path.join(current_file_path,'..','build'))
+# current_file_path = pathlib.Path(__file__).parent.absolute()
+# sys.path.insert(1,current_file_path)
+# if platform.system() == 'Windows':
+# 	sys.path.insert(1,os.path.join(current_file_path,'..','build','x64-Release'))
+# else:
+# 	sys.path.insert(1,os.path.join(current_file_path,'..','build'))
 from binds.cppyabm import Env, Agent, Patch, grid2
 
-class grid(Patch):
+class myPatch(Patch):
 	def __init__(self,env):
 		Patch.__init__(self,env)
 		self.damage_center = False
-		self.has_cell = False
 		self.tissue = 100
 
-class cell (Agent):
-	def __init__(self,env):
-		Agent.__init__(self,env = env,class_name = 'cell')
+class Cell (Agent):
+	def __init__(self,env,agent_name):
+		Agent.__init__(self,env = env,class_name = agent_name)
 		self.clock = 12
 	def update(self):
 		self.clock+=1
@@ -35,12 +34,12 @@ class healingEnv(Env):
 		self.clock = 0
 		self.data = {'cell_count':[],'tissue_density':[]}
 	def generate_agent(self,agent_name):
-		agent_obj = cell(self)
+		agent_obj = Cell(self,agent_name)
 		self._repo.append(agent_obj)
 		self.agents.append(agent_obj)
 		return agent_obj
 	def generate_patch(self):
-		patch_obj = grid(self)
+		patch_obj = myPatch(self)
 		self._repo.append(patch_obj)
 		return patch_obj
 	def damage(self):
@@ -121,7 +120,7 @@ class healingEnv(Env):
 envObj = healingEnv()
 envObj.setup()
 import time
-for i in range(1):
+for i in range(336):
 	print('Iteration {}'.format(i))
 	envObj.run()
 	
