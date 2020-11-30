@@ -4,7 +4,6 @@
 #include <algorithm>
 #include "pybind11/pybind11.h"
 namespace py=pybind11;
-struct Env;
 
 template<class deriveClass>
 struct PyBase: public deriveClass{

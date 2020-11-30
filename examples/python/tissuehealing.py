@@ -6,12 +6,12 @@ import platform
 import pathlib
 import pandas as pd
 
-# current_file_path = pathlib.Path(__file__).parent.absolute()
+current_file_path = pathlib.Path(__file__).parent.absolute()
 # sys.path.insert(1,current_file_path)
-# if platform.system() == 'Windows':
-# 	sys.path.insert(1,os.path.join(current_file_path,'..','build','x64-Release'))
-# else:
-# 	sys.path.insert(1,os.path.join(current_file_path,'..','build'))
+if platform.system() == 'Windows':
+	sys.path.insert(1,os.path.join(current_file_path,'..','build','x64-Release'))
+else:
+	sys.path.insert(1,os.path.join(current_file_path,'..','..','build'))
 from binds.cppyabm import Env, Agent, Patch, grid2
 
 class myPatch(Patch):

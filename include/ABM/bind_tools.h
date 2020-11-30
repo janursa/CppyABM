@@ -7,26 +7,26 @@ namespace py=pybind11;
 
 
 void expose_base_env(py::module &m){
-    py::class_<Env,PyEnv<Env>,std::shared_ptr<Env>> (m,"Env",py::dynamic_attr())
+    py::class_<baseEnv,PyEnv<baseEnv>,std::shared_ptr<baseEnv>> (m,"Env",py::dynamic_attr())
         .def(py::init<>())
-        .def("place_agent_randomly",&Env::place_agent_randomly)
-        .def("setup_domain",&Env::setup_domain)
-        .def("step_agents",&Env::step_agents)
-        .def("step_patches",&Env::step_patches)
-        .def("place_agent",&Env::place_agent)
-        .def("update",&Env::update)
-        .def("setup_agents",&Env::setup_agents)
-        .def("count_agents",&Env::count_agents)
-        .def_readwrite("patches",&Env::patches)
-        .def_readwrite("agents",&Env::agents)
-        .def("connect_patch_agent", &Env::connect_patch_agent);
+        .def("place_agent_randomly",&baseEnv::place_agent_randomly)
+        .def("setup_domain",&baseEnv::setup_domain)
+        .def("step_agents",&baseEnv::step_agents)
+        .def("step_patches",&baseEnv::step_patches)
+        .def("place_agent",&baseEnv::place_agent)
+        .def("update",&baseEnv::update)
+        .def("setup_agents",&baseEnv::setup_agents)
+        .def("count_agents",&baseEnv::count_agents)
+        .def_readwrite("patches",&baseEnv::patches)
+        .def_readwrite("agents",&baseEnv::agents)
+        .def("connect_patch_agent", &baseEnv::connect_patch_agent);
 
 }
 
 template<typename class_name,typename py_class_name>
-py::class_<class_name,Env,py_class_name,std::shared_ptr<class_name>> expose_env(py::module m, string class_name_string){
+py::class_<class_name,baseEnv,py_class_name,std::shared_ptr<class_name>> expose_env(py::module m, string class_name_string){
     auto class_binds_obj = 
-    py::class_<class_name,Env,py_class_name,std::shared_ptr<class_name>> (m,class_name_string.c_str(),py::dynamic_attr())
+    py::class_<class_name,baseEnv,py_class_name,std::shared_ptr<class_name>> (m,class_name_string.c_str(),py::dynamic_attr())
         .def("place_agent_randomly",&class_name::place_agent_randomly)
         .def("setup_domain",&class_name::setup_domain)
         .def("step_agents",&class_name::step_agents)
@@ -43,7 +43,7 @@ py::class_<class_name,Env,py_class_name,std::shared_ptr<class_name>> expose_env(
 
 void expose_base_agent(py::module m){
     py::class_<Agent,PyAgent<Agent>,std::shared_ptr<Agent>>(m,"Agent",py::dynamic_attr())
-        .def(py::init<shared_ptr<Env>,string>(),"Initialize",py::arg("env"),py::arg("class_name"))
+        .def(py::init<shared_ptr<baseEnv>,string>(),"Initialize",py::arg("env"),py::arg("class_name"))
         .def("move",&Agent::move,"Move the agent to a new patch",py::arg("patch")=nullptr,py::arg("quiet")=false)
         .def("order_hatch",&Agent::order_hatch,"Hatch request",
             py::arg("patch")=nullptr, py::arg("inherit")=false,
@@ -87,7 +87,7 @@ py::class_<class_name,Agent,py_class_name,std::shared_ptr<class_name>>  expose_a
 
 void expose_base_patch(py::module m){
     py::class_<Patch,PyPatch<Patch>,std::shared_ptr<Patch>>(m,"Patch",py::dynamic_attr())
-        .def(py::init<shared_ptr<Env>>())
+        .def(py::init<shared_ptr<baseEnv>>())
         .def("empty_neighbor", &Patch::empty_neighbor,"Return an empty patch around the patch",
             py::arg("quiet")=false)
         .def("find_neighbor_agents",&Patch::find_neighbor_agents,"Returns a vector of agents in one patch neighborhood",
