@@ -1,18 +1,21 @@
+#pragma once
 #include <iostream>
 #include "CPPYABM/include/ABM/bases.h"
 #include "CPPYABM/include/ABM/mesh.h"
+
 struct healingEnv;
 struct myPatch;
 struct Cell;
 
+
 struct healingEnv: public baseEnv<healingEnv,Cell,myPatch> {
 	healingEnv():baseEnv<healingEnv,Cell,myPatch>(){}
-	virtual shared_ptr<Cell> generate_agent(std::string agent_name);
+	// virtual shared_ptr<Cell> generate_agent(std::string agent_name)=0;
 	virtual shared_ptr<myPatch> generate_patch();
 	virtual void update();
 	void damage();
 	void setup();
-	void run();
+	void step();
 	unsigned clock=0;
 };
 struct myPatch: public basePatch<healingEnv,Cell,myPatch> {
@@ -25,7 +28,7 @@ struct Cell: public baseAgent<healingEnv,Cell,myPatch> {
 	}
 	void update(){
 		this->clock++;
-	}
-	void step();
+	};
+	virtual void step(){};
 	unsigned clock = 12;
 };

@@ -7,11 +7,7 @@ import pathlib
 import pandas as pd
 
 current_file_path = pathlib.Path(__file__).parent.absolute()
-# sys.path.insert(1,current_file_path)
-if platform.system() == 'Windows':
-	sys.path.insert(1,os.path.join(current_file_path,'..','build','x64-Release'))
-else:
-	sys.path.insert(1,os.path.join(current_file_path,'..','..','build'))
+sys.path.insert(1,os.path.join(current_file_path,'..','..','build'))
 from binds.cppyabm import Env, Agent, Patch, grid2
 
 class myPatch(Patch):
@@ -26,6 +22,22 @@ class Cell (Agent):
 		self.clock = 12
 	def update(self):
 		self.clock+=1
+	def step(self):
+		neighbor_cell_count = len(self.patch.find_neighbor_agents())
+		# migration
+		if neighbor_cell_count <= 8:
+			self.order_move(quiet=True)
+		# proliferation
+		if self.patch.damage_center and self.clock >= 12:
+			if neighbor_cell_count <= 6:
+				self.order_hatch(quiet=True)
+				self.clock = 0 
+		# deposit tissue
+		if self.patch.tissue < 100:
+			self.patch.tissue += 1	
+		# die
+		if neighbor_cell_count >7:
+			self.disappear = True
 
 class healingEnv(Env):
 	def __init__(self):
@@ -62,23 +74,10 @@ class healingEnv(Env):
 		## create the damage
 		self.damage()
 		self.update()
-	def run(self):
+	def step(self):
 		# execute cells
 		for cell in self.agents:
-			# dest_patch = cell.patch.empty_neighbor(quiet=False)
-			cell.order_move(quiet=True)
-			# proliferation
-			neighbor_cell_count = len(cell.patch.find_neighbor_agents())
-			if cell.patch.damage_center and cell.clock >= 12:
-				if neighbor_cell_count <= 6:
-					cell.order_hatch(quiet=True)
-					cell.clock = 0 
-			# deposit tissue
-			if cell.patch.tissue < 100:
-				cell.patch.tissue += 1	
-			# die
-			if neighbor_cell_count >7:
-				cell.disappear = True
+			cell.step()
 		self.update()
 		self.clock +=1
 	def update(self):
@@ -122,7 +121,8 @@ envObj.setup()
 import time
 for i in range(336):
 	print('Iteration {}'.format(i))
-	envObj.run()
-	
-envObj.output()
+	envObj.step()
+	if i%20 ==0:
+		print('cell count {}'.format(len(envObj.agents)))
+		envObj.output()
 

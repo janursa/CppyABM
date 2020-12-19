@@ -5,8 +5,7 @@
 #include <pybind11/stl_bind.h>
 using namespace std;
 namespace py = pybind11;
-struct Agent;
-struct Patch;
+
 
 /** macros and helpers **/
 template <typename T> std::string type_name();
@@ -18,14 +17,10 @@ template <typename T> std::string type_name();
 #else
 #define LOG(str) do { } while ( false )
 #endif
-/** custom types **/
-using AgentsBank = vector<shared_ptr<Agent>>;
-PYBIND11_MAKE_OPAQUE(AgentsBank);
-using PatchesBank = map<unsigned,shared_ptr<Patch>>;
-PYBIND11_MAKE_OPAQUE(PatchesBank);
+template<class ENV, class AGENT, class PATCH>
 struct HATCH_CONFIG{
 	HATCH_CONFIG (bool flag = false, 
-		    shared_ptr<Patch> _patch = nullptr, 
+		    shared_ptr<PATCH> _patch = nullptr, 
 		    bool inherit = false,
 		    bool quiet = false,
 		    bool reset = false
@@ -36,21 +31,22 @@ struct HATCH_CONFIG{
 		
 	};
 	bool _flag;
-	shared_ptr<Patch> _patch;
+	shared_ptr<PATCH> _patch;
 	bool _inherit;
 	bool _quiet; //!< if it's throw, upon failure in moving, even due to patch unavailability, and exception will be thrown 
 	bool _reset; //!< Reset upon failure in hatching. If false, the agent will try in the next steps again
 };
+template<class ENV, class AGENT, class PATCH>
 struct MOVE_CONFIG{
 	MOVE_CONFIG (bool flag = false, 
-		    shared_ptr<Patch> _patch = nullptr, 
+		    shared_ptr<PATCH> _patch = nullptr, 
 		    bool quiet = false,
 		    bool reset = false
 		    ):
 			_flag(flag),_patch(_patch), _quiet(quiet), _reset(reset)
 	{};
 	bool _flag;
-	shared_ptr<Patch> _patch;
+	shared_ptr<PATCH> _patch;
 	bool _quiet; //!< if it's throw, upon failure in moving, even due to patch unavailability, and exception will be thrown 
 	bool _reset;
 };

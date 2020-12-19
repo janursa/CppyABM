@@ -5,6 +5,10 @@ int main(){
 	std::cout<<"hello world"<<endl;
 	auto envObj = make_shared<healingEnv>();
 	envObj->setup();
-	envObj->run();
+	for (unsigned i = 0; i < 100; i++){
+		cout<<"iteration "<<i<<endl;
+		envObj->run();
+	}
+	
 	return 0;
 }
