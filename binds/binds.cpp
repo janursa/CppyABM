@@ -4,21 +4,28 @@
 #include "ABM/common.h"
 #include "ABM/pybases.h"
 #include "ABM/bases.h"
+struct expEnv;
+struct expPatch;
+struct expAgent;
+struct expEnv: public baseEnv<expEnv,expAgent,expPatch>{
 
-using AgentsBank = vector<shared_ptr<expAgent>>;
-using PatchesBank = map<unsigned,shared_ptr<expPatch>>;
-PYBIND11_MAKE_OPAQUE(AgentsBank);
-PYBIND11_MAKE_OPAQUE(PatchesBank);
+};
+struct expAgent: public baseAgent<expEnv,expAgent,expPatch>{
+    expAgent(shared_ptr<expEnv> env , string class_name):baseAgent<expEnv,expAgent,expPatch>(env,class_name){
+        
+    }
+};
+struct expPatch: public basePatch<expEnv,expAgent,expPatch>{
+    expPatch(shared_ptr<expEnv> env):basePatch<expEnv,expAgent,expPatch>(env){}
+};
+
+EXPOSE_AGENT_CONTAINER(expAgent);
+EXPOSE_PATCH_CONTAINER(expPatch);
 
 PYBIND11_MODULE(cppyabm, m) {
-	/** Envs **/
-    expose_defaults<expEnv,expAgent,expPatch>(m);
-
-    expose_base_env<expEnv,expAgent,expPatch>(m,"baseEnv");
-    expose_base_agent<expEnv,expAgent,expPatch>(m,"baseAgent");
-    expose_base_patch<expEnv,expAgent,expPatch>(m,"basePatch");
-    expose_env<expEnv,expAgent,expPatch,PyEnv<expEnv,expAgent,expPatch>>(m,"Env");
-    expose_agent<expEnv,expAgent,expPatch,PyAgent<expEnv,expAgent,expPatch>>(m,"Agent");
-    expose_patch<expEnv,expAgent,expPatch,PyPatch<expEnv,expAgent,expPatch>>(m,"Patch");
+    binds_tools::expose_defaults<expEnv,expAgent,expPatch>(m);
+    binds_tools::expose_env<expEnv,expAgent,expPatch,PyEnv<expEnv,expAgent,expPatch>>(m,"Env");
+    binds_tools::expose_agent<expEnv,expAgent,expPatch,PyAgent<expEnv,expAgent,expPatch>>(m,"Agent");
+    binds_tools::expose_patch<expEnv,expAgent,expPatch,PyPatch<expEnv,expAgent,expPatch>>(m,"Patch");
 }
 

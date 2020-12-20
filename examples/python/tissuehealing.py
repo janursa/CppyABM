@@ -10,11 +10,11 @@ current_file_path = pathlib.Path(__file__).parent.absolute()
 sys.path.insert(1,os.path.join(current_file_path,'..','..','build'))
 from binds.cppyabm import Env, Agent, Patch, grid2
 
-class myPatch(Patch):
+class Tissue(Patch):
 	def __init__(self,env):
 		Patch.__init__(self,env)
 		self.damage_center = False
-		self.tissue = 100
+		self.ECM = 100
 
 class Cell (Agent):
 	def __init__(self,env,agent_name):
@@ -32,9 +32,9 @@ class Cell (Agent):
 			if neighbor_cell_count <= 6:
 				self.order_hatch(quiet=True)
 				self.clock = 0 
-		# deposit tissue
-		if self.patch.tissue < 100:
-			self.patch.tissue += 1	
+		# deposit ECM
+		if self.patch.ECM < 100:
+			self.patch.ECM += 1	
 		# die
 		if neighbor_cell_count >7:
 			self.disappear = True
@@ -44,14 +44,14 @@ class healingEnv(Env):
 		Env.__init__(self)
 		self._repo = []
 		self.clock = 0
-		self.data = {'cell_count':[],'tissue_density':[]}
+		self.data = {'cell_count':[],'ECM':[]}
 	def generate_agent(self,agent_name):
 		agent_obj = Cell(self,agent_name)
 		self._repo.append(agent_obj)
 		self.agents.append(agent_obj)
 		return agent_obj
 	def generate_patch(self):
-		patch_obj = myPatch(self)
+		patch_obj = Tissue(self)
 		self._repo.append(patch_obj)
 		return patch_obj
 	def damage(self):
@@ -59,7 +59,7 @@ class healingEnv(Env):
 			x,y,z = patch.coords
 			if (x >= 0.25 and x <=1.25) and (y>=0.25 and y<=1.25):
 				patch.damage_center = True
-				patch.tissue = 0
+				patch.ECM = 0
 				if patch.empty == False:
 					patch.agent.disappear = True
 	def setup(self):
@@ -86,27 +86,27 @@ class healingEnv(Env):
 			agent.update()
 		cell_count = self.count_agents()
 		self.data['cell_count'].append(cell_count['cell'])
-		tissue_density_sum = 0
+		ECM_sum = 0
 		for _,patch in self.patches.items():
-			tissue_density_sum+=patch.tissue
+			ECM_sum+=patch.ECM
 
-		tissue_mean = tissue_density_sum/len(self.patches)
-		self.data['tissue_density'].append(tissue_mean)
+		ECM_mean = ECM_sum/len(self.patches)
+		self.data['ECM'].append(ECM_mean)
 
 	def output(self):
 		# plot agents on the domain
-		file = open('domain.csv','w')
+		file = open('cells.csv','w')
 		file.write('x,y,type,size\n')
 		for agent in self.agents:
 			x,y,z = agent.patch.coords
 			file.write("{},{},{},{}\n".format(x, y, agent.class_name, 10))
 		file.close()
-		#plot tissue density on the domain
-		file = open('tissuedensity.csv','w')
+		#plot ECM density on the domain
+		file = open('ECM.csv','w')
 		file.write('x,y,type,size\n')
 		for [index,patch] in self.patches.items():
 			x,y,z = patch.coords
-			file.write("{},{},{},{}\n".format(x, y, patch.tissue, 10))
+			file.write("{},{},{},{}\n".format(x, y, patch.ECM, 10))
 		file.close()
 		## cell counts
 		df = pd.DataFrame.from_dict(self.data)
@@ -123,6 +123,5 @@ for i in range(336):
 	print('Iteration {}'.format(i))
 	envObj.step()
 	if i%20 ==0:
-		print('cell count {}'.format(len(envObj.agents)))
 		envObj.output()
 

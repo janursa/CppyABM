@@ -2,16 +2,16 @@ import sys
 sys.path.insert(1,'../realtime_visualization/')
 from realtime import monitor
 settings = {
-    "Medium": {
-            "graph_dir" : "./examples/python/domain.csv",
+    "Cells": {
+            "graph_dir" : "./examples/python/cells.csv",
             "graph_type" : 'scatter',
             "graph_size" : 800
            },
-    # "tissue density": {
-    #         "graph_dir" : "./examples/python/tissuedensity.csv",
-    #         "graph_type" : 'scatter',
-    #         "graph_size" : 800
-    #        },
+    "ECM": {
+            "graph_dir" : "./examples/python/ECM.csv",
+            "graph_type" : 'scatter',
+            "graph_size" : 800
+           },
     # "protein conc": {
     #         "graph_dir" : "./examples/proteinconc.csv",
     #         "graph_type" : 'scatter',

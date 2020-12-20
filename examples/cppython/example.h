@@ -29,6 +29,6 @@ struct Cell: public baseAgent<healingEnv,Cell,myPatch> {
 	void update(){
 		this->clock++;
 	};
-	virtual void step(){};
+	virtual void step(){cout<<"Base step is called"<<endl;};
 	unsigned clock = 12;
 };
