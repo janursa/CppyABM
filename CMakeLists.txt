@@ -1,7 +1,5 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.13.1)
 set(CMAKE_CXX_STANDARD 17)
-
-
 SET(TARGET "CPPYABM")
 PROJECT(${TARGET} VERSION 1.0 LANGUAGES CXX)
 SET(ABMBASE "ABMBASE")
@@ -32,12 +30,8 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     )
     FetchContent_MakeAvailable(pybind11)
     set(PYBIND11_CPP_STANDARD -std=c++17)
-    
 	
 endif()
-
-add_subdirectory(src)
-# add_subdirectory(app)
 
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 	add_subdirectory(binds)

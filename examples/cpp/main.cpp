@@ -1,14 +1,16 @@
 #include <iostream>
 #include "example.cpp"
+#include <chrono>
 
 int main(){
-	std::cout<<"hello world"<<endl;
-	auto envObj = make_shared<healingEnv>();
+
+	std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+	auto envObj = make_shared<Domain>();
 	envObj->setup();
-	for (unsigned i = 0; i < 100; i++){
-		cout<<"iteration "<<i<<endl;
-		envObj->run();
-	}
+	envObj->episode();
+	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();	
+	std::cout << "Simulation took " << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count()/1000000 << " s" << std::endl;
+
 	
 	return 0;
 }

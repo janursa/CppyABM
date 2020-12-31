@@ -11,11 +11,11 @@
 using std::shared_ptr;
 using std::vector;
 template<class ENV, class AGENT, class PATCH>
-struct baseEnv;
+struct Env;
 template<class ENV, class AGENT, class PATCH>
-struct baseAgent;
+struct Agent;
 template<class ENV, class AGENT, class PATCH>
-struct basePatch;
+struct Patch;
 using namespace std;
 //!  Base class
 /*!
@@ -25,18 +25,17 @@ struct Base{
 	string class_name;
     virtual void set_data(string tag, double value) {throw undefined_member("Set data is used before implementation");};
     virtual double get_data(string tag) {throw undefined_member("Get data is used before implementation");};
-
 }; //TODO: remove base class
 //!   Base clase for patches
 /*!
   
 */
 template<class ENV, class AGENT, class PATCH>
-struct basePatch: public Base{
-	basePatch(shared_ptr<ENV> env){
+struct Patch: public Base{
+	Patch(shared_ptr<ENV> env){
 		this->env = env;
 	}
-	virtual ~basePatch(){}
+	virtual ~Patch(){}
 	unsigned index;
 	unsigned layer_index;
 	vector<double> coords;
@@ -51,9 +50,6 @@ struct basePatch: public Base{
 		this->agent = agent;
 		this->empty = false;
 		this->agent_count ++;
-		if (this->agent_count>1){
-			cout<<"Patch holds more than an agent"<<endl;
-		}
 	}
 	void remove_agent(){
 		this->agent = nullptr;
@@ -84,12 +80,12 @@ struct basePatch: public Base{
   
 */
 template<class ENV, class AGENT, class PATCH>
-struct baseAgent: public Base,enable_shared_from_this<AGENT>{
-	baseAgent(shared_ptr<ENV> env , string class_name){
+struct Agent: public Base,enable_shared_from_this<AGENT>{
+	Agent(shared_ptr<ENV> env , string class_name){
 		this->env = env;
 		this->class_name = class_name;
 	}
-	virtual ~baseAgent(){};
+	virtual ~Agent(){};
 	/** Major functions **/ 
 	virtual void step(){
 		throw undefined_member("Agent step function is not defined");
@@ -104,7 +100,9 @@ struct baseAgent: public Base,enable_shared_from_this<AGENT>{
     /** Auxillary funcs **/
     virtual void inherit(shared_ptr<AGENT> father){cout<<"Inherit is not defined"<<endl;};
     virtual void update(){};
-    void set_patch(shared_ptr<PATCH> patch){ this->patch = patch;}
+    void set_patch(shared_ptr<PATCH> patch){ 
+        this->patch = patch;
+    }
     void move(shared_ptr<PATCH> dest, bool quiet = false);
     void order_hatch(shared_ptr<PATCH> patch = nullptr, 
             bool inherit = false, bool quiet = false, bool reset = false);
@@ -133,8 +131,8 @@ struct baseAgent: public Base,enable_shared_from_this<AGENT>{
   
 */
 template<class ENV, class AGENT, class PATCH>
-struct baseEnv: public Base,enable_shared_from_this<ENV>{
-	virtual ~baseEnv(){};
+struct Env: public Base,enable_shared_from_this<ENV>{
+	virtual ~Env(){};
     vector<shared_ptr<AGENT>> agents;
     map<unsigned,shared_ptr<PATCH>> patches;
     vector<unsigned> patches_indices;
@@ -174,48 +172,56 @@ struct baseEnv: public Base,enable_shared_from_this<ENV>{
 
 };
 template<class ENV, class AGENT, class PATCH>
-inline void baseAgent<ENV,AGENT,PATCH>::move(shared_ptr<PATCH> dest, bool quiet){
+inline void Agent<ENV,AGENT,PATCH>::move(shared_ptr<PATCH> dest, bool quiet){
         if (!dest->empty) {
             if (!quiet) throw patch_availibility("Given patch for move is not empty");
             else return;
         }
-        this->patch->remove_agent(); // remove it from the current patch
-        this->env->connect_patch_agent(dest,this->shared_from_this());
+        try{
+            this->patch->remove_agent(); // remove it from the current patch
+            this->env->place_agent(dest,this->shared_from_this());
+
+        }
+        catch(patch_availibility & ee){
+            return;
+        }
+                
+
+        // this->env->connect_patch_agent(dest,this->shared_from_this());
     }
 template<class ENV, class AGENT, class PATCH>
-inline void baseAgent<ENV,AGENT,PATCH>::order_hatch(shared_ptr<PATCH> patch, bool inherit, bool quiet, bool reset)
+inline void Agent<ENV,AGENT,PATCH>::order_hatch(shared_ptr<PATCH> patch, bool inherit, bool quiet, bool reset)
     {
     this->_hatch =  HATCH_CONFIG<ENV,AGENT,PATCH>(true,patch,inherit,quiet,reset);
 
 }
 template<class ENV, class AGENT, class PATCH>
-inline void baseAgent<ENV,AGENT,PATCH>::order_move(shared_ptr<PATCH> patch, 
+inline void Agent<ENV,AGENT,PATCH>::order_move(shared_ptr<PATCH> patch, 
              bool quiet, bool reset ){
     this->_move =  MOVE_CONFIG<ENV,AGENT,PATCH>(true,patch,quiet,reset);
 
 }
 
 template<class ENV, class AGENT, class PATCH>
-inline void baseEnv<ENV,AGENT,PATCH>::step_agents(){
+inline void Env<ENV,AGENT,PATCH>::step_agents(){
     for (unsigned i = 0; i < this->agents.size(); i++){
         this->agents[i]->step();
     }
 }
 template<class ENV, class AGENT, class PATCH>
-inline void baseEnv<ENV,AGENT,PATCH>::step_patches(){
+inline void Env<ENV,AGENT,PATCH>::step_patches(){
 
     for (unsigned i = 0; i < this->patches.size(); i++){
         this->patches[i]->step();
     }
 }
 template<class ENV, class AGENT, class PATCH>
-inline void baseEnv<ENV,AGENT,PATCH>::setup_agents(map<string,unsigned> config){
+inline void Env<ENV,AGENT,PATCH>::setup_agents(map<string,unsigned> config){
     for (auto const [agent_type,count]:config){
         for (unsigned i = 0; i < count; i++){
-            auto agent = this->generate_agent(agent_type);
             auto patch = this->find_empty_patch();
-    		patch->set_agent(agent);
-    		agent->set_patch(patch);
+            auto agent = this->generate_agent(agent_type);
+    		this->place_agent(patch,agent);
     		// agent->patch->empty_neighbor(true);
     		// cout<<"so far so good"<<endl;
         }
@@ -229,11 +235,60 @@ inline void baseEnv<ENV,AGENT,PATCH>::setup_agents(map<string,unsigned> config){
 
 }
 template<class ENV, class AGENT, class PATCH>
-inline void baseEnv<ENV,AGENT,PATCH>::update(){
+inline void Env<ENV,AGENT,PATCH>::update(){
     auto g = random_::randomly_seeded_MT();
     std::shuffle(this->agents.begin(),this->agents.end(),g);
-    /** hatch **/
     unsigned agent_count = this->agents.size();
+    /** move **/
+    for (unsigned  i = 0; i < agent_count; i++){
+        if (!this->agents[i]->_move._flag) continue;
+        auto dest = this->agents[i]->_move._patch;
+        if (dest == nullptr){ // find a random patch
+                try{
+                    dest = this->agents[i]->patch->empty_neighbor();
+                }
+                // failure: manage how to respond
+                catch(patch_availibility&ee){
+                    
+                    if (!this->agents[i]->_move._quiet){ // only throw when it's forced
+                        if (this->agents[i]->_move._reset){ // the try failed so reset the order
+                            this->agents[i]->reset_move();
+                        }
+                        throw ee;
+                    } 
+                    else{ // go to the next agent
+                        if (this->agents[i]->_move._reset){ // the try failed so reset the order
+                            this->agents[i]->reset_move();
+                        }
+                        continue;
+                    }
+                }
+                
+            }
+            // check if another agent hasn't already taken it 
+            if (!dest->empty){ 
+                // failure: manage how to respond
+                
+                if (this->agents[i]->_move._quiet){ // only throw when it's forced
+                    if (this->agents[i]->_move._reset){ // the try failed so reset the order
+                        this->agents[i]->reset_move();
+                    }   
+                    continue;
+                }
+                else{
+                    if (this->agents[i]->_move._reset){ // the try failed so reset the order
+                        this->agents[i]->reset_move();
+                    }
+                    throw patch_availibility("No patch for moving. If you want to silent this error, pass argumen quiet as true");
+                }
+            }
+
+            this->agents[i]->move(dest,this->agents[i]->_move._quiet);
+            this->agents[i]->reset_move();
+    }
+    /** hatch **/
+    // cout<<"\n A: Patches: "<<this->patches.size()<<" Agents: "<<this->agents.size()<<endl;
+// #ifdef something
     for (unsigned  i = 0; i < agent_count; i++){
         if (this->agents[i]->_hatch._flag){
             auto inherit = this->agents[i]->_hatch._inherit;
@@ -256,7 +311,7 @@ inline void baseEnv<ENV,AGENT,PATCH>::update(){
                         if (this->agents[i]->_hatch._reset){ // the try failed so reset the order
                             this->agents[i]->reset_hatch();
                         }
-                        continue;
+                        break;
                     }
                 }
                 
@@ -278,77 +333,47 @@ inline void baseEnv<ENV,AGENT,PATCH>::update(){
                     throw patch_availibility("No patch for hatching. If you want to silent this error, pass argumen quiet as true");
                 }
             }
+            
             auto new_agent = this->generate_agent(this->agents[i]->class_name);
             if (this->agents[i]->_hatch._inherit){
                 new_agent->inherit(this->agents[i]);
             }
-            this->connect_patch_agent(patch,new_agent);
+            // if (patch->empty == false){
+            //     throw patch_availibility("patch is not free!");
+            // }
+            // this->connect_patch_agent(patch,new_agent);
+            this->place_agent(patch,new_agent);
             this->agents[i]->reset_hatch();
+        
+            
         };
     }
-
-    /** move **/
-    for (unsigned  i = 0; i < agent_count; i++){
-        if (!this->agents[i]->_move._flag) continue;
-        auto patch = this->agents[i]->_move._patch;
-        if (patch == nullptr){ // find a random patch
-                try{
-                    patch = this->agents[i]->patch->empty_neighbor();
-                }
-                // failure: manage how to respond
-                catch(patch_availibility&ee){
-                    
-                    if (!this->agents[i]->_move._quiet){ // only throw when it's forced
-                        if (this->agents[i]->_move._reset){ // the try failed so reset the order
-                            this->agents[i]->reset_move();
-                        }
-                        throw ee;
-                    } 
-                    else{ // go to the next agent
-                        if (this->agents[i]->_move._reset){ // the try failed so reset the order
-                            this->agents[i]->reset_move();
-                        }
-                        continue;
-                    }
-                }
-                
-            }
-            // check if another agent hasn't already taken it 
-            if (!patch->empty){ 
-                // failure: manage how to respond
-                
-                if (this->agents[i]->_move._quiet){ // only throw when it's forced
-                    if (this->agents[i]->_move._reset){ // the try failed so reset the order
-                        this->agents[i]->reset_move();
-                    }   
-                    continue;
-                }
-                else{
-                    if (this->agents[i]->_move._reset){ // the try failed so reset the order
-                        this->agents[i]->reset_move();
-                    }
-                    throw patch_availibility("No patch for moving. If you want to silent this error, pass argumen quiet as true");
-                }
-            }
-
-            this->agents[i]->move(patch,this->agents[i]->_move._quiet);
-
-            this->agents[i]->reset_move();
-
-    }
-
+    
     /** switch **/
     for (unsigned  i = 0; i < agent_count; i++){
         auto agent = this->agents[i];
         if (!agent->_switch._flag) continue;
         auto to = agent->_switch._to;
-        auto new_agent = this->generate_agent(to);
-        agent->patch->remove_agent(); // get the patch empty
-        this->connect_patch_agent(agent->patch,new_agent);
-        agent->disappear = true;
+        // auto dest = agent->patch;
+        // dest->remove_agent(); // get the patch empty
+        // auto new_agent = this->generate_agent(to);
+        // this->place_agent(dest,new_agent);
+        // agent->disappear = true;
+        agent->class_name = to;
         agent->reset_switch();
-
     }
+
+    // for (unsigned  i = 0; i < 1; i++){
+    //     auto agent = this->agents[i];
+    //     auto dest = agent->patch;
+    //     // dest->remove_agent(); // get the patch empty
+    //     // auto new_agent = this->generate_agent("Dead");
+    //     this->place_agent(dest,agent);
+    //     // agent->disappear = true;
+    //     agent->reset_switch();
+    // }
+    // cout<<"D: Patches: "<<this->patches.size()<<" Agents: "<<this->agents.size()<<endl;
+
     /** process disappearing **/
     int jj = 0;
     while (true) {
@@ -361,6 +386,7 @@ inline void baseEnv<ENV,AGENT,PATCH>::update(){
             }
             jj++;
         };
+
     }
     this->update_repo(); // to remove the agents from repo
     /** update Env data **/
@@ -371,7 +397,7 @@ inline void baseEnv<ENV,AGENT,PATCH>::update(){
     
 };
 template<class ENV, class AGENT, class PATCH>
-inline map<string,unsigned> baseEnv<ENV,AGENT,PATCH>::count_agents(){
+inline map<string,unsigned> Env<ENV,AGENT,PATCH>::count_agents(){
     map<string,unsigned> agents_count;
     for (unsigned i = 0; i < this->agents.size(); i++) {
         auto agent =  this->agents[i];
@@ -390,23 +416,23 @@ inline map<string,unsigned> baseEnv<ENV,AGENT,PATCH>::count_agents(){
     return agents_count;
 }
 template<class ENV, class AGENT, class PATCH>
-inline void baseEnv<ENV,AGENT,PATCH>::place_agent(shared_ptr<PATCH> patch,shared_ptr<AGENT> agent){
+inline void Env<ENV,AGENT,PATCH>::place_agent(shared_ptr<PATCH> patch,shared_ptr<AGENT> agent){
     if (!patch->empty) throw patch_availibility("Patch is not empty");
     connect_patch_agent(patch,agent);
 }
 template<class ENV, class AGENT, class PATCH>
-inline void baseEnv<ENV,AGENT,PATCH>::connect_patch_agent(shared_ptr<PATCH> patch,shared_ptr<AGENT> agent){
+inline void Env<ENV,AGENT,PATCH>::connect_patch_agent(shared_ptr<PATCH> patch,shared_ptr<AGENT> agent){
     patch->set_agent(agent);
     agent->set_patch(patch);
 
 }
 template<class ENV, class AGENT, class PATCH>
-inline void baseEnv<ENV,AGENT,PATCH>::place_agent_randomly(shared_ptr<AGENT> agent){
+inline void Env<ENV,AGENT,PATCH>::place_agent_randomly(shared_ptr<AGENT> agent){
     auto patch = this->find_empty_patch();
     connect_patch_agent(patch,agent);
 }
 template<class ENV, class AGENT, class PATCH>
-inline shared_ptr<PATCH> baseEnv<ENV,AGENT,PATCH>::find_empty_patch(){
+inline shared_ptr<PATCH> Env<ENV,AGENT,PATCH>::find_empty_patch(){
     /**
      * Finds the first empty patch. If none found, throws an exeption.
      */
@@ -426,7 +452,7 @@ inline shared_ptr<PATCH> baseEnv<ENV,AGENT,PATCH>::find_empty_patch(){
     throw patch_availibility("All patches are occupied.");
 }
 template<class ENV, class AGENT, class PATCH>
- inline void baseEnv<ENV,AGENT,PATCH>::setup_domain(vector<MESH_ITEM> mesh){
+ inline void Env<ENV,AGENT,PATCH>::setup_domain(vector<MESH_ITEM> mesh){
         /** create patches **/ 
         // step 1: create patches from info of meshes
         for (auto & mesh_item:mesh){
@@ -457,7 +483,7 @@ template<class ENV, class AGENT, class PATCH>
         // log_mesh(mesh,"mesh.txt");
     }
 template<class ENV, class AGENT, class PATCH>
-shared_ptr<PATCH> basePatch<ENV,AGENT,PATCH>::empty_neighbor(bool quiet){
+shared_ptr<PATCH> Patch<ENV,AGENT,PATCH>::empty_neighbor(bool quiet){
         auto neighbors = this->neighbors;
         std::random_device rd;
         std::mt19937 g(rd());

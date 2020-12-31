@@ -1,2 +1,0 @@
--DDEALII=true -DDEALII_DIR="D:/projects/extern/dealii" 
--DVTK=true -DVTK_DIR="D:/projects/extern/VTK/build" 

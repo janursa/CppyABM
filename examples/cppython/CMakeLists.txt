@@ -26,7 +26,7 @@ add_subdirectory(../../ CPPYABM)
 # create abm lib
 set(SOURCE_FILES "example.cpp")
 add_library(${ABMLIB} STATIC ${SOURCE_FILES})
-target_link_libraries(${ABMLIB} PRIVATE ABMBASE)
+# target_link_libraries(${ABMLIB} PRIVATE ABMBASE)
 target_link_libraries(${ABMLIB} PRIVATE pybind11::module)
 target_include_directories(${ABMLIB} PUBLIC ${CMAKE_SOURCE_DIR}/../../..)
 set_target_properties(${ABMLIB} PROPERTIES POSITION_INDEPENDENT_CODE ON)
@@ -34,7 +34,7 @@ set_target_properties(${ABMLIB} PROPERTIES POSITION_INDEPENDENT_CODE ON)
 pybind11_add_module(${BINDMODULE} binds.cpp ${HEADER_LIST})
 target_link_libraries(${BINDMODULE} PRIVATE pybind11::module)
 # target_include_directories(${BINDMODULE} PUBLIC ${BASE_SOURCE_DIR}/include)
-target_link_libraries(${BINDMODULE} PRIVATE ${ABMBASE})
+# target_link_libraries(${BINDMODULE} PRIVATE ${ABMBASE})
 target_link_libraries(${BINDMODULE} PRIVATE ${ABMLIB})
 
 

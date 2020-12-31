@@ -5,7 +5,6 @@
 #include "pybind11/pybind11.h"
 #include <pybind11/stl.h>
 #include <pybind11/stl_bind.h>
-#include "pybases.h"
 namespace py=pybind11;
 #define EXPOSE_AGENT_CONTAINER(...) \
 namespace pybind11 { namespace detail { \
@@ -15,13 +14,94 @@ namespace pybind11 { namespace detail { \
 namespace pybind11 { namespace detail { \
     template<> class type_caster<map<unsigned,shared_ptr<__VA_ARGS__>>> : public type_caster_base<map<unsigned,shared_ptr<__VA_ARGS__>>> { }; \
 }}
-#define MAKE_OPAQUE(...) \
-namespace pybind11 { namespace detail { \
-    template<> class type_caster<__VA_ARGS__> : public type_caster_base<__VA_ARGS__> { }; \
-}}
 
 
-namespace binds_tools{
+
+namespace bind_tools{
+    template<class deriveClass>
+    struct PyBase: public deriveClass{
+        using deriveClass::deriveClass;
+        void set_data(string tag, double value) override {
+            PYBIND11_OVERLOAD(
+                void,
+                deriveClass,
+                set_data,
+                tag,value
+                );
+        }
+        double get_data(string tag) override {
+            PYBIND11_OVERLOAD(
+                double,
+                deriveClass,
+                get_data,
+                tag
+                );
+        }
+
+    };
+
+    template<class ENV, class AGENT, class PATCH> 
+    struct tramEnv : ENV  {
+        using ENV::ENV;
+        shared_ptr<PATCH> generate_patch() override {
+            PYBIND11_OVERLOAD(
+                shared_ptr<PATCH>, 
+                ENV,      
+                generate_patch         
+            );
+        }
+        shared_ptr<AGENT> generate_agent(string agent_name) override {
+            PYBIND11_OVERLOAD(
+                shared_ptr<AGENT>, 
+                ENV,      
+                generate_agent,
+                agent_name         
+            );
+        }
+        void update_repo() override {
+            PYBIND11_OVERLOAD(
+                void, 
+                ENV,      
+                update_repo
+                    
+            );
+        }
+
+    };
+
+    template<class ENV, class AGENT, class PATCH> 
+    struct tramAgent : AGENT  {
+        using AGENT::AGENT;
+        void step() override {
+            PYBIND11_OVERLOAD(
+                void, 
+                AGENT,      
+                step         
+            );
+        }
+
+        void inherit(shared_ptr<AGENT> father) override{
+            PYBIND11_OVERLOAD(
+                void, 
+                AGENT,      
+                inherit,
+                father         
+            );
+        };
+    };
+    template<class ENV, class AGENT, class PATCH> 
+    struct tramPatch : PATCH {
+        using PATCH::PATCH;
+        void step() override {
+         PYBIND11_OVERLOAD(
+             void,
+             PATCH,
+             step
+             );
+        }
+
+    };
+
     template<class ENV,class AGENT,class PATCH,typename py_class_name>
     py::class_<ENV, py_class_name,std::shared_ptr<ENV>> expose_env(py::module m, string class_name_string){
         auto class_binds_obj = 
@@ -160,6 +240,13 @@ namespace binds_tools{
         py::bind_map<PatchesBank>(m,"PatchesBank")
         .def("clear",[](PatchesBank& container){
             container.clear();
+        })
+        .def("keys",[](PatchesBank& container){
+              std::vector<unsigned> keys;
+              for (auto const& element : container) {
+                keys.push_back(element.first);
+              }
+            return keys;
         });
     }
 

@@ -5,10 +5,10 @@ import os
 import platform
 import pathlib
 import pandas as pd
-
+import time
 current_file_path = pathlib.Path(__file__).parent.absolute()
 sys.path.insert(1,os.path.join(current_file_path,'build'))
-from myBinds import healingEnv, Cell
+from myBinds import Domain, Cell
 class pyCell(Cell):
 	def __init__(self,env,class_name):
 		super().__init__(env,class_name)
@@ -22,13 +22,13 @@ class pyCell(Cell):
 			if neighbor_cell_count <= 6:
 				self.order_hatch(quiet=True)
 				self.clock = 0 
-		# deposit tissue
-		if self.patch.tissue < 100:
-			self.patch.tissue += 1	
+		# deposit ECM
+		if self.patch.ECM < 100:
+			self.patch.ECM += 1	
 		# die
 		if neighbor_cell_count >7:
 			self.disappear = True
-class pyHealingEnv(healingEnv):
+class pyDomain(Domain):
 	def __init__(self):
 		super().__init__()
 		self._repo = []
@@ -49,12 +49,12 @@ class pyHealingEnv(healingEnv):
 			x,y,z = agent.patch.coords
 			file.write("{},{},{},{}\n".format(x, y, agent.class_name, 10))
 		file.close()
-		#plot tissue density on the domain
-		# file = open('tissuedensity.csv','w')
+		#plot ECM density on the domain
+		# file = open('ECMdensity.csv','w')
 		# file.write('x,y,type,size\n')
 		# for [index,patch] in self.patches.items():
 		# 	x,y,z = patch.coords
-		# 	file.write("{},{},{},{}\n".format(x, y, patch.tissue, 10))
+		# 	file.write("{},{},{},{}\n".format(x, y, patch.ECM, 10))
 		# file.close()
 		# ## cell counts
 		# df = pd.DataFrame.from_dict(self.data)
@@ -62,8 +62,12 @@ class pyHealingEnv(healingEnv):
 		# df_agent_counts.to_csv('cell_count.csv')
 
 
-envObj = pyHealingEnv()
-envObj.setup()
-for i in range(100):
-	envObj.step()
-	print(len(envObj.agents))
+if __name__ == '__main__':
+	
+	begin = time.time()
+	envObj = pyDomain()
+	envObj.setup()
+	envObj.episode()
+	end = time.time()
+	print("Simulation took {} seconds".format(end-begin))
+

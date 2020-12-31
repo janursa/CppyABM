@@ -5,6 +5,7 @@ import os
 import platform
 import pathlib
 import pandas as pd
+import time
 
 current_file_path = pathlib.Path(__file__).parent.absolute()
 sys.path.insert(1,os.path.join(current_file_path,'..','..','build'))
@@ -25,9 +26,10 @@ class Cell (Agent):
 	def step(self):
 		neighbor_cell_count = len(self.patch.find_neighbor_agents())
 		# migration
-		if neighbor_cell_count <= 8:
-			self.order_move(quiet=True)
+		# if neighbor_cell_count <= 8:
+		self.order_move(quiet=True)
 		# proliferation
+		# self.order_hatch(quiet=True)
 		if self.patch.damage_center and self.clock >= 12:
 			if neighbor_cell_count <= 6:
 				self.order_hatch(quiet=True)
@@ -39,7 +41,7 @@ class Cell (Agent):
 		if neighbor_cell_count >7:
 			self.disappear = True
 
-class healingEnv(Env):
+class Domain(Env):
 	def __init__(self):
 		Env.__init__(self)
 		self._repo = []
@@ -80,18 +82,24 @@ class healingEnv(Env):
 			cell.step()
 		self.update()
 		self.clock +=1
+	def episode(self):
+		for i in range(336):
+			print('Iteration {} '.format(i))
+			self.step()
+			# if i%20 ==0:
+			# 	self.output()
 	def update(self):
 		super().update()
 		for agent in self.agents:
 			agent.update()
-		cell_count = self.count_agents()
-		self.data['cell_count'].append(cell_count['cell'])
-		ECM_sum = 0
-		for _,patch in self.patches.items():
-			ECM_sum+=patch.ECM
+		# cell_count = self.count_agents()
+		# self.data['cell_count'].append(cell_count['cell'])
+		# ECM_sum = 0
+		# for _,patch in self.patches.items():
+		# 	ECM_sum+=patch.ECM
 
-		ECM_mean = ECM_sum/len(self.patches)
-		self.data['ECM'].append(ECM_mean)
+		# ECM_mean = ECM_sum/len(self.patches)
+		# self.data['ECM'].append(ECM_mean)
 
 	def output(self):
 		# plot agents on the domain
@@ -114,14 +122,13 @@ class healingEnv(Env):
 		df_agent_counts.to_csv('cell_count.csv')
 
 		
+if __name__ == '__main__':
+	
+	begin = time.time()
+	envObj = Domain()
+	envObj.setup()
+	envObj.episode()
+	end = time.time()
+	print("Simulation took {} seconds".format(end-begin))
 
-
-envObj = healingEnv()
-envObj.setup()
-import time
-for i in range(336):
-	print('Iteration {}'.format(i))
-	envObj.step()
-	if i%20 ==0:
-		envObj.output()
 

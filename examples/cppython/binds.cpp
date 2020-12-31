@@ -5,29 +5,9 @@
 #include <pybind11/complex.h>
 #include <pybind11/functional.h>
 #include "CPPYABM/include/ABM/bind_tools.h"
-
-template<class derivedEnv,class derivedAgent,class derivedPatch>
-class PyhealingEnv: public PyEnv<derivedEnv,derivedAgent,derivedPatch>{
-    using PyEnv<derivedEnv,derivedAgent,derivedPatch>::PyEnv;
-    shared_ptr<derivedAgent> generate_agent(string agent_name) override {
-        PYBIND11_OVERLOAD(
-            shared_ptr<derivedAgent>, 
-            derivedEnv,      
-            generate_agent,
-            agent_name         
-        );
-    }
-    void update() override {
-        PYBIND11_OVERLOAD(
-            void, 
-            derivedEnv,      
-            update
-                     
-        );
-    }
-};
-struct PyCell : public Cell {
-    using Cell::Cell;
+using tramAgent = bind_tools::tramAgent<Domain,Cell,Tissue>;
+struct PyCell : public  tramAgent{
+    using tramAgent::tramAgent;
     void step() override {
         PYBIND11_OVERLOAD(
             void, 
@@ -37,17 +17,18 @@ struct PyCell : public Cell {
         );
     }
 };
+
 EXPOSE_AGENT_CONTAINER(Cell);
-EXPOSE_PATCH_CONTAINER(myPatch);
+EXPOSE_PATCH_CONTAINER(Tissue);
 PYBIND11_MODULE(myBinds, m) {
-    binds_tools::expose_defaults<healingEnv,Cell,myPatch>(m);
-    auto env_obj = binds_tools::expose_env<healingEnv,Cell,myPatch,PyhealingEnv<healingEnv,Cell,myPatch>>(m,"healingEnv");
-    env_obj.def("setup",&healingEnv::setup);
-    env_obj.def("step",&healingEnv::step);
-    auto agent_obj = binds_tools::expose_agent<healingEnv,Cell,myPatch,PyCell>(m,"Cell")
+    bind_tools::expose_defaults<Domain,Cell,Tissue>(m);
+    auto env_obj = bind_tools::expose_env<Domain,Cell,Tissue,bind_tools::tramEnv<Domain,Cell,Tissue>>(m,"Domain");
+    env_obj.def("setup",&Domain::setup);
+    env_obj.def("episode",&Domain::episode);
+    auto agent_obj = bind_tools::expose_agent<Domain,Cell,Tissue,PyCell>(m,"Cell")
         .def_readwrite("clock",&Cell::clock);
-    auto patch_obj = binds_tools::expose_patch<healingEnv,Cell,myPatch>(m,"myPatch")
-        .def_readwrite("damage_center",&myPatch::damage_center)
-        .def_readwrite("tissue",&myPatch::tissue);
+    auto patch_obj = bind_tools::expose_patch<Domain,Cell,Tissue>(m,"Tissue")
+        .def_readwrite("damage_center",&Tissue::damage_center)
+        .def_readwrite("ECM",&Tissue::ECM);
 }
 
