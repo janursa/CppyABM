@@ -3,8 +3,7 @@
 
 # General purpose agent-based modeling library
 
-  <a href="https://janursa.github.io/CppyABM/docs/html/index.html" title="About Me">About Me</a>
-
+<a href="docs/index.html" title="About Me">About Me</a>
 
   
 ## Getting started
