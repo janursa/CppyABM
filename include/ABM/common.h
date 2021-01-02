@@ -1,22 +1,9 @@
 #pragma once
 #include <memory.h>
-#include "pybind11/pybind11.h"
-#include <pybind11/stl.h>
-#include <pybind11/stl_bind.h>
+
 using namespace std;
-namespace py = pybind11;
 
-
-/** macros and helpers **/
-template <typename T> std::string type_name();
-#define TYPENAME(A) { std::cout<< #A; }
-//#define DEBUG
-
-#ifdef DEBUG
-#define LOG(str) do { std::cout << str ; } while( false )
-#else
-#define LOG(str) do { } while ( false )
-#endif
+//! Configuration of hatch order
 template<class ENV, class AGENT, class PATCH>
 struct HATCH_CONFIG{
 	HATCH_CONFIG (bool flag = false, 
@@ -30,12 +17,13 @@ struct HATCH_CONFIG{
 	{
 		
 	};
-	bool _flag;
-	shared_ptr<PATCH> _patch;
-	bool _inherit;
-	bool _quiet; //!< if it's throw, upon failure in moving, even due to patch unavailability, and exception will be thrown 
-	bool _reset; //!< Reset upon failure in hatching. If false, the agent will try in the next steps again
+	bool _flag; //!< if false, the entire hatching process is skipped.
+	shared_ptr<PATCH> _patch; //!< the patch that the new agent will be set. If null, a random patch will be selected.
+	bool _inherit; //!< Inherit from current patch. `Agent::inherit` should be defined for this purpose.
+	bool _quiet; //!< Silent exceptions if hatch fails
+	bool _reset; //!< Resets upon failure in hatching. If false, the agent will try in the next steps again
 };
+//! Configuration of move order
 template<class ENV, class AGENT, class PATCH>
 struct MOVE_CONFIG{
 	MOVE_CONFIG (bool flag = false, 
@@ -45,11 +33,12 @@ struct MOVE_CONFIG{
 		    ):
 			_flag(flag),_patch(_patch), _quiet(quiet), _reset(reset)
 	{};
-	bool _flag;
-	shared_ptr<PATCH> _patch;
-	bool _quiet; //!< if it's throw, upon failure in moving, even due to patch unavailability, and exception will be thrown 
-	bool _reset;
+	bool _flag; //!< if false, the entire process is skipped.
+	shared_ptr<PATCH> _patch;//!< the patch that the new agent will be set. If null, a random patch will be selected.
+	bool _quiet; //!< Silent exceptions if hatch fails
+	bool _reset; //!< Resets upon failure in hatching. If false, the agent will try in the next steps again
 };
+//! Configuration of switch order from one agent type to another
 struct SWITCH_CONFIG{
 	SWITCH_CONFIG (bool flag = false, 
 		    string to = ""
@@ -57,9 +46,9 @@ struct SWITCH_CONFIG{
 			_flag(flag),_to(to)
 	{};
 	bool _flag;
-	string _to;
+	string _to;//!< the target agent class name
 };
-/** Exceptions **/
+//! Base exception class
 struct base_exception_class{
     base_exception_class(std::string msg):message(msg){}
     std::string message;
@@ -81,7 +70,5 @@ struct undefined_member: public base_exception_class{
 };
 
 
-//** directories **//
-
-const std::string main_output_folder = "outputs/";
+// const std::string main_output_folder = "outputs/";
 

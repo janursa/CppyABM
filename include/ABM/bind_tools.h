@@ -16,30 +16,9 @@ namespace pybind11 { namespace detail { \
 }}
 
 
-
+//!Tools for exposing C++ types and functions to Python
 namespace bind_tools{
-    template<class deriveClass>
-    struct PyBase: public deriveClass{
-        using deriveClass::deriveClass;
-        void set_data(string tag, double value) override {
-            PYBIND11_OVERLOAD(
-                void,
-                deriveClass,
-                set_data,
-                tag,value
-                );
-        }
-        double get_data(string tag) override {
-            PYBIND11_OVERLOAD(
-                double,
-                deriveClass,
-                get_data,
-                tag
-                );
-        }
-
-    };
-
+    //! Template trampoline for Env-based classes
     template<class ENV, class AGENT, class PATCH> 
     struct tramEnv : ENV  {
         using ENV::ENV;
@@ -68,7 +47,7 @@ namespace bind_tools{
         }
 
     };
-
+    //! Template trampoline for Agent-based classes
     template<class ENV, class AGENT, class PATCH> 
     struct tramAgent : AGENT  {
         using AGENT::AGENT;
@@ -89,6 +68,7 @@ namespace bind_tools{
             );
         };
     };
+    //! Template trampoline for Patch-based classes
     template<class ENV, class AGENT, class PATCH> 
     struct tramPatch : PATCH {
         using PATCH::PATCH;
@@ -101,7 +81,7 @@ namespace bind_tools{
         }
 
     };
-
+    //! Expose function for Env-based classes with trampoline. 
     template<class ENV,class AGENT,class PATCH,typename py_class_name>
     py::class_<ENV, py_class_name,std::shared_ptr<ENV>> expose_env(py::module m, string class_name_string){
         auto class_binds_obj = 
@@ -120,7 +100,7 @@ namespace bind_tools{
             .def_readwrite("agents",&ENV::agents);
         return class_binds_obj;
     }
-
+    //! Template trampoline for Env-based classes without trampoline
     template<class ENV,class AGENT,class PATCH>
     py::class_<ENV,std::shared_ptr<ENV>> expose_env(py::module m, string class_name_string){
         auto class_binds_obj = 
@@ -139,7 +119,7 @@ namespace bind_tools{
             .def_readwrite("agents",&ENV::agents);
         return class_binds_obj;
     }
-
+    //! Template trampoline for Agent-based classes with trampoline
     template<class ENV,class AGENT,class PATCH,class py_class_name>
     py::class_<AGENT, py_class_name,std::shared_ptr<AGENT>>  expose_agent(py::module &m, string class_name_str){
         auto class_binds_obj = py::class_<AGENT, py_class_name,std::shared_ptr<AGENT>>(m,class_name_str.c_str(),py::dynamic_attr())
@@ -160,7 +140,7 @@ namespace bind_tools{
             .def_readwrite("class_name",&AGENT::class_name);
         return class_binds_obj;
     }
-
+     //! Template trampoline for Agent-based classes without trampoline
     template<class ENV,class AGENT,class PATCH>
     py::class_<AGENT,std::shared_ptr<AGENT>>  expose_agent(py::module &m, string class_name_str){
         auto class_binds_obj = py::class_<AGENT, std::shared_ptr<AGENT>>(m,class_name_str.c_str(),py::dynamic_attr())
@@ -182,7 +162,7 @@ namespace bind_tools{
         return class_binds_obj;
     }
 
-
+     //! Template trampoline for Patch-based classes with trampoline
     template<class ENV,class AGENT,class PATCH,class py_class_name>
     py::class_<PATCH,py_class_name,std::shared_ptr<PATCH>>  expose_patch(py::module &m, string class_name_ptr){
         auto class_binds_obj =  py::class_<PATCH,py_class_name,std::shared_ptr<PATCH>>(m,class_name_ptr.c_str(),py::dynamic_attr())
@@ -199,6 +179,7 @@ namespace bind_tools{
         return class_binds_obj;
             
     }
+     //! Template trampoline for Patch-based classes without trampoline
     template<class ENV,class AGENT,class PATCH>
     py::class_<PATCH,std::shared_ptr<PATCH>>  expose_patch(py::module &m, string class_name_ptr){
         auto class_binds_obj =  py::class_<PATCH,std::shared_ptr<PATCH>>(m,class_name_ptr.c_str(),py::dynamic_attr())
@@ -215,12 +196,13 @@ namespace bind_tools{
         return class_binds_obj;
             
     }
-
+     //! function to expose exceptions
     void expose_exceptions(py::module m){
          py::register_exception<patch_availibility>(m, "patch_availibility");
          py::register_exception<undefined_member>(m, "undefined_member");
          
     }
+     //! function to expose mesh items
     void expose_mesh(py::module &m){
         py::class_<MESH_ITEM>(m,"MESH_ITEM")
             .def(py::init<>()); 
@@ -228,7 +210,7 @@ namespace bind_tools{
         m.def("grid3",&grid3,"Creates 3D grid mesh", py::arg("length"), py::arg("width"),py::arg("height"), py::arg("mesh_length"),py::arg("share") = false);
 
     }
-
+     //! funtion to expose agent and patch containers
     template<class ENV,class AGENT,class PATCH>
     void expose_containers(py::module &m){
         using AgentsBank = vector<shared_ptr<AGENT>>;
@@ -249,7 +231,7 @@ namespace bind_tools{
             return keys;
         });
     }
-
+     //! Exposes default items 
     template<class ENV,class AGENT, class PATCH>
     void expose_defaults(py::module &m){
         expose_containers<ENV,AGENT,PATCH>(m);

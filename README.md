@@ -1,26 +1,16 @@
 
   
 
-# Approximate Bayesian calculation (ABC)
+# General purpose agent-based modeling library
 
   
-
-This package conducts generic ABC on a given model and parameters. Basically, ABC does the followings:
-
-- Sample uniformly from the n-dimensional space of the parameters 
-
-- Create a parameter set for each of sample sets
-
-- Run the given model for each parameter set and collect error value
-
-- Choose the best fits by the rejection algorithm 
 
   
 ## Getting started
 
 ### Quick start
 
-`pip install --upgrade ABayesianC`
+`pip install --upgrade cppyabm`
 
 ```py
 
@@ -126,15 +116,22 @@ mpiexec -n available_cpu_core python test.py
 
 The posteriors are outputed for each parameter as a json file which can be found on the given output directory. A box plot is also generated to compare prior and posterior distributions in a single graph, in SVG format.
 
-## Install
+## Install/compile
+
+###For Python development:
 
 Using pip manager:
 
--  `pip install --upgrade ABayesianC`
+-  `pip install --upgrade cppyabm`
 
 Or, download the package and in the root folder, command:
 
 -  `python3 setup.py install`
+
+###For Cpp development:
+Clone the library and add the main root as a subdirectory. Using modern Cmake, the following command will include the library:
+-  `add_subdirectory("dir_to_cppyabm")`
+-  `target_include_directories("your_project" "dir_to_include/ABM")`
 
 ## Authors
 
@@ -142,8 +139,8 @@ Or, download the package and in the root folder, command:
 
 ## Useful links
 
- [MPI for Python](https://mpi4py.readthedocs.io/en/stable/).
+ 
 
 ### Acknowledgments
 
-No one yet. Give some feedback so your name would appear here :-)
+

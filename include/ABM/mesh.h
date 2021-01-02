@@ -6,20 +6,17 @@
 using namespace std;
 
 
-//!  To generate meshes
-/*!
-  So far, it only generates square meshes on a square domain. 
-*/
+//!  A class for mesh items
 struct MESH_ITEM {
     unsigned index;
-    vector<double> coords;
-    std::vector<unsigned> neighbors_indices;
-    unsigned layer_index;
-    bool on_border = false;
-}; //!< Mesh item
+    vector<double> coords; //!< Coordinates
+    std::vector<unsigned> neighbors_indices; //!< Neighbor mesh indices
+    unsigned layer_index; //!< The layer in which the mesh resides
+    bool on_border = false; //!< Whether the mesh is located on the border
+}; 
 
 
-
+//!  A function to create 2D rectangular mesh
 inline vector<MESH_ITEM> grid2(double length, double width, double mesh_length, bool share){
         auto calculate_mesh_index = [](unsigned i, unsigned j,unsigned x_n) {
             return (j*x_n + i);
@@ -71,14 +68,9 @@ inline vector<MESH_ITEM> grid2(double length, double width, double mesh_length, 
         };
         
         vector<MESH_ITEM> meshes;
-        
-            
         unsigned x_n = length/mesh_length;
         unsigned y_n = width/mesh_length;
         unsigned mesh_count =0;
-        // ** some small funcs **//
-        
-
         for (unsigned j=0; j<y_n; j++){ //outer vector meshes
             for (unsigned i=0; i<x_n; i++){ //inner vector meshe
 
@@ -98,9 +90,9 @@ inline vector<MESH_ITEM> grid2(double length, double width, double mesh_length, 
 
         }
         auto message = to_string(mesh_count) + " mesh generated";
-        LOG(message);
         return meshes;
 };
+//!  A function to create 3D rectangular mesh
 inline vector<MESH_ITEM> grid3(double length, double width, double height, double mesh_length, bool share){
     auto calculate_mesh_index = [](unsigned i, unsigned j, unsigned k, unsigned x_n, unsigned y_n) {
         return (k*y_n*x_n + j*x_n + i);
@@ -194,7 +186,6 @@ inline vector<MESH_ITEM> grid3(double length, double width, double height, doubl
         }
     }
     auto message = to_string(mesh_count) + " mesh generated";
-    LOG(message);
     return meshes;
 };
 
