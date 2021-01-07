@@ -6,6 +6,7 @@ set(DOXYGEN_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/docs)
 doxygen_add_docs(docs
     "${CMAKE_CURRENT_SOURCE_DIR}/mainpage.md"
     "${CMAKE_CURRENT_SOURCE_DIR}/examples.md"
+    "${CMAKE_CURRENT_SOURCE_DIR}/binding.md"
     "${PROJECT_SOURCE_DIR}/include/ABM"
     "${PROJECT_SOURCE_DIR}/binds"
     "${PROJECT_SOURCE_DIR}/examples/python"

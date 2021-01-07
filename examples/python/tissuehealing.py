@@ -1,13 +1,17 @@
 import pandas as pd
 import time
-
+"""
+@page purelypython
+"""
 """@package Python example of CppyABM
 We define two simple classes of Cell and Tissue as extensions of Agent and Patch, respectively,
 to model cellular behavior and the properties of tissue, respectively.
 
 """
-  
-from binds.cppyabm import Env, Agent, Patch, grid2
+import sys, os,pathlib
+current_file_path = pathlib.Path(__file__).parent.absolute()
+sys.path.insert(1,os.path.join(current_file_path,'..','..','build'))
+from cppyabm.binds import Env, Agent, Patch, grid2
 class Tissue(Patch):
 	"""This class extends Patch to simulate tissue properties.
 	"""

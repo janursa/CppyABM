@@ -54,15 +54,15 @@ class build_ext(build_ext_orig):
 
 setuptools.setup(
     name="cppyabm",
-    version='1.0.8',
+    version='1.0.15',
     author="Jalil Nourisa",
     author_email="jalil.nourisa@gmail.com",
-    description="A general-purpose agent-based modeling framework",
+    description="General-purpose agent-based modeling framework",
     long_description=extract_longDiscription("README.md"),
     long_description_content_type="text/markdown",
     url="https://github.com/janursa/CPPYABM",
-    packages=['binds'],
-    ext_modules=[CMakeExtension('binds/binds')],
+    packages=['cppyabm'],
+    ext_modules=[CMakeExtension('cppyabm/cppyabm')],
     cmdclass={
         'build_ext': build_ext,
     },
