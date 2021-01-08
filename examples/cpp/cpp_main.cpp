@@ -1,5 +1,5 @@
 #include <iostream>
-#include "cpp_example.cpp"
+#include "cpp_example.h"
 #include <chrono>
 
 int main(){

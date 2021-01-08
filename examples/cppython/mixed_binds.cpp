@@ -1,6 +1,6 @@
 
 #include <iostream>
-#include "example.h"
+#include "../cpp/cpp_example.h"
 #include <pybind11/stl.h>
 #include <pybind11/stl_bind.h>
 #include <pybind11/complex.h>

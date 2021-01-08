@@ -173,8 +173,8 @@ namespace bind_tools{
                 py::arg("include_self")=true)
             .def_readwrite("index",&PATCH::index)
             .def_readwrite("coords",&PATCH::coords)
-            .def_readwrite("agent",&PATCH::agent)
-            .def_readwrite("empty",&PATCH::empty)
+            .def("get_agent",&PATCH::get_agent)
+            .def("empty",&PATCH::empty)
             .def_readwrite("on_border",&PATCH::on_border)
             .def_readwrite("neighbors",&PATCH::neighbors);
         return class_binds_obj;
@@ -190,8 +190,8 @@ namespace bind_tools{
             .def("find_neighbor_agents",&PATCH::find_neighbor_agents,"Returns a vector of agents in one patch neighborhood",
                 py::arg("include_self")=true)
             .def_readwrite("coords",&PATCH::coords)
-            .def_readwrite("agent",&PATCH::agent)
-            .def_readwrite("empty",&PATCH::empty)
+            .def("get_agent",&PATCH::get_agent)
+            .def("empty",&PATCH::empty)
             .def_readwrite("on_border",&PATCH::on_border)
             .def_readwrite("neighbors",&PATCH::neighbors);
         return class_binds_obj;

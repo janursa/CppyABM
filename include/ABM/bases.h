@@ -32,24 +32,42 @@ struct Patch: public enable_shared_from_this<PATCH>{
 	}; //!< To define patch behavior
 	void set_agent(shared_ptr<AGENT> agent){
 		this->agent = agent;
-		this->empty = false;
+		// this->empty = false;
 		this->agent_count ++;
         agent->patch = this->shared_from_this();
         agent->has_patch = true;
 	}; //!< Assigns agent to the patch
+    shared_ptr<AGENT> get_agent(){
+        shared_ptr<AGENT> p = this->agent.lock();
+        if (p){
+            return p;
+        }else{
+            throw invalid_pointer("poiner to agent is invalid inside patch");
+
+        }
+    }
+    bool empty(){
+        shared_ptr<AGENT> p = this->agent.lock();
+        if (p){
+            return false;
+        }else{
+            return true;
+
+        }
+    }
 	void remove_agent(){
-        this->agent->has_patch = false;
-        this->agent->patch = nullptr;
-		this->agent = nullptr;
-		this->empty = true;
+        this->get_agent()->has_patch = false;
+        this->get_agent()->patch = nullptr;
+		this->agent.reset();
+		// this->empty = true;
 		this->agent_count = 0;
 	} //!< Removes agent from the patch
 	shared_ptr<PATCH> empty_neighbor(bool quiet = false); //!< Returns an arbitrary adjacent patch without an agent 
 	vector<shared_ptr<AGENT>> find_neighbor_agents(bool include_self = true); //!< Returns agents in one patch neighbors
 	unsigned agent_count = 0; //!< Keeps the record of residing agents count
-	std::shared_ptr<AGENT> agent; //!< Pointer to stores agents
+	std::weak_ptr<AGENT> agent; //!< Pointer to stores agents
 	std::shared_ptr<ENV> env; //!< Pointer to the simulation environment
-	bool empty = true; //!< whether the patch host an agent
+	// bool empty = true; //!< whether the patch host an agent
 	bool on_border = false;//!< whether the patch residing on the border of the domain
     unsigned index; //!< unique index that associate patch to mesh
     unsigned layer_index; //!< the index of the layer in which the patch is residing
@@ -141,7 +159,7 @@ struct Env: public enable_shared_from_this<ENV>{
 };
 template<class ENV, class AGENT, class PATCH>
 inline void Agent<ENV,AGENT,PATCH>::move(shared_ptr<PATCH> dest, bool quiet){
-        if (!dest->empty) {
+        if (!dest->empty()) {
             if (!quiet) throw patch_availibility("Given patch for move is not empty");
             else return;
         }
@@ -223,7 +241,7 @@ inline void Env<ENV,AGENT,PATCH>::update(){
                 
             }
             // check if another agent hasn't already taken it 
-            if (!dest->empty){ 
+            if (!dest->empty()){ 
                 // failure: manage how to respond
                 
                 if (this->agents[i]->_move._quiet){ // only throw when it's forced
@@ -272,7 +290,7 @@ inline void Env<ENV,AGENT,PATCH>::update(){
                 
             }
             // check if another agent hasn't already taken it 
-            if (!patch->empty){ 
+            if (!patch->empty()){ 
                 // failure: manage how to respond
                 
                 if (this->agents[i]->_hatch._quiet){ // only throw when it's forced
@@ -352,8 +370,8 @@ inline map<string,unsigned> Env<ENV,AGENT,PATCH>::count_agents(){
 }
 template<class ENV, class AGENT, class PATCH>
 inline void Env<ENV,AGENT,PATCH>::place_agent(shared_ptr<PATCH> patch,shared_ptr<AGENT> agent){
-    if (!patch->empty) {
-        if (patch->agent == agent) return;
+    if (!patch->empty()) {
+        if (patch->get_agent() == agent) return;
         else throw patch_availibility("Patch is not empty");
     }
     else{
@@ -368,8 +386,8 @@ template<class ENV, class AGENT, class PATCH>
 inline void Env<ENV,AGENT,PATCH>::place_agent(unsigned patch_index,shared_ptr<AGENT> agent){
     for (auto &[index,patch]:this->patches){
         if (index == patch_index){
-            if (!patch->empty) {
-                if (patch->agent == agent) return;
+            if (!patch->empty()) {
+                if (patch->get_agent() == agent) return;
                 else throw patch_availibility("Patch is not empty");
             }
             if (agent->has_patch){
@@ -399,7 +417,7 @@ inline shared_ptr<PATCH> Env<ENV,AGENT,PATCH>::find_empty_patch(){
     
     for (auto const&i:patches_indices_copy){
         auto potential_patch = this->patches.at(i);
-        if (potential_patch->empty){
+        if (potential_patch->empty()){
             return potential_patch;
         }
     }
@@ -442,7 +460,7 @@ shared_ptr<PATCH> Patch<ENV,AGENT,PATCH>::empty_neighbor(bool quiet){
         std::mt19937 g(rd());
         std::shuffle(neighbors.begin(),neighbors.end(),g);
         for (auto &neighbor:neighbors){
-            if (neighbor->empty){
+            if (neighbor->empty()){
                 return neighbor;
             }
         }
@@ -452,9 +470,9 @@ shared_ptr<PATCH> Patch<ENV,AGENT,PATCH>::empty_neighbor(bool quiet){
 template<class ENV, class AGENT, class PATCH>
 vector<shared_ptr<AGENT>> Patch<ENV,AGENT,PATCH>::find_neighbor_agents(bool include_self){
         vector<shared_ptr<AGENT>> neighbor_agents;
-        if (!this->empty & include_self) neighbor_agents.push_back(this->agent);
+        if (!this->empty() & include_self) neighbor_agents.push_back(this->get_agent());
         for (auto const &patch:this->neighbors){
-            if (!patch->empty) neighbor_agents.push_back(patch->agent);
+            if (!patch->empty()) neighbor_agents.push_back(patch->get_agent());
         }
         return neighbor_agents;
     }
