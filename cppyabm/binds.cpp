@@ -14,7 +14,7 @@ struct expAgent: public Agent<expEnv,expAgent,expPatch>{
     }
 };
 struct expPatch: public Patch<expEnv,expAgent,expPatch>{
-    expPatch(shared_ptr<expEnv> env):Patch<expEnv,expAgent,expPatch>(env){}
+    expPatch(shared_ptr<expEnv> env, MESH_ITEM mesh_item):Patch<expEnv,expAgent,expPatch>(env,mesh_item){}
 };
 
 EXPOSE_AGENT_CONTAINER(expAgent);

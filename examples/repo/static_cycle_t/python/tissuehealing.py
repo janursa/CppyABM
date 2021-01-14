@@ -14,22 +14,19 @@ from cppyabm.binds import Env, Agent, Patch, space
 class Tissue(Patch):
 	"""This class extends Patch to simulate tissue properties.
 	"""
-	def __init__(self,env,mesh_item):
-		Patch.__init__(self,env,mesh_item)
-		self.setup()
-	def setup(self):
+	def __init__(self,env):
+		Patch.__init__(self,env)
 		self.damage_center = False # identifies the patch as part of the damaged area
 		self.ECM = 100 # quantity of extracellular matrix
+
 class Cell (Agent):
 	"""
 	This class extends Agent to simulate cells.
 	"""
+	cycle_t = 0 # internal clock used to keep the track of proliferation
 	def __init__(self,env,agent_name):
 		Agent.__init__(self,env = env,class_name = agent_name)
-		self.setup()
-	def setup(self):
 		self.clock = 0 
-		self.cycle_t = 0 # clock required before cell commit proliferatoin
 	def update(self):
 		self.clock+=1
 	def step(self):
@@ -50,7 +47,6 @@ class Cell (Agent):
 		# apoptosis
 		if neighbor_cell_count >7:
 			self.disappear = True
-			
 
 class Domain(Env):
 	"""
@@ -58,8 +54,7 @@ class Domain(Env):
 	"""
 	def __init__(self):
 		Env.__init__(self)
-		self._repo_agents = []
-		self._repo_patches = []
+		self._repo = []
 		self.tick = 0
 		self.data = {'cell_count':[]}
 	def generate_agent(self,agent_name):
@@ -67,28 +62,16 @@ class Domain(Env):
 		Extension of the original function to create agents
 		"""
 		agent_obj = Cell(self,agent_name)
-		self._repo_agents.append(agent_obj)
+		self._repo.append(agent_obj)
 		self.agents.append(agent_obj)
 		return agent_obj
-	def generate_patch(self,mesh_item):
+	def generate_patch(self):
 		"""
 		Extension of the original function to create pacthes
 		"""
-		patch_obj = Tissue(self,mesh_item)
-		self.patches.append(patch_obj);
-		self._repo_patches.append(patch_obj)
+		patch_obj = Tissue(self)
+		self._repo.append(patch_obj)
 		return patch_obj
-	def update_repo(self):
-		"""
-		Updates the repository to remove inactive agents
-		"""
-		indices = []
-		for i in range(len(self._repo_agents)):
-			if self._repo_agents[i].disappear==True:
-				indices.append(i)
-		for ele in sorted(indices, reverse = True):  
-			del self._repo_agents[ele]
-		# print("agents in repo {} real agents {}".format(len(self._repo_agents),len(self.agents)))
 	def damage(self):
 		"""
 		Create damage
@@ -100,11 +83,12 @@ class Domain(Env):
 				patch.ECM = 0
 				if patch.empty() == False:
 					patch.get_agent().disappear = True
-	def setup(self):
+	def setup(self,cycle_t):
 		"""
 		Setup the simulation by creating mesh, patches, damage, and agents
 		"""
 		## create mesh
+		Cell.cycle_t = cycle_t
 		length = 1.5 # mm	
 		width = length #mm 	
 		mesh = space.grid2(length=length, width=width, mesh_length=0.015, share = True)
@@ -131,15 +115,13 @@ class Domain(Env):
 		for i in range(336):
 			print('Iteration {} cell count {}'.format(i,len(self.agents)))
 			self.step()
-			if i%20 ==0:
-				self.output()
+			# if i%20 ==0:
+			# 	self.output()
 	def update(self):
 		"""
 		Update the model. A call to parent function is sent to take care of default functions.
 		"""
 		super().update()
-		# if len(self._repo_agents)!= len(self.agents):
-		# 	sys.exit()
 		for agent in self.agents:
 			agent.update()
 		cell_count = self.count_agents()
@@ -171,7 +153,7 @@ class Domain(Env):
 if __name__ == '__main__':
 	begin = time.time()
 	envObj = Domain()
-	envObj.setup()
+	envObj.setup(12)
 	envObj.episode()
 	end = time.time()
 	print("Simulation took {} seconds".format(end-begin))

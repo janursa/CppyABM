@@ -22,11 +22,12 @@ namespace bind_tools{
     template<class ENV, class AGENT, class PATCH> 
     struct tramEnv : ENV  {
         using ENV::ENV;
-        shared_ptr<PATCH> generate_patch() override {
+        shared_ptr<PATCH> generate_patch(MESH_ITEM mesh_item) override {
             PYBIND11_OVERLOAD(
                 shared_ptr<PATCH>, 
                 ENV,      
-                generate_patch         
+                generate_patch,
+                mesh_item        
             );
         }
         shared_ptr<AGENT> generate_agent(string agent_name) override {
@@ -166,7 +167,7 @@ namespace bind_tools{
     template<class ENV,class AGENT,class PATCH,class py_class_name>
     py::class_<PATCH,py_class_name,std::shared_ptr<PATCH>>  expose_patch(py::module &m, string class_name_ptr){
         auto class_binds_obj =  py::class_<PATCH,py_class_name,std::shared_ptr<PATCH>>(m,class_name_ptr.c_str(),py::dynamic_attr())
-            .def(py::init<shared_ptr<ENV>>())
+            .def(py::init<shared_ptr<ENV>,MESH_ITEM>())
             .def("empty_neighbor", &PATCH::empty_neighbor,"Return an empty patch around the patch",
                 py::arg("quiet")=false)
             .def("find_neighbor_agents",&PATCH::find_neighbor_agents,"Returns a vector of agents in one patch neighborhood",
@@ -184,7 +185,7 @@ namespace bind_tools{
     template<class ENV,class AGENT,class PATCH>
     py::class_<PATCH,std::shared_ptr<PATCH>>  expose_patch(py::module &m, string class_name_ptr){
         auto class_binds_obj =  py::class_<PATCH,std::shared_ptr<PATCH>>(m,class_name_ptr.c_str(),py::dynamic_attr())
-            .def(py::init<shared_ptr<ENV>>())
+            .def(py::init<shared_ptr<ENV>,MESH_ITEM>())
             .def("empty_neighbor", &PATCH::empty_neighbor,"Return an empty patch around the patch",
                 py::arg("quiet")=false)
             .def("find_neighbor_agents",&PATCH::find_neighbor_agents,"Returns a vector of agents in one patch neighborhood",
@@ -207,8 +208,9 @@ namespace bind_tools{
     void expose_mesh(py::module &m){
         py::class_<MESH_ITEM>(m,"MESH_ITEM")
             .def(py::init<>()); 
-        m.def("grid2",&grid2,"Creates 3D grid mesh", py::arg("length"), py::arg("width"), py::arg("mesh_length"),py::arg("share") = false);
-        m.def("grid3",&grid3,"Creates 3D grid mesh", py::arg("length"), py::arg("width"),py::arg("height"), py::arg("mesh_length"),py::arg("share") = false);
+        auto space_sub = m.def_submodule("space");
+        space_sub.def("grid2",&space::grid2,"Creates 3D grid mesh", py::arg("length"), py::arg("width"), py::arg("mesh_length"),py::arg("share") = false);
+        space_sub.def("grid3",&space::grid3,"Creates 3D grid mesh", py::arg("length"), py::arg("width"),py::arg("height"), py::arg("mesh_length"),py::arg("share") = false);
 
     }
      //! funtion to expose agent and patch containers
@@ -230,6 +232,9 @@ namespace bind_tools{
                 keys.push_back(element.first);
               }
             return keys;
+        })
+        .def("append",[](PatchesBank& container,shared_ptr<PATCH> patch){
+            container.insert(std::pair<unsigned,shared_ptr<PATCH>>(patch->index,patch));
         });
     }
      //! Exposes default items 

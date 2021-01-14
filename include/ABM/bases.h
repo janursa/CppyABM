@@ -22,8 +22,18 @@ struct Patch;
 */
 template<class ENV, class AGENT, class PATCH>
 struct Patch: public enable_shared_from_this<PATCH>{
-	Patch(shared_ptr<ENV> env){
+	Patch(shared_ptr<ENV> env,MESH_ITEM mesh_item){
 		this->env = env;
+        this->index = mesh_item.index;      // copy index
+        this->layer_index = mesh_item.layer_index;      // copy layer index
+        this->coords = mesh_item.coords;    // copy coords
+        this->neighbors_indices = mesh_item.neighbors_indices;  // copy neighbors indices
+        try {
+            this->on_border = mesh_item.on_border;
+        }
+        catch (...){
+
+        }
 	}
 	virtual ~Patch(){}
 
@@ -59,7 +69,6 @@ struct Patch: public enable_shared_from_this<PATCH>{
         this->get_agent()->has_patch = false;
         this->get_agent()->patch = nullptr;
 		this->agent.reset();
-		// this->empty = true;
 		this->agent_count = 0;
 	} //!< Removes agent from the patch
 	shared_ptr<PATCH> empty_neighbor(bool quiet = false); //!< Returns an arbitrary adjacent patch without an agent 
@@ -126,7 +135,7 @@ template<class ENV, class AGENT, class PATCH>
 struct Env: public enable_shared_from_this<ENV>{
     Env(){};
 	virtual ~Env(){};
-    virtual shared_ptr<PATCH> generate_patch() {
+    virtual shared_ptr<PATCH> generate_patch(MESH_ITEM) {
     	throw undefined_member("Generate patch is not defined inside Env");
     }; //!< A template class to generate patch.
 	virtual	shared_ptr<AGENT> generate_agent(string class_name) {
@@ -143,6 +152,25 @@ struct Env: public enable_shared_from_this<ENV>{
 
     void place_agent_randomly(shared_ptr<AGENT> agent); //!< Places the given agent randomly in the domain. Raises exception if no patch is available.
     shared_ptr<PATCH> find_empty_patch(); //!< Finds empty patches in the entire domain
+    void remove_agent(shared_ptr<AGENT> agent){
+        this->agents.erase(std::remove(this->agents.begin(), this->agents.end(), agent), this->agents.end());
+          // swap the one to be removed with the last element
+
+        auto it = std::find(this->agents.begin(), this->agents.end(), agent);
+
+        if (it != this->agents.end()) {
+          using std::swap;
+          // swap the one to be removed with the last element
+          // and remove the item at the end of the container
+          // to prevent moving all items after '5' by one
+          swap(*it, this->agents.back());
+          this->agents.pop_back();
+        }
+    }
+    void process_switch(); //!< Process swtich requests
+    void process_hatch(); //!< Process hatch requests
+    void process_move(); //!< Process move requests
+    void process_disappear(); //!< Process disappear requests 
 
     virtual void step() {
     	throw undefined_member("Step function is not defined inside Env");
@@ -154,7 +182,6 @@ struct Env: public enable_shared_from_this<ENV>{
     std::set<string> agent_classes; //!< stores a list of `Agent::class_name`.
     vector<shared_ptr<AGENT>> agents; //!< Agent container
     map<unsigned,shared_ptr<PATCH>> patches; //!< Patch container
-    vector<unsigned> patches_indices; //!< list of patch indices.
 
 };
 template<class ENV, class AGENT, class PATCH>
@@ -213,8 +240,21 @@ template<class ENV, class AGENT, class PATCH>
 inline void Env<ENV,AGENT,PATCH>::update(){
     auto g = tools::randomly_seeded_MT();
     std::shuffle(this->agents.begin(),this->agents.end(),g);
-    unsigned agent_count = this->agents.size();
     /// move 
+    this->process_move();
+    /// hatch 
+    this->process_hatch();
+    /// switch 
+    this->process_switch();
+    /// process disappearing
+    this->process_disappear(); 
+    this->update_repo(); // to remove the agents from repo
+    // update agent counts
+    this->count_agents();
+};
+template<class ENV, class AGENT, class PATCH>
+inline void Env<ENV,AGENT,PATCH>::process_move(){
+    unsigned agent_count = this->agents.size();
     for (unsigned  i = 0; i < agent_count; i++){
         if (!this->agents[i]->_move._flag) continue;
         auto dest = this->agents[i]->_move._patch;
@@ -261,7 +301,10 @@ inline void Env<ENV,AGENT,PATCH>::update(){
             this->agents[i]->move(dest,this->agents[i]->_move._quiet);
             this->agents[i]->reset_move();
     }
-    /// hatch 
+}
+template<class ENV, class AGENT, class PATCH>
+inline void Env<ENV,AGENT,PATCH>::process_hatch(){
+    auto agent_count = this->agents.size();
     for (unsigned  i = 0; i < agent_count; i++){
         if (this->agents[i]->_hatch._flag){
             auto inherit = this->agents[i]->_hatch._inherit;
@@ -317,8 +360,30 @@ inline void Env<ENV,AGENT,PATCH>::update(){
             
         };
     }
-    
-    /// switch 
+}
+template<class ENV, class AGENT, class PATCH>
+inline void Env<ENV,AGENT,PATCH>::process_disappear(){
+    unsigned size = this->agents.size();
+    auto counter = 0;
+    unsigned i = 0;
+    while(i<(size-counter)){
+        if(this->agents[i]->disappear == true){
+            swap(this->agents[i], this->agents[size-counter-1]); // we swap the agent location in the vector with the last agent
+            counter++;
+        }else{
+            i++;
+        }
+    }
+    if (counter>0){//if anything there to erase
+        cout<<"counter: "<<counter<<" count before "<<this->agents.size();
+
+        this->agents.erase(this->agents.end()-counter,this->agents.end());
+        cout<<" count after "<<this->agents.size();
+    }
+}
+template<class ENV, class AGENT, class PATCH>
+inline void Env<ENV,AGENT,PATCH>::process_switch(){
+    auto agent_count = this->agents.size();
     for (unsigned  i = 0; i < agent_count; i++){
         auto agent = this->agents[i];
         if (!agent->_switch._flag) continue;
@@ -331,24 +396,7 @@ inline void Env<ENV,AGENT,PATCH>::update(){
         agent->class_name = to;
         agent->reset_switch();
     }
-    /// process disappearing 
-    int jj = 0;
-    while (true) {
-        if (jj >= this->agents.size()) break;
-        for (int ii = jj; ii < this->agents.size(); ii++) {
-            if (this->agents[ii]->disappear == true) {
-                this->agents[ii]->patch->remove_agent();
-                this->agents.erase(this->agents.begin() + ii);
-                break;
-            }
-            jj++;
-        };
-
-    }
-    this->update_repo(); // to remove the agents from repo
-    // update agent counts
-    this->count_agents();
-};
+}
 template<class ENV, class AGENT, class PATCH>
 inline map<string,unsigned> Env<ENV,AGENT,PATCH>::count_agents(){
     map<string,unsigned> agents_count;
@@ -408,14 +456,15 @@ inline void Env<ENV,AGENT,PATCH>::place_agent_randomly(shared_ptr<AGENT> agent){
 }
 template<class ENV, class AGENT, class PATCH>
 inline shared_ptr<PATCH> Env<ENV,AGENT,PATCH>::find_empty_patch(){
-    auto patches_indices_copy = this->patches_indices;
-    auto patch_count = this->patches_indices.size();
-
+    std::vector<int> patch_keys;
+    for(auto const& patch: this->patches)
+        patch_keys.push_back(patch.first);
+    
     auto g = tools::randomly_seeded_MT();
 
-    std::shuffle(patches_indices_copy.begin(), patches_indices_copy.end(), g);
+    std::shuffle(patch_keys.begin(), patch_keys.end(), g);
     
-    for (auto const&i:patches_indices_copy){
+    for (auto const&i:patch_keys){
         auto potential_patch = this->patches.at(i);
         if (potential_patch->empty()){
             return potential_patch;
@@ -427,19 +476,8 @@ template<class ENV, class AGENT, class PATCH>
  inline void Env<ENV,AGENT,PATCH>::setup_domain(vector<MESH_ITEM> mesh){
         // step 1: create patches from info of meshes
         for (auto & mesh_item:mesh){
-            auto patch = this->generate_patch(); // create patch
-            patch->index = mesh_item.index;      // copy index
-            patch->layer_index = mesh_item.layer_index;      // copy layer index
-            patch->coords = mesh_item.coords;    // copy coords
-            patch->neighbors_indices = mesh_item.neighbors_indices;  // copy neighbors indices
-            try {
-                patch->on_border = mesh_item.on_border;
-            }
-            catch (...){
+            this->generate_patch(mesh_item); // create patch
 
-            }
-            patches[patch->index]= patch;
-            this->patches_indices.push_back(patch->index);
         }
         // step 2: assign neighbor patches
         for (auto &[index,patch]:patches){

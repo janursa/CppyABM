@@ -9,25 +9,38 @@ import time
 current_file_path = pathlib.Path(__file__).parent.absolute()
 sys.path.insert(1,os.path.join(current_file_path,'build'))
 from myBinds import Domain, Cell
+import torch
+import torch.nn.functional as F
+import numpy as np
+class policy(torch.nn.Module):
+    """
+    implements a policy model
+    """
+    def __init__(self):
+        super(policy, self).__init__()
+        self.affine1 = torch.nn.Linear(1, 128)
+        self.linear = torch.nn.Linear(128, 1)
+    def forward(self, x):
+        """
+        forward 
+        """
+        x = torch.from_numpy(np.array([x])).float() # convert obs to Torch tensor
+        x = F.relu(self.affine1(x))
+        x = F.sigmoid(self.linear(x))
+        return x
+
 class pyCell(Cell):
-	def __init__(self,env,class_name):
+	NN = policy()
+	def __init__(self,env,class_name): #can go
 		super().__init__(env,class_name)
-	def step(self):
-		neighbor_cell_count = len(self.patch.find_neighbor_agents())
-		# migration
-		if neighbor_cell_count <= 8:
-			self.order_move(quiet=True)
-		# proliferation
-		if self.patch.damage_center and self.clock >= 12:
-			if neighbor_cell_count <= 6:
-				self.order_hatch(quiet=True)
-				self.clock = 0 
-		# deposit ECM
-		if self.patch.ECM < 100:
-			self.patch.ECM += 1	
-		# die
-		if neighbor_cell_count >7:
-			self.disappear = True
+		self.age = randrange(0,100)
+		self.setup()
+	def setup(self):
+		NN_value = self.NN.forward(self.age)
+		max_cycle_t = 20
+		min_cycle_t = 10
+		self.cycle_t = (max_cycle_t-min_cycle_t)*NN_value+min_cycle_t
+
 class pyDomain(Domain):
 	def __init__(self):
 		super().__init__()
@@ -37,33 +50,9 @@ class pyDomain(Domain):
 		self._repo.append(agent_obj)
 		self.agents.append(agent_obj)
 		return agent_obj
-	def update(self):
-		super().update()
-		self.output()
-
-	def output(self):
-		# plot agents on the domain
-		file = open('domain.csv','w')
-		file.write('x,y,type,size\n')
-		for agent in self.agents:
-			x,y,z = agent.patch.coords
-			file.write("{},{},{},{}\n".format(x, y, agent.class_name, 10))
-		file.close()
-		#plot ECM density on the domain
-		# file = open('ECMdensity.csv','w')
-		# file.write('x,y,type,size\n')
-		# for [index,patch] in self.patches.items():
-		# 	x,y,z = patch.coords
-		# 	file.write("{},{},{},{}\n".format(x, y, patch.ECM, 10))
-		# file.close()
-		# ## cell counts
-		# df = pd.DataFrame.from_dict(self.data)
-		# df_agent_counts = df[['cell_count']]
-		# df_agent_counts.to_csv('cell_count.csv')
-
+	
 
 if __name__ == '__main__':
-	
 	begin = time.time()
 	envObj = pyDomain()
 	envObj.setup()

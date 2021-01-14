@@ -6,21 +6,21 @@
 #include <pybind11/complex.h>
 #include <pybind11/functional.h>
 #include "CppyABM/include/ABM/bind_tools.h"
-
+using tramAgent = bind_tools::tramAgent<Domain,Cell,Tissue>;
 //! Defining a trampoline to allow the extension of the functionality of Cell::step
-using tramAgent = bind_tools::tramAgent<Domain,Cell,Tissue>; 
-struct tramCell : public  tramAgent{
-    using tramAgent::tramAgent; // using constructor of the parent class
-    void setup() override {
+struct PyCell : public  tramAgent{
+    using tramAgent::tramAgent;
+    void step() override {
         PYBIND11_OVERLOAD(
             void, 
             Cell,      
-            setup    
+            step    
         );
     }
 };
-/** Expose agent container**/
+/** Expose agent and patch container**/
 EXPOSE_AGENT_CONTAINER(Cell);
+EXPOSE_PATCH_CONTAINER(Tissue);
 //! Binding function. 
 /*!
 The name provided as module, i.e. myBinds, must be the same name given in CmakeLists.txt as argument to
@@ -34,8 +34,11 @@ PYBIND11_MODULE(myBinds, m) {
     env_obj.def("setup",&Domain::setup);
     env_obj.def("episode",&Domain::episode);
     // expose agent and add new member
-    auto agent_obj = bind_tools::expose_agent<Domain,Cell,Tissue,tramCell>(m,"Cell")
-        .def_readwrite("cycle_t",&Cell::cycle_t);
-
+    auto agent_obj = bind_tools::expose_agent<Domain,Cell,Tissue,PyCell>(m,"Cell")
+        .def_readwrite("clock",&Cell::clock);
+    // expose patch and add new members
+    auto patch_obj = bind_tools::expose_patch<Domain,Cell,Tissue>(m,"Tissue")
+        .def_readwrite("damage_center",&Tissue::damage_center)
+        .def_readwrite("ECM",&Tissue::ECM);
 }
 
