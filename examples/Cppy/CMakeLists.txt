@@ -7,6 +7,6 @@ SET(BINDMODULE "myBinds")
 
 add_subdirectory(../cpp/ CPPABM)
 
-pybind11_add_module(${BINDMODULE} mixed_binds.cpp ${HEADER_LIST})
+pybind11_add_module(${BINDMODULE} binds.cpp ${HEADER_LIST})
 target_include_directories(${BINDMODULE} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../../)
 

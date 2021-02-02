@@ -1,5 +1,7 @@
 import pandas as pd
 import time
+from pympler import asizeof
+
 """
 @page purelypython
 """
@@ -11,6 +13,7 @@ import sys, os,pathlib
 current_file_path = pathlib.Path(__file__).parent.absolute()
 sys.path.insert(1,os.path.join(current_file_path,'..','..','build'))
 from cppyabm.binds import Env, Agent, Patch, space
+
 class Tissue(Patch):
 	"""This class extends Patch to simulate tissue properties.
 	"""
@@ -29,17 +32,17 @@ class Cell (Agent):
 		self.setup()
 	def setup(self):
 		self.clock = 0 
-		self.cycle_t = 0 # clock required before cell commit proliferatoin
+		self.cycle_t = 12 # clock required before cell commit proliferatoin
 	def update(self):
 		self.clock+=1
 	def step(self):
 		"""
 		Simulates cellular reactions of migration, proliferation, tissue deposition, and death.
 		"""
-		neighbor_cell_count = len(self.patch.find_neighbor_agents())
 		# migration
 		self.order_move(quiet=True)
 		# proliferation
+		neighbor_cell_count = len(self.patch.find_neighbor_agents())
 		if self.patch.damage_center and self.clock >= self.cycle_t:
 			if neighbor_cell_count <= 6:
 				self.order_hatch(quiet=True)
@@ -56,10 +59,11 @@ class Domain(Env):
 	"""
 	This class extends Env to simulate coordinate the simulation.
 	"""
+	memory_usage_max = 0
 	def __init__(self):
 		Env.__init__(self)
-		self._repo_agents = []
-		self._repo_patches = []
+		self.agents_repo = []
+		self.patches_repo = []
 		self.tick = 0
 		self.data = {'cell_count':[]}
 	def generate_agent(self,agent_name):
@@ -67,7 +71,7 @@ class Domain(Env):
 		Extension of the original function to create agents
 		"""
 		agent_obj = Cell(self,agent_name)
-		self._repo_agents.append(agent_obj)
+		self.agents_repo.append(agent_obj)
 		self.agents.append(agent_obj)
 		return agent_obj
 	def generate_patch(self,mesh_item):
@@ -76,19 +80,18 @@ class Domain(Env):
 		"""
 		patch_obj = Tissue(self,mesh_item)
 		self.patches.append(patch_obj);
-		self._repo_patches.append(patch_obj)
+		self.patches_repo.append(patch_obj)
 		return patch_obj
 	def update_repo(self):
 		"""
 		Updates the repository to remove inactive agents
 		"""
 		indices = []
-		for i in range(len(self._repo_agents)):
-			if self._repo_agents[i].disappear==True:
+		for i in range(len(self.agents_repo)):
+			if self.agents_repo[i].disappear==True:
 				indices.append(i)
 		for ele in sorted(indices, reverse = True):  
-			del self._repo_agents[ele]
-		# print("agents in repo {} real agents {}".format(len(self._repo_agents),len(self.agents)))
+			del self.agents_repo[ele]
 	def damage(self):
 		"""
 		Create damage
@@ -120,6 +123,11 @@ class Domain(Env):
 		Simulate the progress of the model
 		"""
 		# execute cells
+		# h = hpy()
+		usage = self.memory_usage()
+		if usage>Domain.memory_usage_max:
+			Domain.memory_usage_max = usage
+		
 		for cell in self.agents:
 			cell.step()
 		self.update()
@@ -131,15 +139,13 @@ class Domain(Env):
 		for i in range(336):
 			print('Iteration {} cell count {}'.format(i,len(self.agents)))
 			self.step()
-			if i%20 ==0:
+			if i%335 ==0:
 				self.output()
 	def update(self):
 		"""
 		Update the model. A call to parent function is sent to take care of default functions.
 		"""
 		super().update()
-		# if len(self._repo_agents)!= len(self.agents):
-		# 	sys.exit()
 		for agent in self.agents:
 			agent.update()
 		cell_count = self.count_agents()
@@ -168,6 +174,7 @@ class Domain(Env):
 		df_agent_counts = df[['cell_count']]
 		df_agent_counts.to_csv('cell_count.csv')
 
+	
 if __name__ == '__main__':
 	begin = time.time()
 	envObj = Domain()
@@ -175,3 +182,8 @@ if __name__ == '__main__':
 	envObj.episode()
 	end = time.time()
 	print("Simulation took {} seconds".format(end-begin))
+	print("Memory load: {}".format(Domain.memory_usage_max))
+	file = open('memory.txt','w')
+	file.write('{}\n'.format(Domain.memory_usage_max))
+	file.close()
+	

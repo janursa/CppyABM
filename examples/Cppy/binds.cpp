@@ -1,6 +1,6 @@
 
 #include <iostream>
-#include "../cpp/cpp_example.h"
+#include "../Cpp/cpp_example.h"
 #include <pybind11/stl.h>
 #include <pybind11/stl_bind.h>
 #include <pybind11/complex.h>
@@ -36,6 +36,5 @@ PYBIND11_MODULE(myBinds, m) {
     // expose agent and add new member
     auto agent_obj = bind_tools::expose_agent<Domain,Cell,Tissue,tramCell>(m,"Cell")
         .def_readwrite("cycle_t",&Cell::cycle_t);
-
 }
 

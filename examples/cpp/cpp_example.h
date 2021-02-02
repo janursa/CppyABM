@@ -2,6 +2,10 @@
 #include <fstream>
 #include "CppyABM/include/ABM/bases.h"
 #include "CppyABM/include/ABM/mesh.h"
+
+
+
+
 struct Domain;
 struct Tissue;
 struct Cell;
@@ -10,18 +14,21 @@ struct Domain: public Env<Domain,Cell,Tissue> {
 	Domain():Env<Domain,Cell,Tissue>(){
 	}
 	virtual shared_ptr<Cell> generate_agent(std::string agent_name);
-	virtual shared_ptr<Tissue> generate_patch();
+	virtual shared_ptr<Tissue> generate_patch(MESH_ITEM);
 	virtual void update();
 	void damage();
 	void setup();
-	void step();
+	virtual void step();
 	void episode();
 	void output();
 	std::map<std::string,std::vector<int>> data= {{"cell_count",{}}};
 	int tick=0;
+	struct task_basic_info t_info;
+	mach_msg_type_number_t t_info_count = TASK_BASIC_INFO_COUNT;
+	double memory_usage_max;
 };
 struct Tissue: public Patch<Domain,Cell,Tissue> {
-	Tissue(shared_ptr<Domain> env):Patch<Domain,Cell,Tissue>(env){
+	Tissue(shared_ptr<Domain> env,MESH_ITEM mesh):Patch<Domain,Cell,Tissue>(env,mesh){
 		this->setup();
 	}
 	void setup(){
@@ -49,8 +56,9 @@ inline shared_ptr<Cell> Domain::generate_agent(std::string agent_name){
 		this->agents.push_back(agent_obj);
 		return agent_obj;
 	}
-inline shared_ptr<Tissue> Domain::generate_patch(){
-		auto patch_obj = make_shared<Tissue>(this->shared_from_this());
+inline shared_ptr<Tissue> Domain::generate_patch(MESH_ITEM mesh){
+		auto patch_obj = make_shared<Tissue>(this->shared_from_this(),mesh);
+		this->patches.insert(pair<unsigned,shared_ptr<Tissue>>(patch_obj->index,patch_obj));
 		return patch_obj;
 	}
 inline void Domain::setup(){
@@ -85,14 +93,18 @@ inline void Domain::update(){
 
 	}
 inline void Domain::step(){
-		for (auto &cell:this->agents){
-			cell->step();
-		}
-		this->update();
-		this->tick ++;
-	}	
+	auto usage = this->memory_usage();
+	if (usage > memory_usage_max){
+		memory_usage_max = usage;
+	}
+
+	for (auto &cell:this->agents){
+		cell->step();
+	}
+	this->update();
+	this->tick ++;
+}	
 inline void Cell::step(){
-	auto dest_patch = this->patch->empty_neighbor(true);
 	this->order_move(nullptr,true,false);
 	auto neighbor_cell_count = this->patch->find_neighbor_agents().size();
 	if (this->patch->damage_center and this->clock >= this->cycle_t){
@@ -113,8 +125,13 @@ inline void Domain::episode(){
 	for (unsigned i = 0; i < 336; i++){
 			cout<<"iteration "<<i<<" agents "<<this->agents.size()<<endl;
 			this->step();
-			if (i%20 == 0) this->output();
+			if (i%335 == 0) this->output();
 		}	
+	ofstream file1;
+	file1.open("memory_usage.csv");
+	file1<<memory_usage_max<<"\n";
+	file1.close();
+	cout<<"Memory usage "<<memory_usage_max<<endl;
 }
 inline void Domain::output(){
 	// plot agents on the domain

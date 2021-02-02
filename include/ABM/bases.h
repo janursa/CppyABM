@@ -4,11 +4,13 @@
 #include <algorithm>
 #include <random>
 #include <set>
+#include<mach/mach.h>
 #include "common.h"
 #include "mesh.h"
 #include "tools.h"
 using std::shared_ptr;
 using std::vector;
+#define MEMORY_MONITOR
 template<class ENV, class AGENT, class PATCH>
 struct Env;
 template<class ENV, class AGENT, class PATCH>
@@ -182,7 +184,20 @@ struct Env: public enable_shared_from_this<ENV>{
     std::set<string> agent_classes; //!< stores a list of `Agent::class_name`.
     vector<shared_ptr<AGENT>> agents; //!< Agent container
     map<unsigned,shared_ptr<PATCH>> patches; //!< Patch container
+#ifdef MEMORY_MONITOR
+    struct task_basic_info t_info;
+    mach_msg_type_number_t t_info_count = TASK_BASIC_INFO_COUNT;
 
+    double memory_usage(){
+        if (KERN_SUCCESS != task_info(mach_task_self(),
+                              TASK_BASIC_INFO, (task_info_t)&t_info, 
+                              &t_info_count))
+        {
+            
+        }
+        return t_info.resident_size;
+    }
+#endif 
 };
 template<class ENV, class AGENT, class PATCH>
 inline void Agent<ENV,AGENT,PATCH>::move(shared_ptr<PATCH> dest, bool quiet){
@@ -221,8 +236,8 @@ inline void Env<ENV,AGENT,PATCH>::step_agents(){
 template<class ENV, class AGENT, class PATCH>
 inline void Env<ENV,AGENT,PATCH>::step_patches(){
 
-    for (unsigned i = 0; i < this->patches.size(); i++){
-        this->patches[i]->step();
+    for (auto &[index,patch]:this->patches){
+        patch->step();
     }
 }
 template<class ENV, class AGENT, class PATCH>
@@ -375,10 +390,7 @@ inline void Env<ENV,AGENT,PATCH>::process_disappear(){
         }
     }
     if (counter>0){//if anything there to erase
-        cout<<"counter: "<<counter<<" count before "<<this->agents.size();
-
         this->agents.erase(this->agents.end()-counter,this->agents.end());
-        cout<<" count after "<<this->agents.size();
     }
 }
 template<class ENV, class AGENT, class PATCH>

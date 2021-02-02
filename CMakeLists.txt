@@ -29,7 +29,6 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(pybind11)
 set(PYBIND11_CPP_STANDARD -std=c++17)
-
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 	add_subdirectory(cppyabm)
 endif()

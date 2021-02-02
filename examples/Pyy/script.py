@@ -1,99 +1,110 @@
 import pandas as pd
 import time
+from pympler import asizeof
+import torch
+from random import randrange
+import numpy as np
+import torch.nn.functional as F
+
 """
 @page purelypython
 """
 """@package Python example of CppyABM
 We define two simple classes of Cell and Tissue as extensions of Agent and Patch, respectively,
 to model cellular behavior and the properties of tissue, respectively.
-
 """
 import sys, os,pathlib
-from torch.distributions import Categorical
-
-from cppyabm.binds import Env, Agent, Patch, grid2
 current_file_path = pathlib.Path(__file__).parent.absolute()
-sys.path.insert(1,os.path.join(current_file_path,'..','..'))
-from foxyNN.tools import t_env, t_agent
-from policies import cell_policy
-
+sys.path.insert(1,os.path.join(current_file_path,'..','..','build'))
+from cppyabm.binds import Env, Agent, Patch, space
+sys.path.insert(1,os.path.join(current_file_path))
+from policy import policy
+policy_model = policy()
+policy_model.load_state_dict(torch.load(os.path.join(current_file_path,'policy.pt')))
+policy_model.eval()
 class Tissue(Patch):
 	"""This class extends Patch to simulate tissue properties.
 	"""
-	def __init__(self,env):
-		Patch.__init__(self,env)
+	def __init__(self,env,mesh_item):
+		Patch.__init__(self,env,mesh_item)
+		self.setup()
+	def setup(self):
 		self.damage_center = False # identifies the patch as part of the damaged area
 		self.ECM = 100 # quantity of extracellular matrix
-@t_agent
 class Cell (Agent):
+	NN = policy_model
 	"""
 	This class extends Agent to simulate cells.
 	"""
 	def __init__(self,env,agent_name):
 		Agent.__init__(self,env = env,class_name = agent_name)
-		self.clock = 12 # internal clock used to keep the track of proliferation
-		self.policy = cell_policy()
+		self.age = randrange(0,100)
+		self.setup()
+	def setup(self):
+		self.clock = 0 
+		NN_value = Cell.NN.forward(self.age)
+		max_cycle_t = 20
+		min_cycle_t = 10
+		self.cycle_t = (max_cycle_t-min_cycle_t)*NN_value+min_cycle_t
 	def update(self):
 		self.clock+=1
 	def step(self):
 		"""
 		Simulates cellular reactions of migration, proliferation, tissue deposition, and death.
 		"""
-		neighbor_cell_count = len(self.patch.find_neighbor_agents())
 		# migration
 		self.order_move(quiet=True)
 		# proliferation
-		if self.patch.damage_center and self.clock >= 6:
-			probs,state_value= self.policy.forward(neighbor_cell_count)
-			m = Categorical(probs)
-        	action = m.sample()
-        	if action == 0:
+		neighbor_cell_count = len(self.patch.find_neighbor_agents())
+		if self.patch.damage_center and self.clock >= self.cycle_t:
+			if neighbor_cell_count <= 6:
 				self.order_hatch(quiet=True)
 				self.clock = 0 
-			else:
-				pass
-			self.save_action(torch.log(probs[action]),state_value)	
-		self.reward()
 		# ECM synthesize
-		# if self.patch.ECM < 100:
-		# 	self.patch.ECM += 1	
+		if self.patch.ECM < 100:
+			self.patch.ECM += 1	
 		# apoptosis
 		if neighbor_cell_count >7:
 			self.disappear = True
-	def reward(self):
-		if self.env.clock == 50:
-			reward = 100-abs(len(self.env.agents) - 80)
-			self.save_reward(reward)
-settings = {
-    'lr':0.03,
-    'episodes':20,
-    'policy_t':'AC' # type of policty, e.g. actor critic
-}
-@t_env(settings=settings)
+			
+
 class Domain(Env):
 	"""
 	This class extends Env to simulate coordinate the simulation.
 	"""
+	memory_usage_max = 0
 	def __init__(self):
 		Env.__init__(self)
-		self._repo = []
-		self.clock = 0
+		self.agents_repo = []
+		self.patches_repo = []
+		self.tick = 0
 		self.data = {'cell_count':[]}
 	def generate_agent(self,agent_name):
 		"""
 		Extension of the original function to create agents
 		"""
 		agent_obj = Cell(self,agent_name)
-		self._repo.append(agent_obj)
+		self.agents_repo.append(agent_obj)
 		self.agents.append(agent_obj)
 		return agent_obj
-	def generate_patch(self):
+	def generate_patch(self,mesh_item):
 		"""
 		Extension of the original function to create pacthes
 		"""
-		patch_obj = Tissue(self)
-		self._repo.append(patch_obj)
+		patch_obj = Tissue(self,mesh_item)
+		self.patches.append(patch_obj);
+		self.patches_repo.append(patch_obj)
 		return patch_obj
+	def update_repo(self):
+		"""
+		Updates the repository to remove inactive agents
+		"""
+		indices = []
+		for i in range(len(self.agents_repo)):
+			if self.agents_repo[i].disappear==True:
+				indices.append(i)
+		for ele in sorted(indices, reverse = True):  
+			del self.agents_repo[ele]
 	def damage(self):
 		"""
 		Create damage
@@ -103,20 +114,20 @@ class Domain(Env):
 			if (x >= 0.25 and x <=1.25) and (y>=0.25 and y<=1.25):
 				patch.damage_center = True
 				patch.ECM = 0
-				if patch.empty == False:
-					patch.agent.disappear = True
+				if patch.empty() == False:
+					patch.get_agent().disappear = True
 	def setup(self):
 		"""
 		Setup the simulation by creating mesh, patches, damage, and agents
 		"""
 		## create mesh
-		length = .15 # mm	
+		length = 1.5 # mm	
 		width = length #mm 	
-		mesh = grid2(length=length, width=width, mesh_length=0.015, share = True)
+		mesh = space.grid2(length=length, width=width, mesh_length=0.015, share = True)
 		## create patch based on mesh
 		self.setup_domain(mesh)
-		## assiging 200 cells randomly in the domain
-		self.setup_agents({'cell':20})
+		## assiging 2000 cells randomly in the domain
+		self.setup_agents({'cell':2000})
 		## create the damage
 		self.damage()
 		self.update()
@@ -125,26 +136,24 @@ class Domain(Env):
 		Simulate the progress of the model
 		"""
 		# execute cells
+		# h = hpy()
+		usage = self.memory_usage()
+		if usage>Domain.memory_usage_max:
+			Domain.memory_usage_max = usage
+		
 		for cell in self.agents:
 			cell.step()
 		self.update()
-		self.clock +=1
-	def reset(self):
-		for agent in self.agents:
-			agent.disappear =True
-		self.update()
-		self.setup_agents({'cell':20})
-		self.update()
+		self.tick +=1
 	def episode(self):
 		"""
 		Simulate the whole duration of the run
 		"""
-		self.reset()
-		for i in range(50):
+		for i in range(336):
 			print('Iteration {} cell count {}'.format(i,len(self.agents)))
 			self.step()
-			# if i%20 ==0:
-			# 	self.output()
+			if i%1 ==0:
+				self.output()
 	def update(self):
 		"""
 		Update the model. A call to parent function is sent to take care of default functions.
@@ -178,4 +187,16 @@ class Domain(Env):
 		df_agent_counts = df[['cell_count']]
 		df_agent_counts.to_csv('cell_count.csv')
 
-
+	
+if __name__ == '__main__':
+	begin = time.time()
+	envObj = Domain()
+	envObj.setup()
+	envObj.episode()
+	end = time.time()
+	print("Simulation took {} seconds".format(end-begin))
+	print("Memory load: {}".format(Domain.memory_usage_max))
+	file = open('memory.txt','w')
+	file.write('{}\n'.format(Domain.memory_usage_max))
+	file.close()
+	
