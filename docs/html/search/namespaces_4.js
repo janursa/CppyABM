@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['libsize_3139',['libsize',['../namespacelibsize.html',1,'']]],
-  ['literals_3140',['literals',['../namespaceliterals.html',1,'']]]
+  ['libsize_3159',['libsize',['../namespacelibsize.html',1,'']]],
+  ['literals_3160',['literals',['../namespaceliterals.html',1,'']]]
 ];

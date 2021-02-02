@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.19"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CppyABM: move_only_holder_caster&lt; type, holder_type &gt; Struct Template Reference</title>
+<title>CppyABM: move_only_holder_caster&lt; type, holder_type, SFINAE &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,7 +66,7 @@ $(function() {
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="structmove__only__holder__caster-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">move_only_holder_caster&lt; type, holder_type &gt; Struct Template Reference</div>  </div>
+<div class="title">move_only_holder_caster&lt; type, holder_type, SFINAE &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -74,34 +74,35 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a99c0757cdabb82f4f254ad081e738492"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classhandle.html">handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmove__only__holder__caster.html#a99c0757cdabb82f4f254ad081e738492">cast</a> (holder_type &amp;&amp;src, <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h.html#adde72ab1fb0dd4b48a5232c349a53841">return_value_policy</a>, <a class="el" href="classhandle.html">handle</a>)</td></tr>
-<tr class="separator:a99c0757cdabb82f4f254ad081e738492"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16ec4ebc59d88d7cfa79e5681c412870"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classhandle.html">handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmove__only__holder__caster.html#a16ec4ebc59d88d7cfa79e5681c412870">cast</a> (holder_type &amp;&amp;src, <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h.html#adde72ab1fb0dd4b48a5232c349a53841">return_value_policy</a>, <a class="el" href="classhandle.html">handle</a>)</td></tr>
+<tr class="separator:a16ec4ebc59d88d7cfa79e5681c412870"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:a6286ce9a51576874db390d75fde982d1"><td class="memItemLeft" align="right" valign="top">static constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmove__only__holder__caster.html#a6286ce9a51576874db390d75fde982d1">name</a> = <a class="el" href="classtype__caster__base.html">type_caster_base</a>&lt;<a class="el" href="classtype.html">type</a>&gt;::<a class="el" href="structname.html">name</a></td></tr>
-<tr class="separator:a6286ce9a51576874db390d75fde982d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad89fd85bd6a98406b44fdace0d850158"><td class="memItemLeft" align="right" valign="top">static constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmove__only__holder__caster.html#ad89fd85bd6a98406b44fdace0d850158">name</a> = <a class="el" href="classtype__caster__base.html">type_caster_base</a>&lt;<a class="el" href="classtype.html">type</a>&gt;::<a class="el" href="structname.html">name</a></td></tr>
+<tr class="separator:ad89fd85bd6a98406b44fdace0d850158"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename type, typename holder_type&gt;<br />
-struct move_only_holder_caster&lt; type, holder_type &gt;</h3>
+<div class="textblock"><h3>template&lt;typename type, typename holder_type, typename SFINAE = void&gt;<br />
+struct move_only_holder_caster&lt; type, holder_type, SFINAE &gt;</h3>
 
+<p>Type caster for holder types like std::unique_ptr. Please consider the SFINAE hook an implementation detail, as explained in the comment for the <a class="el" href="structcopyable__holder__caster.html">copyable_holder_caster</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01576">1576</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01611">1611</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a99c0757cdabb82f4f254ad081e738492"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99c0757cdabb82f4f254ad081e738492">&#9670;&nbsp;</a></span>cast()</h2>
+<a id="a16ec4ebc59d88d7cfa79e5681c412870"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16ec4ebc59d88d7cfa79e5681c412870">&#9670;&nbsp;</a></span>cast()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename type , typename holder_type &gt; </div>
+template&lt;typename type , typename holder_type , typename SFINAE  = void&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classhandle.html">handle</a> <a class="el" href="structmove__only__holder__caster.html">move_only_holder_caster</a>&lt; <a class="el" href="classtype.html">type</a>, holder_type &gt;::cast </td>
+          <td class="memname">static <a class="el" href="classhandle.html">handle</a> <a class="el" href="structmove__only__holder__caster.html">move_only_holder_caster</a>&lt; <a class="el" href="classtype.html">type</a>, holder_type, SFINAE &gt;::cast </td>
           <td>(</td>
           <td class="paramtype">holder_type &amp;&amp;&#160;</td>
           <td class="paramname"><em>src</em>, </td>
@@ -131,24 +132,24 @@ template&lt;typename type , typename holder_type &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01580">1580</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01615">1615</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a6286ce9a51576874db390d75fde982d1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6286ce9a51576874db390d75fde982d1">&#9670;&nbsp;</a></span>name</h2>
+<a id="ad89fd85bd6a98406b44fdace0d850158"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad89fd85bd6a98406b44fdace0d850158">&#9670;&nbsp;</a></span>name</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename type , typename holder_type &gt; </div>
+template&lt;typename type , typename holder_type , typename SFINAE  = void&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr auto <a class="el" href="structmove__only__holder__caster.html">move_only_holder_caster</a>&lt; <a class="el" href="classtype.html">type</a>, holder_type &gt;::<a class="el" href="structname.html">name</a> = <a class="el" href="classtype__caster__base.html">type_caster_base</a>&lt;<a class="el" href="classtype.html">type</a>&gt;::<a class="el" href="structname.html">name</a></td>
+          <td class="memname">constexpr auto <a class="el" href="structmove__only__holder__caster.html">move_only_holder_caster</a>&lt; <a class="el" href="classtype.html">type</a>, holder_type, SFINAE &gt;::<a class="el" href="structname.html">name</a> = <a class="el" href="classtype__caster__base.html">type_caster_base</a>&lt;<a class="el" href="classtype.html">type</a>&gt;::<a class="el" href="structname.html">name</a></td>
         </tr>
       </table>
   </td>
@@ -158,7 +159,7 @@ template&lt;typename type , typename holder_type &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01584">1584</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01619">1619</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>

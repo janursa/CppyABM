@@ -83,6 +83,10 @@ Functions</h2></td></tr>
 <tr class="separator:ae0904fa5521ec9fe9d94e44e59bda883"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e6969bd263ef047ae9a220f35ff4225"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetest__builtin__casters.html#a9e6969bd263ef047ae9a220f35ff4225">test_integer_casting</a> ()</td></tr>
 <tr class="separator:a9e6969bd263ef047ae9a220f35ff4225"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cbe4a3cb7ec646f7a0113e60f71df43"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetest__builtin__casters.html#a1cbe4a3cb7ec646f7a0113e60f71df43">test_int_convert</a> ()</td></tr>
+<tr class="separator:a1cbe4a3cb7ec646f7a0113e60f71df43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af550e203dab9697a20b4d6fb3e0a2269"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetest__builtin__casters.html#af550e203dab9697a20b4d6fb3e0a2269">test_numpy_int_convert</a> ()</td></tr>
+<tr class="separator:af550e203dab9697a20b4d6fb3e0a2269"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6077d301b56916ab81a4221c208113dd"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetest__builtin__casters.html#a6077d301b56916ab81a4221c208113dd">test_tuple</a> (<a class="el" href="structdoc.html">doc</a>)</td></tr>
 <tr class="separator:a6077d301b56916ab81a4221c208113dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc113e89eecd8ba4326fb07e3a2fb069"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetest__builtin__casters.html#acc113e89eecd8ba4326fb07e3a2fb069">test_builtins_cast_return_none</a> ()</td></tr>
@@ -127,7 +131,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Test bool caster implicit conversions.</pre> 
-<p class="definition">Definition at line <a class="el" href="test__builtin__casters_8py_source.html#l00353">353</a> of file <a class="el" href="test__builtin__casters_8py_source.html">test_builtin_casters.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="test__builtin__casters_8py_source.html#l00445">445</a> of file <a class="el" href="test__builtin__casters_8py_source.html">test_builtin_casters.py</a>.</p>
 
 </div>
 </div>
@@ -146,7 +150,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Casters produced with PYBIND11_TYPE_CASTER() should convert nullptr to None</pre> 
-<p class="definition">Definition at line <a class="el" href="test__builtin__casters_8py_source.html#l00290">290</a> of file <a class="el" href="test__builtin__casters_8py_source.html">test_builtin_casters.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="test__builtin__casters_8py_source.html#l00382">382</a> of file <a class="el" href="test__builtin__casters_8py_source.html">test_builtin_casters.py</a>.</p>
 
 </div>
 </div>
@@ -185,7 +189,7 @@ one-way: the only way to return bytes to Python is via the pybind11::bytes class
       </table>
 </div><div class="memdoc">
 <pre class="fragment">std::complex casts</pre> 
-<p class="definition">Definition at line <a class="el" href="test__builtin__casters_8py_source.html#l00347">347</a> of file <a class="el" href="test__builtin__casters_8py_source.html">test_builtin_casters.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="test__builtin__casters_8py_source.html#l00439">439</a> of file <a class="el" href="test__builtin__casters_8py_source.html">test_builtin_casters.py</a>.</p>
 
 </div>
 </div>
@@ -207,7 +211,26 @@ one-way: the only way to return bytes to Python is via the pybind11::bytes class
 The returned ConstRefCasted type is a mimimal type that is constructed to
 reference the casting mode used.
 </pre> 
-<p class="definition">Definition at line <a class="el" href="test__builtin__casters_8py_source.html#l00430">430</a> of file <a class="el" href="test__builtin__casters_8py_source.html">test_builtin_casters.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="test__builtin__casters_8py_source.html#l00522">522</a> of file <a class="el" href="test__builtin__casters_8py_source.html">test_builtin_casters.py</a>.</p>
+
+</div>
+</div>
+<a id="a1cbe4a3cb7ec646f7a0113e60f71df43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cbe4a3cb7ec646f7a0113e60f71df43">&#9670;&nbsp;</a></span>test_int_convert()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def test_builtin_casters.test_int_convert </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="test__builtin__casters_8py_source.html#l00254">254</a> of file <a class="el" href="test__builtin__casters_8py_source.html">test_builtin_casters.py</a>.</p>
 
 </div>
 </div>
@@ -229,7 +252,7 @@ reference the casting mode used.
 if possible: longs are not always accepted where ints are used (such
 as the argument to sys.exit()). A C++ long long is always a Python
 long.</pre> 
-<p class="definition">Definition at line <a class="el" href="test__builtin__casters_8py_source.html#l00412">412</a> of file <a class="el" href="test__builtin__casters_8py_source.html">test_builtin_casters.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="test__builtin__casters_8py_source.html#l00504">504</a> of file <a class="el" href="test__builtin__casters_8py_source.html">test_builtin_casters.py</a>.</p>
 
 </div>
 </div>
@@ -267,7 +290,7 @@ long.</pre>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">None passed as various argument types should defer to other overloads</pre> 
-<p class="definition">Definition at line <a class="el" href="test__builtin__casters_8py_source.html#l00300">300</a> of file <a class="el" href="test__builtin__casters_8py_source.html">test_builtin_casters.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="test__builtin__casters_8py_source.html#l00392">392</a> of file <a class="el" href="test__builtin__casters_8py_source.html">test_builtin_casters.py</a>.</p>
 
 </div>
 </div>
@@ -286,7 +309,26 @@ long.</pre>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="test__builtin__casters_8py_source.html#l00396">396</a> of file <a class="el" href="test__builtin__casters_8py_source.html">test_builtin_casters.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="test__builtin__casters_8py_source.html#l00488">488</a> of file <a class="el" href="test__builtin__casters_8py_source.html">test_builtin_casters.py</a>.</p>
+
+</div>
+</div>
+<a id="af550e203dab9697a20b4d6fb3e0a2269"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af550e203dab9697a20b4d6fb3e0a2269">&#9670;&nbsp;</a></span>test_numpy_int_convert()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def test_builtin_casters.test_numpy_int_convert </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="test__builtin__casters_8py_source.html#l00324">324</a> of file <a class="el" href="test__builtin__casters_8py_source.html">test_builtin_casters.py</a>.</p>
 
 </div>
 </div>
@@ -305,7 +347,7 @@ long.</pre>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">std::reference_wrapper for builtin and user types</pre> 
-<p class="definition">Definition at line <a class="el" href="test__builtin__casters_8py_source.html#l00314">314</a> of file <a class="el" href="test__builtin__casters_8py_source.html">test_builtin_casters.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="test__builtin__casters_8py_source.html#l00406">406</a> of file <a class="el" href="test__builtin__casters_8py_source.html">test_builtin_casters.py</a>.</p>
 
 </div>
 </div>
@@ -383,7 +425,7 @@ long.</pre>
       </table>
 </div><div class="memdoc">
 <pre class="fragment">std::pair &lt;-&gt; tuple &amp; std::tuple &lt;-&gt; tuple</pre> 
-<p class="definition">Definition at line <a class="el" href="test__builtin__casters_8py_source.html#l00254">254</a> of file <a class="el" href="test__builtin__casters_8py_source.html">test_builtin_casters.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="test__builtin__casters_8py_source.html#l00346">346</a> of file <a class="el" href="test__builtin__casters_8py_source.html">test_builtin_casters.py</a>.</p>
 
 </div>
 </div>
@@ -421,7 +463,7 @@ long.</pre>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="test__builtin__casters_8py_source.html#l00309">309</a> of file <a class="el" href="test__builtin__casters_8py_source.html">test_builtin_casters.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="test__builtin__casters_8py_source.html#l00401">401</a> of file <a class="el" href="test__builtin__casters_8py_source.html">test_builtin_casters.py</a>.</p>
 
 </div>
 </div>
@@ -440,7 +482,7 @@ long.</pre>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="test__builtin__casters_8py_source.html#l00426">426</a> of file <a class="el" href="test__builtin__casters_8py_source.html">test_builtin_casters.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="test__builtin__casters_8py_source.html#l00518">518</a> of file <a class="el" href="test__builtin__casters_8py_source.html">test_builtin_casters.py</a>.</p>
 
 </div>
 </div>
@@ -457,7 +499,7 @@ long.</pre>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="test__builtin__casters_8py_source.html#l00375">375</a> of file <a class="el" href="test__builtin__casters_8py_source.html">test_builtin_casters.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="test__builtin__casters_8py_source.html#l00467">467</a> of file <a class="el" href="test__builtin__casters_8py_source.html">test_builtin_casters.py</a>.</p>
 
 </div>
 </div>

@@ -207,7 +207,7 @@ template&lt;typename D &gt; </div>
 
 <p>See above (the only difference is that they key is provided as a string literal) </p>
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01589">1589</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01614">1614</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -230,7 +230,7 @@ template&lt;typename D &gt; </div>
 </div><div class="memdoc">
 <p>\rst Return an internal functor to access the object's attributes. Casting the returned <code>detail::obj_attr_accessor</code> instance to a <code>handle</code> or <code>object</code> subclass causes a corresponding call to <code>getattr</code>. Assigning a <code>handle</code> or <code>object</code> subclass causes a call to <code>setattr</code>. \endrst </p>
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01586">1586</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01611">1611</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -249,7 +249,7 @@ template&lt;typename D &gt; </div>
 </div><div class="memdoc">
 <p>\rst Return an iterator equivalent to calling <code><a class="el" href="group__python__builtins.html#ga0f2342d8d9000a3bcef531c39e97c531">iter()</a></code> in Python. The object must be a collection which supports the iteration protocol. \endrst </p>
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01578">1578</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01603">1603</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -275,7 +275,7 @@ template&lt;typename T &gt; </div>
 
 <p>Check if the given item is contained within this object, i.e. <code>item in obj</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01595">1595</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01620">1620</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -295,7 +295,7 @@ template&lt;typename D &gt; </div>
 
 <p>Get or set the object's docstring, i.e. <code>obj.__doc__</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01603">1603</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01628">1628</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -315,7 +315,7 @@ template&lt;typename D &gt; </div>
 
 <p>Return a sentinel which ends iteration. </p>
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01579">1579</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01604">1604</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -365,7 +365,7 @@ template&lt;typename D &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01606">1606</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01631">1631</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -524,7 +524,7 @@ template&lt;return_value_policy policy, typename... Args&gt; </div>
 <p>\rst Assuming the Python object is a function or implements the <code>__call__</code> protocol, <code>operator()</code> invokes the underlying function, passing an arbitrary set of parameters. The result is returned as a <code>object</code> and may need to be converted back into a Python object using <code><a class="el" href="classhandle.html#a8158ff37b59a73d48140ab4d718316b9">handle::cast()</a></code>.</p>
 <p>When some of the arguments cannot be converted to Python objects, the function will throw a <code>cast_error</code> exception. When the Python function call fails, a <code><a class="el" href="classerror__already__set.html">error_already_set</a></code> exception is thrown. \endrst </p>
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l02198">2198</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l02254">2254</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -543,7 +543,7 @@ template&lt;typename D &gt; </div>
 </div><div class="memdoc">
 <p>\rst Matches * unpacking in Python, e.g. to unpack arguments out of a <code>tuple</code> or <code>list</code> for a function call. Applying another * to the result yields unpacking, e.g. to unpack a dict as function keyword arguments. See :ref:<code>calling_python_functions</code>. \endrst </p>
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01592">1592</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01617">1617</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -946,7 +946,7 @@ template&lt;typename D &gt; </div>
 
 <p>See above (the only difference is that they key is provided as a string literal) </p>
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01583">1583</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01608">1608</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -969,7 +969,7 @@ template&lt;typename D &gt; </div>
 </div><div class="memdoc">
 <p>\rst Return an internal functor to invoke the object's sequence protocol. Casting the returned <code>detail::item_accessor</code> instance to a <code>handle</code> or <code>object</code> subclass causes a corresponding call to <code>__getitem__</code>. Assigning a <code>handle</code> or <code>object</code> subclass causes a call to <code>__setitem__</code>. \endrst </p>
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01580">1580</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01605">1605</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -1139,7 +1139,7 @@ template&lt;typename D &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01600">1600</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01625">1625</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>

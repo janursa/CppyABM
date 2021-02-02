@@ -90,6 +90,10 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpp__function.html">cpp_function</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wraps an arbitrary C++ function/method/lambda function/.. into a callable Python object.  <a href="classcpp__function.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcpp__function_1_1_initializing_function_record_deleter.html">cpp_function::InitializingFunctionRecordDeleter</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpp__function_1_1strdup__guard.html">cpp_function::strdup_guard</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmodule__.html">module_</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper for Python extension modules.  <a href="classmodule__.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -397,7 +401,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02391">2391</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02444">2444</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -439,7 +443,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02385">2385</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02438">2438</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -487,7 +491,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02387">2387</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02440">2440</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -529,7 +533,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02393">2393</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02446">2446</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -577,7 +581,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02389">2389</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02442">2442</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -623,7 +627,7 @@ Functions</h2></td></tr>
 <p>class PyAnimal : public <a class="el" href="struct_animal.html">Animal</a> { public: Inherit the constructors using <a class="el" href="struct_animal.html#af163de0cc8414e7f3ae8a18c848c42cc">Animal::Animal</a>;</p>
 <p>Trampoline (need one for each virtual function) std::string go(int n_times) override { PYBIND11_OVERRIDE_PURE( std::string, // Return type (ret_type) <a class="el" href="struct_animal.html">Animal</a>, // Parent class (cname) go, // Name of function in C++ (must match Python name) (fn) n_times // Argument(s) (...) ); } }; \endrst </p>
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02362">2362</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02415">2415</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -677,7 +681,7 @@ Functions</h2></td></tr>
 <div class="line">        } \</div>
 <div class="line">    } <span class="keywordflow">while</span> (<span class="keyword">false</span>)</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02291">2291</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02344">2344</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -732,7 +736,7 @@ Functions</h2></td></tr>
 <p>.. code-block:: cpp</p>
 <p>std::string toString() override { PYBIND11_OVERRIDE_NAME( std::string, // Return type (ret_type) <a class="el" href="struct_animal.html">Animal</a>, // Parent class (cname) "__str__", // Name of method in Python (name) toString, // Name of function in C++ (fn) ); } \endrst </p>
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02322">2322</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02375">2375</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -775,7 +779,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>\rst Macro for pure virtual functions, this function is identical to :c:macro:<code>PYBIND11_OVERRIDE</code>, except that it throws if no override can be found. \endrst </p>
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02369">2369</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02422">2422</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -828,7 +832,7 @@ Functions</h2></td></tr>
 <div class="line">    } <span class="keywordflow">while</span> (<span class="keyword">false</span>)</div>
 </div><!-- fragment --><p>\rst Macro for pure virtual functions, this function is identical to :c:macro:<code>PYBIND11_OVERRIDE_NAME</code>, except that it throws if no override can be found. \endrst </p>
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02332">2332</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02385">2385</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -859,7 +863,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01017">1017</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01067">1067</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -904,7 +908,7 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01164">1164</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01214">1214</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -932,7 +936,7 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01811">1811</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01860">1860</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -972,7 +976,7 @@ template&lt;typename T , enable_if_t&lt; has_operator_delete&lt; T &gt;::value, 
 
 <p>Call class-specific delete if it exists or global otherwise. Can also be an overload set. </p>
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01141">1141</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01191">1191</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -1016,7 +1020,7 @@ template&lt;typename T , enable_if_t&lt; has_operator_delete&lt; T &gt;::value, 
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01145">1145</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01195">1195</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -1044,7 +1048,7 @@ template&lt;typename T , enable_if_t&lt; has_operator_delete&lt; T &gt;::value, 
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01563">1563</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01612">1612</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -1065,7 +1069,7 @@ template&lt;typename CppException &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01975">1975</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02028">2028</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -1105,7 +1109,7 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02380">2380</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02433">2433</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -1137,9 +1141,9 @@ template&lt;class T &gt; </div>
       </table>
 </div><div class="memdoc">
 <p>\rst Try to retrieve a python method by the provided name from the instance pointed to by the this_ptr.</p>
-<p>:this_ptr: The pointer to the object the overriden method should be retrieved for. This should be the first non-trampoline class encountered in the inheritance chain. :name: The name of the overridden Python method to retrieve. :return: The Python method by this name from the object or an empty function wrapper. \endrst </p>
+<p>:this_ptr: The pointer to the object the overridden method should be retrieved for. This should be the first non-trampoline class encountered in the inheritance chain. :name: The name of the overridden Python method to retrieve. :return: The Python method by this name from the object or an empty function wrapper. \endrst </p>
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02285">2285</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02338">2338</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -1183,7 +1187,7 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02375">2375</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02428">2428</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -1227,7 +1231,7 @@ template&lt;class T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02219">2219</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02272">2272</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -1248,7 +1252,7 @@ template&lt;typename InputType , typename OutputType &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01910">1910</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01963">1963</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -1271,7 +1275,7 @@ template&lt;typename... Args&gt; </div>
 
 <p>Binds an existing constructor taking arguments Args... </p>
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01538">1538</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01587">1587</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -1304,7 +1308,7 @@ template&lt;typename CFunc , typename AFunc , typename Ret  = detail::initimpl::
 </div><div class="memdoc">
 <p>Dual-argument factory function: the first function is called when no alias is needed, the second when an alias is needed (i.e. due to python-side inheritance). Arguments must be identical. </p>
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01550">1550</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01599">1599</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -1328,7 +1332,7 @@ template&lt;typename Func , typename Ret  = detail::initimpl::factory&lt;Func&gt
 
 <p>Binds a factory function as a constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01545">1545</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01594">1594</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -1350,7 +1354,7 @@ template&lt;typename... Args&gt; </div>
 </div><div class="memdoc">
 <p>Like <code>init&lt;Args...&gt;()</code>, but the instance is always constructed through the alias class (even when not inheriting on the Python side). </p>
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01541">1541</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01590">1590</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -1388,7 +1392,7 @@ template&lt;typename... Args&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01770">1770</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01819">1819</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -1438,7 +1442,7 @@ template&lt;typename... Args&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01797">1797</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01846">1846</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -1478,7 +1482,7 @@ template&lt;return_value_policy Policy = return_value_policy::reference_internal
 
 <p>Makes a python iterator from a first and past-the-end C++ InputIterator. </p>
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01845">1845</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01896">1896</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -1511,7 +1515,7 @@ template&lt;return_value_policy Policy = return_value_policy::reference_internal
 </div><div class="memdoc">
 <p>Makes an iterator over values of an stl container or other container supporting <code>std::begin()</code>/<code><a class="el" href="namespacelibsize.html#a5957fc1e6f6b0ee7cd77e1e062369d35">std::end()</a></code> </p>
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01899">1899</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01952">1952</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -1550,7 +1554,7 @@ template&lt;return_value_policy Policy = return_value_policy::reference_internal
 </div><div class="memdoc">
 <p>Makes an python iterator over the keys (<code>.first</code>) of a iterator over pairs from a first and past-the-end InputIterator. </p>
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01874">1874</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01927">1927</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -1583,7 +1587,7 @@ template&lt;return_value_policy Policy = return_value_policy::reference_internal
 </div><div class="memdoc">
 <p>Makes an iterator over the keys (<code>.first</code>) of a stl map-like container supporting <code>std::begin()</code>/<code><a class="el" href="namespacelibsize.html#a5957fc1e6f6b0ee7cd77e1e062369d35">std::end()</a></code> </p>
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01906">1906</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01959">1959</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -1606,7 +1610,7 @@ template&lt;typename , typename F &gt; </div>
 </div><div class="memdoc">
 <p>Given a pointer to a member function, cast it to its <code>Derived</code> version. Forward everything else unchanged. </p>
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01176">1176</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01226">1226</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -1628,7 +1632,7 @@ template&lt;typename Derived , typename Return , typename Class , typename... Ar
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01179">1179</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01229">1229</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -1661,7 +1665,7 @@ template&lt;typename GetState , typename SetState &gt; </div>
 </div><div class="memdoc">
 <p>Binds pickling functions <code>__getstate__</code> and <code>__setstate__</code> and ensures that the type returned by <code>__getstate__</code> is the same as the argument accepted by <code>__setstate__</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01557">1557</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01606">1606</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -1683,7 +1687,7 @@ template&lt;return_value_policy policy = return_value_policy::automatic_referenc
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02036">2036</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02089">2089</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -1721,7 +1725,7 @@ template&lt;return_value_policy policy = return_value_policy::automatic_referenc
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02003">2003</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02056">2056</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -1760,7 +1764,7 @@ template&lt;typename CppException &gt; </div>
 </div><div class="memdoc">
 <p>Registers a Python exception in <code>m</code> of the given <code>name</code> and installs an exception translator to translate the C++ exception to the created Python exception using the exceptions what() method. This is intended for simple exception translations; for more complex translation, register the exception object and translator directly. </p>
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01985">1985</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l02038">2038</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -1782,7 +1786,7 @@ template&lt;typename ExceptionTranslator &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01938">1938</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01991">1991</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -1804,7 +1808,7 @@ template&lt;typename &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01131">1131</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01181">1181</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -1828,21 +1832,21 @@ template&lt;typename T , typename  = void_t&lt;decltype(static_cast&lt;void *(*)
 
 <p>Set the pointer to operator new if it exists. The cast is needed because it can be overloaded. </p>
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01129">1129</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01179">1179</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
 <div class="ttc" id="astructname_html"><div class="ttname"><a href="structname.html">name</a></div><div class="ttdoc">Annotation for function names.</div><div class="ttdef"><b>Definition:</b> <a href="attr_8h_source.html#l00036">attr.h:36</a></div></div>
-<div class="ttc" id="aexamples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_html_aeea9746c2787bab3a5a0c983ef965520"><div class="ttname"><a href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h.html#aeea9746c2787bab3a5a0c983ef965520">pybind11_fail</a></div><div class="ttdeci">PyExc_RuntimeError PYBIND11_NOINLINE void pybind11_fail(const char *reason)</div><div class="ttdoc">Used internally.</div><div class="ttdef"><b>Definition:</b> <a href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html#l00727">common.h:727</a></div></div>
+<div class="ttc" id="aexamples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_html_aeea9746c2787bab3a5a0c983ef965520"><div class="ttname"><a href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h.html#aeea9746c2787bab3a5a0c983ef965520">pybind11_fail</a></div><div class="ttdeci">PyExc_RuntimeError PYBIND11_NOINLINE void pybind11_fail(const char *reason)</div><div class="ttdoc">Used internally.</div><div class="ttdef"><b>Definition:</b> <a href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html#l00751">common.h:751</a></div></div>
 <div class="ttc" id="astructis__method_html"><div class="ttname"><a href="structis__method.html">is_method</a></div><div class="ttdoc">Annotation for methods.</div><div class="ttdef"><b>Definition:</b> <a href="attr_8h_source.html#l00021">attr.h:21</a></div></div>
-<div class="ttc" id="aclasstype_html_a9c98c2c9a6ae453a7c4da3b9f0e5bee6"><div class="ttname"><a href="classtype.html#a9c98c2c9a6ae453a7c4da3b9f0e5bee6">type::handle_of</a></div><div class="ttdeci">static handle handle_of()</div><div class="ttdef"><b>Definition:</b> <a href="cast_8h_source.html#l02212">cast.h:2212</a></div></div>
-<div class="ttc" id="apybind11_8h_html_a7e8cda8d00f1ec74bba3ed663dfa4e71"><div class="ttname"><a href="pybind11_8h.html#a7e8cda8d00f1ec74bba3ed663dfa4e71">get_override</a></div><div class="ttdeci">function get_override(const T *this_ptr, const char *name)</div><div class="ttdef"><b>Definition:</b> <a href="pybind11_8h_source.html#l02285">pybind11.h:2285</a></div></div>
-<div class="ttc" id="astructarg_html"><div class="ttname"><a href="structarg.html">arg</a></div><div class="ttdef"><b>Definition:</b> <a href="cast_8h_source.html#l01849">cast.h:1849</a></div></div>
-<div class="ttc" id="aexamples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_html_ab822e781bd1668e8bd7bd3de1b610978"><div class="ttname"><a href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h.html#ab822e781bd1668e8bd7bd3de1b610978">PYBIND11_STRINGIFY</a></div><div class="ttdeci">#define PYBIND11_STRINGIFY(x)</div><div class="ttdef"><b>Definition:</b> <a href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html#l00236">common.h:235</a></div></div>
+<div class="ttc" id="aclasstype_html_a9c98c2c9a6ae453a7c4da3b9f0e5bee6"><div class="ttname"><a href="classtype.html#a9c98c2c9a6ae453a7c4da3b9f0e5bee6">type::handle_of</a></div><div class="ttdeci">static handle handle_of()</div><div class="ttdef"><b>Definition:</b> <a href="cast_8h_source.html#l02268">cast.h:2268</a></div></div>
+<div class="ttc" id="apybind11_8h_html_a7e8cda8d00f1ec74bba3ed663dfa4e71"><div class="ttname"><a href="pybind11_8h.html#a7e8cda8d00f1ec74bba3ed663dfa4e71">get_override</a></div><div class="ttdeci">function get_override(const T *this_ptr, const char *name)</div><div class="ttdef"><b>Definition:</b> <a href="pybind11_8h_source.html#l02338">pybind11.h:2338</a></div></div>
+<div class="ttc" id="astructarg_html"><div class="ttname"><a href="structarg.html">arg</a></div><div class="ttdef"><b>Definition:</b> <a href="cast_8h_source.html#l01895">cast.h:1895</a></div></div>
+<div class="ttc" id="aexamples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_html_ab822e781bd1668e8bd7bd3de1b610978"><div class="ttname"><a href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h.html#ab822e781bd1668e8bd7bd3de1b610978">PYBIND11_STRINGIFY</a></div><div class="ttdeci">#define PYBIND11_STRINGIFY(x)</div><div class="ttdef"><b>Definition:</b> <a href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html#l00254">common.h:253</a></div></div>
 <div class="ttc" id="aclasscpp__function_html"><div class="ttname"><a href="classcpp__function.html">cpp_function</a></div><div class="ttdoc">Wraps an arbitrary C++ function/method/lambda function/.. into a callable Python object.</div><div class="ttdef"><b>Definition:</b> <a href="pybind11_8h_source.html#l00062">pybind11.h:62</a></div></div>
-<div class="ttc" id="acast_8h_html_abf638a034b5ed51437f70d736e85c0a6"><div class="ttname"><a href="cast_8h.html#abf638a034b5ed51437f70d736e85c0a6">PYBIND11_TYPE</a></div><div class="ttdeci">#define PYBIND11_TYPE(...)</div><div class="ttdef"><b>Definition:</b> <a href="cast_8h_source.html#l02230">cast.h:2229</a></div></div>
-<div class="ttc" id="acast_8h_html_a9d3321974e3d593c2e75a2a5b4d6b1b9"><div class="ttname"><a href="cast_8h.html#a9d3321974e3d593c2e75a2a5b4d6b1b9">move</a></div><div class="ttdeci">detail::enable_if_t&lt;!detail::move_never&lt; T &gt;::value, T &gt; move(object &amp;&amp;obj)</div><div class="ttdef"><b>Definition:</b> <a href="cast_8h_source.html#l01752">cast.h:1752</a></div></div>
+<div class="ttc" id="acast_8h_html_abf638a034b5ed51437f70d736e85c0a6"><div class="ttname"><a href="cast_8h.html#abf638a034b5ed51437f70d736e85c0a6">PYBIND11_TYPE</a></div><div class="ttdeci">#define PYBIND11_TYPE(...)</div><div class="ttdef"><b>Definition:</b> <a href="cast_8h_source.html#l02286">cast.h:2285</a></div></div>
+<div class="ttc" id="acast_8h_html_a9d3321974e3d593c2e75a2a5b4d6b1b9"><div class="ttname"><a href="cast_8h.html#a9d3321974e3d593c2e75a2a5b4d6b1b9">move</a></div><div class="ttdeci">detail::enable_if_t&lt;!detail::move_never&lt; T &gt;::value, T &gt; move(object &amp;&amp;obj)</div><div class="ttdef"><b>Definition:</b> <a href="cast_8h_source.html#l01798">cast.h:1798</a></div></div>
 <div class="ttc" id="anamespacetest__callbacks_html_a9e87722eddd519b2bd0d4bd5874ccb2b"><div class="ttname"><a href="namespacetest__callbacks.html#a9e87722eddd519b2bd0d4bd5874ccb2b">test_callbacks.value</a></div><div class="ttdeci">value</div><div class="ttdef"><b>Definition:</b> <a href="test__callbacks_8py_source.html#l00126">test_callbacks.py:126</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

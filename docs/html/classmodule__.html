@@ -200,7 +200,7 @@ Additional Inherited Members</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Wrapper for Python extension modules. </p>
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l00891">891</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l00941">941</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a22694df664c03b28f40fa88ea2440a1f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a22694df664c03b28f40fa88ea2440a1f">&#9670;&nbsp;</a></span>module_()</h2>
@@ -238,7 +238,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Create a new top-level Python module with the given name and docstring. </p>
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l00897">897</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l00947">947</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -285,7 +285,7 @@ Additional Inherited Members</h2></td></tr>
 <p>\rst Adds an object to the module using the given name. Throws if an object with the given name already exists.</p>
 <p><code>overwrite</code> should almost always be false: attempting to overwrite objects that <a class="el" href="namespacepybind11.html">pybind11</a> has established will, in most cases, break things. \endrst </p>
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l00963">963</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01013">1013</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -329,9 +329,9 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>\rst Create a new top-level module that can be used as the main module of a C extension.</p>
-<p>For Python 3, <code>def</code> should point to a staticly allocated <a class="el" href="structmodule___1_1module__def.html">module_def</a>. For Python 2, <code>def</code> can be a nullptr and is completely ignored. \endrst </p>
+<p>For Python 3, <code>def</code> should point to a statically allocated <a class="el" href="structmodule___1_1module__def.html">module_def</a>. For Python 2, <code>def</code> can be a nullptr and is completely ignored. \endrst </p>
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l00983">983</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01033">1033</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -378,7 +378,7 @@ template&lt;typename Func , typename... Extra&gt; </div>
 </div><div class="memdoc">
 <p>\rst Create Python binding for a new function within the module scope. <code>Func</code> can be a plain C++ function, a function pointer, or a lambda function. For details on the <code>Extra&amp;&amp; ... extra</code> argument, see section :ref:<code>extras</code>. \endrst </p>
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l00911">911</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l00961">961</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -421,7 +421,7 @@ py::module_ m2 = m.def_submodule("sub", "A submodule of 'example'");
 py::module_ m3 = m2.def_submodule("subsub", "A submodule of 'example.sub'");
 </pre><p> \endrst </p>
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l00930">930</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l00980">980</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -451,7 +451,7 @@ py::module_ m3 = m2.def_submodule("subsub", "A submodule of 'example.sub'");
 
 <p>Import and return a module or throws <code><a class="el" href="classerror__already__set.html">error_already_set</a></code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l00941">941</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l00991">991</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -480,7 +480,7 @@ py::module_ m3 = m2.def_submodule("subsub", "A submodule of 'example.sub'");
 
 <p>Reload the module or throws <code><a class="el" href="classerror__already__set.html">error_already_set</a></code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l00949">949</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l00999">999</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>

@@ -149,13 +149,12 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structholder__helper.html">holder_helper&lt; T &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcopyable__holder__caster.html">copyable_holder_caster&lt; type, holder_type &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type caster for holder types like std::shared_ptr, etc.  <a href="structcopyable__holder__caster.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcopyable__holder__caster.html">copyable_holder_caster&lt; type, holder_type, SFINAE &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtype__caster_3_01std_1_1shared__ptr_3_01_t_01_4_01_4.html">type_caster&lt; std::shared_ptr&lt; T &gt; &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specialize for the common std::shared_ptr, so users don't need to.  <a href="classtype__caster_3_01std_1_1shared__ptr_3_01_t_01_4_01_4.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmove__only__holder__caster.html">move_only_holder_caster&lt; type, holder_type &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmove__only__holder__caster.html">move_only_holder_caster&lt; type, holder_type, SFINAE &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtype__caster_3_01std_1_1unique__ptr_3_01type_00_01deleter_01_4_01_4.html">type_caster&lt; std::unique_ptr&lt; type, deleter &gt; &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -289,6 +288,8 @@ Functions</h2></td></tr>
 <tr class="separator:a31028048b74a70913e602b451bc3039f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d66e15ebc57c86a64dfc44a70dfc33b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h.html#a1fb186b7494d5c576d902c0730ecbb71">PYBIND11_NOINLINE</a> <a class="el" href="classhandle.html">handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cast_8h.html#a0d66e15ebc57c86a64dfc44a70dfc33b">get_type_handle</a> (const std::type_info &amp;tp, bool throw_if_missing)</td></tr>
 <tr class="separator:a0d66e15ebc57c86a64dfc44a70dfc33b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c1632f384c107f6ee3458387c199fb7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h.html#a1fb186b7494d5c576d902c0730ecbb71">PYBIND11_NOINLINE</a> <a class="el" href="classhandle.html">handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cast_8h.html#a4c1632f384c107f6ee3458387c199fb7">find_registered_python_instance</a> (void *src, const detail::type_info *tinfo)</td></tr>
+<tr class="separator:a4c1632f384c107f6ee3458387c199fb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2245145263bfc05e6f2ce8cbc87fa856"><td class="memItemLeft" align="right" valign="top"><a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h.html#a1fb186b7494d5c576d902c0730ecbb71">PYBIND11_NOINLINE</a> bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cast_8h.html#a2245145263bfc05e6f2ce8cbc87fa856">isinstance_generic</a> (<a class="el" href="classhandle.html">handle</a> obj, const std::type_info &amp;tp)</td></tr>
 <tr class="separator:a2245145263bfc05e6f2ce8cbc87fa856"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af50c237c1ebe85cf7e290a97197dd2c1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h.html#a1fb186b7494d5c576d902c0730ecbb71">PYBIND11_NOINLINE</a> std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cast_8h.html#af50c237c1ebe85cf7e290a97197dd2c1">error_string</a> ()</td></tr>
@@ -357,11 +358,14 @@ Functions</h2></td></tr>
 <tr class="separator:aa41c01a57ee7570a0fd14111d2121d4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeade6773ae4649d485c790a1eb9dc729"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="structarg.html">arg</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceliterals.html#aeade6773ae4649d485c790a1eb9dc729">literals::operator&quot;&quot;_a</a> (const char *<a class="el" href="structname.html">name</a>, <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>)</td></tr>
 <tr class="separator:aeade6773ae4649d485c790a1eb9dc729"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2ec603b74afc4d3220c7516650e19a5"><td class="memTemplParams" colspan="2">template&lt;return_value_policy policy, typename... Args, typename  = enable_if_t&lt;all_of&lt;is_positional&lt;Args&gt;...&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:a3b7a45ad17c7f0bb239c9c8ea9f23c76"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a3b7a45ad17c7f0bb239c9c8ea9f23c76"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="cast_8h.html#a3b7a45ad17c7f0bb239c9c8ea9f23c76">args_are_all_positional</a> ()</td></tr>
+<tr class="separator:a3b7a45ad17c7f0bb239c9c8ea9f23c76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2ec603b74afc4d3220c7516650e19a5"><td class="memTemplParams" colspan="2">template&lt;return_value_policy policy, typename... Args, typename  = enable_if_t&lt;args_are_all_positional&lt;Args...&gt;()&gt;&gt; </td></tr>
 <tr class="memitem:ad2ec603b74afc4d3220c7516650e19a5"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classsimple__collector.html">simple_collector</a>&lt; policy &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="cast_8h.html#ad2ec603b74afc4d3220c7516650e19a5">collect_arguments</a> (Args &amp;&amp;...<a class="el" href="classargs.html">args</a>)</td></tr>
 <tr class="memdesc:ad2ec603b74afc4d3220c7516650e19a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collect only positional arguments for a Python function call.  <a href="cast_8h.html#ad2ec603b74afc4d3220c7516650e19a5">More...</a><br /></td></tr>
 <tr class="separator:ad2ec603b74afc4d3220c7516650e19a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6869cc55913b0c3c3e684bf119bf2b3"><td class="memTemplParams" colspan="2">template&lt;return_value_policy policy, typename... Args, typename  = enable_if_t&lt;!all_of&lt;is_positional&lt;Args&gt;...&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:ad6869cc55913b0c3c3e684bf119bf2b3"><td class="memTemplParams" colspan="2">template&lt;return_value_policy policy, typename... Args, typename  = enable_if_t&lt;!args_are_all_positional&lt;Args...&gt;()&gt;&gt; </td></tr>
 <tr class="memitem:ad6869cc55913b0c3c3e684bf119bf2b3"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classunpacking__collector.html">unpacking_collector</a>&lt; policy &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="cast_8h.html#ad6869cc55913b0c3c3e684bf119bf2b3">collect_arguments</a> (Args &amp;&amp;...<a class="el" href="classargs.html">args</a>)</td></tr>
 <tr class="memdesc:ad6869cc55913b0c3c3e684bf119bf2b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collect all arguments, including keywords and unpacking (only instantiated when needed)  <a href="cast_8h.html#ad6869cc55913b0c3c3e684bf119bf2b3">More...</a><br /></td></tr>
 <tr class="separator:ad6869cc55913b0c3c3e684bf119bf2b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -408,7 +412,7 @@ Functions</h2></td></tr>
 </div><!-- fragment -->
 <p>Create a specialization for custom holder types (silently ignores std::shared_ptr) </p>
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01600">1600</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01635">1635</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -431,7 +435,7 @@ Functions</h2></td></tr>
 <div class="line">        template&lt;&gt; <span class="keyword">class </span><a class="code" href="classtype__caster.html">type_caster</a>&lt;__VA_ARGS__&gt; : <span class="keyword">public</span> <a class="code" href="classtype__caster__base.html">type_caster_base</a>&lt;__VA_ARGS__&gt; { }; \</div>
 <div class="line">    }}</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l02223">2223</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l02279">2279</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -452,7 +456,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Lets you pass a type containing a <code>,</code> through a macro parameter without needing a separate typedef, e.g.: <code>PYBIND11_OVERRIDE(PYBIND11_TYPE(ReturnType&lt;<a class="el" href="struct_a.html">A</a>, <a class="el" href="struct_b.html">B</a>&gt;), PYBIND11_TYPE(Parent&lt;C, D&gt;), f, arg)</code> </p>
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l02230">2230</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l02286">2286</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -499,7 +503,7 @@ Functions</h2></td></tr>
 <div class="line">        operator <a class="code" href="classtype.html">type</a>&amp;&amp;() &amp;&amp; { <span class="keywordflow">return</span> <a class="code" href="cast_8h.html#a9d3321974e3d593c2e75a2a5b4d6b1b9">std::move</a>(<a class="code" href="namespacetest__callbacks.html#a9e87722eddd519b2bd0d4bd5874ccb2b">value</a>); } \</div>
 <div class="line">        template &lt;typename T_&gt; <span class="keyword">using</span> <a class="code" href="cast_8h.html#a7acf8746a40fe31848a79ed85ec72701">cast_op_type</a> = pybind11::detail::movable_cast_op_type&lt;T_&gt;</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00985">985</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00993">993</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -520,7 +524,7 @@ template&lt;typename &gt; </div>
 
 <p>Alias for backward compatibility &ndash; to be removed in version 2.0. </p>
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01928">1928</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01974">1974</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -538,7 +542,7 @@ template&lt;typename type &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01678">1678</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01724">1724</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -558,7 +562,7 @@ template&lt;typename T &gt; </div>
 <p>Determine suitable casting operator for pointer-or-lvalue-casting type casters. The type caster needs to provide <code>operator T*()</code> and <code>operator T&amp;()</code> operators.</p>
 <p>If the type supports moving the value away via an <code>operator T&amp;&amp;() &amp;&amp;</code> method, it should use <code>movable_cast_op_type</code> instead. </p>
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00770">770</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00778">778</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -576,7 +580,7 @@ template&lt;typename CharT &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01004">1004</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01012">1012</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -594,7 +598,7 @@ template&lt;typename type &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00947">947</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00955">955</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -614,7 +618,7 @@ template&lt;typename T &gt; </div>
 <p>Determine suitable casting operator for a type caster with a movable value. Such a type caster needs to provide <code>operator T*()</code>, <code>operator T&amp;()</code>, and <code>operator T&amp;&amp;() &amp;&amp;</code>. The latter will be called in appropriate contexts where the value can be moved rather than copied.</p>
 <p>These operator are automatically provided when using the PYBIND11_TYPE_CASTER macro. </p>
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00783">783</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00791">791</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -632,7 +636,7 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01655">1655</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01701">1701</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -650,7 +654,7 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01672">1672</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01718">1718</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -668,7 +672,7 @@ template&lt;typename ret_type &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01797">1797</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01843">1843</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -686,7 +690,7 @@ template&lt;typename type , typename holder_type &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01592">1592</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01627">1627</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -745,7 +749,7 @@ template&lt;typename type , typename holder_type &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01811">1811</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01860">1860</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -787,6 +791,35 @@ template&lt;typename type , typename holder_type &gt; </div>
 
 </div>
 </div>
+<a id="a3b7a45ad17c7f0bb239c9c8ea9f23c76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b7a45ad17c7f0bb239c9c8ea9f23c76">&#9670;&nbsp;</a></span>args_are_all_positional()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool args_are_all_positional </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l02226">2226</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+
+</div>
+</div>
 <a id="a42ebc557ef15690c3171a99f46d59aab"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a42ebc557ef15690c3171a99f46d59aab">&#9670;&nbsp;</a></span>cast() <span class="overload">[1/5]</span></h2>
 
@@ -805,7 +838,7 @@ template&lt;typename T , detail::enable_if_t&lt;!detail::is_pyobject&lt; T &gt;:
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01723">1723</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01769">1769</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -827,7 +860,7 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01772">1772</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01818">1818</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -849,7 +882,7 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01775">1775</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01821">1821</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -871,7 +904,7 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01781">1781</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01827">1827</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -909,7 +942,7 @@ template&lt;typename T , detail::enable_if_t&lt;!detail::is_pyobject&lt; T &gt;:
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01736">1736</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01782">1782</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -931,7 +964,7 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00954">954</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00962">962</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -953,7 +986,7 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00950">950</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00958">958</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -985,7 +1018,7 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01805">1805</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01851">1851</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -1017,7 +1050,7 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01802">1802</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01848">1848</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -1039,7 +1072,7 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01813">1813</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01859">1859</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -1061,7 +1094,7 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01811">1811</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01857">1857</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -1091,7 +1124,7 @@ template&lt;&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01815">1815</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01861">1861</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -1101,7 +1134,7 @@ template&lt;&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;return_value_policy policy, typename... Args, typename  = enable_if_t&lt;all_of&lt;is_positional&lt;Args&gt;...&gt;::value&gt;&gt; </div>
+template&lt;return_value_policy policy, typename... Args, typename  = enable_if_t&lt;args_are_all_positional&lt;Args...&gt;()&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classsimple__collector.html">simple_collector</a>&lt;policy&gt; collect_arguments </td>
@@ -1115,7 +1148,7 @@ template&lt;return_value_policy policy, typename... Args, typename  = enable_if_
 
 <p>Collect only positional arguments for a Python function call. </p>
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l02178">2178</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l02234">2234</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -1125,7 +1158,7 @@ template&lt;return_value_policy policy, typename... Args, typename  = enable_if_
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;return_value_policy policy, typename... Args, typename  = enable_if_t&lt;!all_of&lt;is_positional&lt;Args&gt;...&gt;::value&gt;&gt; </div>
+template&lt;return_value_policy policy, typename... Args, typename  = enable_if_t&lt;!args_are_all_positional&lt;Args...&gt;()&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classunpacking__collector.html">unpacking_collector</a>&lt;policy&gt; collect_arguments </td>
@@ -1139,7 +1172,7 @@ template&lt;return_value_policy policy, typename... Args, typename  = enable_if_
 
 <p>Collect all arguments, including keywords and unpacking (only instantiated when needed) </p>
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l02185">2185</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l02241">2241</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -1166,7 +1199,45 @@ template&lt;return_value_policy policy, typename... Args, typename  = enable_if_
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00410">410</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00423">423</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+
+</div>
+</div>
+<a id="a4c1632f384c107f6ee3458387c199fb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c1632f384c107f6ee3458387c199fb7">&#9670;&nbsp;</a></span>find_registered_python_instance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h.html#a1fb186b7494d5c576d902c0730ecbb71">PYBIND11_NOINLINE</a> <a class="el" href="classhandle.html">handle</a> find_registered_python_instance </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const detail::type_info *&#160;</td>
+          <td class="paramname"><em>tinfo</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00211">211</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -1260,7 +1331,7 @@ template&lt;return_value_policy policy, typename... Args, typename  = enable_if_
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00457">457</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00470">470</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -1287,7 +1358,7 @@ template&lt;return_value_policy policy, typename... Args, typename  = enable_if_
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00469">469</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00482">482</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -1432,7 +1503,7 @@ template&lt;return_value_policy policy, typename... Args, typename  = enable_if_
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00403">403</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00416">416</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -1470,7 +1541,7 @@ template&lt;return_value_policy policy, typename... Args, typename  = enable_if_
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01770">1770</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pybind11_8h_source.html#l01819">1819</a> of file <a class="el" href="pybind11_8h_source.html">pybind11.h</a>.</p>
 
 </div>
 </div>
@@ -1492,7 +1563,7 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01713">1713</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01759">1759</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -1524,7 +1595,7 @@ template&lt;typename T , typename SFINAE &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01701">1701</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01747">1747</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -1574,7 +1645,7 @@ template&lt;return_value_policy policy = return_value_policy::automatic_referenc
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01820">1820</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01866">1866</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -1596,7 +1667,7 @@ template&lt;return_value_policy policy = return_value_policy::automatic_referenc
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01823">1823</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01869">1869</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -1618,7 +1689,7 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01752">1752</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01798">1798</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -1640,26 +1711,26 @@ template&lt;typename T , enable_if_t&lt;!is_pyobject&lt; T &gt;::value, int &gt;
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01794">1794</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01840">1840</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
 <div class="ttc" id="astructname_html"><div class="ttname"><a href="structname.html">name</a></div><div class="ttdoc">Annotation for function names.</div><div class="ttdef"><b>Definition:</b> <a href="attr_8h_source.html#l00036">attr.h:36</a></div></div>
-<div class="ttc" id="acast_8h_html_a42ebc557ef15690c3171a99f46d59aab"><div class="ttname"><a href="cast_8h.html#a42ebc557ef15690c3171a99f46d59aab">cast</a></div><div class="ttdeci">T cast(const handle &amp;handle)</div><div class="ttdef"><b>Definition:</b> <a href="cast_8h_source.html#l01723">cast.h:1723</a></div></div>
-<div class="ttc" id="aclasstype_html"><div class="ttname"><a href="classtype.html">type</a></div><div class="ttdef"><b>Definition:</b> <a href="pytypes_8h_source.html#l00904">pytypes.h:904</a></div></div>
-<div class="ttc" id="astructalways__construct__holder_html"><div class="ttname"><a href="structalways__construct__holder.html">always_construct_holder</a></div><div class="ttdef"><b>Definition:</b> <a href="cast_8h_source.html#l01596">cast.h:1596</a></div></div>
-<div class="ttc" id="aexamples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_html_adde72ab1fb0dd4b48a5232c349a53841"><div class="ttname"><a href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h.html#adde72ab1fb0dd4b48a5232c349a53841">return_value_policy</a></div><div class="ttdeci">return_value_policy</div><div class="ttdoc">Approach used to cast a previously unknown C++ instance into a Python object.</div><div class="ttdef"><b>Definition:</b> <a href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html#l00339">common.h:339</a></div></div>
+<div class="ttc" id="acast_8h_html_a42ebc557ef15690c3171a99f46d59aab"><div class="ttname"><a href="cast_8h.html#a42ebc557ef15690c3171a99f46d59aab">cast</a></div><div class="ttdeci">T cast(const handle &amp;handle)</div><div class="ttdef"><b>Definition:</b> <a href="cast_8h_source.html#l01769">cast.h:1769</a></div></div>
+<div class="ttc" id="aclasstype_html"><div class="ttname"><a href="classtype.html">type</a></div><div class="ttdef"><b>Definition:</b> <a href="pytypes_8h_source.html#l00915">pytypes.h:915</a></div></div>
+<div class="ttc" id="astructalways__construct__holder_html"><div class="ttname"><a href="structalways__construct__holder.html">always_construct_holder</a></div><div class="ttdef"><b>Definition:</b> <a href="cast_8h_source.html#l01631">cast.h:1631</a></div></div>
+<div class="ttc" id="aexamples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_html_adde72ab1fb0dd4b48a5232c349a53841"><div class="ttname"><a href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h.html#adde72ab1fb0dd4b48a5232c349a53841">return_value_policy</a></div><div class="ttdeci">return_value_policy</div><div class="ttdoc">Approach used to cast a previously unknown C++ instance into a Python object.</div><div class="ttdef"><b>Definition:</b> <a href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html#l00357">common.h:357</a></div></div>
 <div class="ttc" id="aclasshandle_html"><div class="ttname"><a href="classhandle.html">handle</a></div><div class="ttdef"><b>Definition:</b> <a href="pytypes_8h_source.html#l00176">pytypes.h:176</a></div></div>
-<div class="ttc" id="aclasstype__caster_html"><div class="ttname"><a href="classtype__caster.html">type_caster</a></div><div class="ttdef"><b>Definition:</b> <a href="cast_8h_source.html#l00946">cast.h:946</a></div></div>
+<div class="ttc" id="aclasstype__caster_html"><div class="ttname"><a href="classtype__caster.html">type_caster</a></div><div class="ttdef"><b>Definition:</b> <a href="cast_8h_source.html#l00954">cast.h:954</a></div></div>
 <div class="ttc" id="aclassobject_html_a4ce66b1d44b37ae6b28e80228b075aae"><div class="ttname"><a href="classobject.html#a4ce66b1d44b37ae6b28e80228b075aae">object::release</a></div><div class="ttdeci">handle release()</div><div class="ttdef"><b>Definition:</b> <a href="pytypes_8h_source.html#l00249">pytypes.h:249</a></div></div>
-<div class="ttc" id="acast_8h_html_a9d3321974e3d593c2e75a2a5b4d6b1b9"><div class="ttname"><a href="cast_8h.html#a9d3321974e3d593c2e75a2a5b4d6b1b9">move</a></div><div class="ttdeci">detail::enable_if_t&lt;!detail::move_never&lt; T &gt;::value, T &gt; move(object &amp;&amp;obj)</div><div class="ttdef"><b>Definition:</b> <a href="cast_8h_source.html#l01752">cast.h:1752</a></div></div>
-<div class="ttc" id="acast_8h_html_a024e48f7c159500a358e9228db141523"><div class="ttname"><a href="cast_8h.html#a024e48f7c159500a358e9228db141523">type_caster_holder</a></div><div class="ttdeci">conditional_t&lt; is_copy_constructible&lt; holder_type &gt;::value, copyable_holder_caster&lt; type, holder_type &gt;, move_only_holder_caster&lt; type, holder_type &gt; &gt; type_caster_holder</div><div class="ttdef"><b>Definition:</b> <a href="cast_8h_source.html#l01592">cast.h:1594</a></div></div>
+<div class="ttc" id="acast_8h_html_a9d3321974e3d593c2e75a2a5b4d6b1b9"><div class="ttname"><a href="cast_8h.html#a9d3321974e3d593c2e75a2a5b4d6b1b9">move</a></div><div class="ttdeci">detail::enable_if_t&lt;!detail::move_never&lt; T &gt;::value, T &gt; move(object &amp;&amp;obj)</div><div class="ttdef"><b>Definition:</b> <a href="cast_8h_source.html#l01798">cast.h:1798</a></div></div>
+<div class="ttc" id="acast_8h_html_a024e48f7c159500a358e9228db141523"><div class="ttname"><a href="cast_8h.html#a024e48f7c159500a358e9228db141523">type_caster_holder</a></div><div class="ttdeci">conditional_t&lt; is_copy_constructible&lt; holder_type &gt;::value, copyable_holder_caster&lt; type, holder_type &gt;, move_only_holder_caster&lt; type, holder_type &gt; &gt; type_caster_holder</div><div class="ttdef"><b>Definition:</b> <a href="cast_8h_source.html#l01627">cast.h:1629</a></div></div>
 <div class="ttc" id="anamespacepybind11_html"><div class="ttname"><a href="namespacepybind11.html">pybind11</a></div><div class="ttdef"><b>Definition:</b> <a href="____init_____8py_source.html#l00001">__init__.py:1</a></div></div>
-<div class="ttc" id="acast_8h_html_a7acf8746a40fe31848a79ed85ec72701"><div class="ttname"><a href="cast_8h.html#a7acf8746a40fe31848a79ed85ec72701">cast_op_type</a></div><div class="ttdeci">conditional_t&lt; std::is_pointer&lt; remove_reference_t&lt; T &gt; &gt;::value, typename std::add_pointer&lt; intrinsic_t&lt; T &gt; &gt;::type, typename std::add_lvalue_reference&lt; intrinsic_t&lt; T &gt; &gt;::type &gt; cast_op_type</div><div class="ttdef"><b>Definition:</b> <a href="cast_8h_source.html#l00770">cast.h:773</a></div></div>
-<div class="ttc" id="aclassnone_html"><div class="ttname"><a href="classnone.html">none</a></div><div class="ttdef"><b>Definition:</b> <a href="pytypes_8h_source.html#l01064">pytypes.h:1064</a></div></div>
+<div class="ttc" id="acast_8h_html_a7acf8746a40fe31848a79ed85ec72701"><div class="ttname"><a href="cast_8h.html#a7acf8746a40fe31848a79ed85ec72701">cast_op_type</a></div><div class="ttdeci">conditional_t&lt; std::is_pointer&lt; remove_reference_t&lt; T &gt; &gt;::value, typename std::add_pointer&lt; intrinsic_t&lt; T &gt; &gt;::type, typename std::add_lvalue_reference&lt; intrinsic_t&lt; T &gt; &gt;::type &gt; cast_op_type</div><div class="ttdef"><b>Definition:</b> <a href="cast_8h_source.html#l00778">cast.h:781</a></div></div>
+<div class="ttc" id="aclassnone_html"><div class="ttname"><a href="classnone.html">none</a></div><div class="ttdef"><b>Definition:</b> <a href="pytypes_8h_source.html#l01075">pytypes.h:1075</a></div></div>
 <div class="ttc" id="anamespacetest__callbacks_html_a9e87722eddd519b2bd0d4bd5874ccb2b"><div class="ttname"><a href="namespacetest__callbacks.html#a9e87722eddd519b2bd0d4bd5874ccb2b">test_callbacks.value</a></div><div class="ttdeci">value</div><div class="ttdef"><b>Definition:</b> <a href="test__callbacks_8py_source.html#l00126">test_callbacks.py:126</a></div></div>
-<div class="ttc" id="aclasstype__caster__base_html"><div class="ttname"><a href="classtype__caster__base.html">type_caster_base</a></div><div class="ttdoc">Generic type caster for objects stored on the heap.</div><div class="ttdef"><b>Definition:</b> <a href="cast_8h_source.html#l00861">cast.h:861</a></div></div>
+<div class="ttc" id="aclasstype__caster__base_html"><div class="ttname"><a href="classtype__caster__base.html">type_caster_base</a></div><div class="ttdoc">Generic type caster for objects stored on the heap.</div><div class="ttdef"><b>Definition:</b> <a href="cast_8h_source.html#l00869">cast.h:869</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

@@ -74,53 +74,66 @@ $(function() {
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">import</span> re</div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">import</span> ghapi.core</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">import</span> ghapi.all</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="namespacemake__changelog.html#a2ab1643ef693f8044775195cc2c3c7f8">    9</a></span>&#160;ENTRY = re.compile(</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="stringliteral">r&quot;&quot;&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="stringliteral">    Suggested \s changelog \s entry:</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="stringliteral">    .*</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="stringliteral">    ```rst</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="stringliteral">    \s*</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="stringliteral">    (.*?)</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="stringliteral">    \s*</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="stringliteral">    ```</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="stringliteral">&quot;&quot;&quot;</span>,</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    re.DOTALL | re.VERBOSE,</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;)</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="namespacemake__changelog.html#adc96441bac072ca66e2c5e9f646851ac">   23</a></span>&#160;api = ghapi.core.GhApi(owner=<span class="stringliteral">&quot;pybind&quot;</span>, repo=<span class="stringliteral">&quot;pybind11&quot;</span>)</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">from</span> rich <span class="keyword">import</span> <span class="keywordflow">print</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">from</span> rich.syntax <span class="keyword">import</span> Syntax</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="namespacemake__changelog.html#a2ab1643ef693f8044775195cc2c3c7f8">   12</a></span>&#160;ENTRY = re.compile(</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="stringliteral">r&quot;&quot;&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="stringliteral">    Suggested \s changelog \s entry:</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="stringliteral">    .*</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="stringliteral">    ```rst</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="stringliteral">    \s*</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="stringliteral">    (.*?)</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="stringliteral">    \s*</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="stringliteral">    ```</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="stringliteral">&quot;&quot;&quot;</span>,</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    re.DOTALL | re.VERBOSE,</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;)</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="namespacemake__changelog.html#a98ed987b6e178bfd7e7ab7bec6009f72">   25</a></span>&#160;issues = api.issues.list_for_repo(labels=<span class="stringliteral">&quot;needs changelog&quot;</span>, state=<span class="stringliteral">&quot;closed&quot;</span>)</div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="namespacemake__changelog.html#a957f9dfd6e5fb638e6a303fc62fc0199">   26</a></span>&#160;missing = []</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<a class="code" href="pybind11_8h.html#a62bcafa97abdcadb6520a62e52331b89">print</a>()</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keywordflow">for</span> issue <span class="keywordflow">in</span> issues:</div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="namespacemake__changelog.html#a935511c42296d62ce76328860692c9d4">   29</a></span>&#160;    changelog = ENTRY.findall(issue.body)</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordflow">if</span> changelog:</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        (msg,) = changelog</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordflow">if</span> <span class="keywordflow">not</span> msg.startswith(<span class="stringliteral">&quot;* &quot;</span>):</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="namespacemake__changelog.html#aa973229e8624483ab65457803a053f81">   33</a></span>&#160;            msg = <span class="stringliteral">&quot;* &quot;</span> + msg</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordflow">if</span> <span class="keywordflow">not</span> msg.endswith(<span class="stringliteral">&quot;.&quot;</span>):</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            msg += <span class="stringliteral">&quot;.&quot;</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <a class="code" href="pybind11_8h.html#a62bcafa97abdcadb6520a62e52331b89">print</a>(msg)</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <a class="code" href="pybind11_8h.html#a62bcafa97abdcadb6520a62e52331b89">print</a>(f<span class="stringliteral">&quot;  `#{issue.number} &lt;{issue.html_url}&gt;`_\n&quot;</span>)</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">else</span>:</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        missing.append(issue)</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keywordflow">if</span> missing:</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="pybind11_8h.html#a62bcafa97abdcadb6520a62e52331b89">print</a>()</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="pybind11_8h.html#a62bcafa97abdcadb6520a62e52331b89">print</a>(<span class="stringliteral">&quot;-&quot;</span> * 30)</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="pybind11_8h.html#a62bcafa97abdcadb6520a62e52331b89">print</a>()</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">for</span> issue <span class="keywordflow">in</span> missing:</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <a class="code" href="pybind11_8h.html#a62bcafa97abdcadb6520a62e52331b89">print</a>(f<span class="stringliteral">&quot;Missing: {issue.title}&quot;</span>)</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <a class="code" href="pybind11_8h.html#a62bcafa97abdcadb6520a62e52331b89">print</a>(f<span class="stringliteral">&quot;  {issue.html_url}&quot;</span>)</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="namespacemake__changelog.html#adc96441bac072ca66e2c5e9f646851ac">   28</a></span>&#160;api = ghapi.all.GhApi(owner=<span class="stringliteral">&quot;pybind&quot;</span>, repo=<span class="stringliteral">&quot;pybind11&quot;</span>)</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="namespacemake__changelog.html#a98ed987b6e178bfd7e7ab7bec6009f72">   30</a></span>&#160;issues = api.issues.list_for_repo(labels=<span class="stringliteral">&quot;needs changelog&quot;</span>, state=<span class="stringliteral">&quot;closed&quot;</span>)</div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="namespacemake__changelog.html#a957f9dfd6e5fb638e6a303fc62fc0199">   31</a></span>&#160;missing = []</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keywordflow">for</span> issue <span class="keywordflow">in</span> issues:</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="namespacemake__changelog.html#a935511c42296d62ce76328860692c9d4">   34</a></span>&#160;    changelog = ENTRY.findall(issue.body)</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordflow">if</span> changelog:</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        (msg,) = changelog</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordflow">if</span> <span class="keywordflow">not</span> msg.startswith(<span class="stringliteral">&quot;* &quot;</span>):</div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="namespacemake__changelog.html#aadab2c6cedc02875d29eda2bf32f9455">   38</a></span>&#160;            msg = <span class="stringliteral">&quot;* &quot;</span> + msg</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keywordflow">if</span> <span class="keywordflow">not</span> msg.endswith(<span class="stringliteral">&quot;.&quot;</span>):</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            msg += <span class="stringliteral">&quot;.&quot;</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        msg += f<span class="stringliteral">&quot;\n  `#{issue.number} &lt;{issue.html_url}&gt;`_&quot;</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <a class="code" href="pybind11_8h.html#a62bcafa97abdcadb6520a62e52331b89">print</a>(Syntax(msg, <span class="stringliteral">&quot;rst&quot;</span>, theme=<span class="stringliteral">&quot;ansi_light&quot;</span>))</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <a class="code" href="pybind11_8h.html#a62bcafa97abdcadb6520a62e52331b89">print</a>()</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">else</span>:</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        missing.append(issue)</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keywordflow">if</span> missing:</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="pybind11_8h.html#a62bcafa97abdcadb6520a62e52331b89">print</a>()</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="pybind11_8h.html#a62bcafa97abdcadb6520a62e52331b89">print</a>(<span class="stringliteral">&quot;[blue]&quot;</span> + <span class="stringliteral">&quot;-&quot;</span> * 30)</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <a class="code" href="pybind11_8h.html#a62bcafa97abdcadb6520a62e52331b89">print</a>()</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordflow">for</span> issue <span class="keywordflow">in</span> missing:</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <a class="code" href="pybind11_8h.html#a62bcafa97abdcadb6520a62e52331b89">print</a>(f<span class="stringliteral">&quot;[red bold]Missing:[/red bold][red] {issue.title}&quot;</span>)</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <a class="code" href="pybind11_8h.html#a62bcafa97abdcadb6520a62e52331b89">print</a>(f<span class="stringliteral">&quot;[red]  {issue.html_url}\n&quot;</span>)</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <a class="code" href="pybind11_8h.html#a62bcafa97abdcadb6520a62e52331b89">print</a>(<span class="stringliteral">&quot;[bold]Template:\n&quot;</span>)</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    msg = <span class="stringliteral">&quot;## Suggested changelog entry:\n\n```rst\n\n```&quot;</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="pybind11_8h.html#a62bcafa97abdcadb6520a62e52331b89">print</a>(Syntax(msg, <span class="stringliteral">&quot;md&quot;</span>, theme=<span class="stringliteral">&quot;ansi_light&quot;</span>))</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<a class="code" href="pybind11_8h.html#a62bcafa97abdcadb6520a62e52331b89">print</a>()</div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="apybind11_8h_html_a62bcafa97abdcadb6520a62e52331b89"><div class="ttname"><a href="pybind11_8h.html#a62bcafa97abdcadb6520a62e52331b89">print</a></div><div class="ttdeci">PYBIND11_NOINLINE void print(tuple args, dict kwargs)</div><div class="ttdef"><b>Definition:</b> <a href="pybind11_8h_source.html#l02003">pybind11.h:2003</a></div></div>
+<div class="ttc" id="apybind11_8h_html_a62bcafa97abdcadb6520a62e52331b89"><div class="ttname"><a href="pybind11_8h.html#a62bcafa97abdcadb6520a62e52331b89">print</a></div><div class="ttdeci">PYBIND11_NOINLINE void print(tuple args, dict kwargs)</div><div class="ttdef"><b>Definition:</b> <a href="pybind11_8h_source.html#l02056">pybind11.h:2056</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

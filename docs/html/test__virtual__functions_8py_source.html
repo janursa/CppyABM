@@ -322,176 +322,175 @@ $(function() {
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                == <span class="stringliteral">&#39;Tried to call pure virtual function &quot;Base::dispatch&quot;&#39;</span></div>
 <div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;            )</div>
 <div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160; </div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            p = PyClass1()</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;            <span class="keywordflow">return</span> m.dispatch_issue_go(p)</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; </div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    b = PyClass2()</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    <span class="keyword">assert</span> m.dispatch_issue_go(b) == <span class="stringliteral">&quot;Yay..&quot;</span></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            <span class="keywordflow">return</span> m.dispatch_issue_go(PyClass1())</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160; </div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    b = PyClass2()</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    <span class="keyword">assert</span> m.dispatch_issue_go(b) == <span class="stringliteral">&quot;Yay..&quot;</span></div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; </div>
 <div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160; </div>
-<div class="line"><a name="l00261"></a><span class="lineno"><a class="line" href="namespacetest__virtual__functions.html#ad2ea910fc087a0a939c5c6110c7d6146">  261</a></span>&#160;<span class="keyword">def </span><a class="code" href="namespacetest__virtual__functions.html#ad2ea910fc087a0a939c5c6110c7d6146">test_override_ref</a>():</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="stringliteral">&quot;&quot;&quot;#392/397: overriding reference-returning functions&quot;&quot;&quot;</span></div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    o = m.OverrideTest(<span class="stringliteral">&quot;asdf&quot;</span>)</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    <span class="comment"># Not allowed (see associated .cpp comment)</span></div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <span class="comment"># i = o.str_ref()</span></div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    <span class="comment"># assert o.str_ref() == &quot;asdf&quot;</span></div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    <span class="keyword">assert</span> o.str_value() == <span class="stringliteral">&quot;asdf&quot;</span></div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    <span class="keyword">assert</span> o.A_value().value == <span class="stringliteral">&quot;hi&quot;</span></div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    a = o.A_ref()</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    <span class="keyword">assert</span> a.value == <span class="stringliteral">&quot;hi&quot;</span></div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    a.value = <span class="stringliteral">&quot;bye&quot;</span></div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    <span class="keyword">assert</span> a.value == <span class="stringliteral">&quot;bye&quot;</span></div>
+<div class="line"><a name="l00260"></a><span class="lineno"><a class="line" href="namespacetest__virtual__functions.html#ad2ea910fc087a0a939c5c6110c7d6146">  260</a></span>&#160;<span class="keyword">def </span><a class="code" href="namespacetest__virtual__functions.html#ad2ea910fc087a0a939c5c6110c7d6146">test_override_ref</a>():</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    <span class="stringliteral">&quot;&quot;&quot;#392/397: overriding reference-returning functions&quot;&quot;&quot;</span></div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    o = m.OverrideTest(<span class="stringliteral">&quot;asdf&quot;</span>)</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160; </div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <span class="comment"># Not allowed (see associated .cpp comment)</span></div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    <span class="comment"># i = o.str_ref()</span></div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <span class="comment"># assert o.str_ref() == &quot;asdf&quot;</span></div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    <span class="keyword">assert</span> o.str_value() == <span class="stringliteral">&quot;asdf&quot;</span></div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    <span class="keyword">assert</span> o.A_value().value == <span class="stringliteral">&quot;hi&quot;</span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    a = o.A_ref()</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    <span class="keyword">assert</span> a.value == <span class="stringliteral">&quot;hi&quot;</span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    a.value = <span class="stringliteral">&quot;bye&quot;</span></div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    <span class="keyword">assert</span> a.value == <span class="stringliteral">&quot;bye&quot;</span></div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; </div>
 <div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; </div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160; </div>
-<div class="line"><a name="l00277"></a><span class="lineno"><a class="line" href="namespacetest__virtual__functions.html#a6659077ad0a4b585ae2980928dfebcd5">  277</a></span>&#160;<span class="keyword">def </span><a class="code" href="namespacetest__virtual__functions.html#a6659077ad0a4b585ae2980928dfebcd5">test_inherited_virtuals</a>():</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    <span class="keyword">class </span>AR(m.A_Repeat):</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        <span class="keyword">def </span>unlucky_number(self):</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;            <span class="keywordflow">return</span> 99</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; </div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    <span class="keyword">class </span>AT(m.A_Tpl):</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        <span class="keyword">def </span>unlucky_number(self):</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;            <span class="keywordflow">return</span> 999</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160; </div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    obj = AR()</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="keyword">assert</span> obj.say_something(3) == <span class="stringliteral">&quot;hihihi&quot;</span></div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    <span class="keyword">assert</span> obj.unlucky_number() == 99</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    <span class="keyword">assert</span> obj.say_everything() == <span class="stringliteral">&quot;hi 99&quot;</span></div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    obj = AT()</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    <span class="keyword">assert</span> obj.say_something(3) == <span class="stringliteral">&quot;hihihi&quot;</span></div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    <span class="keyword">assert</span> obj.unlucky_number() == 999</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    <span class="keyword">assert</span> obj.say_everything() == <span class="stringliteral">&quot;hi 999&quot;</span></div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160; </div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    <span class="keywordflow">for</span> obj <span class="keywordflow">in</span> [m.B_Repeat(), m.B_Tpl()]:</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;        <span class="keyword">assert</span> obj.say_something(3) == <span class="stringliteral">&quot;B says hi 3 times&quot;</span></div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        <span class="keyword">assert</span> obj.unlucky_number() == 13</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        <span class="keyword">assert</span> obj.lucky_number() == 7.0</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        <span class="keyword">assert</span> obj.say_everything() == <span class="stringliteral">&quot;B says hi 1 times 13&quot;</span></div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160; </div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    <span class="keywordflow">for</span> obj <span class="keywordflow">in</span> [m.C_Repeat(), m.C_Tpl()]:</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        <span class="keyword">assert</span> obj.say_something(3) == <span class="stringliteral">&quot;B says hi 3 times&quot;</span></div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;        <span class="keyword">assert</span> obj.unlucky_number() == 4444</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;        <span class="keyword">assert</span> obj.lucky_number() == 888.0</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;        <span class="keyword">assert</span> obj.say_everything() == <span class="stringliteral">&quot;B says hi 1 times 4444&quot;</span></div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160; </div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    <span class="keyword">class </span>CR(m.C_Repeat):</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;        <span class="keyword">def </span>lucky_number(self):</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;            <span class="keywordflow">return</span> m.C_Repeat.lucky_number(self) + 1.25</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; </div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    obj = CR()</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    <span class="keyword">assert</span> obj.say_something(3) == <span class="stringliteral">&quot;B says hi 3 times&quot;</span></div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    <span class="keyword">assert</span> obj.unlucky_number() == 4444</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    <span class="keyword">assert</span> obj.lucky_number() == 889.25</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    <span class="keyword">assert</span> obj.say_everything() == <span class="stringliteral">&quot;B says hi 1 times 4444&quot;</span></div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160; </div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    <span class="keyword">class </span>CT(m.C_Tpl):</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        <span class="keywordflow">pass</span></div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160; </div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    obj = CT()</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    <span class="keyword">assert</span> obj.say_something(3) == <span class="stringliteral">&quot;B says hi 3 times&quot;</span></div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    <span class="keyword">assert</span> obj.unlucky_number() == 4444</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    <span class="keyword">assert</span> obj.lucky_number() == 888.0</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    <span class="keyword">assert</span> obj.say_everything() == <span class="stringliteral">&quot;B says hi 1 times 4444&quot;</span></div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160; </div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    <span class="keyword">class </span>CCR(CR):</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;        <span class="keyword">def </span>lucky_number(self):</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;            <span class="keywordflow">return</span> CR.lucky_number(self) * 10</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160; </div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    obj = CCR()</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    <span class="keyword">assert</span> obj.say_something(3) == <span class="stringliteral">&quot;B says hi 3 times&quot;</span></div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    <span class="keyword">assert</span> obj.unlucky_number() == 4444</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    <span class="keyword">assert</span> obj.lucky_number() == 8892.5</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    <span class="keyword">assert</span> obj.say_everything() == <span class="stringliteral">&quot;B says hi 1 times 4444&quot;</span></div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160; </div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    <span class="keyword">class </span>CCT(CT):</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;        <span class="keyword">def </span>lucky_number(self):</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;            <span class="keywordflow">return</span> CT.lucky_number(self) * 1000</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160; </div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    obj = CCT()</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    <span class="keyword">assert</span> obj.say_something(3) == <span class="stringliteral">&quot;B says hi 3 times&quot;</span></div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    <span class="keyword">assert</span> obj.unlucky_number() == 4444</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    <span class="keyword">assert</span> obj.lucky_number() == 888000.0</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;    <span class="keyword">assert</span> obj.say_everything() == <span class="stringliteral">&quot;B says hi 1 times 4444&quot;</span></div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160; </div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;    <span class="keyword">class </span>DR(m.D_Repeat):</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;        <span class="keyword">def </span>unlucky_number(self):</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;            <span class="keywordflow">return</span> 123</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160; </div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;        <span class="keyword">def </span>lucky_number(self):</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;            <span class="keywordflow">return</span> 42.0</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160; </div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    <span class="keywordflow">for</span> obj <span class="keywordflow">in</span> [m.D_Repeat(), m.D_Tpl()]:</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;        <span class="keyword">assert</span> obj.say_something(3) == <span class="stringliteral">&quot;B says hi 3 times&quot;</span></div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;        <span class="keyword">assert</span> obj.unlucky_number() == 4444</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;        <span class="keyword">assert</span> obj.lucky_number() == 888.0</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;        <span class="keyword">assert</span> obj.say_everything() == <span class="stringliteral">&quot;B says hi 1 times 4444&quot;</span></div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160; </div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    obj = DR()</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;    <span class="keyword">assert</span> obj.say_something(3) == <span class="stringliteral">&quot;B says hi 3 times&quot;</span></div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    <span class="keyword">assert</span> obj.unlucky_number() == 123</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    <span class="keyword">assert</span> obj.lucky_number() == 42.0</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    <span class="keyword">assert</span> obj.say_everything() == <span class="stringliteral">&quot;B says hi 1 times 123&quot;</span></div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160; </div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    <span class="keyword">class </span>DT(m.D_Tpl):</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;        <span class="keyword">def </span>say_something(self, times):</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;            <span class="keywordflow">return</span> <span class="stringliteral">&quot;DT says:&quot;</span> + (<span class="stringliteral">&quot; quack&quot;</span> * times)</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160; </div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;        <span class="keyword">def </span>unlucky_number(self):</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;            <span class="keywordflow">return</span> 1234</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160; </div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;        <span class="keyword">def </span>lucky_number(self):</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;            <span class="keywordflow">return</span> -4.25</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160; </div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;    obj = DT()</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;    <span class="keyword">assert</span> obj.say_something(3) == <span class="stringliteral">&quot;DT says: quack quack quack&quot;</span></div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;    <span class="keyword">assert</span> obj.unlucky_number() == 1234</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;    <span class="keyword">assert</span> obj.lucky_number() == -4.25</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;    <span class="keyword">assert</span> obj.say_everything() == <span class="stringliteral">&quot;DT says: quack 1234&quot;</span></div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160; </div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;    <span class="keyword">class </span>DT2(DT):</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;        <span class="keyword">def </span>say_something(self, times):</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;            <span class="keywordflow">return</span> <span class="stringliteral">&quot;DT2: &quot;</span> + (<span class="stringliteral">&quot;QUACK&quot;</span> * times)</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160; </div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;        <span class="keyword">def </span>unlucky_number(self):</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;            <span class="keywordflow">return</span> -3</div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160; </div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;    <span class="keyword">class </span>BT(m.B_Tpl):</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;        <span class="keyword">def </span>say_something(self, times):</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;            <span class="keywordflow">return</span> <span class="stringliteral">&quot;BT&quot;</span> * times</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160; </div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;        <span class="keyword">def </span>unlucky_number(self):</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;            <span class="keywordflow">return</span> -7</div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160; </div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;        <span class="keyword">def </span>lucky_number(self):</div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;            <span class="keywordflow">return</span> -1.375</div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160; </div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;    obj = BT()</div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;    <span class="keyword">assert</span> obj.say_something(3) == <span class="stringliteral">&quot;BTBTBT&quot;</span></div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;    <span class="keyword">assert</span> obj.unlucky_number() == -7</div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;    <span class="keyword">assert</span> obj.lucky_number() == -1.375</div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;    <span class="keyword">assert</span> obj.say_everything() == <span class="stringliteral">&quot;BT -7&quot;</span></div>
+<div class="line"><a name="l00276"></a><span class="lineno"><a class="line" href="namespacetest__virtual__functions.html#a6659077ad0a4b585ae2980928dfebcd5">  276</a></span>&#160;<span class="keyword">def </span><a class="code" href="namespacetest__virtual__functions.html#a6659077ad0a4b585ae2980928dfebcd5">test_inherited_virtuals</a>():</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    <span class="keyword">class </span>AR(m.A_Repeat):</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;        <span class="keyword">def </span>unlucky_number(self):</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;            <span class="keywordflow">return</span> 99</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160; </div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    <span class="keyword">class </span>AT(m.A_Tpl):</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;        <span class="keyword">def </span>unlucky_number(self):</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;            <span class="keywordflow">return</span> 999</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160; </div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    obj = AR()</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    <span class="keyword">assert</span> obj.say_something(3) == <span class="stringliteral">&quot;hihihi&quot;</span></div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="keyword">assert</span> obj.unlucky_number() == 99</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    <span class="keyword">assert</span> obj.say_everything() == <span class="stringliteral">&quot;hi 99&quot;</span></div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; </div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    obj = AT()</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    <span class="keyword">assert</span> obj.say_something(3) == <span class="stringliteral">&quot;hihihi&quot;</span></div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    <span class="keyword">assert</span> obj.unlucky_number() == 999</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    <span class="keyword">assert</span> obj.say_everything() == <span class="stringliteral">&quot;hi 999&quot;</span></div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160; </div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    <span class="keywordflow">for</span> obj <span class="keywordflow">in</span> [m.B_Repeat(), m.B_Tpl()]:</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;        <span class="keyword">assert</span> obj.say_something(3) == <span class="stringliteral">&quot;B says hi 3 times&quot;</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;        <span class="keyword">assert</span> obj.unlucky_number() == 13</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        <span class="keyword">assert</span> obj.lucky_number() == 7.0</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        <span class="keyword">assert</span> obj.say_everything() == <span class="stringliteral">&quot;B says hi 1 times 13&quot;</span></div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160; </div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    <span class="keywordflow">for</span> obj <span class="keywordflow">in</span> [m.C_Repeat(), m.C_Tpl()]:</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        <span class="keyword">assert</span> obj.say_something(3) == <span class="stringliteral">&quot;B says hi 3 times&quot;</span></div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        <span class="keyword">assert</span> obj.unlucky_number() == 4444</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;        <span class="keyword">assert</span> obj.lucky_number() == 888.0</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;        <span class="keyword">assert</span> obj.say_everything() == <span class="stringliteral">&quot;B says hi 1 times 4444&quot;</span></div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160; </div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    <span class="keyword">class </span>CR(m.C_Repeat):</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;        <span class="keyword">def </span>lucky_number(self):</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;            <span class="keywordflow">return</span> m.C_Repeat.lucky_number(self) + 1.25</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160; </div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    obj = CR()</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    <span class="keyword">assert</span> obj.say_something(3) == <span class="stringliteral">&quot;B says hi 3 times&quot;</span></div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    <span class="keyword">assert</span> obj.unlucky_number() == 4444</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    <span class="keyword">assert</span> obj.lucky_number() == 889.25</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    <span class="keyword">assert</span> obj.say_everything() == <span class="stringliteral">&quot;B says hi 1 times 4444&quot;</span></div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    <span class="keyword">class </span>CT(m.C_Tpl):</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;        <span class="keywordflow">pass</span></div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160; </div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    obj = CT()</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    <span class="keyword">assert</span> obj.say_something(3) == <span class="stringliteral">&quot;B says hi 3 times&quot;</span></div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    <span class="keyword">assert</span> obj.unlucky_number() == 4444</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    <span class="keyword">assert</span> obj.lucky_number() == 888.0</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    <span class="keyword">assert</span> obj.say_everything() == <span class="stringliteral">&quot;B says hi 1 times 4444&quot;</span></div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160; </div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    <span class="keyword">class </span>CCR(CR):</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;        <span class="keyword">def </span>lucky_number(self):</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;            <span class="keywordflow">return</span> CR.lucky_number(self) * 10</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160; </div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    obj = CCR()</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    <span class="keyword">assert</span> obj.say_something(3) == <span class="stringliteral">&quot;B says hi 3 times&quot;</span></div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    <span class="keyword">assert</span> obj.unlucky_number() == 4444</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    <span class="keyword">assert</span> obj.lucky_number() == 8892.5</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    <span class="keyword">assert</span> obj.say_everything() == <span class="stringliteral">&quot;B says hi 1 times 4444&quot;</span></div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160; </div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    <span class="keyword">class </span>CCT(CT):</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        <span class="keyword">def </span>lucky_number(self):</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;            <span class="keywordflow">return</span> CT.lucky_number(self) * 1000</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160; </div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;    obj = CCT()</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    <span class="keyword">assert</span> obj.say_something(3) == <span class="stringliteral">&quot;B says hi 3 times&quot;</span></div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    <span class="keyword">assert</span> obj.unlucky_number() == 4444</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    <span class="keyword">assert</span> obj.lucky_number() == 888000.0</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    <span class="keyword">assert</span> obj.say_everything() == <span class="stringliteral">&quot;B says hi 1 times 4444&quot;</span></div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160; </div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;    <span class="keyword">class </span>DR(m.D_Repeat):</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;        <span class="keyword">def </span>unlucky_number(self):</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;            <span class="keywordflow">return</span> 123</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160; </div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;        <span class="keyword">def </span>lucky_number(self):</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;            <span class="keywordflow">return</span> 42.0</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160; </div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;    <span class="keywordflow">for</span> obj <span class="keywordflow">in</span> [m.D_Repeat(), m.D_Tpl()]:</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;        <span class="keyword">assert</span> obj.say_something(3) == <span class="stringliteral">&quot;B says hi 3 times&quot;</span></div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;        <span class="keyword">assert</span> obj.unlucky_number() == 4444</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;        <span class="keyword">assert</span> obj.lucky_number() == 888.0</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;        <span class="keyword">assert</span> obj.say_everything() == <span class="stringliteral">&quot;B says hi 1 times 4444&quot;</span></div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160; </div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;    obj = DR()</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    <span class="keyword">assert</span> obj.say_something(3) == <span class="stringliteral">&quot;B says hi 3 times&quot;</span></div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;    <span class="keyword">assert</span> obj.unlucky_number() == 123</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;    <span class="keyword">assert</span> obj.lucky_number() == 42.0</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    <span class="keyword">assert</span> obj.say_everything() == <span class="stringliteral">&quot;B says hi 1 times 123&quot;</span></div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160; </div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    <span class="keyword">class </span>DT(m.D_Tpl):</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;        <span class="keyword">def </span>say_something(self, times):</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;            <span class="keywordflow">return</span> <span class="stringliteral">&quot;DT says:&quot;</span> + (<span class="stringliteral">&quot; quack&quot;</span> * times)</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160; </div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;        <span class="keyword">def </span>unlucky_number(self):</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;            <span class="keywordflow">return</span> 1234</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160; </div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;        <span class="keyword">def </span>lucky_number(self):</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;            <span class="keywordflow">return</span> -4.25</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160; </div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;    obj = DT()</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;    <span class="keyword">assert</span> obj.say_something(3) == <span class="stringliteral">&quot;DT says: quack quack quack&quot;</span></div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;    <span class="keyword">assert</span> obj.unlucky_number() == 1234</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;    <span class="keyword">assert</span> obj.lucky_number() == -4.25</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;    <span class="keyword">assert</span> obj.say_everything() == <span class="stringliteral">&quot;DT says: quack 1234&quot;</span></div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160; </div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;    <span class="keyword">class </span>DT2(DT):</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;        <span class="keyword">def </span>say_something(self, times):</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;            <span class="keywordflow">return</span> <span class="stringliteral">&quot;DT2: &quot;</span> + (<span class="stringliteral">&quot;QUACK&quot;</span> * times)</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160; </div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;        <span class="keyword">def </span>unlucky_number(self):</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;            <span class="keywordflow">return</span> -3</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160; </div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;    <span class="keyword">class </span>BT(m.B_Tpl):</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;        <span class="keyword">def </span>say_something(self, times):</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;            <span class="keywordflow">return</span> <span class="stringliteral">&quot;BT&quot;</span> * times</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160; </div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;        <span class="keyword">def </span>unlucky_number(self):</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;            <span class="keywordflow">return</span> -7</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160; </div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;        <span class="keyword">def </span>lucky_number(self):</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;            <span class="keywordflow">return</span> -1.375</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160; </div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;    obj = BT()</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;    <span class="keyword">assert</span> obj.say_something(3) == <span class="stringliteral">&quot;BTBTBT&quot;</span></div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;    <span class="keyword">assert</span> obj.unlucky_number() == -7</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;    <span class="keyword">assert</span> obj.lucky_number() == -1.375</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;    <span class="keyword">assert</span> obj.say_everything() == <span class="stringliteral">&quot;BT -7&quot;</span></div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160; </div>
 <div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160; </div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160; </div>
-<div class="line"><a name="l00406"></a><span class="lineno"><a class="line" href="namespacetest__virtual__functions.html#a8c8dcdf2a75a72c51c420893d6a37e45">  406</a></span>&#160;<span class="keyword">def </span><a class="code" href="namespacetest__virtual__functions.html#a8c8dcdf2a75a72c51c420893d6a37e45">test_issue_1454</a>():</div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;    <span class="comment"># Fix issue #1454 (crash when acquiring/releasing GIL on another thread in Python 2.7)</span></div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;    m.test_gil()</div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;    m.test_gil_from_thread()</div>
+<div class="line"><a name="l00405"></a><span class="lineno"><a class="line" href="namespacetest__virtual__functions.html#a8c8dcdf2a75a72c51c420893d6a37e45">  405</a></span>&#160;<span class="keyword">def </span><a class="code" href="namespacetest__virtual__functions.html#a8c8dcdf2a75a72c51c420893d6a37e45">test_issue_1454</a>():</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;    <span class="comment"># Fix issue #1454 (crash when acquiring/releasing GIL on another thread in Python 2.7)</span></div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;    m.test_gil()</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;    m.test_gil_from_thread()</div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="anamespacetest__virtual__functions_html_aebcdfe688eeefd3b788681e3cb9a69a2"><div class="ttname"><a href="namespacetest__virtual__functions.html#aebcdfe688eeefd3b788681e3cb9a69a2">test_virtual_functions.test_dispatch_issue</a></div><div class="ttdeci">def test_dispatch_issue(msg)</div><div class="ttdef"><b>Definition:</b> <a href="test__virtual__functions_8py_source.html#l00238">test_virtual_functions.py:238</a></div></div>
 <div class="ttc" id="anamespacetest__virtual__functions_html_a88181b0dea0f4aa4dc7c009f751fb3ff"><div class="ttname"><a href="namespacetest__virtual__functions.html#a88181b0dea0f4aa4dc7c009f751fb3ff">test_virtual_functions.test_alias_delay_initialization2</a></div><div class="ttdeci">def test_alias_delay_initialization2(capture)</div><div class="ttdef"><b>Definition:</b> <a href="test__virtual__functions_8py_source.html#l00130">test_virtual_functions.py:130</a></div></div>
-<div class="ttc" id="agroup__python__builtins_html_gacc0a69f008d341c07ff939e0580c5985"><div class="ttname"><a href="group__python__builtins.html#gacc0a69f008d341c07ff939e0580c5985">hasattr</a></div><div class="ttdeci">bool hasattr(handle obj, handle name)</div><div class="ttdef"><b>Definition:</b> <a href="pytypes_8h_source.html#l00403">pytypes.h:403</a></div></div>
-<div class="ttc" id="anamespacetest__virtual__functions_html_a6659077ad0a4b585ae2980928dfebcd5"><div class="ttname"><a href="namespacetest__virtual__functions.html#a6659077ad0a4b585ae2980928dfebcd5">test_virtual_functions.test_inherited_virtuals</a></div><div class="ttdeci">def test_inherited_virtuals()</div><div class="ttdef"><b>Definition:</b> <a href="test__virtual__functions_8py_source.html#l00277">test_virtual_functions.py:277</a></div></div>
+<div class="ttc" id="agroup__python__builtins_html_gacc0a69f008d341c07ff939e0580c5985"><div class="ttname"><a href="group__python__builtins.html#gacc0a69f008d341c07ff939e0580c5985">hasattr</a></div><div class="ttdeci">bool hasattr(handle obj, handle name)</div><div class="ttdef"><b>Definition:</b> <a href="pytypes_8h_source.html#l00405">pytypes.h:405</a></div></div>
+<div class="ttc" id="anamespacetest__virtual__functions_html_a6659077ad0a4b585ae2980928dfebcd5"><div class="ttname"><a href="namespacetest__virtual__functions.html#a6659077ad0a4b585ae2980928dfebcd5">test_virtual_functions.test_inherited_virtuals</a></div><div class="ttdeci">def test_inherited_virtuals()</div><div class="ttdef"><b>Definition:</b> <a href="test__virtual__functions_8py_source.html#l00276">test_virtual_functions.py:276</a></div></div>
 <div class="ttc" id="anamespacetest__virtual__functions_html_aa4539dae52e563d1ade4fd68cef498a9"><div class="ttname"><a href="namespacetest__virtual__functions.html#aa4539dae52e563d1ade4fd68cef498a9">test_virtual_functions.test_override</a></div><div class="ttdeci">def test_override(capture, msg)</div><div class="ttdef"><b>Definition:</b> <a href="test__virtual__functions_8py_source.html#l00010">test_virtual_functions.py:10</a></div></div>
 <div class="ttc" id="aclass_constructor_stats_html_a6766d3e57ee38f5e64151c83e0e6c0d3"><div class="ttname"><a href="class_constructor_stats.html#a6766d3e57ee38f5e64151c83e0e6c0d3">ConstructorStats::get</a></div><div class="ttdeci">static ConstructorStats &amp; get(std::type_index type)</div><div class="ttdef"><b>Definition:</b> <a href="constructor__stats_8h_source.html#l00154">constructor_stats.h:154</a></div></div>
 <div class="ttc" id="anamespacetest__virtual__functions_html_a5862679ba686c1dc509ad1598fab0ddb"><div class="ttname"><a href="namespacetest__virtual__functions.html#a5862679ba686c1dc509ad1598fab0ddb">test_virtual_functions.test_move_support</a></div><div class="ttdeci">def test_move_support()</div><div class="ttdef"><b>Definition:</b> <a href="test__virtual__functions_8py_source.html#l00192">test_virtual_functions.py:192</a></div></div>
 <div class="ttc" id="anamespacetest__virtual__functions_html_a5c20eb78c5144f7798743969442c0d92"><div class="ttname"><a href="namespacetest__virtual__functions.html#a5c20eb78c5144f7798743969442c0d92">test_virtual_functions.test_alias_delay_initialization1</a></div><div class="ttdeci">def test_alias_delay_initialization1(capture)</div><div class="ttdef"><b>Definition:</b> <a href="test__virtual__functions_8py_source.html#l00091">test_virtual_functions.py:91</a></div></div>
-<div class="ttc" id="anamespacetest__virtual__functions_html_a8c8dcdf2a75a72c51c420893d6a37e45"><div class="ttname"><a href="namespacetest__virtual__functions.html#a8c8dcdf2a75a72c51c420893d6a37e45">test_virtual_functions.test_issue_1454</a></div><div class="ttdeci">def test_issue_1454()</div><div class="ttdef"><b>Definition:</b> <a href="test__virtual__functions_8py_source.html#l00406">test_virtual_functions.py:406</a></div></div>
+<div class="ttc" id="anamespacetest__virtual__functions_html_a8c8dcdf2a75a72c51c420893d6a37e45"><div class="ttname"><a href="namespacetest__virtual__functions.html#a8c8dcdf2a75a72c51c420893d6a37e45">test_virtual_functions.test_issue_1454</a></div><div class="ttdeci">def test_issue_1454()</div><div class="ttdef"><b>Definition:</b> <a href="test__virtual__functions_8py_source.html#l00405">test_virtual_functions.py:405</a></div></div>
 <div class="ttc" id="anamespacesetup_html_a52ffe830bc77e7f3621f33f969b6bfee"><div class="ttname"><a href="namespacesetup.html#a52ffe830bc77e7f3621f33f969b6bfee">setup.msg</a></div><div class="ttdeci">string msg</div><div class="ttdef"><b>Definition:</b> <a href="setup_8py_source.html#l00047">setup.py:47</a></div></div>
-<div class="ttc" id="anamespacetest__virtual__functions_html_ad2ea910fc087a0a939c5c6110c7d6146"><div class="ttname"><a href="namespacetest__virtual__functions.html#ad2ea910fc087a0a939c5c6110c7d6146">test_virtual_functions.test_override_ref</a></div><div class="ttdeci">def test_override_ref()</div><div class="ttdef"><b>Definition:</b> <a href="test__virtual__functions_8py_source.html#l00261">test_virtual_functions.py:261</a></div></div>
+<div class="ttc" id="anamespacetest__virtual__functions_html_ad2ea910fc087a0a939c5c6110c7d6146"><div class="ttname"><a href="namespacetest__virtual__functions.html#ad2ea910fc087a0a939c5c6110c7d6146">test_virtual_functions.test_override_ref</a></div><div class="ttdeci">def test_override_ref()</div><div class="ttdef"><b>Definition:</b> <a href="test__virtual__functions_8py_source.html#l00260">test_virtual_functions.py:260</a></div></div>
 <div class="ttc" id="astruct_b_html"><div class="ttname"><a href="struct_b.html">B</a></div><div class="ttdef"><b>Definition:</b> <a href="test__numpy__dtypes_8cpp_source.html#l00255">test_numpy_dtypes.cpp:255</a></div></div>
-<div class="ttc" id="apybind11_8h_html_a62bcafa97abdcadb6520a62e52331b89"><div class="ttname"><a href="pybind11_8h.html#a62bcafa97abdcadb6520a62e52331b89">print</a></div><div class="ttdeci">PYBIND11_NOINLINE void print(tuple args, dict kwargs)</div><div class="ttdef"><b>Definition:</b> <a href="pybind11_8h_source.html#l02003">pybind11.h:2003</a></div></div>
+<div class="ttc" id="apybind11_8h_html_a62bcafa97abdcadb6520a62e52331b89"><div class="ttname"><a href="pybind11_8h.html#a62bcafa97abdcadb6520a62e52331b89">print</a></div><div class="ttdeci">PYBIND11_NOINLINE void print(tuple args, dict kwargs)</div><div class="ttdef"><b>Definition:</b> <a href="pybind11_8h_source.html#l02056">pybind11.h:2056</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

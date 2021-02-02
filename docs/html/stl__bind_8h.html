@@ -135,12 +135,18 @@ Functions</h2></td></tr>
 <tr class="memitem:a824c790c915a6a3f429cbbe0ec8bb10f"><td class="memTemplParams" colspan="2">template&lt;typename Vector , typename Class_ &gt; </td></tr>
 <tr class="memitem:a824c790c915a6a3f429cbbe0ec8bb10f"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="stl__bind_8h.html#a824c790c915a6a3f429cbbe0ec8bb10f">vector_if_insertion_operator</a> (Class_ &amp;cl, std::string const &amp;<a class="el" href="structname.html">name</a>) -&gt; decltype(std::declval&lt; std::ostream &amp; &gt;()&lt;&lt; std::declval&lt; typename Vector::value_type &gt;(), void())</td></tr>
 <tr class="separator:a824c790c915a6a3f429cbbe0ec8bb10f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a7c65acce7c6a5448b7af1434253616"><td class="memTemplParams" colspan="2">template&lt;typename Vector , typename Class_ , typename... Args&gt; </td></tr>
-<tr class="memitem:a2a7c65acce7c6a5448b7af1434253616"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h.html#a012819c9e8b5e04872a271f50f8b8196">enable_if_t</a>&lt; <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h.html#a9fc2947c6f247b5bf1696117d6a46f5c">detail::any_of</a>&lt; std::is_same&lt; Args, <a class="el" href="structbuffer__protocol.html">buffer_protocol</a> &gt;... &gt;::value &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="stl__bind_8h.html#a2a7c65acce7c6a5448b7af1434253616">vector_buffer</a> (Class_ &amp;cl)</td></tr>
-<tr class="separator:a2a7c65acce7c6a5448b7af1434253616"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd10557d1fd8f619f696ce93dd561ecf"><td class="memTemplParams" colspan="2">template&lt;typename Vector , typename Class_ , typename... Args&gt; </td></tr>
-<tr class="memitem:acd10557d1fd8f619f696ce93dd561ecf"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h.html#a012819c9e8b5e04872a271f50f8b8196">enable_if_t</a>&lt;!<a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h.html#a9fc2947c6f247b5bf1696117d6a46f5c">detail::any_of</a>&lt; std::is_same&lt; Args, <a class="el" href="structbuffer__protocol.html">buffer_protocol</a> &gt;... &gt;::value &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="stl__bind_8h.html#acd10557d1fd8f619f696ce93dd561ecf">vector_buffer</a> (Class_ &amp;)</td></tr>
-<tr class="separator:acd10557d1fd8f619f696ce93dd561ecf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4714a8e07ef42e05d1fe4fe3c739f3d1"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a4714a8e07ef42e05d1fe4fe3c739f3d1"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="stl__bind_8h.html#a4714a8e07ef42e05d1fe4fe3c739f3d1">args_any_are_buffer</a> ()</td></tr>
+<tr class="separator:a4714a8e07ef42e05d1fe4fe3c739f3d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e00bd2141c166f3551fd2d4ea047023"><td class="memTemplParams" colspan="2">template&lt;typename Vector , typename Class_ , typename... Args&gt; </td></tr>
+<tr class="memitem:a2e00bd2141c166f3551fd2d4ea047023"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="stl__bind_8h.html#a2e00bd2141c166f3551fd2d4ea047023">vector_buffer_impl</a> (Class_ &amp;cl, std::true_type)</td></tr>
+<tr class="separator:a2e00bd2141c166f3551fd2d4ea047023"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad82a19fa3fa1189650facb5922233084"><td class="memTemplParams" colspan="2">template&lt;typename Vector , typename Class_ , typename... Args&gt; </td></tr>
+<tr class="memitem:ad82a19fa3fa1189650facb5922233084"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="stl__bind_8h.html#ad82a19fa3fa1189650facb5922233084">vector_buffer_impl</a> (Class_ &amp;, std::false_type)</td></tr>
+<tr class="separator:ad82a19fa3fa1189650facb5922233084"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b3c3c855fc1543ed51bec965b350d9a"><td class="memTemplParams" colspan="2">template&lt;typename Vector , typename Class_ , typename... Args&gt; </td></tr>
+<tr class="memitem:a4b3c3c855fc1543ed51bec965b350d9a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="stl__bind_8h.html#a4b3c3c855fc1543ed51bec965b350d9a">vector_buffer</a> (Class_ &amp;cl)</td></tr>
+<tr class="separator:a4b3c3c855fc1543ed51bec965b350d9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0fd5eccaecfa702377aefc899c32b127"><td class="memTemplParams" colspan="2">template&lt;typename Vector , typename holder_type  = std::unique_ptr&lt;Vector&gt;, typename... Args&gt; </td></tr>
 <tr class="memitem:a0fd5eccaecfa702377aefc899c32b127"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classclass__.html">class_</a>&lt; Vector, holder_type &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="stl__bind_8h.html#a0fd5eccaecfa702377aefc899c32b127">bind_vector</a> (<a class="el" href="classhandle.html">handle</a> <a class="el" href="structscope.html">scope</a>, std::string const &amp;<a class="el" href="structname.html">name</a>, Args &amp;&amp;... <a class="el" href="classargs.html">args</a>)</td></tr>
 <tr class="separator:a0fd5eccaecfa702377aefc899c32b127"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -183,6 +189,35 @@ template&lt;typename Vector &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a4714a8e07ef42e05d1fe4fe3c739f3d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4714a8e07ef42e05d1fe4fe3c739f3d1">&#9670;&nbsp;</a></span>args_any_are_buffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool args_any_are_buffer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="stl__bind_8h_source.html#l00382">382</a> of file <a class="el" href="stl__bind_8h_source.html">stl_bind.h</a>.</p>
+
+</div>
+</div>
 <a id="a246d54645b74ba745c8210b1e03d00d8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a246d54645b74ba745c8210b1e03d00d8">&#9670;&nbsp;</a></span>bind_map()</h2>
 
@@ -217,7 +252,7 @@ template&lt;typename Map , typename holder_type  = std::unique_ptr&lt;Map&gt;, t
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="stl__bind_8h_source.html#l00588">588</a> of file <a class="el" href="stl__bind_8h_source.html">stl_bind.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stl__bind_8h_source.html#l00603">603</a> of file <a class="el" href="stl__bind_8h_source.html">stl_bind.h</a>.</p>
 
 </div>
 </div>
@@ -255,7 +290,7 @@ template&lt;typename Vector , typename holder_type  = std::unique_ptr&lt;Vector&
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="stl__bind_8h_source.html#l00427">427</a> of file <a class="el" href="stl__bind_8h_source.html">stl_bind.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stl__bind_8h_source.html#l00442">442</a> of file <a class="el" href="stl__bind_8h_source.html">stl_bind.h</a>.</p>
 
 </div>
 </div>
@@ -277,7 +312,7 @@ template&lt;typename , typename , typename... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="stl__bind_8h_source.html#l00523">523</a> of file <a class="el" href="stl__bind_8h_source.html">stl_bind.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stl__bind_8h_source.html#l00538">538</a> of file <a class="el" href="stl__bind_8h_source.html">stl_bind.h</a>.</p>
 
 </div>
 </div>
@@ -299,7 +334,7 @@ template&lt;typename Map , typename Class_ &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="stl__bind_8h_source.html#l00542">542</a> of file <a class="el" href="stl__bind_8h_source.html">stl_bind.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stl__bind_8h_source.html#l00557">557</a> of file <a class="el" href="stl__bind_8h_source.html">stl_bind.h</a>.</p>
 
 </div>
 </div>
@@ -321,7 +356,7 @@ template&lt;typename Map , typename Class_ &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="stl__bind_8h_source.html#l00527">527</a> of file <a class="el" href="stl__bind_8h_source.html">stl_bind.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stl__bind_8h_source.html#l00542">542</a> of file <a class="el" href="stl__bind_8h_source.html">stl_bind.h</a>.</p>
 
 </div>
 </div>
@@ -353,7 +388,7 @@ template&lt;typename Map , typename Class_ &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="stl__bind_8h_source.html#l00563">563</a> of file <a class="el" href="stl__bind_8h_source.html">stl_bind.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stl__bind_8h_source.html#l00578">578</a> of file <a class="el" href="stl__bind_8h_source.html">stl_bind.h</a>.</p>
 
 </div>
 </div>
@@ -375,7 +410,7 @@ template&lt;typename , typename , typename... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="stl__bind_8h_source.html#l00522">522</a> of file <a class="el" href="stl__bind_8h_source.html">stl_bind.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stl__bind_8h_source.html#l00537">537</a> of file <a class="el" href="stl__bind_8h_source.html">stl_bind.h</a>.</p>
 
 </div>
 </div>
@@ -423,8 +458,8 @@ template&lt;typename Vector , typename Class_ &gt; </div>
 
 </div>
 </div>
-<a id="acd10557d1fd8f619f696ce93dd561ecf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acd10557d1fd8f619f696ce93dd561ecf">&#9670;&nbsp;</a></span>vector_buffer() <span class="overload">[1/2]</span></h2>
+<a id="a4b3c3c855fc1543ed51bec965b350d9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b3c3c855fc1543ed51bec965b350d9a">&#9670;&nbsp;</a></span>vector_buffer()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -432,29 +467,7 @@ template&lt;typename Vector , typename Class_ &gt; </div>
 template&lt;typename Vector , typename Class_ , typename... Args&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h.html#a012819c9e8b5e04872a271f50f8b8196">enable_if_t</a>&lt;!<a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h.html#a9fc2947c6f247b5bf1696117d6a46f5c">detail::any_of</a>&lt;std::is_same&lt;Args, <a class="el" href="structbuffer__protocol.html">buffer_protocol</a>&gt;...&gt;::value&gt; vector_buffer </td>
-          <td>(</td>
-          <td class="paramtype">Class_ &amp;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="stl__bind_8h_source.html#l00419">419</a> of file <a class="el" href="stl__bind_8h_source.html">stl_bind.h</a>.</p>
-
-</div>
-</div>
-<a id="a2a7c65acce7c6a5448b7af1434253616"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2a7c65acce7c6a5448b7af1434253616">&#9670;&nbsp;</a></span>vector_buffer() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Vector , typename Class_ , typename... Args&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h.html#a012819c9e8b5e04872a271f50f8b8196">enable_if_t</a>&lt;<a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h.html#a9fc2947c6f247b5bf1696117d6a46f5c">detail::any_of</a>&lt;std::is_same&lt;Args, <a class="el" href="structbuffer__protocol.html">buffer_protocol</a>&gt;...&gt;::value&gt; vector_buffer </td>
+          <td class="memname">void vector_buffer </td>
           <td>(</td>
           <td class="paramtype">Class_ &amp;&#160;</td>
           <td class="paramname"><em>cl</em></td><td>)</td>
@@ -463,7 +476,71 @@ template&lt;typename Vector , typename Class_ , typename... Args&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="stl__bind_8h_source.html#l00381">381</a> of file <a class="el" href="stl__bind_8h_source.html">stl_bind.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stl__bind_8h_source.html#l00432">432</a> of file <a class="el" href="stl__bind_8h_source.html">stl_bind.h</a>.</p>
+
+</div>
+</div>
+<a id="ad82a19fa3fa1189650facb5922233084"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad82a19fa3fa1189650facb5922233084">&#9670;&nbsp;</a></span>vector_buffer_impl() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Vector , typename Class_ , typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void vector_buffer_impl </td>
+          <td>(</td>
+          <td class="paramtype">Class_ &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::false_type&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="stl__bind_8h_source.html#l00429">429</a> of file <a class="el" href="stl__bind_8h_source.html">stl_bind.h</a>.</p>
+
+</div>
+</div>
+<a id="a2e00bd2141c166f3551fd2d4ea047023"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e00bd2141c166f3551fd2d4ea047023">&#9670;&nbsp;</a></span>vector_buffer_impl() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Vector , typename Class_ , typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void vector_buffer_impl </td>
+          <td>(</td>
+          <td class="paramtype">Class_ &amp;&#160;</td>
+          <td class="paramname"><em>cl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::true_type&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="stl__bind_8h_source.html#l00391">391</a> of file <a class="el" href="stl__bind_8h_source.html">stl_bind.h</a>.</p>
 
 </div>
 </div>

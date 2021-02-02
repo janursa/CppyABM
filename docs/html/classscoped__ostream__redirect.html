@@ -117,12 +117,12 @@ Protected Attributes</h2></td></tr>
 } // &lt;-- return std::cout to normal
 </pre><p>You can explicitly pass the c++ stream and the python object, for example to guard stderr instead.</p>
 <p>.. code-block:: cpp </p><pre class="fragment">{
-    py::scoped_ostream_redirect output{std::cerr, py::module_::import("sys").attr("stderr")};
-    std::cerr &lt;&lt; "Hello, World!";
+    py::scoped_ostream_redirect output{std::cerr, py::module::import("sys").attr("stderr")};
+    std::cout &lt;&lt; "Hello, World!";
 }
 </pre><p> \endrst </p>
 
-<p class="definition">Definition at line <a class="el" href="iostream_8h_source.html#l00111">111</a> of file <a class="el" href="iostream_8h_source.html">iostream.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iostream_8h_source.html#l00113">113</a> of file <a class="el" href="iostream_8h_source.html">iostream.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a717e4b225dd08295aafae46d671e3a54"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a717e4b225dd08295aafae46d671e3a54">&#9670;&nbsp;</a></span>scoped_ostream_redirect() <span class="overload">[1/3]</span></h2>
@@ -158,7 +158,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="iostream_8h_source.html#l00118">118</a> of file <a class="el" href="iostream_8h_source.html">iostream.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iostream_8h_source.html#l00120">120</a> of file <a class="el" href="iostream_8h_source.html">iostream.h</a>.</p>
 
 </div>
 </div>
@@ -185,7 +185,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="iostream_8h_source.html#l00125">125</a> of file <a class="el" href="iostream_8h_source.html">iostream.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iostream_8h_source.html#l00127">127</a> of file <a class="el" href="iostream_8h_source.html">iostream.h</a>.</p>
 
 </div>
 </div>
@@ -315,7 +315,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="iostream_8h_source.html#l00115">115</a> of file <a class="el" href="iostream_8h_source.html">iostream.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iostream_8h_source.html#l00117">117</a> of file <a class="el" href="iostream_8h_source.html">iostream.h</a>.</p>
 
 </div>
 </div>
@@ -339,7 +339,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="iostream_8h_source.html#l00114">114</a> of file <a class="el" href="iostream_8h_source.html">iostream.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iostream_8h_source.html#l00116">116</a> of file <a class="el" href="iostream_8h_source.html">iostream.h</a>.</p>
 
 </div>
 </div>
@@ -363,7 +363,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="iostream_8h_source.html#l00113">113</a> of file <a class="el" href="iostream_8h_source.html">iostream.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="iostream_8h_source.html#l00115">115</a> of file <a class="el" href="iostream_8h_source.html">iostream.h</a>.</p>
 
 </div>
 </div>

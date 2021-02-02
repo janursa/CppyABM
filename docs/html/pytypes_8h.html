@@ -190,10 +190,14 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:a0b591f0e083164ce863bca3eb763a969"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pytypes_8h.html#a0b591f0e083164ce863bca3eb763a969">PYBIND11_STR_CHECK_FUN</a>&#160;&#160;&#160;PyUnicode_Check</td></tr>
+<tr class="separator:a0b591f0e083164ce863bca3eb763a969"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4f94fb1d39306f36e0603accc545b4b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pytypes_8h.html#ab4f94fb1d39306f36e0603accc545b4b">PYBIND11_OBJECT_COMMON</a>(Name,  Parent,  CheckFun)</td></tr>
 <tr class="separator:ab4f94fb1d39306f36e0603accc545b4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fc2dbd315f5508afb7a5940a7c5e823"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pytypes_8h.html#a4fc2dbd315f5508afb7a5940a7c5e823">PYBIND11_OBJECT_CVT</a>(Name,  Parent,  CheckFun,  ConvertFun)</td></tr>
 <tr class="separator:a4fc2dbd315f5508afb7a5940a7c5e823"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ac5e544df764d4c4e3733b03d4174a8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pytypes_8h.html#a1ac5e544df764d4c4e3733b03d4174a8">PYBIND11_OBJECT_CVT_DEFAULT</a>(Name,  Parent,  CheckFun,  ConvertFun)</td></tr>
+<tr class="separator:a1ac5e544df764d4c4e3733b03d4174a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1024242099edd83beaaa1c8795a82abf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pytypes_8h.html#a1024242099edd83beaaa1c8795a82abf">PYBIND11_OBJECT_CHECK_FAILED</a>(Name,  o_ptr)</td></tr>
 <tr class="separator:a1024242099edd83beaaa1c8795a82abf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4b7fc54168d44c54c0ca9863af90858"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pytypes_8h.html#ad4b7fc54168d44c54c0ca9863af90858">PYBIND11_OBJECT</a>(Name,  Parent,  CheckFun)</td></tr>
@@ -308,8 +312,6 @@ Functions</h2></td></tr>
 <tr class="separator:a07da587b49322edcfae93b81ba326969"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa58b5810330b18fcd79e6c975e3e570b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pytypes_8h.html#aa58b5810330b18fcd79e6c975e3e570b">PyEllipsis_Check</a> (PyObject *o)</td></tr>
 <tr class="separator:aa58b5810330b18fcd79e6c975e3e570b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6c77dac9b295da58e7e59bdf82fc797"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pytypes_8h.html#aa6c77dac9b295da58e7e59bdf82fc797">PyUnicode_Check_Permissive</a> (PyObject *o)</td></tr>
-<tr class="separator:aa6c77dac9b295da58e7e59bdf82fc797"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada0f4d2d6f60700eba37f079476f7f22"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pytypes_8h.html#ada0f4d2d6f60700eba37f079476f7f22">PyStaticMethod_Check</a> (PyObject *o)</td></tr>
 <tr class="separator:ada0f4d2d6f60700eba37f079476f7f22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f086b5001169e61bd9260ee9f6978f9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classstr.html">str</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceliterals.html#a8f086b5001169e61bd9260ee9f6978f9">literals::operator&quot;&quot;_s</a> (const char *s, <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> size)</td></tr>
@@ -317,6 +319,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga5cf5177f54cd2d3a17326b8a729417a1"><td class="memTemplParams" colspan="2">template&lt;typename Unsigned &gt; </td></tr>
 <tr class="memitem:ga5cf5177f54cd2d3a17326b8a729417a1"><td class="memTemplItemLeft" align="right" valign="top">Unsigned&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__pytypes.html#ga5cf5177f54cd2d3a17326b8a729417a1">as_unsigned</a> (PyObject *o)</td></tr>
 <tr class="separator:ga5cf5177f54cd2d3a17326b8a729417a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab7cc4d27f07dcb61988879afc654ccf6"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:gab7cc4d27f07dcb61988879afc654ccf6"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__pytypes.html#gab7cc4d27f07dcb61988879afc654ccf6">args_are_all_keyword_or_ds</a> ()</td></tr>
+<tr class="separator:gab7cc4d27f07dcb61988879afc654ccf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaeff368081ac50b8fe2cc0230d96e3acb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__python__builtins.html#gaeff368081ac50b8fe2cc0230d96e3acb">len</a> (<a class="el" href="classhandle.html">handle</a> h)</td></tr>
 <tr class="memdesc:gaeff368081ac50b8fe2cc0230d96e3acb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the length of a Python object.  <a href="group__python__builtins.html#gaeff368081ac50b8fe2cc0230d96e3acb">More...</a><br /></td></tr>
 <tr class="separator:gaeff368081ac50b8fe2cc0230d96e3acb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -362,7 +367,7 @@ Functions</h2></td></tr>
 <div class="line">        return result;                                                         \</div>
 <div class="line">    }</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01625">1625</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01650">1650</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -398,7 +403,7 @@ Functions</h2></td></tr>
 <div class="line">        return result;                                                         \</div>
 <div class="line">    }</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01617">1617</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01642">1642</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -440,7 +445,7 @@ Functions</h2></td></tr>
 <div class="line">    Name(<span class="keywordtype">object</span> &amp;&amp;o) : Parent(std::<a class="code" href="cast_8h.html#a9d3321974e3d593c2e75a2a5b4d6b1b9">move</a>(o)) \</div>
 <div class="line">    { <span class="keywordflow">if</span> (m_ptr &amp;&amp; !check_(m_ptr)) <span class="keywordflow">throw</span> <a class="code" href="pytypes_8h.html#a1024242099edd83beaaa1c8795a82abf">PYBIND11_OBJECT_CHECK_FAILED</a>(Name, m_ptr); }</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00821">821</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00832">832</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -473,7 +478,7 @@ Functions</h2></td></tr>
 <div class="line">                           ::<a class="code" href="class_8h.html#a3138af6fced95393fe4d98100cf5bdae">pybind11::detail::get_fully_qualified_tp_name</a>(Py_TYPE(o_ptr)) + \</div>
 <div class="line">                           <span class="stringliteral">&quot;&#39; is not an instance of &#39;&quot;</span> #Name <span class="stringliteral">&quot;&#39;&quot;</span>)</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00816">816</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00827">827</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -519,7 +524,7 @@ Functions</h2></td></tr>
 <div class="line">        template &lt;typename Policy_&gt; \</div>
 <div class="line">        Name(const ::pybind11::detail::accessor&lt;Policy_&gt; &amp;a) : Name(<a class="code" href="classobject.html">object</a>(a)) { }</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00794">794</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00801">801</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -569,7 +574,51 @@ Functions</h2></td></tr>
 <div class="line">    : Parent(check_(o) ? o.release().ptr() : ConvertFun(o.ptr()), stolen_t{}) \</div>
 <div class="line">    { <span class="keywordflow">if</span> (!m_ptr) <span class="keywordflow">throw</span> <a class="code" href="classerror__already__set.html">error_already_set</a>(); }</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00806">806</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00813">813</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+
+</div>
+</div>
+<a id="a1ac5e544df764d4c4e3733b03d4174a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ac5e544df764d4c4e3733b03d4174a8">&#9670;&nbsp;</a></span>PYBIND11_OBJECT_CVT_DEFAULT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PYBIND11_OBJECT_CVT_DEFAULT</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Parent, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">CheckFun, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">ConvertFun&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <a class="code" href="pytypes_8h.html#a4fc2dbd315f5508afb7a5940a7c5e823">PYBIND11_OBJECT_CVT</a>(Name, Parent, CheckFun, ConvertFun) \</div>
+<div class="line">    Name() : Parent() { }</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00823">823</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -607,7 +656,23 @@ Functions</h2></td></tr>
 <b>Value:</b><div class="fragment"><div class="line">    <a class="code" href="pytypes_8h.html#ad4b7fc54168d44c54c0ca9863af90858">PYBIND11_OBJECT</a>(Name, Parent, CheckFun) \</div>
 <div class="line">    Name() : Parent() { }</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00829">829</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00840">840</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+
+</div>
+</div>
+<a id="a0b591f0e083164ce863bca3eb763a969"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b591f0e083164ce863bca3eb763a969">&#9670;&nbsp;</a></span>PYBIND11_STR_CHECK_FUN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PYBIND11_STR_CHECK_FUN&#160;&#160;&#160;PyUnicode_Check</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00764">764</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -624,7 +689,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00741">741</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00743">743</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -642,7 +707,7 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00775">775</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00782">782</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -662,7 +727,7 @@ template&lt;typename T &gt; </div>
 
 <p>Python argument categories (using PEP 448 terms) </p>
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00773">773</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00780">780</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -680,7 +745,7 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00779">779</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00786">786</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -698,7 +763,7 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00776">776</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00783">783</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -734,7 +799,7 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00774">774</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00781">781</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -782,7 +847,7 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00734">734</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00736">736</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -830,7 +895,7 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00740">740</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00742">742</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -878,7 +943,7 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00733">733</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00735">735</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -906,7 +971,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00410">410</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00423">423</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -934,7 +999,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00466">466</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00468">468</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -992,7 +1057,7 @@ template&lt;&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00390">390</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00392">392</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -1030,7 +1095,7 @@ template&lt;&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00403">403</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00416">416</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -1058,7 +1123,7 @@ template&lt;&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00488">488</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00490">490</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -1080,7 +1145,7 @@ template&lt;typename T , enable_if_t&lt;!is_pyobject&lt; T &gt;::value, int &gt;
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01794">1794</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l01840">1840</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -1102,7 +1167,7 @@ template&lt;typename T , enable_if_t&lt; is_pyobject&lt; T &gt;::value, int &gt;
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00483">483</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00485">485</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -1130,7 +1195,7 @@ template&lt;typename T , enable_if_t&lt; is_pyobject&lt; T &gt;::value, int &gt;
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00755">755</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00757">757</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -1158,7 +1223,7 @@ template&lt;typename T , enable_if_t&lt; is_pyobject&lt; T &gt;::value, int &gt;
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00743">743</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00745">745</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -1186,7 +1251,7 @@ template&lt;typename T , enable_if_t&lt; is_pyobject&lt; T &gt;::value, int &gt;
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00754">754</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00756">756</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -1214,35 +1279,7 @@ template&lt;typename T , enable_if_t&lt; is_pyobject&lt; T &gt;::value, int &gt;
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00759">759</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
-
-</div>
-</div>
-<a id="aa6c77dac9b295da58e7e59bdf82fc797"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa6c77dac9b295da58e7e59bdf82fc797">&#9670;&nbsp;</a></span>PyUnicode_Check_Permissive()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool PyUnicode_Check_Permissive </td>
-          <td>(</td>
-          <td class="paramtype">PyObject *&#160;</td>
-          <td class="paramname"><em>o</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00757">757</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00766">766</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -1268,7 +1305,7 @@ template&lt;typename T &gt; </div>
 py::object o = reinterpret_borrow&lt;py::object&gt;(p);
 </pre><p> or py::tuple t = reinterpret_borrow&lt;py::tuple&gt;(p); // &lt;&ndash; <code>p</code> must be already be a <code>tuple</code> \endrst </p>
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00304">304</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00306">306</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -1293,20 +1330,21 @@ template&lt;typename T &gt; </div>
 <p>.. code-block:: cpp</p>
 <p>PyObject *p = PyObject_Str(obj); py::str s = reinterpret_steal&lt;py::str&gt;(p); // &lt;&ndash; <code>p</code> must be already be a <code>str</code> \endrst </p>
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00314">314</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l00316">316</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
-<div class="ttc" id="apytypes_8h_html_ab4f94fb1d39306f36e0603accc545b4b"><div class="ttname"><a href="pytypes_8h.html#ab4f94fb1d39306f36e0603accc545b4b">PYBIND11_OBJECT_COMMON</a></div><div class="ttdeci">#define PYBIND11_OBJECT_COMMON(Name, Parent, CheckFun)</div><div class="ttdef"><b>Definition:</b> <a href="pytypes_8h_source.html#l00794">pytypes.h:793</a></div></div>
-<div class="ttc" id="apytypes_8h_html_ad4b7fc54168d44c54c0ca9863af90858"><div class="ttname"><a href="pytypes_8h.html#ad4b7fc54168d44c54c0ca9863af90858">PYBIND11_OBJECT</a></div><div class="ttdeci">#define PYBIND11_OBJECT(Name, Parent, CheckFun)</div><div class="ttdef"><b>Definition:</b> <a href="pytypes_8h_source.html#l00821">pytypes.h:820</a></div></div>
-<div class="ttc" id="aclasserror__already__set_html"><div class="ttname"><a href="classerror__already__set.html">error_already_set</a></div><div class="ttdef"><b>Definition:</b> <a href="pytypes_8h_source.html#l00324">pytypes.h:324</a></div></div>
+<div class="ttc" id="apytypes_8h_html_ab4f94fb1d39306f36e0603accc545b4b"><div class="ttname"><a href="pytypes_8h.html#ab4f94fb1d39306f36e0603accc545b4b">PYBIND11_OBJECT_COMMON</a></div><div class="ttdeci">#define PYBIND11_OBJECT_COMMON(Name, Parent, CheckFun)</div><div class="ttdef"><b>Definition:</b> <a href="pytypes_8h_source.html#l00801">pytypes.h:800</a></div></div>
+<div class="ttc" id="apytypes_8h_html_ad4b7fc54168d44c54c0ca9863af90858"><div class="ttname"><a href="pytypes_8h.html#ad4b7fc54168d44c54c0ca9863af90858">PYBIND11_OBJECT</a></div><div class="ttdeci">#define PYBIND11_OBJECT(Name, Parent, CheckFun)</div><div class="ttdef"><b>Definition:</b> <a href="pytypes_8h_source.html#l00832">pytypes.h:831</a></div></div>
+<div class="ttc" id="aclasserror__already__set_html"><div class="ttname"><a href="classerror__already__set.html">error_already_set</a></div><div class="ttdef"><b>Definition:</b> <a href="pytypes_8h_source.html#l00326">pytypes.h:326</a></div></div>
 <div class="ttc" id="aclassobject__api_html"><div class="ttname"><a href="classobject__api.html">object_api</a></div><div class="ttdef"><b>Definition:</b> <a href="pytypes_8h_source.html#l00055">pytypes.h:55</a></div></div>
+<div class="ttc" id="apytypes_8h_html_a4fc2dbd315f5508afb7a5940a7c5e823"><div class="ttname"><a href="pytypes_8h.html#a4fc2dbd315f5508afb7a5940a7c5e823">PYBIND11_OBJECT_CVT</a></div><div class="ttdeci">#define PYBIND11_OBJECT_CVT(Name, Parent, CheckFun, ConvertFun)</div><div class="ttdef"><b>Definition:</b> <a href="pytypes_8h_source.html#l00813">pytypes.h:812</a></div></div>
 <div class="ttc" id="aclassobject_html"><div class="ttname"><a href="classobject.html">object</a></div><div class="ttdef"><b>Definition:</b> <a href="pytypes_8h_source.html#l00232">pytypes.h:232</a></div></div>
 <div class="ttc" id="aclass_8h_html_a3138af6fced95393fe4d98100cf5bdae"><div class="ttname"><a href="class_8h.html#a3138af6fced95393fe4d98100cf5bdae">get_fully_qualified_tp_name</a></div><div class="ttdeci">std::string get_fully_qualified_tp_name(PyTypeObject *type)</div><div class="ttdef"><b>Definition:</b> <a href="class_8h_source.html#l00027">class.h:27</a></div></div>
 <div class="ttc" id="aclasshandle_html"><div class="ttname"><a href="classhandle.html">handle</a></div><div class="ttdef"><b>Definition:</b> <a href="pytypes_8h_source.html#l00176">pytypes.h:176</a></div></div>
-<div class="ttc" id="apytypes_8h_html_a1024242099edd83beaaa1c8795a82abf"><div class="ttname"><a href="pytypes_8h.html#a1024242099edd83beaaa1c8795a82abf">PYBIND11_OBJECT_CHECK_FAILED</a></div><div class="ttdeci">#define PYBIND11_OBJECT_CHECK_FAILED(Name, o_ptr)</div><div class="ttdef"><b>Definition:</b> <a href="pytypes_8h_source.html#l00816">pytypes.h:815</a></div></div>
-<div class="ttc" id="acast_8h_html_a9d3321974e3d593c2e75a2a5b4d6b1b9"><div class="ttname"><a href="cast_8h.html#a9d3321974e3d593c2e75a2a5b4d6b1b9">move</a></div><div class="ttdeci">detail::enable_if_t&lt;!detail::move_never&lt; T &gt;::value, T &gt; move(object &amp;&amp;obj)</div><div class="ttdef"><b>Definition:</b> <a href="cast_8h_source.html#l01752">cast.h:1752</a></div></div>
+<div class="ttc" id="apytypes_8h_html_a1024242099edd83beaaa1c8795a82abf"><div class="ttname"><a href="pytypes_8h.html#a1024242099edd83beaaa1c8795a82abf">PYBIND11_OBJECT_CHECK_FAILED</a></div><div class="ttdeci">#define PYBIND11_OBJECT_CHECK_FAILED(Name, o_ptr)</div><div class="ttdef"><b>Definition:</b> <a href="pytypes_8h_source.html#l00827">pytypes.h:826</a></div></div>
+<div class="ttc" id="acast_8h_html_a9d3321974e3d593c2e75a2a5b4d6b1b9"><div class="ttname"><a href="cast_8h.html#a9d3321974e3d593c2e75a2a5b4d6b1b9">move</a></div><div class="ttdeci">detail::enable_if_t&lt;!detail::move_never&lt; T &gt;::value, T &gt; move(object &amp;&amp;obj)</div><div class="ttdef"><b>Definition:</b> <a href="cast_8h_source.html#l01798">cast.h:1798</a></div></div>
 <div class="ttc" id="aclasshandle_html_afcd412ba4cbffd7d1e3c9338746b2682"><div class="ttname"><a href="classhandle.html#afcd412ba4cbffd7d1e3c9338746b2682">handle::ptr</a></div><div class="ttdeci">PyObject * ptr() const</div><div class="ttdoc">Return the underlying PyObject * pointer.</div><div class="ttdef"><b>Definition:</b> <a href="pytypes_8h_source.html#l00184">pytypes.h:184</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

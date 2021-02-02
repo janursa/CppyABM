@@ -125,11 +125,43 @@ Functions</h2></td></tr>
 <tr class="memitem:ga5cf5177f54cd2d3a17326b8a729417a1"><td class="memTemplParams" colspan="2">template&lt;typename Unsigned &gt; </td></tr>
 <tr class="memitem:ga5cf5177f54cd2d3a17326b8a729417a1"><td class="memTemplItemLeft" align="right" valign="top">Unsigned&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__pytypes.html#ga5cf5177f54cd2d3a17326b8a729417a1">as_unsigned</a> (PyObject *o)</td></tr>
 <tr class="separator:ga5cf5177f54cd2d3a17326b8a729417a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab7cc4d27f07dcb61988879afc654ccf6"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:gab7cc4d27f07dcb61988879afc654ccf6"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__pytypes.html#gab7cc4d27f07dcb61988879afc654ccf6">args_are_all_keyword_or_ds</a> ()</td></tr>
+<tr class="separator:gab7cc4d27f07dcb61988879afc654ccf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad6f34f7f8c2ddca5ab49d20afcb9ddd3"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classmemoryview.html">memoryview</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__pytypes.html#gad6f34f7f8c2ddca5ab49d20afcb9ddd3">memoryview::from_buffer</a> (void *<a class="el" href="classhandle.html#afcd412ba4cbffd7d1e3c9338746b2682">ptr</a>, <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h.html#ac430d16fc097b3bf0a7469cfd09decda">ssize_t</a> itemsize, const char *format, detail::any_container&lt; <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h.html#ac430d16fc097b3bf0a7469cfd09decda">ssize_t</a> &gt; shape, detail::any_container&lt; <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h.html#ac430d16fc097b3bf0a7469cfd09decda">ssize_t</a> &gt; strides, bool readonly=false)</td></tr>
 <tr class="separator:gad6f34f7f8c2ddca5ab49d20afcb9ddd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="gab7cc4d27f07dcb61988879afc654ccf6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab7cc4d27f07dcb61988879afc654ccf6">&#9670;&nbsp;</a></span>args_are_all_keyword_or_ds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool args_are_all_keyword_or_ds </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01294">1294</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+
+</div>
+</div>
 <a id="ga5cf5177f54cd2d3a17326b8a729417a1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga5cf5177f54cd2d3a17326b8a729417a1">&#9670;&nbsp;</a></span>as_unsigned()</h2>
 
@@ -148,7 +180,7 @@ template&lt;typename Unsigned &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01099">1099</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01110">1110</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>
@@ -215,7 +247,7 @@ template&lt;typename Unsigned &gt; </div>
 <p>.. _PyMemoryView_FromBuffer: <a href="https://docs.python.org/c-api/memoryview.html#c.PyMemoryView_FromBuffer">https://docs.python.org/c-api/memoryview.html#c.PyMemoryView_FromBuffer</a></p>
 <p>:param ptr: Pointer to the buffer. :param itemsize: Byte size of an element. :param format: Pointer to the null-terminated format string. For homogeneous Buffers, this should be set to <code><a class="el" href="structformat__descriptor.html">format_descriptor</a>&lt;T&gt;::value</code>. :param shape: Shape of the tensor (1 entry per dimension). :param strides: Number of bytes between adjacent entries (for each per dimension). :param readonly: Flag to indicate if the underlying storage may be written to. \endrst </p>
 
-<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01501">1501</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pytypes_8h_source.html#l01526">1526</a> of file <a class="el" href="pytypes_8h_source.html">pytypes.h</a>.</p>
 
 </div>
 </div>

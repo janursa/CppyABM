@@ -126,7 +126,7 @@ Static Public Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The 'instance' type which needs to be standard layout (need to be able to use 'offsetof') </p>
 
-<p class="definition">Definition at line <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html#l00419">419</a> of file <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html#l00437">437</a> of file <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html">common.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="addb02b48487bafc757c28d40d1d6a995"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#addb02b48487bafc757c28d40d1d6a995">&#9670;&nbsp;</a></span>allocate_layout()</h2>
@@ -153,7 +153,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>Initializes all of the above type/values/holders data (but not the instance values themselves) </p>
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00350">350</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00363">363</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -182,7 +182,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>Destroys/deallocates all of the above. </p>
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00398">398</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00411">411</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -223,7 +223,7 @@ Static Public Attributes</h2></td></tr>
 <p>Extracts C++ value and holder pointer references from an instance (which may contain multiple values/holders for python-side multiple inheritance) that match the given type. Throws an error if the given type (or ValueType, if omitted) is not a <a class="el" href="namespacepybind11.html">pybind11</a> base of the given instance. If <code>find_type</code> is omitted (or explicitly specified as nullptr) the first value/holder are returned, regardless of type (and the resulting .type will be nullptr).</p>
 <p>The returned object should be short-lived: in particular, it must not outlive the called-upon instance. </p>
 
-<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00326">326</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cast_8h_source.html#l00339">339</a> of file <a class="el" href="cast_8h_source.html">cast.h</a>.</p>
 
 </div>
 </div>
@@ -258,7 +258,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>If true, <a class="el" href="internals_8h.html#a04a9d4c2d4a027e104437cce54c0cc5f" title="Return a reference to the current internals data.">get_internals()</a>.patients has an entry for this object. </p>
 
-<p class="definition">Definition at line <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html#l00459">459</a> of file <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html#l00477">477</a> of file <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -274,7 +274,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html#l00424">424</a> of file <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html#l00442">442</a> of file <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -292,7 +292,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>If true, the pointer is owned which means we're free to manage it with a holder. </p>
 
-<p class="definition">Definition at line <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html#l00429">429</a> of file <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html#l00447">447</a> of file <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -310,7 +310,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>For simple layout, tracks whether the holder has been constructed. </p>
 
-<p class="definition">Definition at line <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html#l00455">455</a> of file <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html#l00473">473</a> of file <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -328,7 +328,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>For simple layout, tracks whether the instance is registered in <code>registered_instances</code> </p>
 
-<p class="definition">Definition at line <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html#l00457">457</a> of file <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html#l00475">475</a> of file <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -348,7 +348,7 @@ Static Public Attributes</h2></td></tr>
 <p>Non-simple layout applies when using custom holders that require more space than <code>shared_ptr</code> (which is typically the size of two pointers), or when multiple inheritance is used on the python side. Non-simple layout allocates the required amount of memory to have multiple bound C++ classes as parents. Under this layout, <code>nonsimple.values_and_holders</code> is set to a pointer to allocated space of the required space to hold a sequence of value pointers and holders followed <code>status</code>, a set of bit flags (1 byte each), i.e. [val1*][holder1][val2*][holder2]...[bb...] where each [block] is rounded up to a multiple of <code>sizeof(void *)</code>. <code>nonsimple.status</code> is, for convenience, a pointer to the beginning of the [bb...] block (but not independently allocated).</p>
 <p>Status bits indicate whether the associated holder is constructed (&amp; status_holder_constructed) and whether the value pointer is registered (&amp; status_instance_registered) in <code>registered_instances</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html#l00453">453</a> of file <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html#l00471">471</a> of file <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -364,7 +364,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html#l00423">423</a> of file <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html#l00441">441</a> of file <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -390,7 +390,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>Bit values for the non-simple status flags. </p>
 
-<p class="definition">Definition at line <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html#l00473">473</a> of file <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html#l00491">491</a> of file <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -414,7 +414,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html#l00474">474</a> of file <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html#l00492">492</a> of file <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -432,7 +432,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>Weak references. </p>
 
-<p class="definition">Definition at line <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html#l00427">427</a> of file <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html#l00445">445</a> of file <a class="el" href="examples_2cpp_2build_2__deps_2pybind11-src_2include_2pybind11_2detail_2common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>

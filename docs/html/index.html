@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.19"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CppyABM: Inheritence-based modeling</title>
+<title>CppyABM: Main Page</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,21 +62,130 @@ $(function() {
 
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">Inheritence-based modeling </div>  </div>
+<div class="title">CppyABM Documentation</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md__Users_matin_Downloads_testProjs_CppyABM_doxygen_mainpage"></a>CppyABM provides three base classes of <a class="el" href="struct_env.html" title="Base class for environment.">Env</a>, <a class="el" href="struct_agent.html" title="Base class for Agent.">Agent</a>, and <a class="el" href="struct_patch.html" title="Base class for patch.">Patch</a> for agent-based modeling. Users should inherit and specialize these classes based on their simulation requirements. <a class="el" href="struct_agent.html" title="Base class for Agent.">Agent</a> is designed to simulate moving objects; <a class="el" href="struct_patch.html" title="Base class for patch.">Patch</a> is for non-moving objects; and <a class="el" href="struct_env.html" title="Base class for environment.">Env</a> stores and coordinates <a class="el" href="struct_agent.html" title="Base class for Agent.">Agent</a> and <a class="el" href="struct_patch.html" title="Base class for patch.">Patch</a> objects. <a class="el" href="struct_patch.html" title="Base class for patch.">Patch</a> object can accomodate agents and heteregenious quantities within the simulation domain. Three is a three-way connections between <a class="el" href="struct_env.html" title="Base class for environment.">Env</a>, <a class="el" href="struct_agent.html" title="Base class for Agent.">Agent</a>, and <a class="el" href="struct_patch.html" title="Base class for patch.">Patch</a>. <a class="el" href="struct_env.html" title="Base class for environment.">Env</a> has stored pointers to <a class="el" href="struct_agent.html" title="Base class for Agent.">Agent</a> and <a class="el" href="struct_patch.html" title="Base class for patch.">Patch</a>; <a class="el" href="struct_patch.html" title="Base class for patch.">Patch</a> has pointers to the residing <a class="el" href="struct_agent.html" title="Base class for Agent.">Agent</a> as well as <a class="el" href="struct_env.html" title="Base class for environment.">Env</a> object; and agent has pointers to host <a class="el" href="struct_patch.html" title="Base class for patch.">Patch</a> and <a class="el" href="struct_env.html" title="Base class for environment.">Env</a> object. This three-way connection enables full information retreival among the entire simulation entities.</p>
-<p><a class="el" href="struct_agent.html" title="Base class for Agent.">Agent</a> and <a class="el" href="struct_patch.html" title="Base class for patch.">Patch</a> require an input argument of <a class="el" href="struct_env.html" title="Base class for environment.">Env</a> for initialization. Also, <a class="el" href="struct_agent.html" title="Base class for Agent.">Agent</a> requires an identity variable termed <a class="el" href="struct_agent.html#a40e1bf1edd0d40487d9dd1506c82c963">Agent::class_name</a> to enable multi-agent modeling. There are few conventions that need further explanation to define an environment. Since Python requires object ownership, any object shared between C++ and Python ends, i.e. <a class="el" href="struct_patch.html" title="Base class for patch.">Patch</a> and <a class="el" href="struct_agent.html" title="Base class for Agent.">Agent</a> objects, needs to be stored in Python end and referenced as a pointer in C++ end. To satisfy this requirement, two template functions of <a class="el" href="struct_env.html#a5c6226453c01cafda4bf7ce5ef59fae4">Env::generate_agent</a> and <a class="el" href="struct_env.html#ab1b7a5005339616563013aa2e826a33b">Env::generate_patch</a> are provided to manage the generation and storage of agents and patches. These functions need to be customized for each model. <a class="el" href="struct_a.html">A</a> repository variable needs to be defined in Python end to store created objects. Simultaneously, the objects need to be added to <a class="el" href="struct_env.html#a36dc2eece2a523887a2a21091b7a5654" title="Agent container.">Env::agents</a> and <a class="el" href="struct_env.html#a704207b1b87d5824bd00f60a42f4d78e" title="Patch container.">Env::patches</a> which are the standard containers. The examples is given in <a class="el" href="struct_domain.html">Domain</a>. Using these functions, the defined agents and patches can be accessed in both C++ and Python without further measure.</p>
+<div class="textblock"><p><a class="anchor" id="md__Users_matin_Downloads_testProjs_CppyABM_doxygen_mainpage"></a>CppyABM is a free open-source header-only library that enables agent-based modeling by providing essential tools in both C++ and Python as well as mixing both in a single model. The modeling in both C++ and Python follows similar semantics and style. Therefore, a model developed in one languages can be conveniently transferred to another. In addition, CppyABM provides binding tools to specifically expose certain parts of a model written in C++ for further development in Python. This enables users to take the advantage of both languages simultaneously.</p>
+<h1><a class="anchor" id="autotoc_md0"></a>
+Basics of design</h1>
+<p>CppyABM provides three base classes of <a class="el" href="struct_env.html" title="Base class for environment.">Env</a>, <a class="el" href="struct_agent.html" title="Base class for Agent.">Agent</a>, and <a class="el" href="struct_patch.html" title="Base class for patch.">Patch</a> for agent-based modeling. Users should inherit and specialize these classes based on their simulation requirements. <a class="el" href="struct_agent.html" title="Base class for Agent.">Agent</a> is designed to simulate moving objects; <a class="el" href="struct_patch.html" title="Base class for patch.">Patch</a> is for non-moving objects; and <a class="el" href="struct_env.html" title="Base class for environment.">Env</a> stores and coordinates <a class="el" href="struct_agent.html" title="Base class for Agent.">Agent</a> and <a class="el" href="struct_patch.html" title="Base class for patch.">Patch</a> objects. <a class="el" href="struct_patch.html" title="Base class for patch.">Patch</a> object can accomodate agents and heteregenious quantities within the simulation domain. Three is a three-way connections between <a class="el" href="struct_env.html" title="Base class for environment.">Env</a>, <a class="el" href="struct_agent.html" title="Base class for Agent.">Agent</a>, and <a class="el" href="struct_patch.html" title="Base class for patch.">Patch</a>. <a class="el" href="struct_env.html" title="Base class for environment.">Env</a> has stored pointers to <a class="el" href="struct_agent.html" title="Base class for Agent.">Agent</a> and <a class="el" href="struct_patch.html" title="Base class for patch.">Patch</a>; <a class="el" href="struct_patch.html" title="Base class for patch.">Patch</a> has pointers to the residing <a class="el" href="struct_agent.html" title="Base class for Agent.">Agent</a> as well as <a class="el" href="struct_env.html" title="Base class for environment.">Env</a> object; and agent has pointers to host <a class="el" href="struct_patch.html" title="Base class for patch.">Patch</a> and <a class="el" href="struct_env.html" title="Base class for environment.">Env</a> object. This three-way connection enables full information retreival among the entire simulation entities. Both <a class="el" href="struct_agent.html" title="Base class for Agent.">Agent</a> and <a class="el" href="struct_patch.html" title="Base class for patch.">Patch</a> require an input argument of <a class="el" href="struct_env.html" title="Base class for environment.">Env</a> for initialization. Also, <a class="el" href="struct_agent.html" title="Base class for Agent.">Agent</a> requires an identity variable termed <a class="el" href="struct_agent.html#a40e1bf1edd0d40487d9dd1506c82c963" title="Unique ID of this class.">Agent::class_name</a> to enable multi-agent modeling; and <a class="el" href="struct_patch.html" title="Base class for patch.">Patch</a> requires a <a class="el" href="struct_m_e_s_h___i_t_e_m.html" title="A class for mesh items.">MESH_ITEM</a> object to gather three pieces of information, <a class="el" href="struct_m_e_s_h___i_t_e_m.html#a09116c3d46a08d9f3c6ef4d31497f059">MESH_ITEM::index</a>, <a class="el" href="struct_m_e_s_h___i_t_e_m.html#a9e4c79437295ce010e70b74e5c459b07" title="Coordinates.">MESH_ITEM::coords</a>, and <a class="el" href="struct_m_e_s_h___i_t_e_m.html#accb5bf5293090e1c08e72f6c2f472dde" title="Neighbor mesh indices.">MESH_ITEM::neighbors_indices</a>. There are few conventions that need further explanation to define an environment. Since Python requires object ownership, any object shared between C++ and Python ends, i.e. <a class="el" href="struct_patch.html" title="Base class for patch.">Patch</a> and <a class="el" href="struct_agent.html" title="Base class for Agent.">Agent</a> objects, needs to be stored in Python end and referenced as a pointer in C++ end. To satisfy this requirement, two template functions of <a class="el" href="struct_env.html#a5c6226453c01cafda4bf7ce5ef59fae4" title="A template class to generate patch.">Env::generate_agent</a> and <a class="el" href="struct_env.html#ab1b7a5005339616563013aa2e826a33b">Env::generate_patch</a> are provided to manage the generation and storage of agents and patches. These functions need to be customized for each model (see <a href="#Python+development">example</a>). <a class="el" href="struct_a.html">A</a> repository variable needs to be defined within Python to store created objects. Simultaneously, the objects need to be added to <a class="el" href="struct_env.html#a36dc2eece2a523887a2a21091b7a5654" title="Agent container.">Env::agents</a> and <a class="el" href="struct_env.html#a704207b1b87d5824bd00f60a42f4d78e" title="Patch container.">Env::patches</a> which are the standard containers defined within C++. Using these functions, the defined agents and patches can be accessed in both C++ and Python without further measure (see <a href="#Python+development">example</a>).</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
+Install/compile</h1>
+<h2><a class="anchor" id="autotoc_md2"></a>
+- For Python development:</h2>
+<p>Using pip manager:</p>
+<ul>
+<li><code>pip install --upgrade cppyabm</code></li>
+</ul>
+<p>Or, download the package and in the root folder, command:</p>
+<ul>
+<li><code>python3 <a class="el" href="setup_8py.html">setup.py</a> install</code></li>
+</ul>
+<h2><a class="anchor" id="autotoc_md3"></a>
+- For Cpp development:</h2>
+<p>Clone the library and add the main root as a subdirectory. Using modern Cmake, the following command will include the library:</p>
+<ul>
+<li><code>add_subdirectory("dir_to_cppyabm")</code></li>
+<li><code>target_include_directories("your_project" "dir_to_include/ABM")</code></li>
+</ul>
+<h1><a class="anchor" id="autotoc_md4"></a>
+C++ development</h1>
+<p>The model development in C++ is based on template programing to keep the internal connections between different class objects valid for the derived models. The primary layout of an agent-based model in C++ is, </p><div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="bases_8h.html">CppyABM/include/ABM/bases.h</a>&quot;</span></div>
+<div class="line"><span class="comment">// declare the derived classes</span></div>
+<div class="line"><span class="keyword">struct </span>myEnv;</div>
+<div class="line"><span class="keyword">struct </span>myAgent;</div>
+<div class="line"><span class="keyword">struct </span>myPatch;</div>
+<div class="line"><span class="comment">// define myEnv</span></div>
+<div class="line"><span class="keyword">struct </span>myEnv: <span class="keyword">public</span> <a class="code" href="struct_env.html">Env</a>&lt;myEnv,myAgent,myPatch&gt; <span class="comment">/*Env is inherited using template arguments*/</span> {</div>
+<div class="line">    myEnv():<a class="code" href="struct_env.html">Env</a>&lt;myEnv,myAgent,myPatch&gt;() <span class="comment">/*a call to the base class&#39;s instructor*/</span>{ </div>
+<div class="line">    }</div>
+<div class="line">    shared_ptr&lt;myAgent&gt; <a class="code" href="struct_env.html#a5c6226453c01cafda4bf7ce5ef59fae4">generate_agent</a>(std::string);</div>
+<div class="line">    shared_ptr&lt;myPatch&gt; <a class="code" href="struct_env.html#ab1b7a5005339616563013aa2e826a33b">generate_patch</a>(<a class="code" href="struct_m_e_s_h___i_t_e_m.html">MESH_ITEM</a>);</div>
+<div class="line">};</div>
+<div class="line"><span class="keyword">struct </span>myPatch: <span class="keyword">public</span> <a class="code" href="struct_patch.html">Patch</a>&lt;myEnv,myAgent,myPatch&gt; {</div>
+<div class="line">    myPatch(shared_ptr&lt;myEnv&gt; <a class="code" href="namespaceenv.html">env</a>,<a class="code" href="struct_m_e_s_h___i_t_e_m.html">MESH_ITEM</a> mesh):<a class="code" href="struct_patch.html">Patch</a>&lt;myEnv,myAgent,myPatch&gt;(<a class="code" href="namespaceenv.html">env</a>,mesh)<span class="comment">/*a call to the base class&#39;s instructor*/</span>{</div>
+<div class="line"> </div>
+<div class="line">    }</div>
+<div class="line">};</div>
+<div class="line"><span class="keyword">struct </span>myAgent: <span class="keyword">public</span> <a class="code" href="struct_agent.html">Agent</a>&lt;myEnv,myAgent,myPatch&gt; {</div>
+<div class="line">    myAgent(shared_ptr&lt;myEnv&gt; <a class="code" href="namespaceenv.html">env</a>,std::string agent_name):<a class="code" href="struct_agent.html">Agent</a>&lt;myEnv,myAgent,myPatch&gt;(<a class="code" href="namespaceenv.html">env</a>,agent_name)<span class="comment">/*a call to the base class&#39;s instructor*/</span>{</div>
+<div class="line">    }</div>
+<div class="line">};</div>
+</div><!-- fragment --><p>For the above layout, two generator functions are, </p><div class="fragment"><div class="line">shared_ptr&lt;myAgent&gt; myEnv::generate_agent(std::string agent_name){</div>
+<div class="line">    <span class="keyword">auto</span> agent_obj = make_shared&lt;myAgent&gt;(this-&gt;shared_from_this(),agent_name);</div>
+<div class="line">    this-&gt;agents.push_back(agent_obj);</div>
+<div class="line">    <span class="keywordflow">return</span> agent_obj;</div>
+<div class="line">};</div>
+<div class="line">shared_ptr&lt;myPatch&gt; myEnv::generate_patch(<a class="code" href="struct_m_e_s_h___i_t_e_m.html">MESH_ITEM</a> mesh){</div>
+<div class="line">    <span class="keyword">auto</span> patch_obj = make_shared&lt;myPatch&gt;(this-&gt;shared_from_this(),mesh);</div>
+<div class="line">    this-&gt;patches.insert(pair&lt;<span class="keywordtype">unsigned</span>,shared_ptr&lt;myPatch&gt;&gt;(patch_obj-&gt;index,patch_obj));</div>
+<div class="line">    <span class="keywordflow">return</span> patch_obj;</div>
+<div class="line">};</div>
+</div><!-- fragment --><p>For a complete example in C++, check out <a href="https://github.com/janursa/CppyABM/tree/master/examples/cpp" title="cpp">Cpp example</a>.</p>
+<h1><a class="anchor" id="autotoc_md5"></a>
+Python development</h1>
+<p>The basic layout of an agent-based model in Python is, </p><div class="fragment"><div class="line"><span class="keyword">from</span> cppyabm.binds <span class="keyword">import</span> Env, Agent, Patch</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">class </span>myPatch(<a class="code" href="struct_patch.html">Patch</a>):</div>
+<div class="line">    <span class="keyword">def </span>__init__(self,env,mesh_item):</div>
+<div class="line">        Patch.__init__(self,env,mesh_item)</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">class </span>myAgent (<a class="code" href="struct_agent.html">Agent</a>):</div>
+<div class="line">    <span class="keyword">def </span>__init__(self,env,agent_name):</div>
+<div class="line">        Agent.__init__(self,env = env,class_name = agent_name)</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">class </span>myEnv(<a class="code" href="struct_env.html">Env</a>):</div>
+<div class="line">    <span class="keyword">def </span>__init__(self):</div>
+<div class="line">        Env.__init__(self)</div>
+<div class="line">        self.agents_repo = []</div>
+<div class="line">        self.patches_repo = []</div>
+<div class="line">    <span class="keyword">def </span>generate_agent(self,agent_name):</div>
+<div class="line">        agent_obj = myAgent(self,agent_name)</div>
+<div class="line">        self.agents_repo.append(agent_obj)</div>
+<div class="line">        self.agents.append(agent_obj)</div>
+<div class="line">        <span class="keywordflow">return</span> agent_obj</div>
+<div class="line">    <span class="keyword">def </span>generate_patch(self,mesh_item):</div>
+<div class="line">        patch_obj = myPatch(self,mesh_item)</div>
+<div class="line">        self.patches.append(patch_obj);</div>
+<div class="line">        self.patches_repo.append(patch_obj)</div>
+<div class="line">        <span class="keywordflow">return</span> patch_obj</div>
+<div class="line">    <span class="keyword">def </span>update_repo(self):</div>
+<div class="line">        <span class="keywordflow">for</span> i <span class="keywordflow">in</span> range(<a class="code" href="group__python__builtins.html#gaeff368081ac50b8fe2cc0230d96e3acb">len</a>(self.agents_repo)):</div>
+<div class="line">            <span class="keywordflow">if</span> self.agents_repo[i].disappear==<span class="keyword">True</span>:</div>
+<div class="line">                indices.append(i)</div>
+<div class="line">        <span class="keywordflow">for</span> ele <span class="keywordflow">in</span> sorted(indices, reverse = <span class="keyword">True</span>):  </div>
+<div class="line">            del self.agents_repo[ele]</div>
+</div><!-- fragment --><p>Within Python, the generator functions require an additional step of storing the created objects in the local repositories. Also, the repositories needs to be updated to remove inactive agents. For a complete example in Python, check out <a href="https://github.com/janursa/CppyABM/tree/master/examples/Py" title="py">Py example</a>.</p>
+<h1><a class="anchor" id="autotoc_md6"></a>
 Binding procedure from Cpp to Python</h1>
-<p>lets bind it here.</p>
-<h1><a class="anchor" id="autotoc_md2"></a>
-Usefull build-in functions</h1>
-<h1><a class="anchor" id="autotoc_md3"></a>
+<p>The binding tools provided within CppyABM are based on <a class="el" href="namespacepybind11.html">pybind11</a>. Generally, there are two types of binding are provisioned; exposure: to exposure certain certain functionality written in C++ code to Python; extention: to let the compiler know that the exposed functionality will be replaced within Python. The following steps are taken during the binding process:</p>
+<ul>
+<li>Expose the base functions and class types using <a class="el" href="namespacebind__tools.html#aa7107aef1325f8edaef544eef6e21060" title="Exposes default items.">bind_tools::expose_defaults</a></li>
+<li>Expose the derived classes using <a class="el" href="namespacebind__tools.html#a8190e384a87bc1d19ff6eb0940fd82a4" title="Expose function for Env-based classes with trampoline.">bind_tools::expose_env</a>, <a class="el" href="namespacebind__tools.html#a3d26be1c2b1256df3b067ab5849e9e8a" title="Template trampoline for Agent-based classes with trampoline.">bind_tools::expose_agent</a>, and <a class="el" href="namespacebind__tools.html#a2d9c03e327d10b3d70e52d472ebe8815" title="Template trampoline for Patch-based classes with trampoline.">bind_tools::expose_patch</a>. In case the model is intended for the extention binding, a trampoline needs to be designed and passed as an argument to these functions. The base trampoline classes of <a class="el" href="structbind__tools_1_1tram_env.html" title="Template trampoline for Env-based classes.">bind_tools::tramEnv</a>, <a class="el" href="structbind__tools_1_1tram_agent.html" title="Template trampoline for Agent-based classes.">bind_tools::tramAgent</a>, and <a class="el" href="structbind__tools_1_1tram_patch.html" title="Template trampoline for Patch-based classes.">bind_tools::tramPatch</a> are provided for this purposes which need to be extended. The extention process follows the same semantics as pybin11 see <a href="https://pybind11.readthedocs.io/en/stable/advanced/classes.html" title="pybind11">pybind11</a> and <a href="https://github.com/janursa/CppyABM/tree/master/examples/Cppy" title="cppy">example</a>.</li>
+<li>Bind the members and methods of the derived class. In addition to the base members, the derived class can have additional members for exposure. Two functions <code>def</code> and <code>def_readwrite</code> are used for these purposes (see <a href="https://pybind11.readthedocs.io/en/stable/advanced/classes.html" title="pybind11">pybind11</a>)</li>
+<li>Expose <a class="el" href="struct_agent.html" title="Base class for Agent.">Agent</a> and <a class="el" href="struct_patch.html" title="Base class for patch.">Patch</a> container using <a class="el" href="bind__tools_8h.html#ad60749327698ee518d8a455525e219e6">EXPOSE_AGENT_CONTAINER</a> amd <a class="el" href="bind__tools_8h.html#a20110477fe9ad71820abeb88b2e24d72">EXPOSE_PATCH_CONTAINER</a></li>
+</ul>
+<p>To see an example combining all steps, see <a href="https://github.com/janursa/CppyABM/tree/master/examples/Cppy" title="cppy">binding example</a></p>
+<h2><a class="anchor" id="autotoc_md7"></a>
+Cmake</h2>
+<p>We use Cmake for model compilation and Python binding. <code>pybind11_add_module</code> provided by <a class="el" href="namespacepybind11.html">pybind11</a> takes care of a Python module creation for the given set of C++ files. See <a href="https://github.com/janursa/CppyABM/tree/master/examples/Cppy" title="cppy">binding example</a> for an example.</p>
+<h1><a class="anchor" id="autotoc_md8"></a>
+Visualization</h1>
+<p>We use <a href="https://github.com/janursa/RTvisualize" title="RTvisualize">RTvisualize</a> for real-time visualization of the agent-based modeling. An example can be found on <a href="https://github.com/janursa/CppyABM/tree/master/examples/Py" title="cppy">monitor_script</a>.</p>
+<h1><a class="anchor" id="autotoc_md9"></a>
 Examples</h1>
-<p>Find the examples <a class="el" href="examples.html">here</a> </p>
+<p>In order to demonstrate the use case of CppyABM, we design a computer model of the biological tissue growth in response to injury. For description of the problem, see the article. Implementtion files of the examples together with Cmake files can be found on <a href="https://github.com/janursa/CppyABM/tree/master/examples">here</a>. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
+<div class="ttc" id="astruct_env_html_ab1b7a5005339616563013aa2e826a33b"><div class="ttname"><a href="struct_env.html#ab1b7a5005339616563013aa2e826a33b">Env::generate_patch</a></div><div class="ttdeci">virtual shared_ptr&lt; PATCH &gt; generate_patch(MESH_ITEM)</div><div class="ttdef"><b>Definition:</b> <a href="bases_8h_source.html#l00146">bases.h:146</a></div></div>
+<div class="ttc" id="astruct_patch_html"><div class="ttname"><a href="struct_patch.html">Patch</a></div><div class="ttdoc">Base class for patch.</div><div class="ttdef"><b>Definition:</b> <a href="bases_8h_source.html#l00026">bases.h:26</a></div></div>
+<div class="ttc" id="astruct_m_e_s_h___i_t_e_m_html"><div class="ttname"><a href="struct_m_e_s_h___i_t_e_m.html">MESH_ITEM</a></div><div class="ttdoc">A class for mesh items.</div><div class="ttdef"><b>Definition:</b> <a href="mesh_8h_source.html#l00010">mesh.h:10</a></div></div>
+<div class="ttc" id="astruct_agent_html"><div class="ttname"><a href="struct_agent.html">Agent</a></div><div class="ttdoc">Base class for Agent.</div><div class="ttdef"><b>Definition:</b> <a href="bases_8h_source.html#l00101">bases.h:101</a></div></div>
+<div class="ttc" id="astruct_env_html_a5c6226453c01cafda4bf7ce5ef59fae4"><div class="ttname"><a href="struct_env.html#a5c6226453c01cafda4bf7ce5ef59fae4">Env::generate_agent</a></div><div class="ttdeci">virtual shared_ptr&lt; AGENT &gt; generate_agent(string class_name)</div><div class="ttdoc">A template class to generate patch.</div><div class="ttdef"><b>Definition:</b> <a href="bases_8h_source.html#l00149">bases.h:149</a></div></div>
+<div class="ttc" id="anamespaceenv_html"><div class="ttname"><a href="namespaceenv.html">env</a></div><div class="ttdef"><b>Definition:</b> <a href="env_8py_source.html#l00001">env.py:1</a></div></div>
+<div class="ttc" id="astruct_env_html"><div class="ttname"><a href="struct_env.html">Env</a></div><div class="ttdoc">Base class for environment.</div><div class="ttdef"><b>Definition:</b> <a href="bases_8h_source.html#l00143">bases.h:143</a></div></div>
+<div class="ttc" id="agroup__python__builtins_html_gaeff368081ac50b8fe2cc0230d96e3acb"><div class="ttname"><a href="group__python__builtins.html#gaeff368081ac50b8fe2cc0230d96e3acb">len</a></div><div class="ttdeci">size_t len(handle h)</div><div class="ttdoc">Get the length of a Python object.</div><div class="ttdef"><b>Definition:</b> <a href="pytypes_8h_source.html#l01560">pytypes.h:1560</a></div></div>
+<div class="ttc" id="abases_8h_html"><div class="ttname"><a href="bases_8h.html">bases.h</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
