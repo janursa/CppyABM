@@ -33,7 +33,7 @@ Clone the library and add the main root as a subdirectory. Using modern Cmake, t
 
  
 
-### Contributing to CppyABM
+## Contributing to CppyABM
 In case of encountering an issue, pls report as an issue.
 
 
