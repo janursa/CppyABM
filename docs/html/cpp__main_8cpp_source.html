@@ -70,27 +70,25 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a href="cpp__main_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="cpp__example_8cpp.html">cpp_example.cpp</a>&quot;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="cpp__example_8h.html">cpp_example.h</a>&quot;</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;chrono&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="cpp__main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">    5</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="cpp__main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>(){</div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    std::chrono::steady_clock::time_point <a class="code" href="namespacetissuehealing.html#aee809c50c3ff17ea08f93ff99c5b35ee">begin</a> = std::chrono::steady_clock::now();</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="keyword">auto</span> <a class="code" href="namespacetissuehealing.html#af799ccaf0bf434ca545a6c1c58564dd4">envObj</a> = make_shared&lt;Domain&gt;();</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <a class="code" href="namespacetissuehealing.html#af799ccaf0bf434ca545a6c1c58564dd4">envObj</a>-&gt;setup();</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <a class="code" href="namespacetissuehealing.html#af799ccaf0bf434ca545a6c1c58564dd4">envObj</a>-&gt;episode();</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    std::chrono::steady_clock::time_point <a class="code" href="namespacetissuehealing.html#aba9b26148201dac4d86eeba8710c69e1">end</a> = std::chrono::steady_clock::now();   </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;Simulation took &quot;</span> &lt;&lt; std::chrono::duration_cast&lt;std::chrono::microseconds&gt;(<a class="code" href="namespacetissuehealing.html#aba9b26148201dac4d86eeba8710c69e1">end</a> - <a class="code" href="namespacetissuehealing.html#aee809c50c3ff17ea08f93ff99c5b35ee">begin</a>).count()/1000000 &lt;&lt; <span class="stringliteral">&quot; s&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="keyword">auto</span> envObj = make_shared&lt;Domain&gt;();</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    envObj-&gt;setup();</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    envObj-&gt;episode();</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    std::chrono::steady_clock::time_point <a class="code" href="namespacelibsize.html#a5957fc1e6f6b0ee7cd77e1e062369d35">end</a> = std::chrono::steady_clock::now();   </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;Simulation took &quot;</span> &lt;&lt; std::chrono::duration_cast&lt;std::chrono::microseconds&gt;(<a class="code" href="namespacelibsize.html#a5957fc1e6f6b0ee7cd77e1e062369d35">end</a> - begin).count()/1000000 &lt;&lt; <span class="stringliteral">&quot; s&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    </div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="anamespacetissuehealing_html_af799ccaf0bf434ca545a6c1c58564dd4"><div class="ttname"><a href="namespacetissuehealing.html#af799ccaf0bf434ca545a6c1c58564dd4">tissuehealing.envObj</a></div><div class="ttdeci">envObj</div><div class="ttdef"><b>Definition:</b> <a href="tissuehealing_8py_source.html#l00152">tissuehealing.py:152</a></div></div>
 <div class="ttc" id="acpp__main_8cpp_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="cpp__main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdef"><b>Definition:</b> <a href="cpp__main_8cpp_source.html#l00005">cpp_main.cpp:5</a></div></div>
-<div class="ttc" id="acpp__example_8cpp_html"><div class="ttname"><a href="cpp__example_8cpp.html">cpp_example.cpp</a></div></div>
-<div class="ttc" id="anamespacetissuehealing_html_aee809c50c3ff17ea08f93ff99c5b35ee"><div class="ttname"><a href="namespacetissuehealing.html#aee809c50c3ff17ea08f93ff99c5b35ee">tissuehealing.begin</a></div><div class="ttdeci">begin</div><div class="ttdef"><b>Definition:</b> <a href="tissuehealing_8py_source.html#l00151">tissuehealing.py:151</a></div></div>
-<div class="ttc" id="anamespacetissuehealing_html_aba9b26148201dac4d86eeba8710c69e1"><div class="ttname"><a href="namespacetissuehealing.html#aba9b26148201dac4d86eeba8710c69e1">tissuehealing.end</a></div><div class="ttdeci">end</div><div class="ttdef"><b>Definition:</b> <a href="tissuehealing_8py_source.html#l00155">tissuehealing.py:155</a></div></div>
+<div class="ttc" id="anamespacelibsize_html_a5957fc1e6f6b0ee7cd77e1e062369d35"><div class="ttname"><a href="namespacelibsize.html#a5957fc1e6f6b0ee7cd77e1e062369d35">libsize.end</a></div><div class="ttdeci">end</div><div class="ttdef"><b>Definition:</b> <a href="libsize_8py_source.html#l00022">libsize.py:22</a></div></div>
+<div class="ttc" id="acpp__example_8h_html"><div class="ttname"><a href="cpp__example_8h.html">cpp_example.h</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

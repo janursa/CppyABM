@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['expose_5fagent_5fcontainer_281',['EXPOSE_AGENT_CONTAINER',['../bind__tools_8h.html#ad60749327698ee518d8a455525e219e6',1,'bind_tools.h']]],
-  ['expose_5fpatch_5fcontainer_282',['EXPOSE_PATCH_CONTAINER',['../bind__tools_8h.html#a20110477fe9ad71820abeb88b2e24d72',1,'bind_tools.h']]]
+  ['a_5fmethods_5248',['A_METHODS',['../test__virtual__functions_8cpp.html#a4126fe74ab69ce25d84c37843b37a239',1,'test_virtual_functions.cpp']]]
 ];

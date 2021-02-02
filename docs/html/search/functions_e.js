@@ -1,12 +1,24 @@
 var searchData=
 [
-  ['set_5fagent_226',['set_agent',['../struct_patch.html#a347bd3abc4a3974c9d655a9ea32a3f8d',1,'Patch']]],
-  ['set_5fpatch_227',['set_patch',['../struct_agent.html#a3cbaeda409173491dcf7ddf7ebe3376e',1,'Agent']]],
-  ['setup_228',['setup',['../classtissuehealing_1_1_domain.html#a726c457297a5c480a29b8577a4f95b6a',1,'tissuehealing.Domain.setup()'],['../struct_domain.html#acaff09d70a70b36fe5ef1ae45a04a2a0',1,'Domain::setup()'],['../struct_domain.html#acaff09d70a70b36fe5ef1ae45a04a2a0',1,'Domain::setup()']]],
-  ['setup_5fagents_229',['setup_agents',['../struct_env.html#a0363b60bc5bbaf109538091663115782',1,'Env']]],
-  ['setup_5fdomain_230',['setup_domain',['../struct_env.html#a9f76c481e63ef7dec35adcb43e7bf0ff',1,'Env']]],
-  ['step_231',['step',['../struct_patch.html#aefe68313986fd631517310ddeea169d7',1,'Patch::step()'],['../struct_agent.html#a12f16610dbb7bd299a3878a7d3b85214',1,'Agent::step()'],['../struct_env.html#ab18308b348122cfc41cc5b3bf5a62c66',1,'Env::step()'],['../structbind__tools_1_1tram_agent.html#a2d17ae956c144c3ed914414e53e7bd7d',1,'bind_tools::tramAgent::step()'],['../structbind__tools_1_1tram_patch.html#a7ef647b1de99aeecadb91a2193a28c29',1,'bind_tools::tramPatch::step()'],['../classtissuehealing_1_1_cell.html#a5fe8f2083b8c0a9836684df8a0251786',1,'tissuehealing.Cell.step()'],['../classtissuehealing_1_1_domain.html#a384fdf54c1a6f0f32c19b8efc30b1e20',1,'tissuehealing.Domain.step()'],['../struct_domain.html#a1af42e581e3a10128af4a6a522d1dc1e',1,'Domain::step()'],['../struct_cell.html#a08cdcc8237816791cf338379baee5901',1,'Cell::step()'],['../struct_py_cell.html#a5d6c28a989770f736fd5ae61e320b28d',1,'PyCell::step()'],['../struct_domain.html#a1af42e581e3a10128af4a6a522d1dc1e',1,'Domain::step()'],['../struct_cell.html#a08cdcc8237816791cf338379baee5901',1,'Cell::step()'],['../classmixed__script_1_1py_cell.html#ad9f580e794c90c6fd175bc13da995961',1,'mixed_script.pyCell.step()']]],
-  ['step_5fagents_232',['step_agents',['../struct_env.html#a5ae922d39d90f3dcafe9d0cb6f69a579',1,'Env']]],
-  ['step_5fpatches_233',['step_patches',['../struct_env.html#ac5f16a393816e0efe6c40cab59f35a98',1,'Env']]],
-  ['switch_5fconfig_234',['SWITCH_CONFIG',['../struct_s_w_i_t_c_h___c_o_n_f_i_g.html#aba76b1f1a9a6267391128d41ceb4234d',1,'SWITCH_CONFIG']]]
+  ['naive_5frecompile_3790',['naive_recompile',['../namespacepybind11_1_1setup__helpers.html#a5ffd62b687bb0936df298eda9be9997f',1,'pybind11::setup_helpers']]],
+  ['name_3791',['name',['../structname.html#ac4fea0d283ba29072b06f830fba403d2',1,'name::name()'],['../classcpp__function.html#a5d8bcdd6781aa6da434299589c68013e',1,'cpp_function::name()'],['../classpets_1_1_pet.html#ac3c9624914d359e198368489273ad629',1,'pets::Pet::name()']]],
+  ['name_5fof_5fkind_3792',['name_of_kind',['../struct_animal.html#a2e88b21d676b809b69a8e2adf6d6e52e',1,'Animal']]],
+  ['nbytes_3793',['nbytes',['../classunchecked__reference.html#a9c15e1b4f748ca5d8396e637c4d9abb4',1,'unchecked_reference::nbytes()'],['../classarray.html#a0a2a16579bf2918347a8762c03f10137',1,'array::nbytes()']]],
+  ['ncvirt_3794',['NCVirt',['../class_n_c_virt.html#a68d1ffd84d12b1ff7ee01ae5e2833ef5',1,'NCVirt::NCVirt()=default'],['../class_n_c_virt.html#ac40f1857859acaf06a2849d62d8caa1c',1,'NCVirt::NCVirt(const NCVirt &amp;)=delete']]],
+  ['ndim_3795',['ndim',['../classunchecked__reference.html#a732200223a8d47f248fb9bab843dbe7a',1,'unchecked_reference::ndim()'],['../classarray.html#a184360492eac7224753f132d1a0a973e',1,'array::ndim()']]],
+  ['no_5fnullptr_3796',['no_nullptr',['../init_8h.html#ae79d6ac374406143f31d99493ba43029',1,'init.h']]],
+  ['no_5frecompile_3797',['no_recompile',['../namespacepybind11_1_1setup__helpers.html#a169780c0c1bd802ebe5fc8b34bda9a8d',1,'pybind11::setup_helpers']]],
+  ['nobraceinitialization_3798',['NoBraceInitialization',['../struct_no_brace_initialization.html#a429862bee36828e20af435d8ecddb4a9',1,'NoBraceInitialization::NoBraceInitialization(std::vector&lt; int &gt; v)'],['../struct_no_brace_initialization.html#a5879859223c8d45a7afddd9abbed0289',1,'NoBraceInitialization::NoBraceInitialization(std::initializer_list&lt; T &gt; l)']]],
+  ['noconvert_3799',['noconvert',['../structarg.html#affdcf2c99a2f27cb539efd6853335d4b',1,'arg::noconvert()'],['../structarg__v.html#a018e928b16cc3e83065740a92a490d07',1,'arg_v::noconvert()']]],
+  ['noisy_5ffunct_5fdual_3800',['noisy_funct_dual',['../test__iostream_8cpp.html#af989e64e7327b39db13cffc9f51385fa',1,'test_iostream.cpp']]],
+  ['noisy_5ffunction_3801',['noisy_function',['../test__iostream_8cpp.html#ae531f7e222ae817701c86dcacb76aec2',1,'test_iostream.cpp']]],
+  ['noncopyable_3802',['NonCopyable',['../class_non_copyable.html#a252041bb00ecb92d28d5ec2583a506a0',1,'NonCopyable::NonCopyable(int a, int b)'],['../class_non_copyable.html#a94e3e3c37705261ef68ef062940633b7',1,'NonCopyable::NonCopyable(NonCopyable &amp;&amp;o)'],['../class_non_copyable.html#a501d34ffcc34b30de6d541887a901057',1,'NonCopyable::NonCopyable(const NonCopyable &amp;)=delete'],['../class_non_copyable.html#acaf21c23c4f44d693d603b0b8abbdb39',1,'NonCopyable::NonCopyable()=delete']]],
+  ['none_3803',['none',['../structarg.html#a99082d77a1a365593a16939f03194e5e',1,'arg::none()'],['../structarg__v.html#a3d487f117dc8f3af6555519ab160716a',1,'arg_v::none()'],['../classnone.html#a2b9ad379fe0786f077da548874988f02',1,'none::none()']]],
+  ['none1_3804',['none1',['../test__methods__and__attributes_8cpp.html#a595edeadc83f458644979a63624b1140',1,'test_methods_and_attributes.cpp']]],
+  ['none2_3805',['none2',['../test__methods__and__attributes_8cpp.html#a81fb01231926f48775a0bb87b2ca1c42',1,'test_methods_and_attributes.cpp']]],
+  ['none3_3806',['none3',['../test__methods__and__attributes_8cpp.html#a6444cc152d4a7f59a329acb77c2235df',1,'test_methods_and_attributes.cpp']]],
+  ['none4_3807',['none4',['../test__methods__and__attributes_8cpp.html#af013d5602054a2cd6fe06a5dad7f5eb0',1,'test_methods_and_attributes.cpp']]],
+  ['none5_3808',['none5',['../test__methods__and__attributes_8cpp.html#ad08c4e3aa643a574f14d46324d10df48',1,'test_methods_and_attributes.cpp']]],
+  ['nonzeroiterator_3809',['NonZeroIterator',['../class_non_zero_iterator.html#abcee50c28d2abd2b54acfea71bca848a',1,'NonZeroIterator']]],
+  ['not_5fequal_3810',['not_equal',['../classobject__api.html#acd277a1d6dea84b197d78925b523133c',1,'object_api']]]
 ];

@@ -70,7 +70,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Base class for <a class="el" href="struct_agent.html" title="Base class for Agent.">Agent</a>.  
+<p><a class="el" href="struct_base.html">Base</a> class for <a class="el" href="struct_agent.html" title="Base class for Agent.">Agent</a>.  
  <a href="struct_agent.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="bases_8h_source.html">bases.h</a>&gt;</code></p>
@@ -89,10 +89,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a21795b22477960723a1295ee20f9775c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_agent.html#a21795b22477960723a1295ee20f9775c">update</a> ()</td></tr>
 <tr class="memdesc:a21795b22477960723a1295ee20f9775c"><td class="mdescLeft">&#160;</td><td class="mdescRight">To define inheritage.  <a href="struct_agent.html#a21795b22477960723a1295ee20f9775c">More...</a><br /></td></tr>
 <tr class="separator:a21795b22477960723a1295ee20f9775c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3cbaeda409173491dcf7ddf7ebe3376e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_agent.html#a3cbaeda409173491dcf7ddf7ebe3376e">set_patch</a> (shared_ptr&lt; PATCH &gt; <a class="el" href="struct_agent.html#a0b4979c01c850606c645f4d552de38f6">patch</a>)</td></tr>
-<tr class="separator:a3cbaeda409173491dcf7ddf7ebe3376e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f2a5a04a9b7e71a3ec29796c0608599"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_agent.html#a8f2a5a04a9b7e71a3ec29796c0608599">move</a> (shared_ptr&lt; PATCH &gt; dest, bool quiet=false)</td></tr>
-<tr class="memdesc:a8f2a5a04a9b7e71a3ec29796c0608599"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connects the current agent with the given patch.  <a href="struct_agent.html#a8f2a5a04a9b7e71a3ec29796c0608599">More...</a><br /></td></tr>
+<tr class="memdesc:a8f2a5a04a9b7e71a3ec29796c0608599"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves the agent to the given destination patch.  <a href="struct_agent.html#a8f2a5a04a9b7e71a3ec29796c0608599">More...</a><br /></td></tr>
 <tr class="separator:a8f2a5a04a9b7e71a3ec29796c0608599"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e7f71922c01ff3775fa2a22fa4d3851"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_agent.html#a0e7f71922c01ff3775fa2a22fa4d3851">order_hatch</a> (shared_ptr&lt; PATCH &gt; <a class="el" href="struct_agent.html#a0b4979c01c850606c645f4d552de38f6">patch</a>=nullptr, bool <a class="el" href="struct_agent.html#abd47edb4c42d8e800c64489c976a55a7">inherit</a>=false, bool quiet=false, bool reset=false)</td></tr>
 <tr class="memdesc:a0e7f71922c01ff3775fa2a22fa4d3851"><td class="mdescLeft">&#160;</td><td class="mdescRight">Orders agent to hatch. This will execute during <code><a class="el" href="struct_env.html#a704d5f05a784025bcf4cec39263421d6" title="Update the world. All built-in utilities such as Agent::order_move are executed here.">Env::update</a></code>.  <a href="struct_agent.html#a0e7f71922c01ff3775fa2a22fa4d3851">More...</a><br /></td></tr>
@@ -132,15 +130,18 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a40e1bf1edd0d40487d9dd1506c82c963"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_agent.html#a40e1bf1edd0d40487d9dd1506c82c963">class_name</a></td></tr>
 <tr class="memdesc:a40e1bf1edd0d40487d9dd1506c82c963"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unique ID of this class.  <a href="struct_agent.html#a40e1bf1edd0d40487d9dd1506c82c963">More...</a><br /></td></tr>
 <tr class="separator:a40e1bf1edd0d40487d9dd1506c82c963"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa54545cd8cac8ba16f67e9ac49d63471"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_agent.html#aa54545cd8cac8ba16f67e9ac49d63471">has_patch</a> = false</td></tr>
+<tr class="memdesc:aa54545cd8cac8ba16f67e9ac49d63471"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates if an agent residing on a patch.  <a href="struct_agent.html#aa54545cd8cac8ba16f67e9ac49d63471">More...</a><br /></td></tr>
+<tr class="separator:aa54545cd8cac8ba16f67e9ac49d63471"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class ENV, class AGENT, class PATCH&gt;<br />
 struct Agent&lt; ENV, AGENT, PATCH &gt;</h3>
 
-<p>Base class for <a class="el" href="struct_agent.html" title="Base class for Agent.">Agent</a>. </p>
+<p><a class="el" href="struct_base.html">Base</a> class for <a class="el" href="struct_agent.html" title="Base class for Agent.">Agent</a>. </p>
 <p><a class="el" href="struct_agent.html" title="Base class for Agent.">Agent</a> class simulates movable objects </p>
 
-<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00062">62</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00095">95</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a7a616d94c86ae379192fd4acac46f2e2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7a616d94c86ae379192fd4acac46f2e2">&#9670;&nbsp;</a></span>Agent()</h2>
@@ -178,7 +179,7 @@ template&lt;class ENV , class AGENT , class PATCH &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00063">63</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00096">96</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
 
 </div>
 </div>
@@ -207,7 +208,7 @@ template&lt;class ENV , class AGENT , class PATCH &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00067">67</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00100">100</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
 
 </div>
 </div>
@@ -240,7 +241,7 @@ template&lt;class ENV , class AGENT , class PATCH &gt; </div>
 
 <p>To define agent behavior. </p>
 
-<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00072">72</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00105">105</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
 
 </div>
 </div>
@@ -280,10 +281,9 @@ template&lt;class ENV , class AGENT , class PATCH &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Connects the current agent with the given patch. </p>
-<p>Moves the agent to the given destination patch </p>
+<p>Moves the agent to the given destination patch. </p>
 
-<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00139">139</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00203">203</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
 
 </div>
 </div>
@@ -337,7 +337,7 @@ template&lt;class ENV , class AGENT , class PATCH &gt; </div>
 
 <p>Orders agent to hatch. This will execute during <code><a class="el" href="struct_env.html#a704d5f05a784025bcf4cec39263421d6" title="Update the world. All built-in utilities such as Agent::order_move are executed here.">Env::update</a></code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00157">157</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00218">218</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
 
 </div>
 </div>
@@ -385,7 +385,7 @@ template&lt;class ENV , class AGENT , class PATCH &gt; </div>
 
 <p>Orders agent to move. This will execute during <code><a class="el" href="struct_env.html#a704d5f05a784025bcf4cec39263421d6" title="Update the world. All built-in utilities such as Agent::order_move are executed here.">Env::update</a></code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00163">163</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00224">224</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
 
 </div>
 </div>
@@ -415,7 +415,7 @@ template&lt;class ENV , class AGENT , class PATCH &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00084">84</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00114">114</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
 
 </div>
 </div>
@@ -446,7 +446,7 @@ template&lt;class ENV , class AGENT , class PATCH &gt; </div>
 
 <p>Orders agent to switch to another agent. This will execute during <code><a class="el" href="struct_env.html#a704d5f05a784025bcf4cec39263421d6" title="Update the world. All built-in utilities such as Agent::order_move are executed here.">Env::update</a></code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00088">88</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00118">118</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
 
 </div>
 </div>
@@ -475,7 +475,7 @@ template&lt;class ENV , class AGENT , class PATCH &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00089">89</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00119">119</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
 
 </div>
 </div>
@@ -504,37 +504,7 @@ template&lt;class ENV , class AGENT , class PATCH &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00090">90</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
-
-</div>
-</div>
-<a id="a3cbaeda409173491dcf7ddf7ebe3376e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3cbaeda409173491dcf7ddf7ebe3376e">&#9670;&nbsp;</a></span>set_patch()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class ENV , class AGENT , class PATCH &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="struct_agent.html">Agent</a>&lt; ENV, AGENT, PATCH &gt;::set_patch </td>
-          <td>(</td>
-          <td class="paramtype">shared_ptr&lt; PATCH &gt;&#160;</td>
-          <td class="paramname"><em>patch</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00076">76</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00120">120</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
 
 </div>
 </div>
@@ -563,7 +533,9 @@ template&lt;class ENV , class AGENT , class PATCH &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00069">69</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
+<p>Reimplemented in <a class="el" href="struct_cell.html#a08cdcc8237816791cf338379baee5901">Cell</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00102">102</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
 
 </div>
 </div>
@@ -594,7 +566,9 @@ template&lt;class ENV , class AGENT , class PATCH &gt; </div>
 
 <p>To define inheritage. </p>
 
-<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00075">75</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
+<p>Reimplemented in <a class="el" href="struct_cell.html#aed364ed0f58e1ef888e72567c1c66757">Cell</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00108">108</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
 
 </div>
 </div>
@@ -613,7 +587,7 @@ template&lt;class ENV , class AGENT , class PATCH &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00092">92</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00122">122</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
 
 </div>
 </div>
@@ -631,7 +605,7 @@ template&lt;class ENV , class AGENT , class PATCH &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00093">93</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00123">123</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
 
 </div>
 </div>
@@ -649,7 +623,7 @@ template&lt;class ENV , class AGENT , class PATCH &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00094">94</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00124">124</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
 
 </div>
 </div>
@@ -669,7 +643,7 @@ template&lt;class ENV , class AGENT , class PATCH &gt; </div>
 
 <p>Unique ID of this class. </p>
 
-<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00098">98</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00128">128</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
 
 </div>
 </div>
@@ -689,7 +663,7 @@ template&lt;class ENV , class AGENT , class PATCH &gt; </div>
 
 <p>if set to true, the agent will be removed from the simulation. This will execute during <code><a class="el" href="struct_env.html#a704d5f05a784025bcf4cec39263421d6" title="Update the world. All built-in utilities such as Agent::order_move are executed here.">Env::update</a></code> </p>
 
-<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00097">97</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00127">127</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
 
 </div>
 </div>
@@ -709,7 +683,27 @@ template&lt;class ENV , class AGENT , class PATCH &gt; </div>
 
 <p>Pointer to the simulation world. </p>
 
-<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00096">96</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00126">126</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
+
+</div>
+</div>
+<a id="aa54545cd8cac8ba16f67e9ac49d63471"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa54545cd8cac8ba16f67e9ac49d63471">&#9670;&nbsp;</a></span>has_patch</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ENV , class AGENT , class PATCH &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="struct_agent.html">Agent</a>&lt; ENV, AGENT, PATCH &gt;::has_patch = false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Indicates if an agent residing on a patch. </p>
+
+<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00129">129</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
 
 </div>
 </div>
@@ -729,7 +723,7 @@ template&lt;class ENV , class AGENT , class PATCH &gt; </div>
 
 <p>Pointer to the residing patch. </p>
 
-<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00095">95</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00125">125</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
 
 </div>
 </div>
@@ -747,7 +741,7 @@ template&lt;class ENV , class AGENT , class PATCH &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00091">91</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bases_8h_source.html#l00121">121</a> of file <a class="el" href="bases_8h_source.html">bases.h</a>.</p>
 
 </div>
 </div>

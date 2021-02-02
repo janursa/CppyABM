@@ -27,9 +27,15 @@ struct Patch: public enable_shared_from_this<PATCH>{
 	Patch(shared_ptr<ENV> env,MESH_ITEM mesh_item){
 		this->env = env;
         this->index = mesh_item.index;      // copy index
-        this->layer_index = mesh_item.layer_index;      // copy layer index
         this->coords = mesh_item.coords;    // copy coords
         this->neighbors_indices = mesh_item.neighbors_indices;  // copy neighbors indices
+        try {
+            this->layer_index = mesh_item.layer_index;      // copy layer index
+
+        }
+        catch (...){
+
+        }
         try {
             this->on_border = mesh_item.on_border;
         }

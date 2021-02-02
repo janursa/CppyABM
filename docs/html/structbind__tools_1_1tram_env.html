@@ -86,12 +86,14 @@ Inheritance diagram for bind_tools::tramEnv&lt; ENV, AGENT, PATCH &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa24742cb1a377f19996ff0d676ebd3a3"><td class="memItemLeft" align="right" valign="top">shared_ptr&lt; PATCH &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbind__tools_1_1tram_env.html#aa24742cb1a377f19996ff0d676ebd3a3">generate_patch</a> () override</td></tr>
-<tr class="separator:aa24742cb1a377f19996ff0d676ebd3a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e9c214df18a5d43d9d7d812fdab1f70"><td class="memItemLeft" align="right" valign="top">shared_ptr&lt; PATCH &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbind__tools_1_1tram_env.html#a1e9c214df18a5d43d9d7d812fdab1f70">generate_patch</a> (<a class="el" href="struct_m_e_s_h___i_t_e_m.html">MESH_ITEM</a> mesh_item) override</td></tr>
+<tr class="separator:a1e9c214df18a5d43d9d7d812fdab1f70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1197a213cc20f77e506a8075ef5c2a98"><td class="memItemLeft" align="right" valign="top">shared_ptr&lt; AGENT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbind__tools_1_1tram_env.html#a1197a213cc20f77e506a8075ef5c2a98">generate_agent</a> (string agent_name) override</td></tr>
 <tr class="separator:a1197a213cc20f77e506a8075ef5c2a98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af52bce15d6e6193306d36a1822aececa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbind__tools_1_1tram_env.html#af52bce15d6e6193306d36a1822aececa">update_repo</a> () override</td></tr>
 <tr class="separator:af52bce15d6e6193306d36a1822aececa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa65c1df0d80ccdceb8e02df386de167"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbind__tools_1_1tram_env.html#aaa65c1df0d80ccdceb8e02df386de167">step</a> () override</td></tr>
+<tr class="separator:aaa65c1df0d80ccdceb8e02df386de167"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class ENV, class AGENT, class PATCH&gt;<br />
@@ -127,12 +129,12 @@ template&lt;class ENV , class AGENT , class PATCH &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="bind__tools_8h_source.html#l00032">32</a> of file <a class="el" href="bind__tools_8h_source.html">bind_tools.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bind__tools_8h_source.html#l00033">33</a> of file <a class="el" href="bind__tools_8h_source.html">bind_tools.h</a>.</p>
 
 </div>
 </div>
-<a id="aa24742cb1a377f19996ff0d676ebd3a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa24742cb1a377f19996ff0d676ebd3a3">&#9670;&nbsp;</a></span>generate_patch()</h2>
+<a id="a1e9c214df18a5d43d9d7d812fdab1f70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e9c214df18a5d43d9d7d812fdab1f70">&#9670;&nbsp;</a></span>generate_patch()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -145,7 +147,8 @@ template&lt;class ENV , class AGENT , class PATCH &gt; </div>
         <tr>
           <td class="memname">shared_ptr&lt;PATCH&gt; <a class="el" href="structbind__tools_1_1tram_env.html">bind_tools::tramEnv</a>&lt; ENV, AGENT, PATCH &gt;::generate_patch </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="struct_m_e_s_h___i_t_e_m.html">MESH_ITEM</a>&#160;</td>
+          <td class="paramname"><em>mesh_item</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -157,6 +160,35 @@ template&lt;class ENV , class AGENT , class PATCH &gt; </div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="bind__tools_8h_source.html#l00025">25</a> of file <a class="el" href="bind__tools_8h_source.html">bind_tools.h</a>.</p>
+
+</div>
+</div>
+<a id="aaa65c1df0d80ccdceb8e02df386de167"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa65c1df0d80ccdceb8e02df386de167">&#9670;&nbsp;</a></span>step()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ENV , class AGENT , class PATCH &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="structbind__tools_1_1tram_env.html">bind_tools::tramEnv</a>&lt; ENV, AGENT, PATCH &gt;::step </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="bind__tools_8h_source.html#l00049">49</a> of file <a class="el" href="bind__tools_8h_source.html">bind_tools.h</a>.</p>
 
 </div>
 </div>
@@ -185,7 +217,7 @@ template&lt;class ENV , class AGENT , class PATCH &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="bind__tools_8h_source.html#l00040">40</a> of file <a class="el" href="bind__tools_8h_source.html">bind_tools.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bind__tools_8h_source.html#l00041">41</a> of file <a class="el" href="bind__tools_8h_source.html">bind_tools.h</a>.</p>
 
 </div>
 </div>

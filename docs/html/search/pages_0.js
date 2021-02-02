@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['inheritage_2dbased_20develomment_283',['Inheritage-based develomment',['../index.html',1,'']]]
+  ['inheritence_2dbased_20modeling_5391',['Inheritence-based modeling',['../index.html',1,'']]]
 ];
