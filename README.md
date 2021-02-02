@@ -4,7 +4,7 @@
 # General purpose agent-based modeling library to integrate C++ and Python
 CppyABM allows agent-based modeling by providing essential tools in both C++ and Python as well as mixing both in a single development. The modeling in both C++ and Python follows similar semantics and style. Therefore, a model developed in one languages can be conveniently transferred to another. In addition, the provided binding tools in CppyABM enables to specifically expose certain parts of a model written in C++ for further development in Python. This enables users to take the advantage of both languages simultaneously. CppyABM uses <a href="https://github.com/janursa/RTvisualize" title="RTvisualize">RTvisualize</a> for browser-based real-time visualization. 
 
-The full documentation of the library is available <a href="https://janursa.github.io/CppyABM/" title="About Me">here</a>. See examples (link) folder as showcase of CppyABM utility.
+The full documentation of the library is available <a href="https://janursa.github.io/CppyABM/" title="About Me">here</a>. See <a href="https://github.com/janursa/CppyABM/tree/master/examples" title="examples">examples</a> folder as showcase of CppyABM utility.
 
 
 ##Install/compile
