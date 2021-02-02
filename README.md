@@ -7,9 +7,9 @@ CppyABM allows agent-based modeling by providing essential tools in both C++ and
 The full documentation of the library is available <a href="https://janursa.github.io/CppyABM/" title="About Me">here</a>. See <a href="https://github.com/janursa/CppyABM/tree/master/examples" title="examples">examples</a> folder as showcase of CppyABM utility.
 
 
-##Install/compile
+## Install/compile
 
-###For Python development:
+### For Python development:
 
 Using pip manager:
 
@@ -19,7 +19,7 @@ Or, download the package and in the root folder, command:
 
 -  `python3 setup.py install`
 
-###For Cpp development:
+### For Cpp development:
 Clone the library and add the main root as a subdirectory. Using modern Cmake, the following command will include the library:
 -  `add_subdirectory("dir_to_cppyabm")`
 -  `target_include_directories("your_project" "dir_to_include/ABM")`
