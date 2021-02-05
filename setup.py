@@ -39,6 +39,7 @@ class build_ext(build_ext_orig):
         extdir.mkdir(parents=True, exist_ok=True)
         config = 'Debug' if self.debug else 'Release'
         cmake_args = [
+            '-DBIND_FLAG=TRUE',# to build for binding
             '-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=' + str(extdir.parent.absolute()),
             '-DCMAKE_BUILD_TYPE=' + config
         ]
@@ -49,18 +50,18 @@ class build_ext(build_ext_orig):
         os.chdir(str(build_temp))
         self.spawn(['cmake', str(cwd)] + cmake_args)
         if not self.dry_run:
-            self.spawn(['cmake', '--build', '.'] + build_args)
+            self.spawn(['cmake','--build', '.'] + build_args)
         os.chdir(str(cwd))
 
 setuptools.setup(
     name="cppyabm",
-    version='1.0.15',
+    version='1.0.17',
     author="Jalil Nourisa",
     author_email="jalil.nourisa@gmail.com",
     description="General-purpose agent-based modeling framework",
     long_description=extract_longDiscription("README.md"),
     long_description_content_type="text/markdown",
-    url="https://github.com/janursa/CPPYABM",
+    url="https://github.com/janursa/CppyABM",
     packages=['cppyabm'],
     ext_modules=[CMakeExtension('cppyabm/cppyabm')],
     cmdclass={

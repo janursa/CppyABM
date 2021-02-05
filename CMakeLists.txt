@@ -20,25 +20,26 @@ include(FetchContent)
 # if(${CMAKE_VERSION} VERSION_LESS 3.14)
 #     include(cmake/add_FetchContent_MakeAvailable.cmake)
 # endif()
-
-FIND_PACKAGE(pybind11 ${PYBIND11_MIN_VERSION} CONFIG)
-if (NOT PYBIND11_FOUND)
-    include(FetchContent)
-    FetchContent_Declare(
-      pybind11
-      GIT_REPOSITORY https://github.com/pybind/pybind11.git
-      GIT_TAG        master
-    )
-    FetchContent_GetProperties(pybind11)
-    if(NOT pybind11_POPULATED)
-      FetchContent_Populate(pybind11)
-      add_subdirectory(${pybind11_SOURCE_DIR} ${pybind11_BINARY_DIR})
+if (${BIND_FLAG})
+    FIND_PACKAGE(pybind11 ${PYBIND11_MIN_VERSION} CONFIG)
+    if (NOT pybind11_FOUND)
+        include(FetchContent)
+        FetchContent_Declare(
+          pybind11
+          GIT_REPOSITORY https://github.com/pybind/pybind11.git
+          GIT_TAG        master
+        )
+        FetchContent_GetProperties(pybind11)
+        if(NOT pybind11_POPULATED)
+          FetchContent_Populate(pybind11)
+          add_subdirectory(${pybind11_SOURCE_DIR} ${pybind11_BINARY_DIR})
+        endif()
     endif()
-endif()
 
-set(PYBIND11_CPP_STANDARD -std=c++17)
-if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-	add_subdirectory(cppyabm)
+    set(PYBIND11_CPP_STANDARD -std=c++17)
+    if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+    	add_subdirectory(cppyabm)
+    endif()
 endif()
 
 
