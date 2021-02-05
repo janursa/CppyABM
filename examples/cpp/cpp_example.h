@@ -23,8 +23,10 @@ struct Domain: public Env<Domain,Cell,Tissue> {
 	void output();
 	std::map<std::string,std::vector<int>> data= {{"cell_count",{}}};
 	int tick=0;
+#ifdef MEMORY_MONITOR
 	struct task_basic_info t_info;
 	mach_msg_type_number_t t_info_count = TASK_BASIC_INFO_COUNT;
+#endif //MEMORY_MONITOR
 	double memory_usage_max;
 };
 struct Tissue: public Patch<Domain,Cell,Tissue> {

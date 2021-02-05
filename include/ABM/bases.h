@@ -4,13 +4,15 @@
 #include <algorithm>
 #include <random>
 #include <set>
-#include<mach/mach.h>
 #include "common.h"
 #include "mesh.h"
 #include "tools.h"
 using std::shared_ptr;
 using std::vector;
-#define MEMORY_MONITOR
+// #define MEMORY_MONITOR
+#ifdef MEMORY_MONITOR
+#include<mach/mach.h>
+#endif
 template<class ENV, class AGENT, class PATCH>
 struct Env;
 template<class ENV, class AGENT, class PATCH>
@@ -190,20 +192,23 @@ struct Env: public enable_shared_from_this<ENV>{
     std::set<string> agent_classes; //!< stores a list of `Agent::class_name`.
     vector<shared_ptr<AGENT>> agents; //!< Agent container
     map<unsigned,shared_ptr<PATCH>> patches; //!< Patch container
+    double memory_usage(){
 #ifdef MEMORY_MONITOR
     struct task_basic_info t_info;
     mach_msg_type_number_t t_info_count = TASK_BASIC_INFO_COUNT;
 
-    double memory_usage(){
-        if (KERN_SUCCESS != task_info(mach_task_self(),
-                              TASK_BASIC_INFO, (task_info_t)&t_info, 
-                              &t_info_count))
-        {
-            
-        }
-        return t_info.resident_size;
+    
+    if (KERN_SUCCESS != task_info(mach_task_self(),
+                          TASK_BASIC_INFO, (task_info_t)&t_info, 
+                          &t_info_count))
+    {
+        
     }
+    return t_info.resident_size;
+#else
+    return 0;
 #endif 
+    }
 };
 template<class ENV, class AGENT, class PATCH>
 inline void Agent<ENV,AGENT,PATCH>::move(shared_ptr<PATCH> dest, bool quiet){
