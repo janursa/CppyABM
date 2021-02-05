@@ -1,5 +1,5 @@
 #pragma once
-#include <memory.h>
+#include <memory>
 
 using namespace std;
 
