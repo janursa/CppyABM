@@ -7,18 +7,6 @@ SET(BINDMODULE "myBinds")
 SET(cppyabm_dir ${DIR})
 FIND_PACKAGE(pybind11 ${PYBIND11_MIN_VERSION} CONFIG)
 if (NOT pybind11_FOUND)
-    # include(FetchContent)
-    # FetchContent_Declare(
-    #   pybind11
-    #   GIT_REPOSITORY https://github.com/pybind/pybind11.git
-    #   GIT_TAG        master
-    # )
-    # FetchContent_GetProperties(pybind11)
-    # if(NOT pybind11_POPULATED)
-    #   FetchContent_Populate(pybind11)
-    #   add_subdirectory(${pybind11_SOURCE_DIR} ${pybind11_BINARY_DIR})
-    # endif()
-    # set(PYBIND11_CPP_STANDARD -std=c++17)
     SET(PYBIND11 TRUE)
     include(FetchContent)
     FetchContent_Declare(
@@ -26,7 +14,6 @@ if (NOT pybind11_FOUND)
       GIT_REPOSITORY https://github.com/janursa/CppyABM.git
       GIT_TAG        master
     )
-    message(STATUS ${cppyabm_BINARY_DIR})
     FetchContent_GetProperties(cppyabm)
     if(NOT cppyabm_POPULATED)
       FetchContent_Populate(cppyabm)
@@ -35,7 +22,7 @@ if (NOT pybind11_FOUND)
 endif()
 
 
-
 pybind11_add_module(${BINDMODULE} binds.cpp ${HEADER_LIST})
+target_include_directories(${BINDMODULE} PUBLIC ${cppyabm_SOURCE_DIR}/include)
 target_include_directories(${BINDMODULE} PUBLIC ${cppyabm_dir})
 
