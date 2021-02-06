@@ -9,7 +9,7 @@ The full documentation of the library is available <a href="https://janursa.gith
 
 ## Install/compile
 
-### For Python development:
+### For Python development
 
 Using pip manager:
 
@@ -19,8 +19,26 @@ Or, download the package and in the root folder, command:
 
 -  `python3 setup.py install`
 
-### For Cpp development:
-Clone the library and add the main root as a subdirectory. Using modern Cmake, the following command will include the library:
+### For C++ development
+The library can be cloned as,
+- git clone https://github.com/janursa/CppyABM 
+The header files can be accessed in the `include` folder located in the root directory. Using Cmake, the following command can make the library accessible to a project:
+- add_executable(your_project your_files.cpp )
+- target_compile_features(your_project PUBLIC dir_to_include_folder)
+
+The library can be also installed on the machine using,
+- git clone https://github.com/janursa/CppyABM 
+- cd CppyABM
+- mkdir build
+- cd build
+- cmake ..
+- make install
+
+
+### For Python-C++ development:
+In order to create a mixed model using both languages of C++ and Python, in addition to the [previous step](#For-C++-development), <a href="https://github.com/pybind/pybind11" title="pybind11">pybind11</a> needs to be installed. 
+
+
 -  `add_subdirectory("dir_to_cppyabm")`
 -  `target_include_directories("your_project" "dir_to_include/ABM")`
  

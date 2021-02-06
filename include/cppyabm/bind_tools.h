@@ -96,9 +96,6 @@ namespace bind_tools{
         auto class_binds_obj = 
         py::class_<ENV,py_class_name,std::shared_ptr<ENV>> (m,class_name_string.c_str(),py::dynamic_attr())
             .def(py::init<>())
-#ifdef MEMORY_MONITOR
-            .def("memory_usage",&ENV::memory_usage)
-#endif
             .def("place_agent", py::overload_cast<shared_ptr<PATCH>,shared_ptr<AGENT>>(&ENV::place_agent), "Places the agent on the given patch")
             .def("place_agent", py::overload_cast<unsigned,shared_ptr<AGENT>>(&ENV::place_agent), "Places the agent on the given patch index")
             .def("place_agent_randomly",&ENV::place_agent_randomly)
@@ -109,6 +106,7 @@ namespace bind_tools{
             .def("step",&ENV::step)
             .def("setup_agents",&ENV::setup_agents)
             .def("count_agents",&ENV::count_agents)
+            .def("memory_usage",&ENV::memory_usage)
             .def_readwrite("patches",&ENV::patches)
             .def_readwrite("agents",&ENV::agents);
         return class_binds_obj;
@@ -119,9 +117,7 @@ namespace bind_tools{
         auto class_binds_obj = 
         py::class_<ENV,std::shared_ptr<ENV>> (m,class_name_string.c_str(),py::dynamic_attr())
             .def(py::init<>())
-#ifdef MEMORY_MONITOR
             .def("memory_usage",&ENV::memory_usage)
-#endif
             .def("place_agent_randomly",&ENV::place_agent_randomly)
             .def("setup_domain",&ENV::setup_domain)
             .def("step_agents",&ENV::step_agents)

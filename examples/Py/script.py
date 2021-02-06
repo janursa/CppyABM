@@ -60,12 +60,18 @@ class Domain(Env):
 	This class extends Env to simulate coordinate the simulation.
 	"""
 	memory_usage_max = 0
-	def __init__(self):
+	def __init__(self,output_flag):
 		Env.__init__(self)
 		self.agents_repo = []
 		self.patches_repo = []
 		self.tick = 0
 		self.data = {'cell_count':[]}
+		self.output_flag = output_flag
+		if self.output_flag:
+			try:
+				os.mkdir('results')
+			except:
+				pass
 	def generate_agent(self,agent_name):
 		"""
 		Extension of the original function to create agents
@@ -139,7 +145,7 @@ class Domain(Env):
 		for i in range(336):
 			print('Iteration {} cell count {}'.format(i,len(self.agents)))
 			self.step()
-			if i%335 ==0:
+			if self.output_flag:
 				self.output()
 	def update(self):
 		"""
@@ -156,14 +162,14 @@ class Domain(Env):
 		Output the results
 		"""
 		# plot agents on the domain
-		file = open('cells.csv','w')
+		file = open('results/cells.csv','w')
 		file.write('x,y,type,size\n')
 		for agent in self.agents:
 			x,y,z = agent.patch.coords
 			file.write("{},{},{},{}\n".format(x, y, agent.class_name, 10))
 		file.close()
 		#plot ECM density on the domain
-		file = open('ECM.csv','w')
+		file = open('results/ECM.csv','w')
 		file.write('x,y,type,size\n')
 		for [index,patch] in self.patches.items():
 			x,y,z = patch.coords
@@ -172,12 +178,15 @@ class Domain(Env):
 		## cell counts
 		df = pd.DataFrame.from_dict(self.data)
 		df_agent_counts = df[['cell_count']]
-		df_agent_counts.to_csv('cell_count.csv')
+		df_agent_counts.to_csv('results/cell_count.csv')
 
 	
 if __name__ == '__main__':
+	output_flag = False
+	if len(sys.argv) > 1:
+		output_flag = True
 	begin = time.time()
-	envObj = Domain()
+	envObj = Domain(output_flag)
 	envObj.setup()
 	envObj.episode()
 	end = time.time()

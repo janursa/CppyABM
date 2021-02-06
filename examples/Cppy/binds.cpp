@@ -5,7 +5,7 @@
 #include <pybind11/stl_bind.h>
 #include <pybind11/complex.h>
 #include <pybind11/functional.h>
-#include "CppyABM/include/ABM/bind_tools.h"
+#include "cppyabm/bind_tools.h"
 
 //! Defining a trampoline to allow the extension of the functionality of Cell::step
 using tramAgent = bind_tools::tramAgent<Domain,Cell,Tissue>; 
@@ -31,6 +31,7 @@ PYBIND11_MODULE(myBinds, m) {
     bind_tools::expose_defaults<Domain,Cell,Tissue>(m);
     // expose env and add new members
     auto env_obj = bind_tools::expose_env<Domain,Cell,Tissue,bind_tools::tramEnv<Domain,Cell,Tissue>>(m,"Domain");
+    env_obj.def(py::init<bool>());
     env_obj.def("setup",&Domain::setup);
     env_obj.def("episode",&Domain::episode);
     // expose agent and add new member

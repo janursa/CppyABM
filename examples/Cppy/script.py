@@ -34,8 +34,8 @@ class pyCell(Cell):
 class pyDomain(Domain):
 	memory_usage_max = 0
 
-	def __init__(self):
-		super().__init__()
+	def __init__(self,output_flag):
+		super().__init__(output_flag)
 		self.agents_repo = []
 	def generate_agent(self,agent_name):
 		agent_obj = pyCell(self,agent_name)
@@ -61,8 +61,11 @@ class pyDomain(Domain):
 	
 	
 if __name__ == '__main__':
+	output_flag = False
+	if len(sys.argv)>1:
+		output_flag = True
 	begin = time.time()
-	envObj = pyDomain()
+	envObj = pyDomain(output_flag)
 	envObj.setup()
 	envObj.episode()
 	end = time.time()

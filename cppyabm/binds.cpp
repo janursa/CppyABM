@@ -1,8 +1,8 @@
 #include <iostream>
-#include "ABM/mesh.h"
-#include "ABM/bind_tools.h"
-#include "ABM/common.h"
-#include "ABM/bases.h"
+#include "cppyabm/mesh.h"
+#include "cppyabm/bind_tools.h"
+#include "cppyabm/common.h"
+#include "cppyabm/bases.h"
 struct expEnv;
 struct expPatch;
 struct expAgent;

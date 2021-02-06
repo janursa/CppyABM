@@ -3,7 +3,7 @@ set(CMAKE_CXX_STANDARD 17)
 SET(TARGET "CppyABM")
 SET(BINDMODULE "binds")
 PROJECT(${TARGET} LANGUAGES CXX)
-SET(BASE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+SET(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     set_property(GLOBAL PROPERTY USE_FOLDERS ON)
     set(CMAKE_CXX_EXTENSIONS OFF)
@@ -16,11 +16,10 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     endif()
     
 endif()
-include(FetchContent)
-# if(${CMAKE_VERSION} VERSION_LESS 3.14)
-#     include(cmake/add_FetchContent_MakeAvailable.cmake)
-# endif()
-if (${BIND_FLAG})
+
+if (${PYBIND11}) #inlude pybind11
+    message(STATUS "inside pybind11 cppyabm")
+    include(FetchContent)
     FIND_PACKAGE(pybind11 ${PYBIND11_MIN_VERSION} CONFIG)
     if (NOT pybind11_FOUND)
         include(FetchContent)
@@ -35,13 +34,19 @@ if (${BIND_FLAG})
           add_subdirectory(${pybind11_SOURCE_DIR} ${pybind11_BINARY_DIR})
         endif()
     endif()
-
     set(PYBIND11_CPP_STANDARD -std=c++17)
+endif()
+
+if (${BIND_FLAG}) #generates the python library
     if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     	add_subdirectory(cppyabm)
     endif()
 endif()
 
+INSTALL (
+    DIRECTORY ${CMAKE_SOURCE_DIR}/include/
+    DESTINATION include
+    FILES_MATCHING PATTERN "*.h*")
 
 
 

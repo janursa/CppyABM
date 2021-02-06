@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
-#include "CppyABM/include/ABM/bases.h"
-#include "CppyABM/include/ABM/mesh.h"
+#include "cppyabm/bases.h"
+#include "cppyabm/mesh.h"
 
 
 
@@ -11,8 +11,12 @@ struct Tissue;
 struct Cell;
 //! Domain class to coordinate the simulation
 struct Domain: public Env<Domain,Cell,Tissue> {
-	Domain():Env<Domain,Cell,Tissue>(){
+	using baseEnv = Env<Domain,Cell,Tissue>;
+	using baseEnv::baseEnv;
+	Domain(bool _output_flag):Env<Domain,Cell,Tissue>(){
+		output_flag = _output_flag;
 	}
+	bool output_flag = false;
 	virtual shared_ptr<Cell> generate_agent(std::string agent_name);
 	virtual shared_ptr<Tissue> generate_patch(MESH_ITEM);
 	virtual void update();
@@ -127,7 +131,7 @@ inline void Domain::episode(){
 	for (unsigned i = 0; i < 336; i++){
 			cout<<"iteration "<<i<<" agents "<<this->agents.size()<<endl;
 			this->step();
-			if (i%335 == 0) this->output();
+			if (this->output_flag) this->output();
 		}	
 	ofstream file1;
 	file1.open("memory_usage.csv");
