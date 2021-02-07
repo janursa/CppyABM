@@ -19,9 +19,9 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     endif()
     
 endif()
-
-if (${PYBIND11}) #inlude pybind11
-    message(STATUS "inside pybind11 cppyabm")
+FIND_PACKAGE(pybind11 CONFIG)
+if ((NOT pybind11_FOUND) AND (NOT CPP)) #inlude pybind11
+    message(STATUS "Clonning pybind11")
     include(FetchContent)
     FIND_PACKAGE(pybind11 ${PYBIND11_MIN_VERSION} CONFIG)
     if (NOT pybind11_FOUND)
@@ -40,12 +40,13 @@ if (${PYBIND11}) #inlude pybind11
     set(PYBIND11_CPP_STANDARD -std=c++17)
 endif()
 
-if (${BIND_FLAG}) #generates the python library
+if (${BIND}) #generates the python library
     if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     	add_subdirectory(cppyabm)
     endif()
 endif()
 
+# to setup
 add_library(${PROJECT_NAME} INTERFACE)
 target_include_directories(
   ${PROJECT_NAME}
@@ -75,16 +76,3 @@ install(FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
               "${PROJECT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
         DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/cmake)
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/ DESTINATION include)
-
-# INSTALL (
-#     DIRECTORY ${CMAKE_SOURCE_DIR}/include/
-#     DESTINATION include
-#     FILES_MATCHING PATTERN "*.h*")
-# INSTALL (
-#     DIRECTORY ${CMAKE_SOURCE_DIR}/src/cppyabm
-#     DESTINATION lib)
-# INSTALL(FILES cppyabmConfig.cmake DESTINATION lib/cmake/cppyabm)
-
-
-
-

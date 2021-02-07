@@ -20,12 +20,9 @@ Or, download the package and in the root folder, command:
 -  `python3 setup.py install`
 
 ### For C++ development
-The library can be installed,
-The library can be also installed on the machine using,
+The library can be also installed on,
 - git clone https://github.com/janursa/CppyABM 
-- cd CppyABM
-- mkdir build
-- cd build
+- cd CppyABM && mkdir build && cd build
 - cmake ..
 - make install
 
@@ -36,6 +33,7 @@ Using Cmake, the library can be linked against a project,
 The library can be also locally linked without installation by providing the `include` directory located in the root folder to the project,
 - add_executable(your_project your_files.cpp )
 - target_compile_features(your_project PUBLIC dir_to_include_folder)
+
 See <a href="https://github.com/janursa/CppyABM/tree/master/examples/Cpp" title="cpp">example</a>.
 
 ### For Python-C++ development:

@@ -13,7 +13,7 @@ if (cppyabm_FOUND)
 	target_link_libraries(${APP}  PUBLIC cppyabm::cppyabm)
 else()
 	message(STATUS "CppyABM is not found. It will be cloned and linked.")
-    # SET(PYBIND11 TRUE)
+	SET(CPP TRUE)
     include(FetchContent)
     FetchContent_Declare(
       cppyabm
@@ -26,7 +26,6 @@ else()
       add_subdirectory(${cppyabm_SOURCE_DIR} ${cppyabm_BINARY_DIR})
     endif()
     target_include_directories(${APP}  PUBLIC ${cppyabm_SOURCE_DIR}/include)
-
 endif()
 
 
