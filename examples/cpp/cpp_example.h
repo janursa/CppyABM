@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include "cppyabm/bases.h"
+#include <cppyabm/bases.h>
 #include "cppyabm/mesh.h"
 
 

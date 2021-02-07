@@ -20,12 +20,7 @@ Or, download the package and in the root folder, command:
 -  `python3 setup.py install`
 
 ### For C++ development
-The library can be cloned as,
-- git clone https://github.com/janursa/CppyABM 
-The header files can be accessed in the `include` folder located in the root directory. Using Cmake, the following command can make the library accessible to a project:
-- add_executable(your_project your_files.cpp )
-- target_compile_features(your_project PUBLIC dir_to_include_folder)
-
+The library can be installed,
 The library can be also installed on the machine using,
 - git clone https://github.com/janursa/CppyABM 
 - cd CppyABM
@@ -34,14 +29,18 @@ The library can be also installed on the machine using,
 - cmake ..
 - make install
 
+Using Cmake, the library can be linked against a project,
+- add_executable(your_project your_files.cpp)
+- target_link_libraries(your_project  PUBLIC cppyabm::cppyabm)
+
+The library can be also locally linked without installation by providing the `include` directory located in the root folder to the project,
+- add_executable(your_project your_files.cpp )
+- target_compile_features(your_project PUBLIC dir_to_include_folder)
+See <a href="https://github.com/janursa/CppyABM/tree/master/examples/Cpp" title="cpp">example</a>.
 
 ### For Python-C++ development:
-In order to create a mixed model using both languages of C++ and Python, in addition to the [previous step](#For-C++-development), <a href="https://github.com/pybind/pybind11" title="pybind11">pybind11</a> needs to be installed. 
+In order to create a mixed model using both languages of C++ and Python, in addition to CppyABM, <a href="https://github.com/pybind/pybind11" title="pybind11">pybind11</a> needs to be installed. It can be either seperately installed according to the instruction given on <a href="https://pybind11.readthedocs.io/en/stable/installing.html" title="pybind11">pybind11-installation</a>, or can be included in a project using Cmake. The latter can be achieved by setting `PYBIND11` flag before the compilation of CppyABM. See <a href="https://github.com/janursa/CppyABM/tree/master/examples/Cppy" title="cppy">example</a>.
 
-
--  `add_subdirectory("dir_to_cppyabm")`
--  `target_include_directories("your_project" "dir_to_include/ABM")`
- 
 
 ## Authors
 
