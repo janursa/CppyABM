@@ -1,23 +1,22 @@
 ﻿import sys, os,pathlib
-current_file_path = pathlib.Path(__file__).parent.absolute()
-sys.path.insert(1,'/Users/matin/Downloads/testProjs/RTvisalize')
 from realtime import monitor
 settings = {
     "Cell count": {
             "graph_dir" : "cell_count.csv",
             "graph_type" : 'lines',
-            "graph_size" : 800,
+            "col" : 'col s4',
             'x-axis-moves': False
            },
     "ECM": {
             "graph_dir" : "ECM.csv",
-            "graph_type" : 'scatter',
-            "graph_size" : 800
+            "graph_type" : 'map',
+            "col" : 'col s4',
+            "range_color": [0,100]
            },
     "Cells": {
             "graph_dir" : "cells.csv",
-            "graph_type" : 'scatter',
-            "graph_size" : 800
+            "graph_type" : 'scatter2',
+            "col" : 'col s4',
            },
 
 }
