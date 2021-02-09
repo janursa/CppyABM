@@ -28,6 +28,8 @@ The library can be also installed solely for C++ development using,
 
 ### For Python-C++ development
 In order to create a mixed model using both languages of C++ and Python, in addition to CppyABM, <a href="https://github.com/pybind/pybind11" title="pybind11">pybind11</a> needs to be installed. It can be either seperately installed according to the instruction given on <a href="https://pybind11.readthedocs.io/en/stable/installing.html" title="pybind11">pybind11-installation</a>, or can be included in a project using Cmake. See  <a href="https://janursa.github.io/CppyABM/" title="About Me">documentation</a>.
+## License
+This project is licensed under the MIT License - see the LICENSE.md file for details
 
 ## Authors
 

@@ -1,16 +1,20 @@
 set(DOXYGEN_EXTRACT_ALL YES)
 set(DOXYGEN_BUILTIN_STL_SUPPORT YES)
 set(DOXYGEN_SOURCE_BROWSER YES)
+set(DOXYGEN_STRIP_CODE_COMMENTS NO)
+set(DOXYGEN_DISABLE_INDEX YES)
+set(DOXYGEN_GENERATE_TREEVIEW NO)
 set(DOXYGEN_USE_MDFILE_AS_MAINPAGE "${CMAKE_CURRENT_SOURCE_DIR}/mainpage.md")
 set(DOXYGEN_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/docs)
 doxygen_add_docs(docs
     "${CMAKE_CURRENT_SOURCE_DIR}/mainpage.md"
     "${CMAKE_CURRENT_SOURCE_DIR}/examples.md"
     "${CMAKE_CURRENT_SOURCE_DIR}/binding.md"
-    "${PROJECT_SOURCE_DIR}/include/ABM"
-    "${PROJECT_SOURCE_DIR}/binds"
-    "${PROJECT_SOURCE_DIR}/examples/python"
-    "${PROJECT_SOURCE_DIR}/examples/cpp"
-    "${PROJECT_SOURCE_DIR}/examples/cppython"
+    "${PROJECT_SOURCE_DIR}/include/cppyabm"
+    "${PROJECT_SOURCE_DIR}/cppyabm"
+    "${PROJECT_SOURCE_DIR}/examples/Py"
+    "${PROJECT_SOURCE_DIR}/examples/Cpp"
+    "${PROJECT_SOURCE_DIR}/examples/Cppy"
+    "${PROJECT_SOURCE_DIR}/examples/Pyy"
 )
 
