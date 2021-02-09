@@ -39,8 +39,7 @@ class build_ext(build_ext_orig):
         extdir.mkdir(parents=True, exist_ok=True)
         config = 'Debug' if self.debug else 'Release'
         cmake_args = [
-            '-DPYBIND11=TRUE',# to incorporate pybind11
-            '-DBIND_FLAG=TRUE',# to build for binding
+            '-DBIND=TRUE',# to build for binding
             '-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=' + str(extdir.parent.absolute()),
             '-DCMAKE_BUILD_TYPE=' + config
         ]
@@ -56,7 +55,7 @@ class build_ext(build_ext_orig):
 
 setuptools.setup(
     name="cppyabm",
-    version='1.0.17',
+    version='1.0.18',
     author="Jalil Nourisa",
     author_email="jalil.nourisa@gmail.com",
     description="General-purpose agent-based modeling framework",
