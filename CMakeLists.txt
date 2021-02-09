@@ -6,7 +6,7 @@ project("cppyabm" VERSION ${version}
              HOMEPAGE_URL "https://github.com/janursa/CppyABM")
 include(GNUInstallDirs)
 SET(BINDMODULE "binds")
-SET(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+SET(BASE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     set_property(GLOBAL PROPERTY USE_FOLDERS ON)
     set(CMAKE_CXX_EXTENSIONS OFF)

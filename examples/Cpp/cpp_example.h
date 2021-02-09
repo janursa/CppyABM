@@ -34,7 +34,9 @@ struct Domain: public Env<Domain,Cell,Tissue> {
 	double memory_usage_max;
 };
 struct Tissue: public Patch<Domain,Cell,Tissue> {
-	Tissue(shared_ptr<Domain> env,MESH_ITEM mesh):Patch<Domain,Cell,Tissue>(env,mesh){
+	using basePatch = Patch<Domain,Cell,Tissue>;
+	using basePatch::basePatch;
+	Tissue(shared_ptr<Domain> env,MESH_ITEM mesh):basePatch(env,mesh){
 		this->setup();
 	}
 	void setup(){
@@ -44,7 +46,9 @@ struct Tissue: public Patch<Domain,Cell,Tissue> {
 
 };
 struct Cell: public Agent<Domain,Cell,Tissue> {
-	Cell(shared_ptr<Domain> env,std::string agent_name):Agent<Domain,Cell,Tissue>(env,agent_name){
+	using baseAgent = Agent<Domain,Cell,Tissue>;
+	using baseAgent::baseAgent;
+	Cell(shared_ptr<Domain> env,std::string agent_name):baseAgent(env,agent_name){
 		this->setup();
 	}
 	void update(){

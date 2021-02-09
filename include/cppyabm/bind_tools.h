@@ -20,7 +20,7 @@ namespace pybind11 { namespace detail { \
 namespace bind_tools{
     //! Template trampoline for Env-based classes
     template<class ENV, class AGENT, class PATCH> 
-    struct tramEnv : ENV  {
+    struct tramEnv : public ENV  {
         using ENV::ENV;
         shared_ptr<PATCH> generate_patch(MESH_ITEM mesh_item) override {
             PYBIND11_OVERLOAD(
@@ -91,10 +91,10 @@ namespace bind_tools{
 
     };
     //! Expose function for Env-based classes with trampoline. 
-    template<class ENV,class AGENT,class PATCH,typename py_class_name>
-    py::class_<ENV, py_class_name,std::shared_ptr<ENV>> expose_env(py::module m, string class_name_string){
+    template<class ENV,class AGENT,class PATCH,class tramclass>
+    py::class_<ENV, tramclass,std::shared_ptr<ENV>> expose_env(py::module m, string class_name_string){
         auto class_binds_obj = 
-        py::class_<ENV,py_class_name,std::shared_ptr<ENV>> (m,class_name_string.c_str(),py::dynamic_attr())
+        py::class_<ENV,tramclass,std::shared_ptr<ENV>> (m,class_name_string.c_str(),py::dynamic_attr())
             .def(py::init<>())
             .def("place_agent", py::overload_cast<shared_ptr<PATCH>,shared_ptr<AGENT>>(&ENV::place_agent), "Places the agent on the given patch")
             .def("place_agent", py::overload_cast<unsigned,shared_ptr<AGENT>>(&ENV::place_agent), "Places the agent on the given patch index")
@@ -133,9 +133,9 @@ namespace bind_tools{
         return class_binds_obj;
     }
     //! Template trampoline for Agent-based classes with trampoline
-    template<class ENV,class AGENT,class PATCH,class py_class_name>
-    py::class_<AGENT, py_class_name,std::shared_ptr<AGENT>>  expose_agent(py::module &m, string class_name_str){
-        auto class_binds_obj = py::class_<AGENT, py_class_name,std::shared_ptr<AGENT>>(m,class_name_str.c_str(),py::dynamic_attr())
+    template<class ENV,class AGENT,class PATCH,class tramclass>
+    py::class_<AGENT, tramclass,std::shared_ptr<AGENT>>  expose_agent(py::module &m, string class_name_str){
+        auto class_binds_obj = py::class_<AGENT, tramclass,std::shared_ptr<AGENT>>(m,class_name_str.c_str(),py::dynamic_attr())
             .def(py::init<shared_ptr<ENV>,string>(),"Initialize",py::arg("env"),py::arg("class_name"))
             .def("move",&AGENT::move,"Move the agent to a new patch",py::arg("patch")=nullptr,py::arg("quiet")=false)
             .def("order_hatch",&AGENT::order_hatch,"Hatch request",
@@ -176,9 +176,9 @@ namespace bind_tools{
     }
 
      //! Template trampoline for Patch-based classes with trampoline
-    template<class ENV,class AGENT,class PATCH,class py_class_name>
-    py::class_<PATCH,py_class_name,std::shared_ptr<PATCH>>  expose_patch(py::module &m, string class_name_ptr){
-        auto class_binds_obj =  py::class_<PATCH,py_class_name,std::shared_ptr<PATCH>>(m,class_name_ptr.c_str(),py::dynamic_attr())
+    template<class ENV,class AGENT,class PATCH,class tramclass>
+    py::class_<PATCH,tramclass,std::shared_ptr<PATCH>>  expose_patch(py::module &m, string class_name_ptr){
+        auto class_binds_obj =  py::class_<PATCH,tramclass,std::shared_ptr<PATCH>>(m,class_name_ptr.c_str(),py::dynamic_attr())
             .def(py::init<shared_ptr<ENV>,MESH_ITEM>())
             .def("empty_neighbor", &PATCH::empty_neighbor,"Return an empty patch around the patch",
                 py::arg("quiet")=false)
@@ -256,6 +256,40 @@ namespace bind_tools{
         expose_exceptions(m);
         expose_mesh(m);
     }
+    //!< the main class to create binding
+    template<class env,class agent,class patch,class tramenv,class tramagent,class trampatch>
+    struct Bind {
+        using py_env =  py::class_<env,tramenv,std::shared_ptr<env>>;
+        using py_agent = py::class_<agent,tramagent,std::shared_ptr<agent>>;
+        using py_patch = py::class_<patch,trampatch,std::shared_ptr<patch>>;
+        Bind(py::module m,string env_name,string agent_name,string patch_name):
+        m_env(bind_tools::expose_env<env,agent,patch,tramenv>(m,env_name)),
+        m_agent(bind_tools::expose_agent<env,agent,patch,tramagent>(m,agent_name)),
+        m_patch(bind_tools::expose_patch<env,agent,patch,trampatch>(m,patch_name))
+        {
+            // expose defaults
+            bind_tools::expose_defaults<env,agent,patch>(m);
+            // m_env = ;
+            // // expose agent 
+            // m_agent = ;
+            // // expose patch 
+            // m_patch = ;
+            this->m = m;      
+        }
+        py_env get_env(){
+            return m_env;
+        }
+        py_agent get_agent(){
+            return m_agent;
+        }
+        py_patch get_patch(){
+            return m_patch;
+        }
+        py::module m;
+        py_env m_env;
+        py_agent m_agent;
+        py_patch m_patch;
+    };
 }
 
 

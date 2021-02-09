@@ -67,11 +67,7 @@ class Domain(Env):
 		self.tick = 0
 		self.data = {'cell_count':[]}
 		self.output_flag = output_flag
-		if self.output_flag:
-			try:
-				os.mkdir('results')
-			except:
-				pass
+		
 	def generate_agent(self,agent_name):
 		"""
 		Extension of the original function to create agents
@@ -162,14 +158,14 @@ class Domain(Env):
 		Output the results
 		"""
 		# plot agents on the domain
-		file = open('results/cells.csv','w')
+		file = open('cells.csv','w')
 		file.write('x,y,type,size\n')
 		for agent in self.agents:
 			x,y,z = agent.patch.coords
 			file.write("{},{},{},{}\n".format(x, y, agent.class_name, 10))
 		file.close()
 		#plot ECM density on the domain
-		file = open('results/ECM.csv','w')
+		file = open('ECM.csv','w')
 		file.write('x,y,type,size\n')
 		for [index,patch] in self.patches.items():
 			x,y,z = patch.coords
@@ -178,7 +174,7 @@ class Domain(Env):
 		## cell counts
 		df = pd.DataFrame.from_dict(self.data)
 		df_agent_counts = df[['cell_count']]
-		df_agent_counts.to_csv('results/cell_count.csv')
+		df_agent_counts.to_csv('cell_count.csv')
 
 	
 if __name__ == '__main__':
