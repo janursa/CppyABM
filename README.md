@@ -28,8 +28,20 @@ The library can be also installed solely for C++ development using,
 
 ### For Python-C++ development
 In order to create a mixed model using both languages of C++ and Python, in addition to CppyABM, <a href="https://github.com/pybind/pybind11" title="pybind11">pybind11</a> needs to be installed. It can be either seperately installed according to the instruction given on <a href="https://pybind11.readthedocs.io/en/stable/installing.html" title="pybind11">pybind11-installation</a>, or can be included in a project using Cmake. See  <a href="https://janursa.github.io/CppyABM/" title="About Me">documentation</a>.
+
+## Docker
+The following docker image will provide an isolated environment where the latest version of CppyABM and pybind11 are insalled.
+
+$ docker run --rm -t -i janursa/cppyabm /bin/bash
+
+
 ## License
 This project is licensed under the MIT License - see the LICENSE.md file for details
+
+## To cite
+Cite this library using [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4541247.svg)](https://doi.org/10.5281/zenodo.4541247).
+
+
 
 ## Authors
 
