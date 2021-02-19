@@ -42,7 +42,6 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 Cite this library using [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4541247.svg)](https://doi.org/10.5281/zenodo.4541247).
 
 
-
 ## Authors
 
 - Jalil Nourisa

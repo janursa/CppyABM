@@ -1,4 +1,5 @@
 
+
 CppyABM is a free open-source header-only library that enables agent-based modeling both C++ and Python.  The model development follows similar semantics and style in both languages. Therefore, a model developed in one languages can be conveniently transferred to another. In addition, CppyABM provides essential binding tools to specifically expose certain parts of a model written in C++ for further development in Python. This enables users to take the advantage of both languages simultaneously.
 
 ## Basics of design
@@ -160,7 +161,7 @@ class myEnv(Env):
 Within Python, the generator functions require an additional step of storing the created objects in the local repositories. Also, the repositories needs to be updated to remove inactive agents. For a complete example in Python, check out <a href="https://github.com/janursa/CppyABM/tree/master/examples/Py" title="py">Py example</a>.
 
 ## Mixed Python and C++ development
-A model writen in C++ can be further extended within Python by the creation of bindings. Generally, there are two types of binding approach; exposure: to expose certain functionality already written in C++ code to Python; extention: to bind a functionality that needs to be (further) implemented in Python. We currently use pybind11 to generate Python bindings. By having the derived classes of `myEnv`, `myAgent`, and `myPatch`, the binding template looks like,
+A model writen in C++ can be further extended within Python by the creation of bindings. Generally, there are two types of binding approach; embeding: to expose certain functionality already written in C++ code to Python; extending: to bind a functionality that needs to be (further) implemented in Python. We currently use pybind11 to generate Python bindings. By having the derived classes of `myEnv`, `myAgent`, and `myPatch`, the binding template looks like,
 ```Cpp
 #include "cppyabm/bind_tools.h"
 using namespace bind_tools;
@@ -178,6 +179,7 @@ PYBIND11_MODULE(module_name, m) {
 	using tramAgent = tramAgent<myEnv,myAgent,myPatch>; // just use the base class
 	using tramPatch = tramPatch<myEnv,myAgent,myPatch>; // just use the base class
 	auto bind_obj = Bind<myEnv,myAgent,myPatch,tramEnv,tramAgent,tramPatch>(m,"myEnv","myAgent","myPatch");
+}
 ```
 The `bind_tools::Bind`  automatically binds the class members and functions of the base classes, i.e. `Env`,`Agent`, and `Patch`, as the members of the derived classes. However, the specific attributes of the derived class needs to be bind in a seperate step. For that, `bind_tools::Bind` provides three functions of `get_env`, `get_agent` and `get_patch` to have access to the exposed classes in order to attach further class members.  Two pybind11 functions of `def` and `def_readwrite` can be used to bind class functions and members, respectively. For example, assuming that `myEnv` has a function named `myEnvFunc`, and `myAgent` has a member `myAgentMem`, the following code will expose these class attibutes,
 ```Cpp
@@ -230,6 +232,9 @@ We use <a href="https://github.com/janursa/RTvisualize" title="RTvisualize">RTvi
 
 ## Examples
 In order to demonstrate the use case of CppyABM, we design a computer model of the biological tissue growth in response to injury. For description of the problem, see the article. Implementtion files of the examples together with Cmake files can be found on <a href="https://github.com/janursa/CppyABM/tree/master/examples">here</a>. 
+
+## To cite
+Cite this library using [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4541247.svg)](https://doi.org/10.5281/zenodo.4541247).
 
 ## License
 This project is licensed under the MIT License - see the LICENSE.md file for details

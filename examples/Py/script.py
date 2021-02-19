@@ -1,6 +1,5 @@
 import pandas as pd
 import time
-from pympler import asizeof
 
 """
 @page purelypython
