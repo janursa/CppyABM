@@ -9,3 +9,6 @@ This folder contains:
 To execute the model after compilation,
 - `./appABM`: execution without outputs
 - `./appABM outout`: execution with outputs
+
+To execute the visualization after outputs are available,
+- `python monitor_script.py` within the folder that contains the outputs

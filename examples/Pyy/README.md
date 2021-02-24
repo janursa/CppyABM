@@ -9,3 +9,6 @@ This folder contains:
 To execute the model after compilation,
 - `python script.py`: execution without outputs
 - `python script.py outout`: execution with outputs
+
+To execute the visualization after outputs are available,
+- `python monitor_script.py` within the folder that contains the outputs

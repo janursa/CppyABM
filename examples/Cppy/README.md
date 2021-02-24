@@ -12,3 +12,6 @@ To execute the model after compilation,
 - `python script.py outout`: execution with outputs
 
 The model includes the implementation file located in the Cpp folder and the policy model located in the Pyy folder.
+
+To execute the visualization after outputs are available,
+- `python monitor_script.py` within the folder that contains the outputs

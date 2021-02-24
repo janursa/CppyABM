@@ -4,7 +4,7 @@ from pympler import asizeof
 import torch
 from random import randrange
 import numpy as np
-import torch.nn.functional as F
+# import torch.nn.functional as F
 
 """
 @page purelypython
