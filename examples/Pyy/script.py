@@ -15,7 +15,7 @@ to model cellular behavior and the properties of tissue, respectively.
 """
 import sys, os,pathlib
 current_file_path = pathlib.Path(__file__).parent.absolute()
-sys.path.insert(1,os.path.join(current_file_path,'..','..','build'))
+# sys.path.insert(1,os.path.join(current_file_path,'..','..','build'))
 from cppyabm.binds import Env, Agent, Patch, space
 sys.path.insert(1,os.path.join(current_file_path))
 from policy import policy

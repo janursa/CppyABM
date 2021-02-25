@@ -6,11 +6,10 @@ CppyABM is a free open-source header-only library that enables agent-based model
 For an extended version of the available installation options, see <a href="https://janursa.github.io/CppyABM/" title="About Me">documentation</a>.
 
 ### For Python development 
-Reuired minimum version of Python (3.7).
 
 Using pip manager:
 
--  `pip install --upgrade cppyabm`
+-  `pip install --upgrade cppyabm` in case any error occured, install using the next option.
 
 Or, download the package and in the root folder, command:
 
