@@ -7,30 +7,44 @@ For an extended version of the available installation options, see <a href="http
 
 ### For Python development 
 
-Using pip manager:
+Using pip manager (in case any error occured, install using the next option):
 
--  `pip install --upgrade cppyabm` in case any error occured, install using the next option.
+$ pip install --upgrade cppyabm
+
 
 Or, download the package and in the root folder, command:
 
--  `python3 setup.py install`
+$ python3 setup.py install
 
 ### For C++ development
 The library can be also installed solely for C++ development using,
-- git clone https://github.com/janursa/CppyABM 
-- cd CppyABM && mkdir build && cd build
-- cmake .. -DCPP=TRUE
-- make install
+$ git clone https://github.com/janursa/CppyABM 
+$ cd CppyABM && mkdir build && cd build
+$ cmake .. -DCPP=TRUE
+$ make install
 
 
 ### For Python-C++ development
 In order to create a mixed model using both languages of C++ and Python, in addition to CppyABM, <a href="https://github.com/pybind/pybind11" title="pybind11">pybind11</a> needs to be installed. It can be either seperately installed according to the instruction given on <a href="https://pybind11.readthedocs.io/en/stable/installing.html" title="pybind11">pybind11-installation</a>, or can be included in a project using Cmake. See  <a href="https://janursa.github.io/CppyABM/" title="About Me">documentation</a>.
 
 ## Docker
-The following docker image will provide an isolated environment where the latest version of CppyABM and pybind11 are insalled.
+The Docker image "janursa/cppyabm" provides an environment where the lastest version of CppyABM, pybind11, and RTvisualize are installed. The following command will land you in a container with all set ready for development. 
 
 $ docker run --rm -t -i janursa/cppyabm /bin/bash
 
+To run the examples with visualization, two seperate bash of same container needs to be executed; one for running the model and another for visualization. To do so,
+
+[1]$ docker run -d -p 1818:8050 -t janursa/cppyabm /bin/bash 
+
+Runs the image in a detached mode and maps the port number 8050 (container) to 1818 (host). Then,
+
+[2]$ docker ps
+
+Get the `CONTAINER ID`,
+
+[3]$ docker exec -it container_id bash 
+
+Once in the container, navigate to the example folder and run the model. In parallel, open another bash using the exact command as [3]. But, this time run the `monitor_script.py` for visualization. It will output the graphs to the port `http://0.0.0.0:1818`.
 
 ## License
 This project is licensed under the MIT License - see the LICENSE.md file for details
