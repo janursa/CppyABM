@@ -10,7 +10,7 @@ to model cellular behavior and the properties of tissue, respectively.
 """
 import sys, os,pathlib
 current_file_path = pathlib.Path(__file__).parent.absolute()
-# sys.path.insert(1,os.path.join(current_file_path,'..','..','build'))
+sys.path.insert(1,os.path.join(current_file_path,'..','..','build'))
 from cppyabm.binds import Env, Agent, Patch, space
 
 class Tissue(Patch):
@@ -129,8 +129,9 @@ class Domain(Env):
 		if usage>Domain.memory_usage_max:
 			Domain.memory_usage_max = usage
 		
-		for cell in self.agents:
-			cell.step()
+		# for cell in self.agents:
+		# 	cell.step()
+		self.activate_random()
 		self.update()
 		self.tick +=1
 	def episode(self):

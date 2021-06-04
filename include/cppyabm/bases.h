@@ -184,7 +184,15 @@ struct Env: public enable_shared_from_this<ENV>{
 
     virtual void step() {
     	throw undefined_member("Step function is not defined inside Env");
-    }; //!< steps the simulation
+    }; //!< Steps the simulation
+    void activate_serial(){
+        for (auto&agent:this->agents) agent->step();
+    }; //!< Serial activation of the agents
+    void activate_random(){
+        auto g = tools::randomly_seeded_MT();
+        std::shuffle(this->agents.begin(),this->agents.end(),g);
+        for (auto&agent:this->agents) agent->step();
+    }; //!< Random activation of the agents
 
     map<string,unsigned> count_agents(); //!< Counts the agents according to `Agent::class_name`.
 

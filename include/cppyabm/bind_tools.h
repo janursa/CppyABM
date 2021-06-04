@@ -107,6 +107,8 @@ namespace bind_tools{
             .def("setup_agents",&ENV::setup_agents)
             .def("count_agents",&ENV::count_agents)
             .def("memory_usage",&ENV::memory_usage)
+            .def("activate_serial",&ENV::activate_serial)
+            .def("activate_random",&ENV::activate_random)
             .def_readwrite("patches",&ENV::patches)
             .def_readwrite("agents",&ENV::agents);
         return class_binds_obj;
@@ -128,6 +130,8 @@ namespace bind_tools{
             .def("setup_agents",&ENV::setup_agents)
             .def("count_agents",&ENV::count_agents)
             .def("connect_patch_agent", &ENV::connect_patch_agent)
+            .def("activate_serial",&ENV::activate_serial)
+            .def("activate_random",&ENV::activate_random)
             .def_readwrite("patches",&ENV::patches)
             .def_readwrite("agents",&ENV::agents);
         return class_binds_obj;
