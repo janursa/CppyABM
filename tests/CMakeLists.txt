@@ -4,12 +4,16 @@ catch2
 GIT_REPOSITORY https://github.com/catchorg/Catch2.git
 GIT_TAG        v2.9.1
 )
+message(STATUS "Running tests")
+set(cppyabm_SOURCE_DIR  "/Users/matin/Downloads/testProjs/CppyABM/")
 FetchContent_MakeAvailable(catch2)
 
-add_executable(testlib test_ABM.cpp)
+add_executable(testApp test_ABM.cpp)
 
-target_compile_features(testlib PRIVATE cxx_std_17)
+target_compile_features(testApp PRIVATE cxx_std_17)
 
-target_link_libraries(testlib PRIVATE Catch2::Catch2)
+target_link_libraries(testApp PRIVATE Catch2::Catch2)
 
-add_test(NAME testlibtest COMMAND testlib) # Command can be a target
+# add_subdirectory(${cppyabm_SOURCE_DIR} ${cppyabm_BINARY_DIR})
+
+target_include_directories(testApp  PUBLIC ${cppyabm_SOURCE_DIR}/include)

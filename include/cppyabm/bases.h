@@ -19,6 +19,8 @@ template<class ENV, class AGENT, class PATCH>
 struct Agent;
 template<class ENV, class AGENT, class PATCH>
 struct Patch;
+template<class ENV, class AGENT, class PATCH>
+struct basePatch;
 
 //!   Base class for patch
 /*!

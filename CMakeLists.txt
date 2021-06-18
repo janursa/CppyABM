@@ -42,6 +42,12 @@ if (${BIND}) #generates the python library
     endif()
 endif()
 
+if (${TEST}) #generates the python library
+    if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+        add_subdirectory(tests)
+    endif()
+endif()
+
 # to setup
 add_library(${PROJECT_NAME} INTERFACE)
 target_include_directories(
