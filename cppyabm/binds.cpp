@@ -21,9 +21,11 @@ EXPOSE_AGENT_CONTAINER(expAgent);
 EXPOSE_PATCH_CONTAINER(expPatch);
 
 PYBIND11_MODULE(binds, m) {
-    bind_tools::expose_defaults<expEnv,expAgent,expPatch>(m);
-    bind_tools::expose_env<expEnv,expAgent,expPatch,bind_tools::tramEnv<expEnv,expAgent,expPatch>>(m,"Env");
-    bind_tools::expose_agent<expEnv,expAgent,expPatch,bind_tools::tramAgent<expEnv,expAgent,expPatch>>(m,"Agent");
-    bind_tools::expose_patch<expEnv,expAgent,expPatch,bind_tools::tramPatch<expEnv,expAgent,expPatch>>(m,"Patch");
+    using tramEnv = bind_tools::tramEnv<expEnv,expAgent,expPatch>;
+    using tramAgent = bind_tools::tramAgent<expEnv,expAgent,expPatch>;
+    using tramPatch = bind_tools::tramPatch<expEnv,expAgent,expPatch>;
+
+    auto bind_obj = bind_tools::Bind<expEnv,expAgent,expPatch,tramEnv,tramAgent,tramPatch>(m,"Env","Agent","Patch");
+    
 }
 

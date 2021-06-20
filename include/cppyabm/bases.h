@@ -21,15 +21,16 @@ template<class ENV, class AGENT, class PATCH>
 struct Patch;
 template<class ENV, class AGENT, class PATCH>
 struct basePatch;
-
+template<class ENV, class AGENT, class PATCH>
+struct multiPatch;
 //!   Base class for patch
 /*!
   Patch class abstracts non-movable discrete elements of the simulation domain.
 */
 template<class ENV, class AGENT, class PATCH>
-struct Patch: public enable_shared_from_this<PATCH>{
-	Patch(shared_ptr<ENV> env,MESH_ITEM mesh_item){
-		this->env = env;
+struct basePatch{
+    basePatch(shared_ptr<ENV> env,MESH_ITEM mesh_item){
+        this->env = env;
         this->index = mesh_item.index;      // copy index
         this->coords = mesh_item.coords;    // copy coords
         this->neighbors_indices = mesh_item.neighbors_indices;  // copy neighbors indices
@@ -46,12 +47,34 @@ struct Patch: public enable_shared_from_this<PATCH>{
         catch (...){
 
         }
-	}
-	virtual ~Patch(){}
+    }
+    virtual ~basePatch(){}
 
-	virtual void step(){
-		throw undefined_member("Step function is not defined inside Patch");
-	}; //!< To define patch behavior
+    virtual void step(){
+        throw undefined_member("Step function is not defined inside Patch");
+    }; //!< To define patch behavior #TODO: see if this can go
+    
+   
+    unsigned agent_count = 0; //!< Keeps the record of residing agents count
+    std::shared_ptr<ENV> env; //!< Pointer to the simulation environment
+    // bool empty = true; //!< whether the patch host an agent
+    bool on_border = false;//!< whether the patch residing on the border of the domain
+    unsigned index; //!< unique index that associate patch to mesh
+    unsigned layer_index; //!< the index of the layer in which the patch is residing
+    vector<double> coords; //!< the coordinates of the patch
+    vector<unsigned> neighbors_indices; //!< the indices of the neighbor patches
+    vector<shared_ptr<PATCH>> neighbors; //!< list of neighbor patches
+};
+//!   Single patch class
+/*!
+  Specilization of the base patch for single agent occupancy
+*/
+template<class ENV, class AGENT, class PATCH>
+struct Patch: public basePatch<ENV,AGENT,PATCH>, public enable_shared_from_this<PATCH>{
+	using basePatch<ENV,AGENT,PATCH>::basePatch;
+    vector<shared_ptr<AGENT>> find_neighbor_agents(bool include_self = true); //!< Returns agents in one patch neighbors
+    shared_ptr<PATCH> empty_neighbor(bool quiet = false); //!< Returns an arbitrary adjacent patch without an agent 
+
 	void set_agent(shared_ptr<AGENT> agent){
 		this->agent = agent;
 		// this->empty = false;
@@ -83,18 +106,67 @@ struct Patch: public enable_shared_from_this<PATCH>{
 		this->agent.reset();
 		this->agent_count = 0;
 	} //!< Removes agent from the patch
-	shared_ptr<PATCH> empty_neighbor(bool quiet = false); //!< Returns an arbitrary adjacent patch without an agent 
-	vector<shared_ptr<AGENT>> find_neighbor_agents(bool include_self = true); //!< Returns agents in one patch neighbors
-	unsigned agent_count = 0; //!< Keeps the record of residing agents count
 	std::weak_ptr<AGENT> agent; //!< Pointer to stores agents
-	std::shared_ptr<ENV> env; //!< Pointer to the simulation environment
-	// bool empty = true; //!< whether the patch host an agent
-	bool on_border = false;//!< whether the patch residing on the border of the domain
-    unsigned index; //!< unique index that associate patch to mesh
-    unsigned layer_index; //!< the index of the layer in which the patch is residing
-    vector<double> coords; //!< the coordinates of the patch
-    vector<unsigned> neighbors_indices; //!< the indices of the neighbor patches
-    vector<shared_ptr<PATCH>> neighbors; //!< list of neighbor patches
+};
+//!   Multi patch class
+/*!
+  Specilization of the base patch for multiple agent occupancy
+*/
+template<class ENV, class AGENT, class PATCH>
+struct multiPatch: public basePatch<ENV,AGENT,PATCH>, public enable_shared_from_this<PATCH>{
+    using basePatch<ENV,AGENT,PATCH>::basePatch;
+    vector<shared_ptr<AGENT>> find_neighbor_agents(bool include_self = true); //!< Returns agents in one patch neighbors
+
+    void add_agent(shared_ptr<AGENT> agent){
+        this->agents.push_back(agent);
+        // this->empty = false;
+        this->agent_count ++;
+        agent->patch = this->shared_from_this();
+        agent->has_patch = true;
+    }; //!< Add the agent to the patch
+    vector<shared_ptr<AGENT>> get_agents(){
+        vector<shared_ptr<AGENT>> _agents;
+        for (auto&agent:this->agents){
+            shared_ptr<AGENT> p = agent.lock();
+            if (p){
+                _agents.push_back(p);
+            }else{
+                throw invalid_pointer("poiner to agent is invalid inside patch");
+
+            }
+        }
+        return _agents;
+        
+    }
+    bool empty(){
+        for (auto&agent:this->agents){
+            shared_ptr<AGENT> p = agent.lock();
+            if (p){
+                return false;
+            }
+        }
+        return true;
+    }
+    void remove_agent(shared_ptr<AGENT> agent){
+        this->get_agent()->has_patch = false;
+        this->get_agent()->patch = nullptr;
+        this->agent.reset();
+        for (unsigned i = 0; i < this->agents.size(); i++){
+            shared_ptr<AGENT> p = this->agents[i].lock();
+            if (p){
+                if (p == agent){
+                    swap(this->agents[i], this->agents[-1]);  
+                    this->agents.pop_back();
+                    break;      
+                }
+            }else{
+                throw invalid_pointer("poiner to agent is invalid inside patch");
+
+            }
+        }
+        
+    } //!< Removes agent from the patch
+    vector<std::weak_ptr<AGENT>> agents; //!< Pointers to stores agents
 };
 
 //!   Base class for Agent
@@ -538,12 +610,22 @@ shared_ptr<PATCH> Patch<ENV,AGENT,PATCH>::empty_neighbor(bool quiet){
         if (!quiet) throw patch_availibility("No available patch around the agent");
         return nullptr;
 }
+
 template<class ENV, class AGENT, class PATCH>
 vector<shared_ptr<AGENT>> Patch<ENV,AGENT,PATCH>::find_neighbor_agents(bool include_self){
         vector<shared_ptr<AGENT>> neighbor_agents;
         if (!this->empty() & include_self) neighbor_agents.push_back(this->get_agent());
         for (auto const &patch:this->neighbors){
             if (!patch->empty()) neighbor_agents.push_back(patch->get_agent());
+        }
+        return neighbor_agents;
+    }
+template<class ENV, class AGENT, class PATCH>
+vector<shared_ptr<AGENT>> multiPatch<ENV,AGENT,PATCH>::find_neighbor_agents(bool include_self){
+        vector<shared_ptr<AGENT>> neighbor_agents;
+        if (!this->empty() & include_self) neighbor_agents.push_back(this->get_agents());
+        for (auto const &patch:this->neighbors){
+            if (!patch->empty()) neighbor_agents.push_back(patch->get_agents());
         }
         return neighbor_agents;
     }

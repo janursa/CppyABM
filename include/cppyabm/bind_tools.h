@@ -194,10 +194,9 @@ namespace bind_tools{
             .def("empty",&PATCH::empty)
             .def_readwrite("on_border",&PATCH::on_border)
             .def_readwrite("neighbors",&PATCH::neighbors);
-        return class_binds_obj;
-            
+        return class_binds_obj;      
     }
-     //! Template trampoline for Patch-based classes without trampoline
+     //! Template for Patch-based classes without trampoline
     template<class ENV,class AGENT,class PATCH>
     py::class_<PATCH,std::shared_ptr<PATCH>>  expose_patch(py::module &m, string class_name_ptr){
         auto class_binds_obj =  py::class_<PATCH,std::shared_ptr<PATCH>>(m,class_name_ptr.c_str(),py::dynamic_attr())
@@ -211,6 +210,39 @@ namespace bind_tools{
             .def("empty",&PATCH::empty)
             .def_readwrite("on_border",&PATCH::on_border)
             .def_readwrite("neighbors",&PATCH::neighbors);
+        return class_binds_obj;
+            
+    }
+     //! Template trampoline for multi Patch-based classes with trampoline
+    template<class ENV,class AGENT,class PATCH,class tramclass>
+    py::class_<PATCH,tramclass,std::shared_ptr<PATCH>>  expose_multiPatch(py::module &m, string class_name_ptr){
+        auto class_binds_obj =  py::class_<PATCH,tramclass,std::shared_ptr<PATCH>>(m,class_name_ptr.c_str(),py::dynamic_attr())
+            .def(py::init<shared_ptr<ENV>,MESH_ITEM>())
+            .def("find_neighbor_agents",&PATCH::find_neighbor_agents,"Returns a vector of agents in one patch neighborhood",
+                py::arg("include_self")=true)
+            .def("get_agents",&PATCH::get_agent)
+            .def("add_agent",&PATCH::add_agent)
+            .def("remove_agent",&PATCH::remove_agent)
+            .def("empty",&PATCH::empty)
+            .def_readwrite("on_border",&PATCH::on_border)
+            .def_readwrite("neighbors",&PATCH::neighbors)
+            .def_readwrite("index",&PATCH::index)
+            .def_readwrite("coords",&PATCH::coords);
+        return class_binds_obj;      
+    }
+     //! Template multi Patch-based classes without trampoline
+    template<class ENV,class AGENT,class PATCH>
+    py::class_<PATCH,std::shared_ptr<PATCH>>  expose_multiPatch(py::module &m, string class_name_ptr){
+        auto class_binds_obj =  py::class_<PATCH,std::shared_ptr<PATCH>>(m,class_name_ptr.c_str(),py::dynamic_attr())
+            .def(py::init<shared_ptr<ENV>,MESH_ITEM>())
+            .def("get_agents",&PATCH::get_agent)
+            .def("add_agent",&PATCH::add_agent)
+            .def("remove_agent",&PATCH::remove_agent)
+            .def("empty",&PATCH::empty)
+            .def_readwrite("on_border",&PATCH::on_border)
+            .def_readwrite("neighbors",&PATCH::neighbors)
+            .def_readwrite("index",&PATCH::index)
+            .def_readwrite("coords",&PATCH::coords);
         return class_binds_obj;
             
     }
@@ -273,11 +305,6 @@ namespace bind_tools{
         {
             // expose defaults
             bind_tools::expose_defaults<env,agent,patch>(m);
-            // m_env = ;
-            // // expose agent 
-            // m_agent = ;
-            // // expose patch 
-            // m_patch = ;
             this->m = m;      
         }
         py_env get_env(){
