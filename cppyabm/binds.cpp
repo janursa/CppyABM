@@ -6,8 +6,12 @@
 struct expEnv;
 struct expPatch;
 struct expAgent;
+struct expMultiPatch;
+
 struct expEnv: public Env<expEnv,expAgent,expPatch>{
 };
+
+
 struct expAgent: public Agent<expEnv,expAgent,expPatch>{
     expAgent(shared_ptr<expEnv> env , string class_name):Agent<expEnv,expAgent,expPatch>(env,class_name){
         
@@ -17,6 +21,8 @@ struct expPatch: public Patch<expEnv,expAgent,expPatch>{
     expPatch(shared_ptr<expEnv> env, MESH_ITEM mesh_item):Patch<expEnv,expAgent,expPatch>(env,mesh_item){}
 };
 
+
+
 EXPOSE_AGENT_CONTAINER(expAgent);
 EXPOSE_PATCH_CONTAINER(expPatch);
 
@@ -25,7 +31,9 @@ PYBIND11_MODULE(binds, m) {
     using tramAgent = bind_tools::tramAgent<expEnv,expAgent,expPatch>;
     using tramPatch = bind_tools::tramPatch<expEnv,expAgent,expPatch>;
 
-    auto bind_obj = bind_tools::Bind<expEnv,expAgent,expPatch,tramEnv,tramAgent,tramPatch>(m,"Env","Agent","Patch");
-    
+    bind_tools::expose_defaults<expEnv,expAgent,expPatch>(m);
+    bind_tools::expose_env<expEnv,expAgent,expPatch,tramEnv>(m,"Env");
+    bind_tools::expose_agent<expEnv,expAgent,expPatch,tramAgent>(m,"Agent");
+    bind_tools::expose_patch<expEnv,expAgent,expPatch,tramPatch>(m,"Patch");
 }
 

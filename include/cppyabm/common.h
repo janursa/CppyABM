@@ -71,6 +71,9 @@ struct undefined_member: public base_exception_class{
 struct invalid_pointer: public base_exception_class{
     using base_exception_class::base_exception_class;
 };
+struct illegal_action: public base_exception_class{
+    using base_exception_class::base_exception_class;
+};
 
 
 // const std::string main_output_folder = "outputs/";

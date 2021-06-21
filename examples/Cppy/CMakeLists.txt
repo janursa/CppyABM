@@ -7,7 +7,6 @@ SET(BINDMODULE "myBinds")
 
 FIND_PACKAGE(cppyabm CONFIG)
 FIND_PACKAGE(pybind11 CONFIG)
-
 # add_subdirectory(../../ cppyabm)
 if (NOT cppyabm_FOUND OR NOT pybind11_FOUND)
     message(STATUS "Either CppyABM or pybind11 is not installed. Clonning CppyABM.")

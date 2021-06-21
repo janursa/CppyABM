@@ -80,19 +80,20 @@ inline void Domain::setup(){
 	this->update();
 	}
 inline void Domain::damage(){
-		for (auto &[index,patch]:this->patches){
-			auto x = patch->coords[0];
-			auto y = patch->coords[1];
-			if ((x >= 0.25 and x <=1.25) and (y>=0.25 and y<=1.25)){
-				patch->damage_center = true;
-				patch->ECM = 0;
-				if (patch->empty() == false){
-					patch->get_agent()->disappear = true;
-				}
-					
+	for (auto &[index,patch]:this->patches){
+		auto x = patch->coords[0];
+		auto y = patch->coords[1];
+		if ((x >= 0.25 and x <=1.25) and (y>=0.25 and y<=1.25)){
+			patch->damage_center = true;
+			patch->ECM = 0;
+			if (patch->empty() == false){
+				auto agents = patch->get_agents();
+				agents[0]->disappear = true;
 			}
+				
 		}
 	}
+}
 inline void Domain::update(){
 		Env<Domain,Cell,Tissue>::update();
 		for (auto &agent: this->agents){
@@ -107,24 +108,51 @@ inline void Domain::step(){
 	if (usage > memory_usage_max){
 		memory_usage_max = usage;
 	}
+	unsigned ii = 0;
+	for (auto&[index,patch]:this->patches){
+		if (patch->empty()) ii++;
+	}
+	cout<<"number of available patches "<<ii<<endl;
 
-	for (auto &cell:this->agents){
-		cell->step();
+	for (unsigned i = 0; i<this->agents.size(); i++){
+
+		this->agents[i]->step();
 	}
 	this->update();
 	this->tick ++;
 }	
 inline void Cell::step(){
 	this->order_move(nullptr,true,false);
-	auto neighbor_cell_count = this->patch->find_neighbor_agents().size();
-	if (this->patch->damage_center and this->clock >= this->cycle_t){
+	// { // for moving
+	// 	try {
+	// 		auto dest = this->get_patch()->empty_neighbor();
+	// 		this->move(dest,true);
+			  
+	// 	}catch(patch_availibility &ee){
+			
+	// 	}
+		
+	// }
+	
+	auto neighbor_cell_count = this->get_patch()->find_neighbor_agents().size();
+	if (this->get_patch()->damage_center and this->clock >= this->cycle_t){
 		if (neighbor_cell_count <= 6){
-			this->order_hatch(nullptr,false,true,false);
-			this->clock = 0 ;
+			shared_ptr<Tissue> dest;
+			try{
+				dest = this->get_patch()->empty_neighbor();
+				auto new_agent = this->env->generate_agent("cell");
+				this->env->place_agent(dest,new_agent);
+				// this->order_hatch(nullptr,false,true,false);
+				this->clock = 0 ;
+			}
+			catch(patch_availibility & ee){
+				
+			}
+			
 		}
 	}
-	if (this->patch->ECM < 100) {
-		this->patch->ECM += 1;	
+	if (this->get_patch()->ECM < 100) {
+		this->get_patch()->ECM += 1;	
 	}
 		
 	if (neighbor_cell_count >7){
@@ -149,7 +177,7 @@ inline void Domain::output(){
 	file1.open("cells.csv");
 	file1 << "x,y,type,size\n";
 	for (auto &agent:this->agents){
-		file1<<agent->patch->coords[0]<<","<<agent->patch->coords[1]<<","<< agent->class_name<<", "<<10<<std::endl;
+		file1<<agent->get_patch()->coords[0]<<","<<agent->get_patch()->coords[1]<<","<< agent->class_name<<", "<<10<<std::endl;
 	}
 	file1.close();
 	//plot ECM density on the domain

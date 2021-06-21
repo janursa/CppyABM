@@ -150,9 +150,9 @@ namespace bind_tools{
                 py::arg("quiet")=false, py::arg("reset")=false)
             .def("order_switch",&AGENT::order_switch,"Switch request",
                 py::arg("to"))
+            .def("get_patch",&AGENT::get_patch,"Retreives the patch")
             .def_readwrite("disappear",&AGENT::disappear)
             .def_readwrite("env",&AGENT::env)
-            .def_readwrite("patch",&AGENT::patch)
             .def_readwrite("disappear",&AGENT::disappear)
             .def_readwrite("class_name",&AGENT::class_name);
         return class_binds_obj;
@@ -171,9 +171,9 @@ namespace bind_tools{
                 py::arg("quiet")=false, py::arg("reset")=false)
             .def("order_switch",&AGENT::order_switch,"Switch request",
                 py::arg("to"))
+            .def("get_patch",&AGENT::get_patch,"Retreives the patch")
             .def_readwrite("disappear",&AGENT::disappear)
             .def_readwrite("env",&AGENT::env)
-            .def_readwrite("patch",&AGENT::patch)
             .def_readwrite("disappear",&AGENT::disappear)
             .def_readwrite("class_name",&AGENT::class_name);
         return class_binds_obj;
@@ -188,12 +188,15 @@ namespace bind_tools{
                 py::arg("quiet")=false)
             .def("find_neighbor_agents",&PATCH::find_neighbor_agents,"Returns a vector of agents in one patch neighborhood",
                 py::arg("include_self")=true)
-            .def_readwrite("index",&PATCH::index)
-            .def_readwrite("coords",&PATCH::coords)
-            .def("get_agent",&PATCH::get_agent)
+            .def("get_agents",&PATCH::get_agents)
+            .def("add_agent",&PATCH::add_agent)
+            .def("remove_agent",&PATCH::remove_agent)
+            .def("remove_agents",&PATCH::remove_agents)
             .def("empty",&PATCH::empty)
             .def_readwrite("on_border",&PATCH::on_border)
-            .def_readwrite("neighbors",&PATCH::neighbors);
+            .def_readwrite("neighbors",&PATCH::neighbors)
+            .def_readwrite("index",&PATCH::index)
+            .def_readwrite("coords",&PATCH::coords);
         return class_binds_obj;      
     }
      //! Template for Patch-based classes without trampoline
@@ -205,39 +208,10 @@ namespace bind_tools{
                 py::arg("quiet")=false)
             .def("find_neighbor_agents",&PATCH::find_neighbor_agents,"Returns a vector of agents in one patch neighborhood",
                 py::arg("include_self")=true)
-            .def_readwrite("coords",&PATCH::coords)
-            .def("get_agent",&PATCH::get_agent)
-            .def("empty",&PATCH::empty)
-            .def_readwrite("on_border",&PATCH::on_border)
-            .def_readwrite("neighbors",&PATCH::neighbors);
-        return class_binds_obj;
-            
-    }
-     //! Template trampoline for multi Patch-based classes with trampoline
-    template<class ENV,class AGENT,class PATCH,class tramclass>
-    py::class_<PATCH,tramclass,std::shared_ptr<PATCH>>  expose_multiPatch(py::module &m, string class_name_ptr){
-        auto class_binds_obj =  py::class_<PATCH,tramclass,std::shared_ptr<PATCH>>(m,class_name_ptr.c_str(),py::dynamic_attr())
-            .def(py::init<shared_ptr<ENV>,MESH_ITEM>())
-            .def("find_neighbor_agents",&PATCH::find_neighbor_agents,"Returns a vector of agents in one patch neighborhood",
-                py::arg("include_self")=true)
-            .def("get_agents",&PATCH::get_agent)
+            .def("get_agents",&PATCH::get_agents)
             .def("add_agent",&PATCH::add_agent)
             .def("remove_agent",&PATCH::remove_agent)
-            .def("empty",&PATCH::empty)
-            .def_readwrite("on_border",&PATCH::on_border)
-            .def_readwrite("neighbors",&PATCH::neighbors)
-            .def_readwrite("index",&PATCH::index)
-            .def_readwrite("coords",&PATCH::coords);
-        return class_binds_obj;      
-    }
-     //! Template multi Patch-based classes without trampoline
-    template<class ENV,class AGENT,class PATCH>
-    py::class_<PATCH,std::shared_ptr<PATCH>>  expose_multiPatch(py::module &m, string class_name_ptr){
-        auto class_binds_obj =  py::class_<PATCH,std::shared_ptr<PATCH>>(m,class_name_ptr.c_str(),py::dynamic_attr())
-            .def(py::init<shared_ptr<ENV>,MESH_ITEM>())
-            .def("get_agents",&PATCH::get_agent)
-            .def("add_agent",&PATCH::add_agent)
-            .def("remove_agent",&PATCH::remove_agent)
+            .def("remove_agents",&PATCH::remove_agents)
             .def("empty",&PATCH::empty)
             .def_readwrite("on_border",&PATCH::on_border)
             .def_readwrite("neighbors",&PATCH::neighbors)
@@ -246,6 +220,8 @@ namespace bind_tools{
         return class_binds_obj;
             
     }
+     
+     
      //! function to expose exceptions
     void expose_exceptions(py::module m){
          py::register_exception<patch_availibility>(m, "patch_availibility");

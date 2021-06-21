@@ -40,15 +40,16 @@ class Cell (Agent):
 		"""
 		# migration
 		self.order_move(quiet=True)
+		
 		# proliferation
-		neighbor_cell_count = len(self.patch.find_neighbor_agents())
-		if self.patch.damage_center and self.clock >= self.cycle_t:
+		neighbor_cell_count = len(self.get_patch().find_neighbor_agents())
+		if self.get_patch().damage_center and self.clock >= self.cycle_t:
 			if neighbor_cell_count <= 6:
 				self.order_hatch(quiet=True)
 				self.clock = 0 
 		# ECM synthesize
-		if self.patch.ECM < 100:
-			self.patch.ECM += 1	
+		if self.get_patch().ECM < 100:
+			self.get_patch().ECM += 1	
 		# apoptosis
 		if neighbor_cell_count >7:
 			self.disappear = True
@@ -103,7 +104,7 @@ class Domain(Env):
 				patch.damage_center = True
 				patch.ECM = 0
 				if patch.empty() == False:
-					patch.get_agent().disappear = True
+					patch.get_agents()[0].disappear = True
 	def setup(self):
 		"""
 		Setup the simulation by creating mesh, patches, damage, and agents
@@ -161,7 +162,7 @@ class Domain(Env):
 		file = open('cells.csv','w')
 		file.write('x,y,type,size\n')
 		for agent in self.agents:
-			x,y,z = agent.patch.coords
+			x,y,z = agent.get_patch().coords
 			file.write("{},{},{},{}\n".format(x, y, agent.class_name, 10))
 		file.close()
 		#plot ECM density on the domain
