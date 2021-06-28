@@ -67,6 +67,7 @@
             "isolation": {
                 "proportion_isolated": 0.45,
                 "day_start_isolation": 0,
+                "after_isolation": 0.07,
                 "days_isolation_lasts": 117,
                 "prob_isolation_effective": 0.8
             },

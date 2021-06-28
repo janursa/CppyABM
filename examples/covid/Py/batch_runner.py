@@ -9,8 +9,9 @@ import pandas as pd
 
 class Runner:
 
-    def __init__(self,model_class,args,runs,parallel=False):
+    def __init__(self,model_class,args,file_name,runs,parallel=False):
         self.model_class = model_class
+        self.file_name=file_name
         self.args = args
         self.runs = runs
         if parallel:
@@ -68,7 +69,8 @@ class Runner:
                     aa += output[key]
                 cumulated_data.update({key:aa}) 
             cumulated_data = pd.DataFrame(cumulated_data)
-            cumulated_data.to_csv('batch_outputs.csv')
+            split_name = self.file_name.split("/")
+            cumulated_data.to_csv(split_name[-1])
             # np.savetxt('batch_outputs.txt',np.array(outputs),fmt='%s')
 if __name__ == '__main__':
     file_params = sys.argv[1]
@@ -175,7 +177,7 @@ if __name__ == '__main__':
         "steps":data['ensemble']['steps']
     }
     begin = time.time()
-    runner_obj = Runner(CovidModel,model_params,runs = data['ensemble']['runs'], parallel=True)
+    runner_obj = Runner(CovidModel,model_params,file_name =file_params, runs = data['ensemble']['runs'], parallel=True)
     runner_obj.run()
     end = time.time()
     print('Running completed in {} seconds'.format(end-begin))
