@@ -111,8 +111,8 @@
         }
     },
     "ensemble": {
-        "steps": 10,
-        "runs": 2
+        "steps": 1000,
+        "runs": 10
     },
     "output": {
         "prefix": "outcomes/cu-50-nisol-bars.csv"
