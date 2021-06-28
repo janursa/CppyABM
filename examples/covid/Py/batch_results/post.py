@@ -18,8 +18,8 @@ current_dir = os.getcwd()
 
 class PARAMS:
 	tag = 'susceptible'
-	period_t = 10
-	iter_n = 2
+	period_t = 1000
+	iter_n = 10
 	data_files = ['batch_outputs.csv']
 	labels = ['25% of population tested']
 	# colors = ['green','blue','red','black']
@@ -86,7 +86,10 @@ if __name__ == '__main__':
 		label = PARAMS.labels[i]
 		color = PARAMS.colors[i]
 		min_bounds,max_bounds,mean_bounds = process_data(output[PARAMS.tag])
-
+		ax.fill_between(range(PARAMS.period_t), min_bounds, max_bounds,
+			                 facecolor=color, # The fill color
+			                 color=color,       # The outline color
+			                 alpha=0.2)          # Transparency of the fill
 		ax.plot(mean_bounds,label=label)
 	update_layout(ax)
 		# plt.plot(x,label=tag)

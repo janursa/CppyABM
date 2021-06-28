@@ -174,6 +174,8 @@ if __name__ == '__main__':
         "alpha_public": data["model"]["value"]["alpha_public"],
         "steps":data['ensemble']['steps']
     }
-
+    begin = time.time()
     runner_obj = Runner(CovidModel,model_params,runs = data['ensemble']['runs'], parallel=True)
     runner_obj.run()
+    end = time.time()
+    print('Running completed in {} seconds'.format(end-begin))
