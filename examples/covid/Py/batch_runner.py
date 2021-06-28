@@ -9,10 +9,10 @@ import pandas as pd
 
 class Runner:
 
-    def __init__(self,model_class,args,run_n,parallel=False):
+    def __init__(self,model_class,args,runs,parallel=False):
         self.model_class = model_class
         self.args = args
-        self.run_n = run_n
+        self.runs = runs
         if parallel:
             from mpi4py import MPI
             self.comm = MPI.COMM_WORLD
@@ -25,8 +25,8 @@ class Runner:
         if self.rank == 0:
             import numpy as np
             CPU_n = self.comm.Get_size()
-            shares = np.ones(CPU_n,dtype=int)*int(int(self.run_n)/CPU_n)
-            plus = len(self.run_n)%CPU_n
+            shares = np.ones(CPU_n,dtype=int)*int(int(self.runs)/CPU_n)
+            plus = self.runs%CPU_n
             for i in range(plus):
                 shares[i]+=1
 
@@ -71,8 +71,7 @@ class Runner:
             cumulated_data.to_csv('batch_outputs.csv')
             # np.savetxt('batch_outputs.txt',np.array(outputs),fmt='%s')
 if __name__ == '__main__':
-    cpu_n = sys.argv[1]
-    file_params = sys.argv[2]
+    file_params = sys.argv[1]
     with open(file_params) as f:
         data = json.load(f)
     age_mortality = {
@@ -176,5 +175,5 @@ if __name__ == '__main__':
         "steps":data['ensemble']['steps']
     }
 
-    runner_obj = Runner(CovidModel,model_params,cpu_n,parallel=True)
+    runner_obj = Runner(CovidModel,model_params,runs = data['ensemble']['runs'], parallel=True)
     runner_obj.run()
