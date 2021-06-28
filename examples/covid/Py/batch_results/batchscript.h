@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --partition=all
-#SBATCH --time=1:00:00                           # Maximum time requested
+#SBATCH --time=3:00:00                           # Maximum time requested
 #SBATCH --nodes=1                                 # Number of nodes
 #SBATCH --chdir   ./      # directory must already exist!
 #SBATCH --job-name  test
@@ -13,4 +13,5 @@ source /etc/profile.d/modules.sh
 module load maxwell gcc/8.2
 module load mpi/openmpi-x86_64
 export PYTHONPATH=/usr/lib64/python3.6/site-packages/openmpi
-mpiexec -np 2 --mca pml ob1 python3 ../batch_runner.py ../scenarios/cu-50-nisol-bars-only.json
+mpiexec -np 30 --mca pml ob1 python3 ../batch_runner.py ../scenarios/cu-50-nisol.json
+

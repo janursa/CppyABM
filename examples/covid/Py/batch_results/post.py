@@ -17,10 +17,10 @@ current_dir = os.getcwd()
 
 
 class PARAMS:
-	tag = 'susceptible'
-	period_t = 1000
-	iter_n = 10
-	data_files = ['batch_outputs.csv']
+	tag = 'symptomatics'
+	period_t = 14688
+	iter_n = 30
+	data_files = ['cu-25-nisol.json']
 	labels = ['25% of population tested']
 	# colors = ['green','blue','red','black']
 	colors = ['green']

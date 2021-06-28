@@ -2,8 +2,9 @@ import time
 import os
 # from pprogress import ProgressBar
 import json
-from covidmodel_original import CovidModel
-from covidmodel_original import *
+# from covidmodel_original import CovidModel
+# from covidmodel_original import *
+from covidmodel import *
 import sys
 import pandas as pd
 

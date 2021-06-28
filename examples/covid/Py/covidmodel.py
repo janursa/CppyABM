@@ -669,6 +669,7 @@ class CovidModel(Env):
                  new_agent_proportion, new_agent_start, new_agent_lasts, new_agent_age_mean, new_agent_prop_infected,
                  day_tracing_start, days_tracing_lasts, stage_value_matrix, test_cost, alpha_private, alpha_public, proportion_beds_pop, dummy=0):
         Env.__init__(self)
+        self.steps = steps
         self.max_memory_usages = []
         self.data = {'susceptible':[],'symptomatics':[],'exposed':[],'asymptomatics':[]} # SymptQuarantined
         self.patches_repo = []
@@ -894,8 +895,8 @@ class CovidModel(Env):
                 data_scheme['asymptomatics']+=1
         for key,value in data_scheme.items():
             self.data[key].append(value/len(self.agents))
-    def episode(self,steps):
-        for i in range(steps):
+    def episode(self):
+        for i in range(self.steps):
             self.step()
         return self.data
     def calculate_memor_usage(self):
