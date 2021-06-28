@@ -219,10 +219,10 @@ struct Env: public enable_shared_from_this<ENV>{
     void step_agents(); //!< Calls step function of agents
     void step_patches(); //!< Calls step function of patches
 	virtual void update(); //!< Update the world. All built-in utilities such as `Agent::order_move` are executed here.
-    void place_agent(shared_ptr<PATCH> patch,shared_ptr<AGENT> agent); //!< Places the given agent in the given patch. Raises an exception if the patch is not available.
-    void place_agent(unsigned patch_index,shared_ptr<AGENT> agent); //!< Places the given agent in the given patch index. Raises an exception if the patch is not available.
+    void place_agent(shared_ptr<PATCH> patch,shared_ptr<AGENT> agent, bool quiet = false); //!< Places the given agent in the given patch. Raises an exception if the patch is not available.
+    void place_agent(unsigned patch_index,shared_ptr<AGENT> agent, bool quiet = false); //!< Places the given agent in the given patch index. Raises an exception if the patch is not available.
 
-    void place_agent_randomly(shared_ptr<AGENT> agent); //!< Places the given agent randomly in the domain. Raises exception if no patch is available.
+    void place_agent_randomly(shared_ptr<AGENT> agent,bool quiet = false); //!< Places the given agent randomly in the domain. Raises exception if no patch is available.
     shared_ptr<PATCH> find_empty_patch(); //!< Finds empty patches in the entire domain
     void remove_agent(shared_ptr<AGENT> agent){
         this->agents.erase(std::remove(this->agents.begin(), this->agents.end(), agent), this->agents.end());
@@ -282,18 +282,8 @@ struct Env: public enable_shared_from_this<ENV>{
 };
 template<class ENV, class AGENT, class PATCH>
 inline void Agent<ENV,AGENT,PATCH>::move(shared_ptr<PATCH> dest, bool quiet){
-        if (!dest->empty()) {
-            if (!quiet) throw patch_availibility("Given patch for move is not empty");
-            else return;
-        }
-        try{
-            this->get_patch()->remove_agent(this->shared_from_this()); // remove it from the current patch
-            this->env->place_agent(dest,this->shared_from_this());
-
-        }
-        catch(patch_availibility & ee){
-            return;
-        }
+        this->get_patch()->remove_agent(this->shared_from_this()); // remove it from the current patch
+        this->env->place_agent(dest,this->shared_from_this(),quiet); 
     }
 template<class ENV, class AGENT, class PATCH>
 inline void Agent<ENV,AGENT,PATCH>::order_hatch(shared_ptr<PATCH> patch, bool inherit, bool quiet, bool reset)
@@ -511,8 +501,9 @@ inline map<string,unsigned> Env<ENV,AGENT,PATCH>::count_agents(){
     return agents_count;
 }
 template<class ENV, class AGENT, class PATCH>
-inline void Env<ENV,AGENT,PATCH>::place_agent(shared_ptr<PATCH> patch,shared_ptr<AGENT> agent){
-    if (!patch->empty()){
+inline void Env<ENV,AGENT,PATCH>::place_agent(shared_ptr<PATCH> patch,shared_ptr<AGENT> agent, bool quiet ){
+    if (!patch->empty() && !quiet){
+
         cerr<<"placing agent in a patch which has already an agent"<<endl;
         throw patch_availibility("placing agent in a patch which has already an agent");
     }
@@ -527,7 +518,7 @@ inline void Env<ENV,AGENT,PATCH>::place_agent(shared_ptr<PATCH> patch,shared_ptr
 
 }
 template<class ENV, class AGENT, class PATCH>
-inline void Env<ENV,AGENT,PATCH>::place_agent(unsigned patch_index,shared_ptr<AGENT> agent){
+inline void Env<ENV,AGENT,PATCH>::place_agent(unsigned patch_index,shared_ptr<AGENT> agent, bool quiet){
     for (auto &[index,patch]:this->patches){
         if (index == patch_index){
             this->place_agent(patch,agent);
@@ -539,9 +530,9 @@ inline void Env<ENV,AGENT,PATCH>::place_agent(unsigned patch_index,shared_ptr<AG
     
 }
 template<class ENV, class AGENT, class PATCH>
-inline void Env<ENV,AGENT,PATCH>::place_agent_randomly(shared_ptr<AGENT> agent){
+inline void Env<ENV,AGENT,PATCH>::place_agent_randomly(shared_ptr<AGENT> agent, bool quiet){
     auto patch = this->find_empty_patch();
-    place_agent(patch,agent);
+    place_agent(patch,agent,quiet);
 }
 template<class ENV, class AGENT, class PATCH>
 inline shared_ptr<PATCH> Env<ENV,AGENT,PATCH>::find_empty_patch(){

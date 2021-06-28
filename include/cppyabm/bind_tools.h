@@ -96,8 +96,8 @@ namespace bind_tools{
         auto class_binds_obj = 
         py::class_<ENV,tramclass,std::shared_ptr<ENV>> (m,class_name_string.c_str(),py::dynamic_attr())
             .def(py::init<>())
-            .def("place_agent", py::overload_cast<shared_ptr<PATCH>,shared_ptr<AGENT>>(&ENV::place_agent), "Places the agent on the given patch")
-            .def("place_agent", py::overload_cast<unsigned,shared_ptr<AGENT>>(&ENV::place_agent), "Places the agent on the given patch index")
+            .def("place_agent", py::overload_cast<shared_ptr<PATCH>,shared_ptr<AGENT>,bool>(&ENV::place_agent), "Places the agent on the given patch")
+            .def("place_agent", py::overload_cast<unsigned,shared_ptr<AGENT>,bool>(&ENV::place_agent), "Places the agent on the given patch index")
             .def("place_agent_randomly",&ENV::place_agent_randomly)
             .def("setup_domain",&ENV::setup_domain)
             .def("step_agents",&ENV::step_agents)
@@ -119,17 +119,17 @@ namespace bind_tools{
         auto class_binds_obj = 
         py::class_<ENV,std::shared_ptr<ENV>> (m,class_name_string.c_str(),py::dynamic_attr())
             .def(py::init<>())
-            .def("memory_usage",&ENV::memory_usage)
+            .def("place_agent", py::overload_cast<shared_ptr<PATCH>,shared_ptr<AGENT>,bool>(&ENV::place_agent), "Places the agent on the given patch")
+            .def("place_agent", py::overload_cast<unsigned,shared_ptr<AGENT>,bool>(&ENV::place_agent), "Places the agent on the given patch index")
             .def("place_agent_randomly",&ENV::place_agent_randomly)
             .def("setup_domain",&ENV::setup_domain)
             .def("step_agents",&ENV::step_agents)
             .def("step_patches",&ENV::step_patches)
-            .def("place_agent",&ENV::place_agent)
             .def("update",&ENV::update)
             .def("step",&ENV::step)
             .def("setup_agents",&ENV::setup_agents)
             .def("count_agents",&ENV::count_agents)
-            .def("connect_patch_agent", &ENV::connect_patch_agent)
+            .def("memory_usage",&ENV::memory_usage)
             .def("activate_serial",&ENV::activate_serial)
             .def("activate_random",&ENV::activate_random)
             .def_readwrite("patches",&ENV::patches)
@@ -141,7 +141,7 @@ namespace bind_tools{
     py::class_<AGENT, tramclass,std::shared_ptr<AGENT>>  expose_agent(py::module &m, string class_name_str){
         auto class_binds_obj = py::class_<AGENT, tramclass,std::shared_ptr<AGENT>>(m,class_name_str.c_str(),py::dynamic_attr())
             .def(py::init<shared_ptr<ENV>,string>(),"Initialize",py::arg("env"),py::arg("class_name"))
-            .def("move",&AGENT::move,"Move the agent to a new patch",py::arg("patch")=nullptr,py::arg("quiet")=false)
+            .def("move",&AGENT::move,"Move the agent to a new patch")
             .def("order_hatch",&AGENT::order_hatch,"Hatch request",
                 py::arg("patch")=nullptr, py::arg("inherit")=false,
                 py::arg("quiet")=false, py::arg("reset")=false)
@@ -162,7 +162,7 @@ namespace bind_tools{
     py::class_<AGENT,std::shared_ptr<AGENT>>  expose_agent(py::module &m, string class_name_str){
         auto class_binds_obj = py::class_<AGENT, std::shared_ptr<AGENT>>(m,class_name_str.c_str(),py::dynamic_attr())
             .def(py::init<shared_ptr<ENV>,string>(),"Initialize",py::arg("env"),py::arg("class_name"))
-            .def("move",&AGENT::move,"Move the agent to a new patch",py::arg("patch")=nullptr,py::arg("quiet")=false)
+            .def("move",&AGENT::move,"Move the agent to a new patch")
             .def("order_hatch",&AGENT::order_hatch,"Hatch request",
                 py::arg("patch")=nullptr, py::arg("inherit")=false,
                 py::arg("quiet")=false, py::arg("reset")=false)

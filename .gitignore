@@ -6,6 +6,7 @@ CMakeFiles/*
 outputs/*
 examples/Cpp/build
 examples/Cppy/build
+examples/covid/Py/original_outcomes
 
 
 
