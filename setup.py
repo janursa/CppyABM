@@ -55,7 +55,7 @@ class build_ext(build_ext_orig):
 
 setuptools.setup(
     name="cppyabm",
-    version='1.0.18',
+    version='1.0.19',
     author="Jalil Nourisa",
     author_email="jalil.nourisa@gmail.com",
     description="General-purpose agent-based modeling framework",

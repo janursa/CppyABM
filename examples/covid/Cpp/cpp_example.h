@@ -15,7 +15,7 @@ double random(double min, double max){
 double poisson(double mean){
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::poisson_distribution<int> dis(mean;
+    std::poisson_distribution<int> dis(mean);
     return dis(gen);
 };
 enum Stage{
@@ -26,7 +26,7 @@ enum Stage{
     ASYMPDETECTED = 5,
     SEVERE = 6,
     RECOVERED = 7,
-    DECEASED = 8,
+    DECEASED = 8
 };
 
 
@@ -97,77 +97,37 @@ struct CovidAgent: public Agent<CovidModel,CovidAgent,Patch>{
         this->employed = true;
         // Contact tracing: this is only available for symptomatic patients
         this->tested_traced = false;
-        // All agents
-        this->contacts = set();
+
         // We assume it takes two full days
         this->tracing_delay = 2 * model->dwell_15_day;
         this->tracing_counter = 0;
     }
-    this->
-    stage = Stage.SUSCEPTIBLE;
-    //        this->age_group = ageg;
-    //        this->sex_group = sexg;
-    // These are fixed values associated with properties of individuals
-    this->
-    incubation_time = poisson(model->avg_incubation);
-    this->
-    dwelling_time = poisson(model->avg_dwell);
-    this->
-    recovery_time = poisson(model->avg_recovery);
-    this->
-    prob_contagion = this->env->prob_contagion_base;
-    // Mortality in vulnerable population appears to be around day 2-3
-    this->
-    mortality_value = mort / (this->env->dwell_15_day * this->recovery_time);
-    // Severity appears to appear after day 5
-    this->
-    severity_value = model->prob_severe / (this->env->dwell_15_day * this->recovery_time);
-    this->
-    curr_dwelling = 0;
-    this->
-    curr_incubation = 0;
-    this->
-    curr_recovery = 0;
-    this->
-    curr_asymptomatic = 0;
-    // Isolation measures are set at the model step level
-    this->
-    isolated = false;
-    this->
-    isolated_but_inefficient = false;
-    // Contagion probability is local
-    this->
-    test_chance = 0;
-    // Horrible hack for isolation step
-    this->
-    in_isolation = false;
-    this->
-    in_distancing = false;
-    this->
-    in_testing = false;
-    this->
-    astep = 0;
-    this->
-    tested = false;
-    // Economic assumptions
-    this->
-    cumul_private_value = 0;
-    this->
-    cumul_public_value = 0;
-    // Employment
-    this->
-    employed = true;
-    // Contact tracing: this is only available for symptomatic patients
-    this->
-    tested_traced = false;
-    // All agents
-    this->
-    contacts = set();
-    // We assume it takes two full days
-    this->
-    tracing_delay = 2 * model->dwell_15_day;
-    this->
-    tracing_counter = 0;
+    unsigned stage ;    
+    float incubation_time ;
+    float dwelling_time ;
+    float recovery_time ;
+    float prob_contagion;    
+    float mortality_value;    
+    float severity_value;
+    float curr_dwelling;
+    float curr_incubation ;
+    float curr_recovery ;
+    float curr_asymptomatic ;    
+    bool isolated ;
+    bool isolated_but_inefficient;    
+    float test_chance ;    
+    bool in_isolation ;
+    bool in_distancing ;
+    bool in_testing ;
+    unsigned astep ;
+    bool tested ;    
+    float cumul_private_value ;
+    float cumul_public_value;    
+    bool employed ;    
+    bool tested_traced ;    
+    std::set contacts;    
+    float tracing_delay ;
+    unsigned tracing_counter ;
 }
 /**
 void alive(self):
@@ -735,35 +695,42 @@ def compute_eff_reprod_number(model):
 
 def compute_num_agents(model):
     return model.num_agents
-
-class CovidModel(Env):
-    """ A model to describe parameters relevant to COVID-19"""
-    def __init__(self, steps, num_agents, width, height, kmob, repscaling, rate_inbound, age_mortality, 
+**/
+struct CovidModel: public Env<CovidModel,CovidAgent,Patch>{
+    using baseEnv = Env<CovidModel,CovidAgent,Patch>;
+    baseEnv::baseEnv;
+    unsigned steps;
+    std::map<std::string,std::vector<int>> data= {{"susceptible",{}},{"symptomatics",{}},{"exposed",{}},{"asymptomatics",{}}};
+    bool running = true;
+    this->age_mortality ;
+        this->sex_mortality ;
+        this->age_distribution ;
+        this->sex_distribution ;
+        this->stage_value_dist; ??
+        float test_cost;
+        unsigned stepno = 0;
+        float alpha_private ;
+        float alpha_public;
+    CovidModel(steps, num_agents, width, height, kmob, repscaling, rate_inbound, age_mortality, 
                  sex_mortality, age_distribution, sex_distribution, prop_initial_infected, 
                  proportion_asymptomatic, proportion_severe, avg_incubation_time, avg_recovery_time, prob_contagion,
                  proportion_isolated, day_start_isolation, days_isolation_lasts, after_isolation, prob_isolation_effective, social_distance,
                  day_distancing_start, days_distancing_lasts, proportion_detected, day_testing_start, days_testing_lasts, 
                  new_agent_proportion, new_agent_start, new_agent_lasts, new_agent_age_mean, new_agent_prop_infected,
-                 day_tracing_start, days_tracing_lasts, stage_value_matrix, test_cost, alpha_private, alpha_public, proportion_beds_pop, dummy=0):
-        Env.__init__(self)
-        this->steps = steps
-        this->max_memory_usages = []
-        this->data = {'susceptible':[],'symptomatics':[],'exposed':[],'asymptomatics':[]} // SymptQuarantined
-        this->patches_repo = []
-        this->agents_repo = []
-        this->running = true
-        this->num_agents = num_agents
-        mesh = space.grid2(length=height, width=width, mesh_length=1, share = true)
-        this->setup_domain(mesh)
-        this->age_mortality = age_mortality
-        this->sex_mortality = sex_mortality
-        this->age_distribution = age_distribution
-        this->sex_distribution = sex_distribution
-        this->stage_value_dist = stage_value_matrix
-        this->test_cost = test_cost
+                 day_tracing_start, days_tracing_lasts, stage_value_matrix, test_cost, alpha_private, alpha_public, proportion_beds_pop, dummy=0):baseEnv(){
+        this->steps = steps;
+        this->num_agents = num_agents;
+        auto mesh = space.grid2(height, width, 1, true);
+        this->setup_domain(mesh);
+        this->age_mortality = age_mortality;
+        this->sex_mortality = sex_mortality;
+        this->age_distribution = age_distribution;
+        this->sex_distribution = sex_distribution;
+        this->stage_value_dist = stage_value_matrix;
+        this->test_cost = test_cost;
         this->stepno = 0
-        this->alpha_private = alpha_private
-        this->alpha_public = alpha_public
+        this->alpha_private = alpha_private;
+        this->alpha_public = alpha_public;
 
         // Number of 15 minute dwelling times per day
         this->dwell_15_day = 96
@@ -896,22 +863,34 @@ class CovidModel(Env):
             else:
                 a.stage = Stage.EXPOSED
                 num_init = num_init - 1
-    def generate_agent(self,agent_name,ag, sg, mort):
-        """
-        Extension of the original function to create agents
-        """
-        agent_obj = CovidAgent(self,agent_name, ag, sg, mort)
-        this->agents_repo.append(agent_obj)
-        this->agents.append(agent_obj)
-        return agent_obj
-    def generate_patch(self,mesh_item):
-        """
-        Extension of the original function to create pacthes
-        """
-        patch_obj = Patch(self,mesh_item)
-        this->patches.append(patch_obj);
-        this->patches_repo.append(patch_obj)
-        return patch_obj
+    
+
+    }
+    shared_ptr<CovidAgent> generate_agent(string agent_name,float mort){
+        auto agent_obj = CovidAgent(agent_name, mort);
+        this->agents.push_back(agent_obj);
+        return agent_obj;
+    }
+        
+    shared_ptr<Patch> generate_patch(MESH mesh_item){
+        auto patch_obj = Patch(mesh_item);
+        this->patches.push_back(patch_obj);
+        return patch_obj;
+    }
+        
+}
+/**
+
+    """ A model to describe parameters relevant to COVID-19"""
+    def __init__(self, steps, num_agents, width, height, kmob, repscaling, rate_inbound, age_mortality, 
+                 sex_mortality, age_distribution, sex_distribution, prop_initial_infected, 
+                 proportion_asymptomatic, proportion_severe, avg_incubation_time, avg_recovery_time, prob_contagion,
+                 proportion_isolated, day_start_isolation, days_isolation_lasts, after_isolation, prob_isolation_effective, social_distance,
+                 day_distancing_start, days_distancing_lasts, proportion_detected, day_testing_start, days_testing_lasts, 
+                 new_agent_proportion, new_agent_start, new_agent_lasts, new_agent_age_mean, new_agent_prop_infected,
+                 day_tracing_start, days_tracing_lasts, stage_value_matrix, test_cost, alpha_private, alpha_public, proportion_beds_pop, dummy=0):
+        Env.__init__(self)
+        
     def step(self):
         // this->datacollector.collect(self)
         

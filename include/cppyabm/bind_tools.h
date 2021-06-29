@@ -196,6 +196,7 @@ namespace bind_tools{
             .def_readwrite("on_border",&PATCH::on_border)
             .def_readwrite("neighbors",&PATCH::neighbors)
             .def_readwrite("index",&PATCH::index)
+            .def_readwrite("env",&PATCH::env)
             .def_readwrite("coords",&PATCH::coords);
         return class_binds_obj;      
     }
@@ -216,6 +217,7 @@ namespace bind_tools{
             .def_readwrite("on_border",&PATCH::on_border)
             .def_readwrite("neighbors",&PATCH::neighbors)
             .def_readwrite("index",&PATCH::index)
+            .def_readwrite("env",&PATCH::env)
             .def_readwrite("coords",&PATCH::coords);
         return class_binds_obj;
             
