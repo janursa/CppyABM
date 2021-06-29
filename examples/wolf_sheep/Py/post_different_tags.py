@@ -20,7 +20,7 @@ class PARAMS:
 	# tag = 'SymptQuarantined'
 	tags = ['Sheep','Wolf']
 	period_t = 400
-	iter_n = 2
+	iter_n = 20
 	data_file = 'results.csv'
 	labels = ['Sheep','Wolf']
 	# colors = ['green','blue','red','black']
