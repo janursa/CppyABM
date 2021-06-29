@@ -1,8 +1,7 @@
 import os
 import sys
 file_dir = os.path.abspath(os.path.dirname(__file__))
-print(os.path.join(file_dir,'../../../../scripts/'))
-sys.path.insert(0,'/Users/matin/Downloads/testProjs/CppyABM/script')
+sys.path.insert(0,os.path.join(file_dir,'../../../scripts/'))
 
 from batch_runner import Runner
 from models import WolfSheep
