@@ -8,8 +8,8 @@ from models import WolfSheep
 import time
 import pandas as pd
 class SETTINGS:
-	iter_n = 2
-	output_dir = 'results.csv'
+	iter_n = 20
+	output_dir = 'results_1.csv'
 
 
 if __name__ == '__main__':
