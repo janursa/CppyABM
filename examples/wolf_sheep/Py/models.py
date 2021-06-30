@@ -21,7 +21,8 @@ class PARAMS:
 	width=100
 	initial_sheep=2000
 	initial_wolves=500
-	sheep_reproduce=0.04
+	# sheep_reproduce=0.04
+	sheep_reproduce=0.08
 	wolf_reproduce=0.05
 	wolf_gain_from_food=40
 	grass_regrowth_time=30

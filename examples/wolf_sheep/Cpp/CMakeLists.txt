@@ -4,7 +4,7 @@ set(CMAKE_CXX_STANDARD 17)
 SET(TARGET "cpp_example")
 PROJECT(${TARGET} LANGUAGES CXX)
 SET(APP "appABM")
-add_executable(${APP} cpp_main.cpp )
+add_executable(${APP} single_run.cpp )
 target_compile_features(${APP} PRIVATE cxx_std_17)
 FIND_PACKAGE(cppyabm CONFIG)
 

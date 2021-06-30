@@ -19,9 +19,9 @@ current_dir = os.getcwd()
 class PARAMS:
 	# tag = 'SymptQuarantined'
 	tags = ['Sheep','Wolf']
-	period_t = 1000
-	iter_n = 20
-	data_file = 'results_1.csv'
+	period_t = 100
+	iter_n = 1
+	data_file = 'single_run_results.csv'
 	labels = ['Sheep','Wolf']
 	# colors = ['green','blue','red','black']
 	colors = ['green','blue']
@@ -55,7 +55,7 @@ def process_data(output):
 
 def update_layout(ax):
 
-	ax.legend(bbox_to_anchor=(.6, .95),loc = 'upper right', borderaxespad=0.,prop={ 'family':FONT.family,'size':FONT.legend},ncol=1)
+	ax.legend(bbox_to_anchor=(.9, .95),loc = 'upper right', borderaxespad=0.,prop={ 'family':FONT.family,'size':FONT.legend},ncol=1)
 	
 	# ax.set_ylim(yrange)
 	# labels = [item.get_text() for item in ax.get_xticklabels()]

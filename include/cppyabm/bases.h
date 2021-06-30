@@ -262,6 +262,7 @@ struct Env: public enable_shared_from_this<ENV>{
     std::set<string> agent_classes; //!< stores a list of `Agent::class_name`.
     vector<shared_ptr<AGENT>> agents; //!< Agent container
     map<unsigned,shared_ptr<PATCH>> patches; //!< Patch container
+    vector<int> patches_keys; //!< Patch container
     double memory_usage(){
 #ifdef MEMORY_MONITOR
     struct task_basic_info t_info;
@@ -557,8 +558,9 @@ template<class ENV, class AGENT, class PATCH>
         // step 1: create patches from info of meshes
         for (auto & mesh_item:mesh){
             this->generate_patch(mesh_item); // create patch
-
+            this->patches_keys.push_back(mesh_item.index);
         }
+
         // step 2: assign neighbor patches
         for (auto &[index,patch]:patches){
             vector<shared_ptr<PATCH>> neighbors;
