@@ -16,7 +16,7 @@ import random
 import numpy as np
 
 class PARAMS:
-	steps = 400
+	steps = 1000
 	height=100
 	width=100
 	initial_sheep=2000
@@ -25,7 +25,8 @@ class PARAMS:
 	wolf_reproduce=0.05
 	wolf_gain_from_food=40
 	grass_regrowth_time=30
-	sheep_gain_from_food=4
+	sheep_gain_from_food=4 # case 1
+	# sheep_gain_from_food=10 # case 2
 
 
 class Sheep(Agent):
@@ -149,21 +150,6 @@ class WolfSheep(Env):
 	Wolf-Sheep Predation Model
 	"""
 
-	height = 20
-	width = 20
-
-	initial_sheep = 100
-	initial_wolves = 50
-
-	sheep_reproduce = 0.04
-	wolf_reproduce = 0.05
-
-	wolf_gain_from_food = 20
-
-	grass_regrowth_time = 30
-	sheep_gain_from_food = 4
-
-	memory_usages = []
 	def __init__(
 		self,
 		height=PARAMS.height,
@@ -204,7 +190,7 @@ class WolfSheep(Env):
 		self.sheep_gain_from_food = sheep_gain_from_food
 		mesh = space.grid2(self.height, self.width,1, True)
 		self.setup_domain(mesh)
-		self.data = {'Wolf':[],'Sheep':[]} 
+		self.data = {'Wolf':[],'Sheep':[],'memory':[]} 
 
 
 		# Create sheep:
@@ -257,14 +243,13 @@ class WolfSheep(Env):
 		# collect data
 		self.collect_output()
 		self.update()
-		usage = self.memory_usage()
 		
-		WolfSheep.memory_usages.append(usage)
 	def collect_output(self):
 		counts = self.count_agents()
 		for key,value in counts.items():
 			self.data[key].append(value)
-
+		usage = self.memory_usage()
+		self.data['memory'].append(usage)
 
 	def episode(self):
 		for i in range(PARAMS.steps):
@@ -281,16 +266,4 @@ class WolfSheep(Env):
 		for ele in sorted(indices, reverse = True):  
 			del self.agents_repo[ele]
 
-if __name__ == '__main__':
-	output_flag = False
-	if len(sys.argv) > 1:
-		output_flag = True
-	begin = time.time()
-	envObj = WolfSheep()
-	results = envObj.episode()
-	end = time.time()
-	print("Simulation took {} seconds".format(end-begin))
-	memory_df = pd.DataFrame({'usages':envObj.memory_usages})
-	print('Mean memory usage {}'.format(np.mean(envObj.memory_usages)))
-	memory_df.to_csv('memory.csv')
-	
+

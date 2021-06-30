@@ -19,9 +19,9 @@ current_dir = os.getcwd()
 class PARAMS:
 	# tag = 'SymptQuarantined'
 	tags = ['Sheep','Wolf']
-	period_t = 400
+	period_t = 1000
 	iter_n = 20
-	data_file = 'results.csv'
+	data_file = 'results_1.csv'
 	labels = ['Sheep','Wolf']
 	# colors = ['green','blue','red','black']
 	colors = ['green','blue']
@@ -103,7 +103,7 @@ if __name__ == '__main__':
 	update_layout(ax)
 		# plt.plot(x,label=tag)
 	# plt.legend()
-	plt.savefig(os.path.join(current_dir,'{}.svg'.format('combined')),bbox_inches="tight")
+	plt.savefig(os.path.join(current_dir,'{}.svg'.format(PARAMS.data_file)),bbox_inches="tight")
 	
 
 

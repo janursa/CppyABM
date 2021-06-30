@@ -9,7 +9,7 @@
 #include "tools.h"
 using std::shared_ptr;
 using std::vector;
-// #define MEMORY_MONITOR
+#define MEMORY_MONITOR
 #ifdef MEMORY_MONITOR
 #include<mach/mach.h>
 #endif

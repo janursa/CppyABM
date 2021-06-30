@@ -13,11 +13,11 @@ class SETTINGS:
 
 
 if __name__ == '__main__':
-	begin = time.time()
 	runner_obj = Runner(WolfSheep, iter_n=SETTINGS.iter_n, parallel=True)
-	outputs = runner_obj.run()
+	outputs,CPU_time = runner_obj.run()
 	outputs = pd.DataFrame(outputs)
 	outputs.to_csv(SETTINGS.output_dir)
-	end = time.time()
-	print('Running completed in {} seconds'.format(end-begin))
+
+	CPU_time = pd.DataFrame({'CPU':CPU_time})
+	CPU_time.to_csv('CPU_'+SETTINGS.output_dir)
 

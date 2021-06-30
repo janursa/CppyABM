@@ -1,4 +1,3 @@
-import time
 import os
 
 class Runner:
@@ -42,20 +41,29 @@ class Runner:
             Constructs and runs the model 
         
             """
+            import time
+
             outputs = []
+            CPU_time = []
             for i in range(start,end):
+                begin = time.time()
                 model = self.model_class(**self.args)
                 output = model.episode()
+                end = time.time()
                 outputs.append(output)
+                CPU_time.append(end-begin)
 
-            return outputs
-        outputs_perCore = run_model(portion[0],portion[1])
+            return outputs,CPU_time
+        outputs_perCore,CPU_time_perCore = run_model(portion[0],portion[1])
         outputs_stacks = self.comm.gather(outputs_perCore,root = 0)
+        CPU_time_stacks = self.comm.gather(CPU_time_perCore,root = 0)
         if self.rank == 0:
             import numpy as np
             outputs = np.array([])
-            for stack in outputs_stacks:
-                outputs = np.concatenate([outputs,stack],axis = 0)
+            CPU_time = np.array([])
+            for output,time in zip(outputs_stacks,CPU_time_stacks):
+                outputs = np.concatenate([outputs,output],axis = 0)
+                CPU_time = np.concatenate([CPU_time,time],axis = 0)
             keys = outputs[0].keys()
             cumulated_data = {}
             for key in keys:
@@ -63,4 +71,5 @@ class Runner:
                 for output in outputs:
                     aa += output[key]
                 cumulated_data.update({key:aa}) 
-            return cumulated_data
+
+            return cumulated_data,CPU_time
