@@ -16,6 +16,17 @@ import random
 import numpy as np
 
 class PARAMS:
+	"""
+	Args:
+		initial_sheep: Number of sheep to start with
+		initial_wolves: Number of wolves to start with
+		sheep_reproduce: Probability of each sheep reproducing each step
+		wolf_reproduce: Probability of each wolf reproducing each step
+		wolf_gain_from_food: Energy a wolf gains from eating a sheep
+		grass_regrowth_time: How long it takes for a grass patch to regrow
+							 once it is eaten
+		sheep_gain_from_food: Energy sheep gain from grass, if enabled.
+	"""
 	steps = 1000
 	height=100
 	width=100
@@ -60,7 +71,7 @@ class Sheep(Agent):
 		# If there is grass available, eat it
 		grass_patch = self.get_patch()
 		if grass_patch.fully_grown:
-			self.energy += self.env.sheep_gain_from_food
+			self.energy += PARAMS.sheep_gain_from_food
 			grass_patch.fully_grown = False
 
 		# Death
@@ -68,7 +79,7 @@ class Sheep(Agent):
 			self.disappear = True
 			self.living = False
 
-		if self.living and random.random() < self.env.sheep_reproduce:
+		if self.living and random.random() < PARAMS.sheep_reproduce:
 			# Create a new sheep:
 			
 			self.energy /= 2
@@ -102,7 +113,7 @@ class Wolf(Agent):
 		sheep = [obj for obj in local_agents if obj.class_name == 'Sheep']
 		if len(sheep) > 0:
 			sheep_to_eat = random.choice(sheep)
-			self.energy += self.env.wolf_gain_from_food
+			self.energy += PARAMS.wolf_gain_from_food
 
 			# Kill the sheep
 			sheep_to_eat.disappear = True
@@ -111,7 +122,7 @@ class Wolf(Agent):
 		if self.energy < 0:
 			self.disappear = True
 		else:
-			if random.random() < self.env.wolf_reproduce:
+			if random.random() < PARAMS.wolf_reproduce:
 				# Create a new wolf cub
 				self.energy /= 2
 				cub = self.env.generate_agent('Wolf',wolf_energy=self.energy)
@@ -141,7 +152,7 @@ class GrassPatch(Patch):
 			if self.countdown <= 0:
 				# Set as fully grown
 				self.fully_grown = True
-				self.countdown = self.env.grass_regrowth_time
+				self.countdown = PARAMS.grass_regrowth_time
 			else:
 				self.countdown -= 1
 			
@@ -151,60 +162,31 @@ class WolfSheep(Env):
 	Wolf-Sheep Predation Model
 	"""
 
-	def __init__(
-		self,
-		height=PARAMS.height,
-		width=PARAMS.width,
-		initial_sheep=PARAMS.initial_sheep,
-		initial_wolves=PARAMS.initial_wolves,
-		sheep_reproduce=PARAMS.sheep_reproduce,
-		wolf_reproduce=PARAMS.wolf_reproduce,
-		wolf_gain_from_food=PARAMS.wolf_gain_from_food,
-		grass_regrowth_time=PARAMS.grass_regrowth_time,
-		sheep_gain_from_food=PARAMS.sheep_gain_from_food,
-	):
-		"""
-		Create a new Wolf-Sheep model with the given parameters.
-
-		Args:
-			initial_sheep: Number of sheep to start with
-			initial_wolves: Number of wolves to start with
-			sheep_reproduce: Probability of each sheep reproducing each step
-			wolf_reproduce: Probability of each wolf reproducing each step
-			wolf_gain_from_food: Energy a wolf gains from eating a sheep
-			grass_regrowth_time: How long it takes for a grass patch to regrow
-								 once it is eaten
-			sheep_gain_from_food: Energy sheep gain from grass, if enabled.
-		"""
+	def __init__(self):
 		super().__init__()
-		# Set parameters
+		
+	def reset(self,iter_i):
+		self.iter_i = iter_i
+		self.agents.clear()
+		self.patches.clear()
 		self.agents_repo = []
 		self.patches_repo = []
-		self.height = height
-		self.width = width
-		self.initial_sheep = initial_sheep
-		self.initial_wolves = initial_wolves
-		self.sheep_reproduce = sheep_reproduce
-		self.wolf_reproduce = wolf_reproduce
-		self.wolf_gain_from_food = wolf_gain_from_food
-		self.grass_regrowth_time = grass_regrowth_time
-		self.sheep_gain_from_food = sheep_gain_from_food
-		mesh = space.grid2(self.height, self.width,1, True)
+		mesh = space.grid2(PARAMS.height, PARAMS.width,1, True)
 		self.setup_domain(mesh)
 		self.data = {'Wolf':[],'Sheep':[],'memory':[]} 
 
 
 		# Create sheep:
-		for i in range(self.initial_sheep):
-			energy = random.randrange(2 * self.sheep_gain_from_food)
+		for i in range(PARAMS.initial_sheep):
+			energy = random.randrange(2 * PARAMS.sheep_gain_from_food)
 			a =self.generate_agent("Sheep",sheep_energy=energy)
 			dest = random.choice(self.patches)
 			self.place_agent(dest,a,True)
  
 
 		# Create wolves
-		for i in range(self.initial_wolves):
-			energy = random.randrange(2 * self.wolf_gain_from_food)
+		for i in range(PARAMS.initial_wolves):
+			energy = random.randrange(2 * PARAMS.wolf_gain_from_food)
 			a =self.generate_agent("Wolf",wolf_energy=energy)
 			dest = random.choice(self.patches)
 			self.place_agent(dest,a,True)
@@ -231,9 +213,9 @@ class WolfSheep(Env):
 		fully_grown = random.choice([True, False])
 
 		if fully_grown:
-			countdown = self.grass_regrowth_time
+			countdown = PARAMS.grass_regrowth_time
 		else:
-			countdown = random.randrange(self.grass_regrowth_time)
+			countdown = random.randrange(PARAMS.grass_regrowth_time)
 		patch_obj = GrassPatch(self,mesh_item,fully_grown=fully_grown,countdown=countdown)
 		self.patches.append(patch_obj);
 		self.patches_repo.append(patch_obj)
@@ -253,9 +235,20 @@ class WolfSheep(Env):
 		self.data['memory'].append(usage)
 
 	def episode(self):
+		begin = time.time()
 		for i in range(PARAMS.steps):
 			self.step()
-		return self.data
+		end = time.time()
+		cpu = end-begin
+		## output cpu
+		cpu = pd.DataFrame({'CPU':[cpu]})
+		cpu.to_csv('cpu_'+str(self.iter_i)+'.csv')
+		## output memory
+		memory = pd.DataFrame({'Memory':[np.mean(self.data['memory'])]})
+		memory.to_csv('memory_'+str(self.iter_i)+'.csv')
+		## output the data frame
+		results = pd.DataFrame(self.data)
+		results.to_csv('results_'+str(self.iter_i)+'.csv')
 	def update_repo(self):
 		"""
 		Updates the repository to remove inactive agents

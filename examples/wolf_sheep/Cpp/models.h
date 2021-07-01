@@ -2,7 +2,6 @@
 #include "cppyabm/mesh.h"
 #include <random>
 #include <vector>
-#include <json/value.h>
 
 struct PARAMS{
 	static unsigned steps;
@@ -18,20 +17,19 @@ struct PARAMS{
 	static unsigned sheep_gain_from_food;
 	//unsigned  sheep_gain_from_food=10 
 };
-// unsigned PARAMS::steps = 1000;
-unsigned PARAMS::steps = 100;
- float PARAMS::height=100;
- float PARAMS::width=100;
- unsigned PARAMS::initial_sheep=2000;
- unsigned PARAMS::initial_wolves=500;
-// sheep_reproduce=0.04,
- float PARAMS::sheep_reproduce=0.08;
- float PARAMS::wolf_reproduce=0.05;
- unsigned PARAMS::wolf_gain_from_food=40;
- unsigned PARAMS::grass_regrowth_time=30;
- unsigned PARAMS::sheep_gain_from_food=4;
+unsigned PARAMS::steps = 1000;
+// unsigned PARAMS::steps = 10;
+float PARAMS::height=100;
+float PARAMS::width=100;
+unsigned PARAMS::initial_sheep=2000;
+unsigned PARAMS::initial_wolves=500;
+// float PARAMS::sheep_reproduce=0.04;
+float PARAMS::sheep_reproduce=0.08;
+float PARAMS::wolf_reproduce=0.05;
+unsigned PARAMS::wolf_gain_from_food=40;
+unsigned PARAMS::grass_regrowth_time=30;
+unsigned PARAMS::sheep_gain_from_food=4;
 	
-
 
 struct WolfSheep;
 struct Animal;
@@ -99,7 +97,6 @@ struct Animal: public Agent<WolfSheep,Animal,GrassPatch>{
 		
 };
 
-	
 
 struct WolfSheep: public Env<WolfSheep,Animal,GrassPatch>{
 
@@ -107,6 +104,16 @@ struct WolfSheep: public Env<WolfSheep,Animal,GrassPatch>{
 	// using baseEnv::baseEnv;
 
 	WolfSheep():Env<WolfSheep,Animal,GrassPatch>(){
+	}
+	void reset(unsigned iter_i = 0){
+		this->agents.clear();
+		this->patches.clear();
+		this->iter_i = iter_i;
+		this->data = {{"Sheep",{}},{"Wolf",{}},{"memory",{}}};
+		auto mesh = space::grid2(PARAMS::height, PARAMS::width,1, true);
+		this->setup_domain(mesh);
+		this->setup_animals("Sheep");
+	 	this->setup_animals("Wolf");
 	}
 	void setup_animals(string class_name){
 		int number ;
@@ -136,7 +143,6 @@ struct WolfSheep: public Env<WolfSheep,Animal,GrassPatch>{
 		this->agents.push_back(obj);
 		return obj;
 	}
-
 	shared_ptr<GrassPatch> generate_patch(MESH_ITEM mesh_item){
 		vector<bool> options = {true, false};
 		auto fully_grown = options[random::randint(0,1)];
@@ -149,15 +155,12 @@ struct WolfSheep: public Env<WolfSheep,Animal,GrassPatch>{
 		this->patches[mesh_item.index] = patch_obj;
 		return patch_obj;
 	}
-		
 	void step(){
 		this->activate_random();
 		this->step_patches();
 		this->collect_output();
 		this->update();
 	}
-		
-		
 	void collect_output(){
 		auto counts = this->count_agents();
 		for (auto &[key,value]: counts){
@@ -166,21 +169,68 @@ struct WolfSheep: public Env<WolfSheep,Animal,GrassPatch>{
 		auto usage = this->memory_usage();
 		this->data["memory"].push_back(float(usage));
 	}
-		
-
 	DataType episode(){
-		auto mesh = space::grid2(PARAMS::height, PARAMS::width,1, true);
-		this->setup_domain(mesh);
-		this->setup_animals("Sheep");
-	 	this->setup_animals("Wolf");
+		auto start = chrono::high_resolution_clock::now();
 		for (unsigned i=0; i< PARAMS::steps; i++)
 			this->step();
+
+		auto end = chrono::high_resolution_clock::now();
+        auto iter_dur = chrono::duration_cast<chrono::milliseconds>(end-start);
+
+		this->output(this->data,iter_dur.count());
 		return this->data;
 	}
-
-	DataType data = {{"Sheep",{}},{"Wolf",{}},{"memory",{}}};
-	
+	void output(DataType&,float);
+	DataType data;
+	unsigned iter_i;
 };
+inline void WolfSheep::output(DataType &results,float cpu_time){
+	ofstream fd;
+	string file_name = "results_" + std::to_string(this->iter_i)+".csv";
+	fd.open(file_name);
+	vector<string> keys;
+	vector<vector<float>> stack_results;
+	for (auto & [key,value]:results){
+		keys.push_back(key);
+		stack_results.push_back(value);
+	}
+	// write the header
+	for (auto &key:keys){
+		fd<<key;
+	}
+	fd<<endl;
+	// write the rows
+	unsigned len = 0;
+	if (stack_results.size()>0) len = stack_results[0].size();
+	for (unsigned i = 0; i<len; i++){
+		fd<<i;
+		for (unsigned j=0; j<keys.size(); j++){
+			fd<<","<<stack_results[j][i];
+		}	
+		fd<<endl;
+	}
+	fd.close();
+	/** output cpu **/
+	ofstream fd2;
+	string file_name2 = "cpu_" + std::to_string(this->iter_i)+".csv";
+	fd2.open(file_name2);
+	fd2<<"CPU"<<endl;
+	fd2<<cpu_time<<endl;
+	fd2.close();
+	/** output memory **/
+	auto n = this->data["memory"].size(); 
+	float average = 0.0f;
+	if ( n != 0) {
+	     average = accumulate( this->data["memory"].begin(), this->data["memory"].end(), 0.0) / n; 
+	}
+	ofstream fd3;
+	string file_name3 = "memory_" + std::to_string(this->iter_i)+".csv";
+	fd3.open(file_name3);
+	fd3<<"Memory"<<endl;
+	fd3<<average<<endl;
+	fd3.close();
+
+}
 inline void GrassPatch::step(){
 	if (! this->fully_grown){
 		if (this->countdown <= 0){
