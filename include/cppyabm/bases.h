@@ -208,10 +208,10 @@ struct Env: public enable_shared_from_this<ENV>{
     Env(){};
 	virtual ~Env(){};
     virtual shared_ptr<PATCH> generate_patch(MESH_ITEM) {
-    	throw undefined_member("Generate patch is not defined inside Env");
+    	throw undefined_member("Generate patch is either not defined inside Env or not exposed in tram class for python development");
     }; //!< A template class to generate patch.
 	virtual	shared_ptr<AGENT> generate_agent(string class_name) {
-		throw undefined_member("Generate agent is not defined inside Env");
+		throw undefined_member("Generate agent is either not defined inside Env or not exposed in tram class for python development");
 	}; //!< A template class to generate agent.
 	virtual void update_repo(){} //!< To remove the dead agents from the repo. This needs to be implemented.
     void setup_domain(vector<MESH_ITEM> mesh); //!< Sets up the domain by creating patch objects in accordance to mesh objects.
@@ -248,12 +248,12 @@ struct Env: public enable_shared_from_this<ENV>{
     	throw undefined_member("Step function is not defined inside Env");
     }; //!< Steps the simulation
     void activate_serial(){
-        for (auto&agent:this->agents) agent->step();
+        for (unsigned i =0; i < this->agents.size(); i++) this->agents[i]->step();
     }; //!< Serial activation of the agents
     void activate_random(){
         auto g = tools::randomly_seeded_MT();
         std::shuffle(this->agents.begin(),this->agents.end(),g);
-        for (auto&agent:this->agents) agent->step();
+        this->activate_serial();
     }; //!< Random activation of the agents
 
     map<string,unsigned> count_agents(); //!< Counts the agents according to `Agent::class_name`.

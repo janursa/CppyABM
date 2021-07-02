@@ -23,8 +23,8 @@ float PARAMS::height=100;
 float PARAMS::width=100;
 unsigned PARAMS::initial_sheep=2000;
 unsigned PARAMS::initial_wolves=500;
-// float PARAMS::sheep_reproduce=0.04;
-float PARAMS::sheep_reproduce=0.08;
+float PARAMS::sheep_reproduce=0.04;
+// float PARAMS::sheep_reproduce=0.08;
 float PARAMS::wolf_reproduce=0.05;
 unsigned PARAMS::wolf_gain_from_food=40;
 unsigned PARAMS::grass_regrowth_time=30;
@@ -196,7 +196,7 @@ inline void WolfSheep::output(DataType &results,float cpu_time){
 	}
 	// write the header
 	for (auto &key:keys){
-		fd<<key;
+		fd<<","<<key;
 	}
 	fd<<endl;
 	// write the rows

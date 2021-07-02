@@ -21,7 +21,7 @@ class PARAMS:
 	tags = ['Sheep','Wolf']
 	period_t = 1000
 	iter_n = 20
-	data_file = 'resultss.csv'
+	data_file = 'resultss_cpp_004.csv'
 	labels = ['Sheep','Wolf']
 	# colors = ['green','blue','red','black']
 	colors = ['green','blue']
