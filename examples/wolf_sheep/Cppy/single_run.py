@@ -3,21 +3,24 @@ import sys
 file_dir = os.path.abspath(os.path.dirname(__file__))
 sys.path.insert(0,os.path.join(file_dir,'../../../scripts/'))
 
-# from batch_runner_serial import SerialBatchRunner
-from batch_runner_parallel import ParallelBatchRunner
 from models import MyWolfSheep
 import time
 import pandas as pd
 import time
-class SETTINGS:
-	iter_n = 20
+import matplotlib.pyplot as plt
 
 
 if __name__ == '__main__':
 	begin = time.time()
 	model = MyWolfSheep()
-	# runner_obj = SerialBatchRunner(model, iter_n=SETTINGS.iter_n)
-	runner_obj = ParallelBatchRunner(model, iter_n=SETTINGS.iter_n)
-	runner_obj.run()
+	model.reset(100)
+	model.episode()
+	results = pd.read_csv('results_100.csv')
+	plt.figure()
+	for tag in ['Wolf','Sheep']:
+		data = results[tag]
+		plt.plot(data,label= tag)
+	plt.savefig('results_100.svg',bbox_inches="tight")
+
 	end = time.time()
 	print("The simulation took {} seconds".format(end-begin))

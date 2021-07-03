@@ -6,12 +6,12 @@ from plotly.subplots import make_subplots
 from copy import deepcopy
 
 class SETTINGS:
-    cpu_file_names = ['cpus_cpp_004.csv','cpus_py_004.csv']
-    memory_file_names = ['memorys_cpp_004.csv','memorys_py_004.csv']
+    cpu_file_names = ['cpus_cpp_004.csv','cpus_py_004.csv','cpus_cppy_004.csv']
+    memory_file_names = ['memorys_cpp_004.csv','memorys_py_004.csv','memorys_cppy_004.csv']
     # xs = [1,2,3,4]
-    xs = [0,1]
+    xs = [0,1,2]
     # postfixes = ['Cpp','Py','Cppy','Pyy']
-    labels = ['Cpp', 'Py']
+    labels = ['Cpp', 'Py','Cppy']
 
     line_types = ['solid', 'dot', 'dash', 'longdash', 'dashdot', 'longdashdot']
     colors = ['DarkSlateGrey','black','DarkViolet']

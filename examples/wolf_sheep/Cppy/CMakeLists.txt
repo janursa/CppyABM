@@ -7,20 +7,24 @@ SET(BINDMODULE "myBinds")
 
 FIND_PACKAGE(cppyabm CONFIG)
 FIND_PACKAGE(pybind11 CONFIG)
-# add_subdirectory(../../ cppyabm)
-if (NOT cppyabm_FOUND OR NOT pybind11_FOUND)
-    message(STATUS "Either CppyABM or pybind11 is not installed. Clonning CppyABM.")
+if (NOT pybind11_FOUND) #inlude pybind11
+    message(STATUS "Clonning pybind11")
     include(FetchContent)
     FetchContent_Declare(
-      cppyabm
-      GIT_REPOSITORY https://github.com/janursa/CppyABM.git
+      pybind11
+      GIT_REPOSITORY https://github.com/pybind/pybind11.git
       GIT_TAG        master
     )
-    FetchContent_GetProperties(cppyabm)
-    if(NOT cppyabm_POPULATED)
-      FetchContent_Populate(cppyabm)
-      add_subdirectory(${cppyabm_SOURCE_DIR} ${cppyabm_BINARY_DIR})
+    FetchContent_GetProperties(pybind11)
+    if(NOT pybind11_POPULATED)
+      FetchContent_Populate(pybind11)
+      add_subdirectory(${pybind11_SOURCE_DIR} ${pybind11_BINARY_DIR})
     endif()
+    set(PYBIND11_CPP_STANDARD -std=c++17)
+endif()
+# add_subdirectory(../../ cppyabm)
+if (NOT cppyabm_FOUND)
+    set(cppyabm_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../../")
 endif()
 
 pybind11_add_module(${BINDMODULE} binds.cpp)

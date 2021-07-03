@@ -21,7 +21,7 @@ class PARAMS:
 	tags = ['Sheep','Wolf']
 	period_t = 1000
 	iter_n = 20
-	data_file = 'resultss_cpp_004.csv'
+	data_file = 'resultss.csv'
 	labels = ['Sheep','Wolf']
 	# colors = ['green','blue','red','black']
 	colors = ['green','blue']
@@ -33,10 +33,10 @@ class PARAMS:
 
 class FONT:
 	family = 'Times New Roman'
-	legend = 18
-	tick_font_size = 20
-	axis_title_font_size = 20
-	title_font_size = 20
+	legend = 30
+	tick_font_size = 35
+	axis_title_font_size = 35
+	title_font_size = 35
 
 def process_data(output):
 	cumulated_data = [[] for i in range(PARAMS.period_t)]
@@ -100,7 +100,7 @@ if __name__ == '__main__':
 		# 	print("start {} end {}".format(start,end))
 		# 	plt.plot(range(period_t-2*gap),output[tag][start:end])
 			
-		ax.plot(mean_bounds,label=label)
+		ax.plot(mean_bounds,label=label,linewidth = 4)
 	update_layout(ax)
 		# plt.plot(x,label=tag)
 	# plt.legend()

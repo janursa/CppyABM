@@ -2,46 +2,30 @@ import pandas as pd
 import time
 import random
 import numpy as np
-"""
-@page purelypython
-"""
-"""@package Python example of CppyABM
-We define two simple classes of Cell and Tissue as extensions of Agent and Patch, respectively,
-to model cellular behavior and the properties of tissue, respectively.
-"""
+
 import sys, os,pathlib
 current_file_path = pathlib.Path(__file__).parent.absolute()
 sys.path.insert(1,os.path.join(current_file_path,'build'))
-from myBinds import Animal, GrassPatch, myEnv, space
+from myBinds import Animal, GrassPatch, WolfSheep, space
 
 
 class PARAMS:
-	"""
-	Args:
-		initial_sheep: Number of sheep to start with
-		initial_wolves: Number of wolves to start with
-		sheep_reproduce: Probability of each sheep reproducing each step
-		wolf_reproduce: Probability of each wolf reproducing each step
-		wolf_gain_from_food: Energy a wolf gains from eating a sheep
-		grass_regrowth_time: How long it takes for a grass patch to regrow
-							 once it is eaten
-		sheep_gain_from_food: Energy sheep gain from grass, if enabled.
-	"""
 	steps = 1000
 	height=100
 	width=100
 	initial_sheep=2000
 	initial_wolves=500
-	# sheep_reproduce=0.04
-	sheep_reproduce=0.08
-	wolf_reproduce=0.05
-	wolf_gain_from_food=40
+	sheep_reproduce=0.04
+	# sheep_reproduce=0.08
 	grass_regrowth_time=30
-	sheep_gain_from_food=4 # case 1
-	# sheep_gain_from_food=10 # case 2
+	sheep_gain_from_food=4 
+	wolf_reproduce=0.001
+	wolf_gain_from_food=4
+
+
 			
 
-class WolfSheep(myEnv):
+class MyWolfSheep(WolfSheep):
 	"""
 	Wolf-Sheep Predation Model
 	"""
@@ -79,7 +63,7 @@ class WolfSheep(myEnv):
 			dest = random.choice(self.patches)
 			self.place_agent(dest,a,True)
 
-	def generate_agent(self,agent_name,sheep_energy=None,wolf_energy=None):
+	def generate_agent(self,agent_name,wolf_energy,sheep_energy):
 		"""
 		Extension of the original function to create agents
 		"""
@@ -104,14 +88,12 @@ class WolfSheep(myEnv):
 			countdown = PARAMS.grass_regrowth_time
 		else:
 			countdown = random.randrange(PARAMS.grass_regrowth_time)
-		patch_obj = GrassPatch(self,mesh_item)
+		patch_obj = GrassPatch(self,mesh_item,fully_grown,countdown)
 		self.patches.append(patch_obj);
 		self.patches_repo.append(patch_obj)
 		return patch_obj
 	def step(self):
-		# self.activate_random()
-		for i in range(len(self.agents)):
-			self.agents[i].step()
+		self.activate_random()
 		self.step_patches()
 		self.collect_output()
 		self.update()
@@ -126,6 +108,7 @@ class WolfSheep(myEnv):
 	def episode(self):
 		begin = time.time()
 		for i in range(PARAMS.steps):
+			print(i,len(self.agents))
 			self.step()
 		end = time.time()
 		cpu = end-begin

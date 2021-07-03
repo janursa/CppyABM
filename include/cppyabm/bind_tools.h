@@ -118,7 +118,7 @@ namespace bind_tools{
     py::class_<ENV,std::shared_ptr<ENV>> expose_env(py::module m, string class_name_string){
         auto class_binds_obj = 
         py::class_<ENV,std::shared_ptr<ENV>> (m,class_name_string.c_str(),py::dynamic_attr())
-            .def(py::init<>())
+            // .def(py::init<>())
             .def("place_agent", py::overload_cast<shared_ptr<PATCH>,shared_ptr<AGENT>,bool>(&ENV::place_agent), "Places the agent on the given patch")
             .def("place_agent", py::overload_cast<unsigned,shared_ptr<AGENT>,bool>(&ENV::place_agent), "Places the agent on the given patch index")
             .def("place_agent_randomly",&ENV::place_agent_randomly)
@@ -140,7 +140,7 @@ namespace bind_tools{
     template<class ENV,class AGENT,class PATCH,class tramclass>
     py::class_<AGENT, tramclass,std::shared_ptr<AGENT>>  expose_agent(py::module &m, string class_name_str){
         auto class_binds_obj = py::class_<AGENT, tramclass,std::shared_ptr<AGENT>>(m,class_name_str.c_str(),py::dynamic_attr())
-            .def(py::init<shared_ptr<ENV>,string>(),"Initialize",py::arg("env"),py::arg("class_name"))
+            // .def(py::init<shared_ptr<ENV>,string>(),"Initialize",py::arg("env"),py::arg("class_name"))
             .def("move",&AGENT::move,"Move the agent to a new patch")
             .def("order_hatch",&AGENT::order_hatch,"Hatch request",
                 py::arg("patch")=nullptr, py::arg("inherit")=false,
@@ -183,7 +183,7 @@ namespace bind_tools{
     template<class ENV,class AGENT,class PATCH,class tramclass>
     py::class_<PATCH,tramclass,std::shared_ptr<PATCH>>  expose_patch(py::module &m, string class_name_ptr){
         auto class_binds_obj =  py::class_<PATCH,tramclass,std::shared_ptr<PATCH>>(m,class_name_ptr.c_str(),py::dynamic_attr())
-            .def(py::init<shared_ptr<ENV>,MESH_ITEM>())
+        //     .def(py::init<shared_ptr<ENV>,MESH_ITEM>())
             .def("empty_neighbor", &PATCH::empty_neighbor,"Return an empty patch around the patch",
                 py::arg("quiet")=false)
             .def("find_neighbor_agents",&PATCH::find_neighbor_agents,"Returns a vector of agents in one patch neighborhood",

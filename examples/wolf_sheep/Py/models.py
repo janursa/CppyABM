@@ -5,8 +5,9 @@ import time
 @page purelypython
 """
 """@package Python example of CppyABM
-We define two simple classes of Cell and Tissue as extensions of Agent and Patch, respectively,
-to model cellular behavior and the properties of tissue, respectively.
+Twi classes of Sheep and Wolf are developed to simulate sheep and wolfs. GrassPatch is the specialized Patch class to address
+the growth of grass. The problem is multiagent (more than one type of agent class) and multipatch (more than one agent in a patch is allowed).
+WolfSheep class simulates the environment.
 """
 import sys, os,pathlib
 current_file_path = pathlib.Path(__file__).parent.absolute()
@@ -17,15 +18,16 @@ import numpy as np
 
 class PARAMS:
 	"""
-	Args:
-		initial_sheep: Number of sheep to start with
-		initial_wolves: Number of wolves to start with
-		sheep_reproduce: Probability of each sheep reproducing each step
-		wolf_reproduce: Probability of each wolf reproducing each step
-		wolf_gain_from_food: Energy a wolf gains from eating a sheep
-		grass_regrowth_time: How long it takes for a grass patch to regrow
-							 once it is eaten
-		sheep_gain_from_food: Energy sheep gain from grass, if enabled.
+	steps: Simulation steps
+	width*height: The dimentions of the simulation domain
+	initial_sheep: Number of sheep to start with
+	initial_wolves: Number of wolves to start with
+	sheep_reproduce: Probability of each sheep reproducing each step
+	wolf_reproduce: Probability of each wolf reproducing each step
+	wolf_gain_from_food: Energy a wolf gains from eating a sheep
+	grass_regrowth_time: How long it takes for a grass patch to regrow
+						 once it is eaten
+	sheep_gain_from_food: Energy sheep gain from grass, if enabled.
 	"""
 	steps = 1000
 	height=100
@@ -37,8 +39,7 @@ class PARAMS:
 	wolf_reproduce=0.05
 	wolf_gain_from_food=40
 	grass_regrowth_time=30
-	sheep_gain_from_food=4 # case 1
-	# sheep_gain_from_food=10 # case 2
+	sheep_gain_from_food=4 
 
 
 class Sheep(Agent):
@@ -81,7 +82,6 @@ class Sheep(Agent):
 
 		if self.living and random.random() < PARAMS.sheep_reproduce:
 			# Create a new sheep:
-			
 			self.energy /= 2
 			lamb =self.env.generate_agent('Sheep',sheep_energy=self.energy)
 			dest = self.get_patch()
@@ -107,14 +107,12 @@ class Wolf(Agent):
 	def step(self):
 		self.random_move()
 		self.energy -= 1
-
 		# If there are sheep present, eat one
 		local_agents = self.get_patch().get_agents()
 		sheep = [obj for obj in local_agents if obj.class_name == 'Sheep']
 		if len(sheep) > 0:
 			sheep_to_eat = random.choice(sheep)
 			self.energy += PARAMS.wolf_gain_from_food
-
 			# Kill the sheep
 			sheep_to_eat.disappear = True
 
@@ -175,7 +173,6 @@ class WolfSheep(Env):
 		self.setup_domain(mesh)
 		self.data = {'Wolf':[],'Sheep':[],'memory':[]} 
 
-
 		# Create sheep:
 		for i in range(PARAMS.initial_sheep):
 			energy = random.randrange(2 * PARAMS.sheep_gain_from_food)
@@ -206,6 +203,7 @@ class WolfSheep(Env):
 		self.agents_repo.append(agent_obj)
 		self.agents.append(agent_obj)
 		return agent_obj
+
 	def generate_patch(self,mesh_item):
 		"""
 		Extension of the original function to create pacthes
@@ -235,6 +233,9 @@ class WolfSheep(Env):
 		self.data['memory'].append(usage)
 
 	def episode(self):
+		"""
+		Runs an episode of the simulation.
+		"""
 		begin = time.time()
 		for i in range(PARAMS.steps):
 			self.step()

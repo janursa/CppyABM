@@ -1,3 +1,4 @@
+
 #include "cppyabm/bases.h"
 #include "cppyabm/mesh.h"
 #include <random>
@@ -15,21 +16,28 @@ struct PARAMS{
 	static unsigned wolf_gain_from_food;
 	static unsigned grass_regrowth_time;
 	static unsigned sheep_gain_from_food;
-	//unsigned  sheep_gain_from_food=10 
 };
 unsigned PARAMS::steps = 1000;
-// unsigned PARAMS::steps = 10;
 float PARAMS::height=100;
 float PARAMS::width=100;
 unsigned PARAMS::initial_sheep=2000;
 unsigned PARAMS::initial_wolves=500;
+
 float PARAMS::sheep_reproduce=0.04;
 // float PARAMS::sheep_reproduce=0.08;
-float PARAMS::wolf_reproduce=0.05;
-unsigned PARAMS::wolf_gain_from_food=40;
 unsigned PARAMS::grass_regrowth_time=30;
+
 unsigned PARAMS::sheep_gain_from_food=4;
+
+float PARAMS::wolf_reproduce=0.001;
+unsigned PARAMS::wolf_gain_from_food=4;
 	
+
+struct WolfSheep;
+struct Animal;
+struct GrassPatch;
+using DataType = std::map<std::string,std::vector<float>>;
+
 struct random{
 	static double randrange(double min, double max){
 	    std::random_device rd;
@@ -47,26 +55,13 @@ struct random{
 	    return list[dis(gen)];
 	};
 };
-struct myEnv;
-struct Animal;
-struct GrassPatch;
-using DataType = std::map<std::string,std::vector<float>>;
-
-struct myEnv:public Env<myEnv,Animal,GrassPatch>{
-	using baseEnv = Env<myEnv,Animal,GrassPatch>;
-	using baseEnv::baseEnv;
-
-	virtual shared_ptr<Animal> generate_agent(string agent_name,int wolf_energy, int sheep_energy)=0;
-
-};
 
 
+struct GrassPatch: public Patch<WolfSheep,Animal,GrassPatch>{
 
-struct GrassPatch: public Patch<myEnv,Animal,GrassPatch>{
-
-	using basePatch = Patch<myEnv,Animal,GrassPatch>;
-	using basePatch::basePatch;
-	GrassPatch(shared_ptr<myEnv> env,MESH_ITEM mesh_item, bool fully_grown,int countdown):basePatch(env,mesh_item){
+	using basePatch = Patch<WolfSheep,Animal,GrassPatch>;
+	// using basePatch::basePatch;
+	GrassPatch(shared_ptr<WolfSheep> env,MESH_ITEM mesh_item, bool fully_grown,int countdown):basePatch(env,mesh_item){
 		this->fully_grown = fully_grown;
 		this->countdown = countdown;
 	}
@@ -75,11 +70,11 @@ struct GrassPatch: public Patch<myEnv,Animal,GrassPatch>{
 	int countdown;
 };
 
-struct Animal: public Agent<myEnv,Animal,GrassPatch>{
+struct Animal: public Agent<WolfSheep,Animal,GrassPatch>{
 
-	using baseAgent = Agent<myEnv,Animal,GrassPatch>;
-	using baseAgent::baseAgent;
-	Animal(shared_ptr<myEnv> env, string class_name, int energy):baseAgent(env,class_name){
+	using baseAgent = Agent<WolfSheep,Animal,GrassPatch>;
+	// using baseAgent::baseAgent;
+	Animal(shared_ptr<WolfSheep> env, string class_name, int energy):baseAgent(env,class_name){
 		this->energy = energy;
 		this->living = true;
 	}
@@ -87,22 +82,15 @@ struct Animal: public Agent<myEnv,Animal,GrassPatch>{
 	void random_move();
 	void sheep_step();
 	void wolf_step();
-	void step(){
-		this->random_move();
-		this->energy --;
-
-		if (this->class_name == "Sheep") this->sheep_step();
-		else if (this->class_name == "Wolf") this->wolf_step();			
-		else throw ;
-		if (this->energy < 0){
-			this->disappear = true;
-			this->living = false;
-		}
-			
-	}
+	void step();
 	int energy;
 	bool living;
 		
+};
+
+
+struct WolfSheep: public Env<WolfSheep,Animal,GrassPatch>{
+	virtual shared_ptr<Animal> generate_agent(string agent_name,int wolf_energy, int sheep_energy)=0;
 };
 
 inline void GrassPatch::step(){
@@ -115,6 +103,19 @@ inline void GrassPatch::step(){
 	}
 }
 
+inline void Animal::step(){
+	this->random_move();
+	this->energy --;
+	if (this->class_name == "Sheep") this->sheep_step();
+	else if (this->class_name == "Wolf") {
+		this->wolf_step();
+	}
+	else throw ;
+	if (this->energy < 0){
+		this->disappear = true;
+		this->living = false;
+	}	
+}
 
 inline void Animal::wolf_step(){
 	auto local_agents = this->get_patch()->get_agents();
@@ -128,7 +129,8 @@ inline void Animal::wolf_step(){
 		this->energy += PARAMS::wolf_gain_from_food;
 		sheep_to_eat->disappear = true;
 	}
-	if (random::randrange(0,1) < PARAMS::wolf_reproduce){
+	
+	if (this->living and random::randrange(0,1) < PARAMS::wolf_reproduce){
 		this->energy /= 2;
 		auto cub = this->env->generate_agent("Wolf",this->energy,0);
 		auto dest = this->get_patch();
@@ -148,7 +150,8 @@ inline void Animal::sheep_step(){
 			auto lamb = this->env->generate_agent("Sheep",0,this->energy);
 			auto dest = this->get_patch();
 			this->env->place_agent(dest,lamb,true);
-		}		
+		}
+			
 }
 
 inline void Animal::random_move(){
