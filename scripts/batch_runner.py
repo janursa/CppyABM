@@ -6,7 +6,7 @@ class BatchRunner:
         self.iter_n = iter_n
     def run_model(self,start,end):
         """
-        Constructs and runs the model 
+        Runs the model 
     
         """
         for i in range(start,end):
