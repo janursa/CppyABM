@@ -49,12 +49,12 @@ class SexGroup(Enum):
 
 class ValueGroup(Enum):
     PRIVATE = 1
-    PUBLIC = 2 
+    PUBLIC = 2
 
 
 class CovidAgent(Agent):
     """ An agent representing a potential covid case"""
-    
+
     def __init__(self, model, name, ageg, sexg, mort):
         super().__init__(model, name)
         self.stage = Stage.SUSCEPTIBLE
@@ -91,12 +91,12 @@ class CovidAgent(Agent):
         self.employed = True
         # Contact tracing: this is only available for symptomatic patients
         self.tested_traced = False
-        # All agents 
+        # All agents
         self.contacts = set()
         # We assume it takes two full days
         self.tracing_delay = 2*model.dwell_15_day
         self.tracing_counter = 0
-        
+
     def alive(self):
         print(f'{self.unique_id} {self.age_group} {self.sex_group} is alive')
 
@@ -207,7 +207,7 @@ class CovidAgent(Agent):
                         self.isolated = False
                     self.in_isolation = True
 
-                    
+
         # Using a similar logic, we remove isolation for all relevant agents still locked
         if self.in_isolation and (self.astep >= self.env.isolation_end):
             if (self.stage == Stage.SUSCEPTIBLE) or (self.stage == Stage.EXPOSED) or \
@@ -248,8 +248,8 @@ class CovidAgent(Agent):
                             break
                         else:
                             infected_contact = True
-                            break        
-            
+                            break
+
             # Value is computed before infected stage happens
             isolation_private_divider = 1
             isolation_public_divider = 1
@@ -284,7 +284,7 @@ class CovidAgent(Agent):
                 self.displace()
         elif self.stage == Stage.EXPOSED:
             # Susceptible patients only move and spread the disease.
-            # If the incubation time is reached, it is immediately 
+            # If the incubation time is reached, it is immediately
             # considered as detected since it is severe enough.
 
             # We compute the private value as usual
@@ -297,7 +297,7 @@ class CovidAgent(Agent):
                 if self.isolated:
                     isolation_private_divider = 0.3
                     isolation_public_divider = 0.01
-                
+
                 self.cumul_private_value = self.cumul_private_value + \
                     ((len(cellmates) - 1) * self.env.stage_value_dist[ValueGroup.PRIVATE][Stage.EXPOSED])*isolation_private_divider
                 self.cumul_public_value = self.cumul_public_value + \
@@ -316,7 +316,7 @@ class CovidAgent(Agent):
                 else:
                     self.stage = Stage.SYMPDETECTED
                     do_move = False
-                
+
                 self.tested = True
             else:
                 if self.curr_incubation < self.incubation_time:
@@ -331,7 +331,7 @@ class CovidAgent(Agent):
             # Now, attempt to move
             if do_move and not(self.isolated):
                 self.displace()
-            
+
             # Perform the move once the condition has been determined
         elif self.stage == Stage.ASYMPTOMATIC:
             # Asymptomayic patients only roam around, spreading the
@@ -345,7 +345,7 @@ class CovidAgent(Agent):
                 if self.isolated:
                     isolation_private_divider = 0.3
                     isolation_public_divider = 0.01
-                
+
                     self.cumul_private_value = self.cumul_private_value + \
                         ((len(cellmates) - 1) * self.env.stage_value_dist[ValueGroup.PRIVATE][Stage.ASYMPTOMATIC])*isolation_private_divider
                     self.cumul_public_value = self.cumul_public_value + \
@@ -360,10 +360,10 @@ class CovidAgent(Agent):
             else:
                 if self.curr_recovery >= self.recovery_time:
                     self.stage = Stage.RECOVERED
-                    
+
                 if not(self.isolated):
                     self.displace()
-                    
+
         elif self.stage == Stage.SYMPDETECTED:
             # Once a symptomatic patient has been detected, it does not move and starts
             # the road to severity, recovery or death. We assume that, by reaching a health
@@ -381,7 +381,7 @@ class CovidAgent(Agent):
                     self.tracing_counter = -1
                 else:
                     self.tracing_counter = self.tracing_counter + 1
-            
+
             self.cumul_private_value = self.cumul_private_value + \
                 self.env.stage_value_dist[ValueGroup.PRIVATE][Stage.SYMPDETECTED]
             self.cumul_public_value = self.cumul_public_value + \
@@ -418,7 +418,7 @@ class CovidAgent(Agent):
                self.curr_recovery = self.curr_recovery + 1
             else:
                 self.stage = Stage.RECOVERED
-        elif self.stage == Stage.SEVERE:            
+        elif self.stage == Stage.SEVERE:
             self.cumul_private_value = self.cumul_private_value + \
                 self.env.stage_value_dist[ValueGroup.PRIVATE][Stage.SEVERE]
             self.cumul_public_value = self.cumul_public_value + \
@@ -439,7 +439,7 @@ class CovidAgent(Agent):
                 self.stage = Stage.RECOVERED
         elif self.stage == Stage.RECOVERED:
             cellmates = self.get_patch().get_agents()
-            
+
             if self.employed:
                 isolation_private_divider = 1
                 isolation_public_divider = 1
@@ -467,7 +467,7 @@ class CovidAgent(Agent):
             self.cumul_public_value = self.cumul_public_value + \
                 self.env.stage_value_dist[ValueGroup.PUBLIC][Stage.DECEASED]
         else:
-            # If we are here, there is a problem 
+            # If we are here, there is a problem
             sys.exit("Unknown stage: aborting.")
 
         self.astep = self.astep + 1
@@ -605,12 +605,12 @@ def compute_traced(model):
 
 def compute_eff_reprod_number(model):
     prob_contagion = 0.0
-    
+
     # Adding logic to better compute R(t)
     exposed = 0.0
     asymptomatics = 0.0
     symptomatics = 0.0
-    
+
     exp_time = 0.0
     asympt_time = 0.0
     sympt_time = 0.0
@@ -660,11 +660,11 @@ def compute_num_agents(model):
 
 class CovidModel(Env):
     """ A model to describe parameters relevant to COVID-19"""
-    def __init__(self, steps, num_agents, width, height, kmob, repscaling, rate_inbound, age_mortality, 
-                 sex_mortality, age_distribution, sex_distribution, prop_initial_infected, 
+    def __init__(self, steps, num_agents, width, height, kmob, repscaling, rate_inbound, age_mortality,
+                 sex_mortality, age_distribution, sex_distribution, prop_initial_infected,
                  proportion_asymptomatic, proportion_severe, avg_incubation_time, avg_recovery_time, prob_contagion,
                  proportion_isolated, day_start_isolation, days_isolation_lasts, after_isolation, prob_isolation_effective, social_distance,
-                 day_distancing_start, days_distancing_lasts, proportion_detected, day_testing_start, days_testing_lasts, 
+                 day_distancing_start, days_distancing_lasts, proportion_detected, day_testing_start, days_testing_lasts,
                  new_agent_proportion, new_agent_start, new_agent_lasts, new_agent_age_mean, new_agent_prop_infected,
                  day_tracing_start, days_tracing_lasts, stage_value_matrix, test_cost, alpha_private, alpha_public, proportion_beds_pop, dummy=0):
         Env.__init__(self)
@@ -704,7 +704,7 @@ class CovidModel(Env):
             self.repscaling = 1
         else:
             self.repscaling = (np.log(repscaling)/np.log(1.96587))
-        
+
         self.prob_contagion_base = prob_contagion / self.repscaling
 
         # Mobility constant for geographic rescaling
@@ -784,7 +784,7 @@ class CovidModel(Env):
                     a =self.generate_agent("Person", ag, sg, mort)
                     dest = random.choice(self.patches)
                     self.place_agent(dest,a,True)
-        
+
         # self.datacollector = DataCollector(
         #     model_reporters = {
         #         "Step": compute_stepno,
@@ -811,7 +811,7 @@ class CovidModel(Env):
 
         # Final step: infect an initial proportion of random agents
         num_init = int(self.num_agents * prop_initial_infected)
-        
+
         for a in self.agents:
             if num_init < 0:
                 break
@@ -836,18 +836,18 @@ class CovidModel(Env):
         return patch_obj
     def step(self):
         # self.datacollector.collect(self)
-        
+
         if self.stepno % self.dwell_15_day == 0:
             print(f'Simulating day {self.stepno // self.dwell_15_day}')
 
         # Activate contact tracing only if necessary and turn it off correspondingly at the end
         if not(self.tracing_now) and (self.stepno >= self.tracing_start):
             self.tracing_now = True
-        
+
         if self.tracing_now and (self.stepno > self.tracing_end):
             self.tracing_now = False
         self.stepno = self.stepno + 1
-        
+
         # If new agents enter the population, create them
         if (self.stepno >= self.new_agent_start) and (self.stepno < self.new_agent_end):
             # Check if the current step is in the new-agent time map
@@ -864,12 +864,12 @@ class CovidModel(Env):
                         arange = poisson.rvs(self.new_agent_age_mean)
                         if arange in range(0, 9):
                             in_range = True
-                    
+
                     ag = AgeGroup(arange)
                     sg = random.choice(list(SexGroup))
                     mort = self.age_mortality[ag]*self.sex_mortality[sg]
                     a = self.generate_agent('Person', ag, sg, mort)
-                    
+
                     # Some will be infected
                     if bernoulli.rvs(self.new_agent_prop_infected):
                         a.stage = Stage.EXPOSED
@@ -896,10 +896,9 @@ class CovidModel(Env):
             self.data[key].append(value/len(self.agents))
     def episode(self):
         for i in range(self.steps):
-        # for i in range(2):
+        # for i in range(100):
             self.step()
         return self.data
     def calculate_memor_usage(self):
         process = psutil.Process(os.getpid())
-        self.max_memory_usages.append(process.memory_info().rss/1000000)  # in bytes 
-        
+        self.max_memory_usages.append(process.memory_info().rss/1000000)  # in bytes

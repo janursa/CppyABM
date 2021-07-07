@@ -13,5 +13,5 @@ source /etc/profile.d/modules.sh
 module load maxwell gcc/8.2
 module load mpi/openmpi-x86_64
 export PYTHONPATH=/usr/lib64/python3.6/site-packages/openmpi
-mpiexec -np 30 --mca pml ob1 python3 ../batch_runner.py ../scenarios/cu-50-nisol.json
+mpiexec -np 30 --mca pml ob1 python3 ../batch_runner.py ../scenarios/cu-counterfactual.json
 

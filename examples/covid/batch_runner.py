@@ -21,8 +21,8 @@ class Runner(ParallelBatchRunner_DataCollector):
         self.args = args
     def run_model(self,start,end):
         """
-        Constructs and runs the model 
-    
+        Constructs and runs the model
+
         """
         stack_results_per_core = []
         for i in range(start,end):
@@ -32,7 +32,7 @@ class Runner(ParallelBatchRunner_DataCollector):
             print("The iteration {} is completed.".format(i))
         return stack_results_per_core
 
-    
+
 if __name__ == '__main__':
     file_params = sys.argv[1]
     with open(file_params) as f:
@@ -139,9 +139,11 @@ if __name__ == '__main__':
     }
     begin = time.time()
     runner_obj = Runner(CovidModel,model_params, runs = data['ensemble']['runs'])
+    # runner_obj = Runner(CovidModel,model_params, runs = 30)
     # runner_obj = Runner(CovidModel,model_params,runs = 2)
     results = runner_obj.run()
     results = pd.DataFrame(results)
+    # print(file_params.split('/')[-1]+str('.csv'))
     results.to_csv(file_params.split('/')[-1]+str('.csv'))
 
     end = time.time()

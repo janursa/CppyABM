@@ -19,11 +19,12 @@ current_dir = os.getcwd()
 class PARAMS:
 	tag = 'symptomatics'
 	period_t = 14688
+	# period_t = 100
 	iter_n = 30
-	data_files = ['cu-25-nisol.json.csv']
-	labels = ['25% of population tested']
-	# colors = ['green','blue','red','black']
-	colors = ['green']
+	data_files = ['cu-25-nisol.json.csv','cu-50-nisol.json.csv','cu-75-nisol.json.csv']
+	labels = ['25% of population tested','50% of population tested','75% of population tested']
+	colors = ['green','blue','red','black']
+	# colors = ['green']
 	# graph_name = 'graph.svg'
 
 
@@ -52,13 +53,13 @@ def process_data(output):
 def update_layout(ax):
 
 	ax.legend(bbox_to_anchor=(.6, .95),loc = 'upper right', borderaxespad=0.,prop={ 'family':FONT.family,'size':FONT.legend},ncol=1)
-	
+
 	# ax.set_ylim(yrange)
 	# labels = [item.get_text() for item in ax.get_xticklabels()]
 	# print(labels)
 	# ax.set_xticks(ticks = [int(i) for i in x_labels])
 	# ax.set_xticklabels(x_labels_adj)
-	
+
 	ax.get_xaxis().set_major_formatter(
 	    matplotlib.ticker.FuncFormatter(lambda x, p: int(x*15/(60*24))))
 
@@ -69,9 +70,9 @@ def update_layout(ax):
 
 	ax.set_ylabel('Active cases (fraction of population)',fontdict ={'family':FONT.family,'size':FONT.axis_title_font_size})
 	ax.set_xlabel('Days',fontdict ={'family':FONT.family,'size':FONT.axis_title_font_size})
-	
+
 	# ax.set_title('Title',fontdict ={'family':FONT.family,'size':FONT.title_font_size, 'fontweight':'bold'})
-if __name__ == '__main__': 
+if __name__ == '__main__':
 	output_cumulated = []
 	for data_file in PARAMS.data_files:
 		output = pd.read_csv(data_file)
@@ -95,7 +96,3 @@ if __name__ == '__main__':
 		# plt.plot(x,label=tag)
 	# plt.legend()
 	plt.savefig(os.path.join(current_dir,'{}.svg'.format(PARAMS.tag)),bbox_inches="tight")
-	
-
-
-
