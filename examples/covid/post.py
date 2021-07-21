@@ -21,8 +21,8 @@ class PARAMS:
 	period_t = 14688
 	# period_t = 100
 	iter_n = 30
-	data_files = ['cu-25-nisol.json.csv','cu-50-nisol.json.csv','cu-75-nisol.json.csv']
-	labels = ['25% of population tested','50% of population tested','75% of population tested']
+	data_files = ['cu-25-nisol.json.csv','cu-50-nisol.json.csv','cu-75-nisol.json.csv','cu-counterfactual.json.csv']
+	labels = ['25% of population tested','50% of population tested','75% of population tested','No testing']
 	colors = ['green','blue','red','black']
 	# colors = ['green']
 	# graph_name = 'graph.svg'
@@ -68,7 +68,7 @@ def update_layout(ax):
 		label.set_fontsize(FONT.tick_font_size)
 
 
-	ax.set_ylabel('Active cases (fraction of population)',fontdict ={'family':FONT.family,'size':FONT.axis_title_font_size})
+	ax.set_ylabel('Active cases (% of population)',fontdict ={'family':FONT.family,'size':FONT.axis_title_font_size})
 	ax.set_xlabel('Days',fontdict ={'family':FONT.family,'size':FONT.axis_title_font_size})
 
 	# ax.set_title('Title',fontdict ={'family':FONT.family,'size':FONT.title_font_size, 'fontweight':'bold'})
@@ -90,8 +90,8 @@ if __name__ == '__main__':
 		ax.fill_between(range(PARAMS.period_t), min_bounds, max_bounds,
 			                 facecolor=color, # The fill color
 			                 color=color,       # The outline color
-			                 alpha=0.2)          # Transparency of the fill
-		ax.plot(mean_bounds,label=label)
+			                 alpha=0.1)          # Transparency of the fill
+		ax.plot(mean_bounds,label=label,linewidth = 3)
 	update_layout(ax)
 		# plt.plot(x,label=tag)
 	# plt.legend()
