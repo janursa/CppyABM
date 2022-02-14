@@ -5,31 +5,36 @@ SET(TARGET "cppython_example")
 PROJECT(${TARGET} LANGUAGES CXX)
 SET(BINDMODULE "myBinds")
 
-FIND_PACKAGE(cppyabm CONFIG)
-FIND_PACKAGE(pybind11 CONFIG)
-if (NOT pybind11_FOUND) #inlude pybind11
-    message(STATUS "Clonning pybind11")
-    include(FetchContent)
-    FetchContent_Declare(
-      pybind11
-      GIT_REPOSITORY https://github.com/pybind/pybind11.git
-      GIT_TAG        master
-    )
-    FetchContent_GetProperties(pybind11)
-    if(NOT pybind11_POPULATED)
-      FetchContent_Populate(pybind11)
-      add_subdirectory(${pybind11_SOURCE_DIR} ${pybind11_BINARY_DIR})
-    endif()
-    set(PYBIND11_CPP_STANDARD -std=c++17)
-endif()
-# add_subdirectory(../../ cppyabm)
-if (NOT cppyabm_FOUND)
-    set(cppyabm_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../../")
-endif()
-
-pybind11_add_module(${BINDMODULE} binds.cpp)
-if (NOT cppyabm_FOUND)
+set(LOCAL_FETCH FALSE) # fetching from local directory. Otherwise, it will fetch from github
+if (LOCAL_FETCH)
+    message(STATUS "FETCHING CPPYABM LOCALLY")
+    add_subdirectory(../../../ cppyabm)
+    set (cppyabm_SOURCE_DIR "/Users/matin/Downloads/testProjs/CppyABM/")
+    pybind11_add_module(${BINDMODULE} binds.cpp)
     target_include_directories(${BINDMODULE} PUBLIC ${cppyabm_SOURCE_DIR}/include)
+
 else()
-    target_link_libraries(${BINDMODULE}  PUBLIC cppyabm::cppyabm)
+    FIND_PACKAGE(cppyabm CONFIG)
+    FIND_PACKAGE(pybind11 CONFIG)
+    if (NOT cppyabm_FOUND OR NOT pybind11_FOUND)
+        message(STATUS "Either CppyABM or pybind11 is not installed. Clonning CppyABM.")
+        include(FetchContent)
+        FetchContent_Declare(
+          cppyabm
+          GIT_REPOSITORY https://github.com/janursa/CppyABM.git
+          GIT_TAG        master
+        )
+        FetchContent_GetProperties(cppyabm)
+        if(NOT cppyabm_POPULATED)
+          FetchContent_Populate(cppyabm)
+          add_subdirectory(${cppyabm_SOURCE_DIR} ${cppyabm_BINARY_DIR})
+        endif()
+    endif()
+
+    pybind11_add_module(${BINDMODULE} binds.cpp)
+    if (NOT cppyabm_FOUND)
+        target_include_directories(${BINDMODULE} PUBLIC ${cppyabm_SOURCE_DIR}/include)
+    else()
+        target_link_libraries(${BINDMODULE}  PUBLIC cppyabm::cppyabm)
+    endif()
 endif()

@@ -60,7 +60,7 @@ struct random{
 struct GrassPatch: public Patch<WolfSheep,Animal,GrassPatch>{
 
 	using basePatch = Patch<WolfSheep,Animal,GrassPatch>;
-	// using basePatch::basePatch;
+	using basePatch::basePatch;
 	GrassPatch(shared_ptr<WolfSheep> env,MESH_ITEM mesh_item, bool fully_grown,int countdown):basePatch(env,mesh_item){
 		this->fully_grown = fully_grown;
 		this->countdown = countdown;
@@ -73,7 +73,7 @@ struct GrassPatch: public Patch<WolfSheep,Animal,GrassPatch>{
 struct Animal: public Agent<WolfSheep,Animal,GrassPatch>{
 
 	using baseAgent = Agent<WolfSheep,Animal,GrassPatch>;
-	// using baseAgent::baseAgent;
+	using baseAgent::baseAgent;
 	Animal(shared_ptr<WolfSheep> env, string class_name, int energy):baseAgent(env,class_name){
 		this->energy = energy;
 		this->living = true;

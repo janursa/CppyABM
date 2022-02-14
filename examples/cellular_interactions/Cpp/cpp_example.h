@@ -112,7 +112,7 @@ inline void Domain::step(){
 	for (auto&[index,patch]:this->patches){
 		if (patch->empty()) ii++;
 	}
-	cout<<"number of available patches "<<ii<<endl;
+	// cout<<"number of available patches "<<ii<<endl;
 
 	for (unsigned i = 0; i<this->agents.size(); i++){
 

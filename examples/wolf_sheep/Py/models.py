@@ -133,7 +133,7 @@ class GrassPatch(Patch):
 	A patch of grass that grows at a fixed rate and it is eaten by sheep
 	"""
 
-	def __init__(self, mesh_item, env, fully_grown, countdown):
+	def __init__(self, env,mesh_item, fully_grown, countdown):
 		"""
 		Creates a new patch of grass
 
@@ -141,7 +141,7 @@ class GrassPatch(Patch):
 			grown: (boolean) Whether the patch of grass is fully grown or not
 			countdown: Time for the patch of grass to be fully grown again
 		"""
-		super().__init__(mesh_item, env)
+		super().__init__(env,mesh_item)
 		self.fully_grown = fully_grown
 		self.countdown = countdown
 
