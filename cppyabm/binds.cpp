@@ -29,6 +29,6 @@ PYBIND11_MODULE(binds, m) {
     bind_tools::expose_defaults<expEnv,expAgent,expPatch>(m);
     bind_tools::expose_env<expEnv,expAgent,expPatch,tramEnv>(m,"Env");
     bind_tools::expose_agent<expEnv,expAgent,expPatch,tramAgent>(m,"Agent");
-    patch_obj = bind_tools::expose_patch<expEnv,expAgent,expPatch,tramPatch>(m,"Patch");
+    bind_tools::expose_patch<expEnv,expAgent,expPatch,tramPatch>(m,"Patch");
 }
 
